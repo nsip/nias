@@ -1,0 +1,23 @@
+<!-- examples.txt -->
+
+<!-- post 2k large schoolinfos, as for a jurisdiction -->
+http post localhost:4567/timetable/syn Content-Type:application/xml < schoolinfos.xml 
+
+<!-- post 10k student personals in json goessner format -->
+http post localhost:4567/timetable/syn Content-Type:application/json < 10k_student_personals.json
+
+<!-- post the full content of asl list as csv file approx 10k schools -->
+http post localhost:4567/timetable/syn Content-Type:text/csv < asl_schools.csv
+
+<!-- get messages from the server -->
+http get localhost:4567/timetable/syn?offset=-2
+
+
+
+
+
+
+
+
+
+
