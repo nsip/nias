@@ -1,0 +1,45 @@
+<messages>
+    <message>
+        <StudentAttendanceTimeList RefId="2FFB63B4CFEF48208501E7D1E54555CB">
+            <StudentPersonalRefId>D3E34B359D75101A8C3D00AA001A1652</StudentPersonalRefId>
+            <SchoolInfoRefId>CA285746359D75101A8C36432A901A16</SchoolInfoRefId>
+            <Date>2002-11-01</Date>
+            <SchoolYear>2003</SchoolYear>
+            <AttendanceTimes>
+                <AttendanceTime>
+                    <AttendanceCode>
+                        <Code>200</Code>
+                        <OtherCodeList>
+                            <OtherCode Codeset="Local">S</OtherCode>
+                            <OtherCode Codeset="Text">C</OtherCode>
+                        </OtherCodeList>
+                    </AttendanceCode>
+                    <AttendanceStatus>01</AttendanceStatus>
+                    <StartTime>11:00:00</StartTime>
+                    <EndTime>12:05:00</EndTime>
+                    <DurationValue>0.167</DurationValue>
+                    <AttendanceNote>Left for Orthodontist appt. and returned to school afterward
+                    </AttendanceNote>
+                </AttendanceTime>
+                <AttendanceTime>
+                    <AttendanceCode>
+                        <Code>100</Code>
+                    </AttendanceCode>
+                    <AttendanceStatus>01</AttendanceStatus>
+                    <StartTime>09:00:00</StartTime>
+                    <EndTime>11:00:00</EndTime>
+                    <AttendanceNote />
+                </AttendanceTime>
+                <AttendanceTime>
+                    <AttendanceCode>
+                        <Code>100</Code>
+                    </AttendanceCode>
+                    <AttendanceStatus>01</AttendanceStatus>
+                    <StartTime>12:05:00</StartTime>
+                    <EndTime>15:30:00</EndTime>
+                    <AttendanceNote />
+                </AttendanceTime>
+            </AttendanceTimes>
+        </StudentAttendanceTimeList>
+    </message>
+</messages>
