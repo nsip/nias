@@ -1,13 +1,14 @@
-readme.txt
 
+NSIP Integration As A Service - NIAS
+====================================
 
-NSIP Integration As A Service NIAS
+**Important Note - This project is under heavy development, do not expect installation instructions to produce anything that actually runs at this point.**
 
 Installation Notes
 
-Ensure Ruby is at 2.2. as a minimum.
+Ensure Ruby is at 2.2.3 as a minimum.
 
-rvm install ruby-2.2.0
+rvm install ruby-2.2.3
 
 NIAS (& timesheet) use Redis. This is distributed from Redis.io as source and can be compiled for any platform, but most likely route to installation is to use package manager for the platform
 
@@ -19,9 +20,12 @@ check Redis has been added to your binary path by running the command 'redis-ser
 
 Java resources are cross-platform & so zookeeper and kafka are included in the distribution.
 
-LMDB may be used for the key-value store component of SMS as data volumes increase - like redis this is a C source distribution which can be built on the platform or installed i.e.
+LMDB/GDBM may be used for the key-value store component of SMS as data volumes increase - 
+like redis these are  C source distribution which can be built on the platform or installed i.e.
 
 'brew install lmdb'
+'brew install gdbm'
+'gem install gdbm'
 
 
 when services are running all kafka logs, redis dump files etc. will be created under /tmp e.g. /tmp/kafka /tmp/redis tmp/zookeeper
