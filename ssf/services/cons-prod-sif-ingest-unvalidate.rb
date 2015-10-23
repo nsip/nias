@@ -3,6 +3,9 @@
 require 'poseidon'
 require 'nokogiri' # xml support
 
+# version of the validating ingestor that turns off validity checking - mostly necessary because our own sample 
+# data is so poor!
+
 # consumer of ingest SIF/XML messages. Each object in the stream is validated. Two streams of SIF created:
 # * error stream, with malformed objects and associated error messages
 # * validated stream of parsed SIF objects
@@ -39,26 +42,28 @@ loop do
   	    messages = []
 	    messages = consumer.fetch
 	    messages.each do |m|
-      	    puts "processing message no.: #{m.offset}, #{m.key}\n\n"
+  	    
+	  	    puts "processing message no.: #{m.offset}, #{m.key}\n\n"
 
-		# each ingest message is a group of objects of the same class, e.g. 
-		# <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
-		# Parse each message as a unit; pass them on as individual objects
+			# each ingest message is a group of objects of the same class, e.g. 
+			# <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
+			# Parse each message as a unit; pass them on as individual objects
 
-		doc = Nokogiri::XML(m.value) do |config|
-        		config.nonet.noblanks
-		end
-		if(doc.errors.empty?) 
-			xsd_errors = [] #@xsd.validate(doc)
-			if(xsd_errors.empty?) 
-	      		item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
-				doc.xpath("/*/node()").each { |x| outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", x.to_s, item_key ) }
-			else
-				outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} validity error:\n" + xsd_errors.map{|e| e.message}.join("\n") + "\n" + m.value, "invalid" )
+			doc = Nokogiri::XML(m.value) do |config|
+	        		config.nonet.noblanks
 			end
-		else
-			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value, "invalid" )
-		end
+		
+				if(doc.errors.empty?) 
+					xsd_errors = [] #@xsd.validate(doc)
+					if(xsd_errors.empty?) 
+			      		item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
+						doc.xpath("/*/node()").each { |x| outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", x.to_s, item_key ) }
+					else
+						outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} validity error:\n" + xsd_errors.map{|e| e.message}.join("\n") + "\n" + m.value, "invalid" )
+					end
+				else
+					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value, "invalid" )
+				end
 		end
 
 		# debugging if needed
