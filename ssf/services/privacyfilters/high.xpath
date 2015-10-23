@@ -1,0 +1,43 @@
+# Fields specified as High rating in SIF-AU Privacy Framework. Note that any attributes to be filtered need to be specified explicitly
+
+//AssessmentRegistration
+//Identity
+//StudentContactRelationship/ContactFlags/ParentLegalGuardian	X
+//StudentContactRelationship/ContactFlags/PickupRights	X
+//StudentContactRelationship/ContactFlags/LivesWith	X
+//StudentContactRelationship/ContactFlags/AccessToRecords	X
+//StudentContactRelationship/ContactFlags/ReceivesAssessmentReport	X
+//StudentContactRelationship/ContactFlags/EmergencyContact	X
+//StudentContactRelationship/ContactFlags/HasCustody	X
+//StudentContactRelationship/ContactFlags/DisciplinaryContact	X
+//StudentContactRelationship/ContactFlags/AttendanceContact	X
+//StudentContactRelationship/ContactFlags/PrimaryCareProvider	X
+//StudentContactRelationship/ContactFlags/FeesBilling	X
+//StudentContactRelationship/ContactFlags/FamilyMail	X
+//StudentPersonal/GiftedTalented	X
+//StudentPersonal/EconomicDisadvantage	X
+//StudentPersonal/ESL	X
+//StudentPersonal/YoungCarersRole	X
+//StudentPersonal/Disability	X
+//StudentPersonal/IntegrationAide	X
+//StudentPersonal/PrePrimaryEducation
+//StudentSchoolEnrollment/ExitStatus
+//StudentSchoolEnrollment/ExitStatus/Code	9999
+//StudentSchoolEnrollment/ExitType
+//StudentSchoolEnrollment/ExitType/Code	9999
+//StudentSchoolEnrollment/RecordClosureReason	SchoolExit
+//StudentSnapshot
+//PersonInfo/Demographics/BirthDate	2000-01-01
+//PersonInfo/Demographics/Religion
+//PersonInfo/Demographics/Religion/Code	0001
+//PersonInfo/Demographics/ReligiousEventList
+//PersonInfo/Demographics/ReligiousEventList/ReligiousEvent/Date	2000-01-01
+//PersonInfo/Demographics/ReligiousRegion
+//PersonInfo/Demographics/VisaSubClass
+//PersonInfo/Demographics/VisaStatisticalCode
+//PersonInfo/Demographics/ImmunizationCertificateStatus	X
+//PersonInfo/Demographics/CulturalBackground	0001
+//PersonInfo/Demographics/AddressList
+//PersonInfo/Demographics/AddressList/Address/Country	0003
+//PersonInfo/Demographics/PhoneNumberList
+//PersonInfo/Demographics/PhoneNumberList/PhoneNumber/ListedStatus	X
