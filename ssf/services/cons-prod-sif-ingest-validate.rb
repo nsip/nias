@@ -1,4 +1,4 @@
-# cons-prod-ingest.rb
+# cons-prod-sif-ingest.rb
 
 require 'poseidon'
 require 'nokogiri' # xml support
@@ -11,11 +11,12 @@ require 'nokogiri' # xml support
 
 
 @inbound = 'sifxml.ingest'
-@outbound1 = 'validated'
-@outbound2 = 'errors'
+@outbound1 = 'sifxml.validated'
+@outbound2 = 'sifxml.errors'
 
-@xsd = Nokogiri::XML::Schema(File.open("./ssf/services/SIF_Message1.3_3.x.xsd"))
 
+@xsd = Nokogiri::XML::Schema(File.open("xsd/sif1.3/SIF_Message1.3_3.x.xsd"))
+# @xsd = Nokogiri::XML::Schema(File.open("xsd/sif1.3/xml.xsd"))
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new("cons-prod-ingest", "localhost", 9092,
@@ -50,19 +51,26 @@ loop do
 		if(doc.errors.empty?) 
 			xsd_errors = @xsd.validate(doc)
 			if(xsd_errors.empty?) 
-	      			item_key = "ts_entry:#{ sprintf('%09d', m.offset) }"
-				doc.xpath("/*/node()").each { |x| outbound_messages << Poseidon::MessageToSend.new( "#{m.key}.#{@outbound1}", x.to_s, item_key ) }
+	      		item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
+				doc.xpath("/*/node()").each { |x| outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", x.to_s, item_key ) }
 			else
-				outbound_messages << Poseidon::MessageToSend.new( "#{m.key}.#{@outbound2}", "Message #{m.offset} validity error:\n" + xsd_errors.map{|e| e.message}.join("\n") + "\n" + m.value, "invalid" )
+				outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} validity error:\n" + xsd_errors.map{|e| e.message}.join("\n") + "\n" + m.value, "invalid" )
 			end
 		else
-			outbound_messages << Poseidon::MessageToSend.new( "#{m.key}.#{@outbound2}", "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value, "invalid" )
+			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value, "invalid" )
 		end
 		end
 
+		# debugging if needed
+		# outbound_messages.each do | msg |
+		# 	puts "\n\nSending to: #{msg.topic}\n"
+		# 	puts "\n\nKey: #{msg.key}\n"
+		# 	puts "\n\nContent: #{msg.value}"
+		# end
+
 		outbound_messages.each_slice(20) do | batch |
 			pool.next.send_messages( batch )
-	   end
+	   	end
 	
 
 		# puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
@@ -75,7 +83,7 @@ loop do
 
   # trap to allow console interrupt
   trap("INT") { 
-    puts "\ncons-prod-ingest service shutting down...\n\n"
+    puts "\ncons-prod-sif-ingest service shutting down...\n\n"
     consumer.close
     exit 130 
   } 

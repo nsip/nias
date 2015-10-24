@@ -17,9 +17,13 @@ configure do
 	# create an interface to the zookeeper node
 	set :zk, ZK.new
 	set :hashid, Hashids.new( "gregor samza" )
+	
 	# uncomment line below to allow session to keep temporary client-id, if calling from browser with
 	# cookies enabled will mean automatic correct setting of message offset in session
 	# enable :sessions
+
+	# All received XML messages are also sent from /:topic:/stream to a global sifxml.ingest topic, for validation by microservice
+	set :xmltopic, 'sifxml.ingest'
 end
 
 
@@ -49,8 +53,6 @@ get "/" do
 	return 'SSF Server is up and running...'
 end
 
-# All received XML messages are also sent from /:topic:/stream to a global sifxml.ingest topic, for validation by microservice
-xmltopic = 'sifxml.ingest'
 
 # send messages - messages assumed to be in the data file sent
 # as part of the request, handles json without needing content type specified
@@ -109,7 +111,8 @@ post "/:topic/:stream" do
 		#when 'application/xml' then msg = msg.to_s
 		when 'application/xml' then 
 			msg = msg.to_s
-			messages << Poseidon::MessageToSend.new( "#{xmltopic}", msg, "#{topic_name}" )
+			puts "topic is: #{settings.xmltopic} : topic name is #{topic_name}\n\n"
+			messages << Poseidon::MessageToSend.new( "#{settings.xmltopic}", msg, "#{topic_name}" )
 		when 'text/csv' then msg = msg.to_hash.to_json
 		end
 		messages << Poseidon::MessageToSend.new( "#{topic_name}", msg, "#{strm}" )
