@@ -63,12 +63,14 @@ class SMSQuery
 			q = []
 			q = @redis.smembers q_item
 
-			# puts "indirect sinter - #{q.inspect}"
+			return result unless !q.empty? # return empty results if item not in db
 
-			redis.pipelined do
-				@redis.sunionstore @tmp, q.to_a
-				result = redis.sinter tmp, q_collection
-				redis.expire tmp, 5 
+			# puts "\n\nindirect sinter - #{q.inspect}\n\n"
+
+			@redis.pipelined do
+				@redis.sunionstore tmp, q.to_a
+				result = @redis.sinter tmp, q_collection
+				@redis.expire tmp, 5 
 			end
 
 			q_indirect_finish = Time.now
@@ -88,7 +90,7 @@ class SMSQuery
 	# 
 	def known_collections
 
-		return @redis.smembers 'known:collections'
+		return @redis.smembers('known:collections').to_a
 
 	end
 

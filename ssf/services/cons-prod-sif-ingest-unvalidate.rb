@@ -18,7 +18,7 @@ require 'nokogiri' # xml support
 @outbound2 = 'sifxml.errors'
 
 
-@xsd = Nokogiri::XML::Schema(File.open("xsd/sif1.3/SIF_Message1.3_3.x.xsd"))
+@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif1.3/SIF_Message1.3_3.x.xsd"))
 # @xsd = Nokogiri::XML::Schema(File.open("xsd/sif1.3/xml.xsd"))
 
 # create consumer
