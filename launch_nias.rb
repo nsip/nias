@@ -77,8 +77,9 @@ def launch
   banner 'Starting indexer services'
 
   services = [
-                'cons-prod-sif-ingest.rb',
                 'cons-prod-privacyfilter.rb',
+                'cons-prod-sif-ingest-unvalidate.rb'
+                # 'cons-prod-sif-ingest-validate.rb',
               ]
 
 
