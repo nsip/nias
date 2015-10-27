@@ -30,7 +30,7 @@
 //SessionInfo
 //SIF_Report
 //StaffAssignment
-//StaffPersonal/@RefId	00000000-0000-0000-0000-000000000000
+//StaffPersonal/@RefId:00000000-0000-0000-0000-000000000000
 //StaffPersonal/OtherIdList/OtherId/@Type
 //StaffPersonal/Title
 //StudentActivityInfo
@@ -39,63 +39,63 @@
 //StudentContactPersonal/OtherIdList/OtherId/@Type
 //StudentContactRelationship/ContactSequence
 //StudentContactRelationship/ContactSequenceSource
-//StudentDailyAttendance/@RefId	00000000-0000-0000-0000-000000000000
-//StudentDailyAttendance/SchoolInfoRefId	00000000-0000-0000-0000-000000000000
-//StudentDailyAttendance/Date	2000-01-01
-//StudentDailyAttendance/SchoolYear	2000
-//StudentDailyAttendance/DayValue	N/A
-//StudentDailyAttendance/AttendanceStatus	NA
-//StudentDailyAttendance/TimeIn	00:00:00
-//StudentDailyAttendance/TimeOut	00:00:00
-//StudentDailyAttendance/AbsenceValue	0.00
-//StudentPeriodAttendance/@RefId	00000000-0000-0000-0000-000000000000
-//StudentPeriodAttendance/StudentPersonalRefId	00000000-0000-0000-0000-000000000000
-//StudentPeriodAttendance/SchoolInfoRefId	00000000-0000-0000-0000-000000000000
-//StudentPeriodAttendance/Date	2000-01-01
-//StudentPeriodAttendance/SessionInfoRefId	00000000-0000-0000-0000-000000000000
+//StudentDailyAttendance/@RefId:00000000-0000-0000-0000-000000000000
+//StudentDailyAttendance/SchoolInfoRefId:00000000-0000-0000-0000-000000000000
+//StudentDailyAttendance/Date:2000-01-01
+//StudentDailyAttendance/SchoolYear:2000
+//StudentDailyAttendance/DayValue:N/A
+//StudentDailyAttendance/AttendanceStatus:NA
+//StudentDailyAttendance/TimeIn:00:00:00
+//StudentDailyAttendance/TimeOut:00:00:00
+//StudentDailyAttendance/AbsenceValue:0.00
+//StudentPeriodAttendance/@RefId:00000000-0000-0000-0000-000000000000
+//StudentPeriodAttendance/StudentPersonalRefId:00000000-0000-0000-0000-000000000000
+//StudentPeriodAttendance/SchoolInfoRefId:00000000-0000-0000-0000-000000000000
+//StudentPeriodAttendance/Date:2000-01-01
+//StudentPeriodAttendance/SessionInfoRefId:00000000-0000-0000-0000-000000000000
 //StudentPeriodAttendance/TimeTablePeriod
-//StudentPeriodAttendance/TimeIn	00:00:00
-//StudentPeriodAttendance/TimeOut	00:00:00
-//StudentPeriodAttendance/AttendanceStatus	NA
-//StudentPeriodAttendance/SchoolYear	2000
+//StudentPeriodAttendance/TimeIn:00:00:00
+//StudentPeriodAttendance/TimeOut:00:00:00
+//StudentPeriodAttendance/AttendanceStatus:NA
+//StudentPeriodAttendance/SchoolYear:2000
 //StudentPeriodAttendance/AuditInfo
 //StudentPeriodAttendance/AuditInfo/CreationUser/@Type
-//StudentPeriodAttendance/AuditInfo/CreationDateTime	2000-01-01
-//StudentPersonal/MedicalAlertMessages/MedicalAlertMessage/@Severity	Unknown
-//StudentPersonal/ProjectedGraduationYear	2000
-//StudentPersonal/OnTimeGraduationYear	2000
-//StudentPersonal/GraduationDate	2000
+//StudentPeriodAttendance/AuditInfo/CreationDateTime:2000-01-01
+//StudentPersonal/MedicalAlertMessages/MedicalAlertMessage/@Severity:Unknown
+//StudentPersonal/ProjectedGraduationYear:2000
+//StudentPersonal/OnTimeGraduationYear:2000
+//StudentPersonal/GraduationDate:2000
 //StudentPersonal/MostRecent/SchoolLocalId
 //StudentPersonal/MostRecent/HomeroomLocalId
-//StudentPersonal/MostRecent/YearLevel	UG
-//StudentPersonal/AcceptableUsePolicy	X
-//StudentPersonal/FirstAUSchoolEnrollment	2000-01-01
-//StudentSchoolEnrollment/@RefId	00000000-0000-0000-0000-000000000000
-//StudentSchoolEnrollment/StudentPersonalRefId	00000000-0000-0000-0000-000000000000
-//StudentSchoolEnrollment/SchoolInfoRefId	00000000-0000-0000-0000-000000000000
-//StudentSchoolEnrollment/MembershipType	01
-//StudentSchoolEnrollment/TimeFrame	C
-//StudentSchoolEnrollment/SchoolYear	2000
-//StudentSchoolEnrollment/EntryDate	2000-01-01
+//StudentPersonal/MostRecent/YearLevel:UG
+//StudentPersonal/AcceptableUsePolicy:X
+//StudentPersonal/FirstAUSchoolEnrollment:2000-01-01
+//StudentSchoolEnrollment/@RefId:00000000-0000-0000-0000-000000000000
+//StudentSchoolEnrollment/StudentPersonalRefId:00000000-0000-0000-0000-000000000000
+//StudentSchoolEnrollment/SchoolInfoRefId:00000000-0000-0000-0000-000000000000
+//StudentSchoolEnrollment/MembershipType:01
+//StudentSchoolEnrollment/TimeFrame:C
+//StudentSchoolEnrollment/SchoolYear:2000
+//StudentSchoolEnrollment/EntryDate:2000-01-01
 //StudentSchoolEnrollment/EntryType
-//StudentSchoolEnrollment/EntryType/Code	9999
-//StudentSchoolEnrollment/YearLevel	UG
+//StudentSchoolEnrollment/EntryType/Code:9999
+//StudentSchoolEnrollment/YearLevel:UG
 //StudentSchoolEnrollment/HomeRoom
-//StudentSchoolEnrollment/Advisor	00000000-0000-0000-0000-000000000000
-//StudentSchoolEnrollment/Counselor	00000000-0000-0000-0000-000000000000
+//StudentSchoolEnrollment/Advisor:00000000-0000-0000-0000-000000000000
+//StudentSchoolEnrollment/Counselor:00000000-0000-0000-0000-000000000000
 //StudentSchoolEnrollment/Homegroup
 //StudentSchoolEnrollment/House
-//StudentSchoolEnrollment/Calendar	00000000-0000-0000-0000-000000000000
-//StudentSchoolEnrollment/ExitDate	2000-01-01
-//StudentSchoolEnrollment/FTE	0.00
-//StudentSchoolEnrollment/FTPTStatus	01
-//StudentSchoolEnrollment/FFPOS	X
+//StudentSchoolEnrollment/Calendar:00000000-0000-0000-0000-000000000000
+//StudentSchoolEnrollment/ExitDate:2000-01-01
+//StudentSchoolEnrollment/FTE:0.00
+//StudentSchoolEnrollment/FTPTStatus:01
+//StudentSchoolEnrollment/FFPOS:X
 //StudentSchoolEnrollment/CatchmentStatus
-//StudentSchoolEnrollment/CatchmentStatus/Code	9999
+//StudentSchoolEnrollment/CatchmentStatus/Code:9999
 //StudentSchoolEnrollment/PreviousSchool
 //StudentSchoolEnrollment/DestinationSchool
 //StudentSchoolEnrollment/StudentSubjectChoiceList
-//StudentSchoolEnrollment/StudentSubjectChoiceList/StudentSubjectChoiceList/PreferenceNumber	0
+//StudentSchoolEnrollment/StudentSubjectChoiceList/StudentSubjectChoiceList/PreferenceNumber:0
 //StudentSectionEnrollment
 //SystemRole
 //TeachingGroup
@@ -103,4 +103,4 @@
 //TimeTable
 //TimeTableCell
 //TimeTableSubject
-//PersonInfo/Demographics/BirthDateVerification	N
+//PersonInfo/Demographics/BirthDateVerification:N
