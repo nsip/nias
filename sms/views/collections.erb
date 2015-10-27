@@ -1,0 +1,97 @@
+<!-- collections.erb -->
+
+
+<div class="container">
+  
+	<!-- header -->
+    <section class="header">
+    	<!-- <img class="value-img" src="images/watch.svg"> -->
+    	<img class="value-img" src="images/datastore.svg" width="160" height="160">
+    	<!-- <img class="value-img" src="images/deadlines.svg" width="132" height="132"> -->
+        <div class="row">
+        	<div class="twelve columns" style="margin-top: 5%">
+                <h4>NIAS - SMS</h4>
+                <p>SIF Memory Store</p>
+            </br></br></br>
+            </div>
+        </div>
+    </section>
+
+    <!-- navigation -->
+    <div class="navbar-spacer"></div>
+    <nav class="navbar">
+        <div class="container">
+            <ul class="navbar-list">
+                <li class="navbar-item"><a class="navbar-link" href="#collections">Collections</a></li>
+                <li class="navbar-item"><a class="navbar-link" href="#query_ui">Query</a></li>                
+                <li class="navbar-item"><a class="navbar-link" href="#graph">View</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- collections list -->
+    <div class="docs-section" id="collections"> 
+		<h6 class="docs-header">SMS Collections</h6>
+
+		<div class="row">
+    		<div class="seven columns" id="collection_text">
+    			<h6 class="docs-header">Known Collections</h6>
+				<div><p>These are the known object collections provided to the SMS so far...</p></div>	
+    		</div>
+
+    		<div class="five columns" id="collection_list">
+    			<h6 class="docs-header">SMS has:</h6>
+    			<%= @result.count %> known collections: -
+				<div>
+					<p>
+						<ul>
+							<% @result.each do | collection | %>
+								<li><%= collection %> </li>
+							<% end %>
+						</ul>
+						
+					</p>
+				</div>	
+    		</div>
+    	</div>
+
+	</div>
+
+    <!-- lightweight query interface -->
+    <div class="docs-section" id="query_ui"> 
+		<h6 class="docs-header">Query Explorer</h6>
+
+		<div class="row">
+    		<div class="seven columns" id="query_text">
+    			<h6 class="docs-header">The query interface</h6>
+				<div>
+					<p>
+						do queries here...
+					</p>
+				</div>	
+    		</div>
+
+    		<div class="five columns" id="collection_list">
+    			<h6 class="docs-header">SMS has:</h6>
+				<div>
+					<p>
+						selctor interface here...
+					</p>
+				</div>	
+    		</div>
+    	</div>
+
+	</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
