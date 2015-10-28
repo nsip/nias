@@ -42,17 +42,17 @@ def read_filter(filepath, level)
 	end
 end
 
-@filter[:extreme] = []
-read_filter("./ssf/services/privacyfilters/extreme.xpath", :extreme)
-
-
-# cumulative filters: the fields to filter in the next lowest sensitivity are added on to the previous sensitivity's
-@filter[:high] = Array.new(@filter[:extreme])
-read_filter("./ssf/services/privacyfilters/high.xpath", :high)
-@filter[:medium] = Array.new(@filter[:high])
-read_filter("./ssf/services/privacyfilters/medium.xpath", :medium)
-@filter[:low] = Array.new(@filter[:medium])
+@filter[:low] = []
 read_filter("./ssf/services/privacyfilters/low.xpath", :low)
+
+
+# cumulative filters: the fields to filter in the next highest sensitivity are added on to the previous sensitivity's
+@filter[:medium] = Array.new(@filter[:low])
+read_filter("./ssf/services/privacyfilters/medium.xpath", :medium)
+@filter[:high] = Array.new(@filter[:medium])
+read_filter("./ssf/services/privacyfilters/high.xpath", :high)
+@filter[:extreme] = Array.new(@filter[:high])
+read_filter("./ssf/services/privacyfilters/extreme.xpath", :extreme)
 
 # redact all textual content of xml (a Node)
 def redact(xml, redaction)
