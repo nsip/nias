@@ -1,8 +1,95 @@
-<h1>Privacy filters:</h1>
-<ul>
-<% @d.each do |line| %>
-<li><a href="privacy?profile=<%= line %>"><%= line %></a>
-<% end %>
-</ul>
 
-<% Date.today %>
+
+
+<div class="container">
+  
+	<!-- header -->
+    <section class="header">
+    	<!-- <img class="value-img" src="images/watch.svg"> -->
+    	<img class="value-img" src="images/privacy.svg" width="160" height="160">
+    	<!-- <img class="value-img" src="images/deadlines.svg" width="132" height="132"> -->
+        <div class="row">
+        	<div class="twelve columns" style="margin-top: 5%">
+                <h4>NIAS - SPS</h4>
+                <p>SIF Privacy Service</p>
+            </br></br></br>
+            </div>
+        </div>
+    </section>
+
+    <!-- navigation -->
+    <div class="navbar-spacer"></div>
+    <nav class="navbar">
+        <div class="container">
+            <ul class="navbar-list">
+				
+				<li class="navbar-item"><a class="navbar-link" href="#edit_help">How To Edit Profiles</a></li>
+				
+				<% @d.each do |line| %>
+					<li class="navbar-item"><a class="navbar-link" href="privacy?profile=<%= line %>"><%= line %></a></li>
+				<% end %>
+
+                <li class="navbar-item"><a class="navbar-link" href="#test">Profile Tester</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- collections list -->
+    <div class="docs-section" id="collections"> 
+		<h6 class="docs-header">Profile Definition...</h6>
+
+		<div class="row">
+    		<div class="seven columns" id="collection_text">
+    			<h6 class="docs-header">Profile Name</h6>
+				<div><p>profile description...</p></div>	
+    		</div>
+
+    		<div class="five columns" id="collection_list">
+    			<h6 class="docs-header">Profile editor:</h6>
+				<div>
+					<p>
+						<ul>
+						</ul>
+						
+					</p>
+				</div>	
+    		</div>
+    	</div>
+
+	</div>
+
+    <!-- lightweight query interface -->
+    <div class="docs-section" id="query_ui"> 
+		<h6 class="docs-header">Profile Explorer</h6>
+
+		<div class="row">
+    		<div class="seven columns" id="query_text">
+    			<h6 class="docs-header">Privacy profile testing </h6>
+				<div>
+					<p>
+						input interface here....
+					</p>
+				</div>	
+    		</div>
+
+    		<div class="five columns" id="collection_list">
+    			<h6 class="docs-header">SPS Result:</h6>
+				<div>
+					<p>
+						output interface here...
+					</p>
+				</div>	
+    		</div>
+    	</div>
+
+	</div>
+
+
+
+
+
+
+</div>
+
+
+
