@@ -53,6 +53,33 @@ get "/" do
 	return 'SSF Server is up and running...'
 end
 
+get "/privacy" do
+	@profile = params['profile']
+	if @profile.nil? 
+		# List known privacy profiles
+		@d = Dir["./ssf/services/privacyfilters/*.xpath"].map{|x| x[/\/([^\/]+).xpath$/, 1]}
+		erb :privacyfilters
+	else
+		# Edit privacy profile named
+		@file = File.open("./ssf/services/privacyfilters/#{@profile}.xpath", "r")
+		@contents = @file.read
+		@file.close
+		erb :create
+	end
+end
+
+# receive edit of privacy profile
+post "/privacy" do
+	@profile = params['profile']
+	if !@profile.nil?
+		@logfile = File.open("./ssf/services/privacyfilters/#{@profile}.xpath","w")
+    		@logfile.truncate(@logfile.size)
+    		@logfile.write(params[:file])
+    		@logfile.close
+    		redirect '/privacy'
+	end
+end
+
 
 # send messages - messages assumed to be in the data file sent
 # as part of the request, handles json without needing content type specified

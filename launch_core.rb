@@ -68,14 +68,16 @@ end
 
 
 def shut_down
-
     banner "\n Core Services shutting down...\n\n"
 
     File.readlines( @pid_file ).each do |line|
-
-        Process.kill :INT, line.chomp.to_i
-        sleep 2
-
+	begin
+       		Process.kill :INT, line.chomp.to_i
+        	sleep 2
+	rescue Exception => e  
+  		puts e.message  
+  		puts e.backtrace.inspect  
+	end
     end
 
     File.delete( @pid_file ) if File.exist?( @pid_file )

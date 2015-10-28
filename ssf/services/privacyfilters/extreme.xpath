@@ -1,21 +1,21 @@
 # Fields specified as Extreme rating in SIF-AU Privacy Framework. Note that any attributes to be filtered need to be specified explicitly
-# Second column optionally specifies replacement text. 
-
-# If any rules overlap, specify the narrower rule after the more specific, so that the specific text to be replaced (and suited to the
-# type of the field) overwrites the default replcament text applied throughout the node
 
 //StudentPersonal/AlertMessages/AlertMessage
-//StudentPersonal/AlertMessages/AlertMessage/@Type	Other
+//StudentPersonal/AlertMessages/AlertMessage/@Type:Other
 //StudentPersonal/MedicalAlertMessages/MedicalAlertMessage
 //StudentPersonal/StateProvinceId
 //StudentDailyAttendance/AttendanceCode
-//StudentDailyAttendance/AttendanceCode/Code	999
+//StudentDailyAttendance/AttendanceCode/Code:999
 //StudentDailyAttendance/AttendanceNote
 //StudentParticipation
 //StudentPeriodAttendance/AttendanceCode
-//StudentPeriodAttendance/AttendanceCode/Code	999
+//StudentPeriodAttendance/AttendanceCode/Code:999
 //StudentPeriodAttendance/AttendanceComment
-//StudentContactRelationship/ContactFlags/InterventionOrder	X
+//StudentContactRelationship/ContactFlags/InterventionOrder:X
 //StudentSDTN
 //SummaryEnrollmentInfo
 
+
+    
+    
+    
