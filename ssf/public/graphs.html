@@ -1,0 +1,30 @@
+<!-- graphs.html -->
+
+
+<html>
+<div id="chartContainer">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
+  <script type="text/javascript">
+    var svg = dimple.newSvg("#chartContainer", 1200, 850);
+    d3.json("/graph_data", function (data) {
+      // data = dimple.filterData(data, "Customer", ["NSW", "ESA","ACT"])
+      var myChart = new dimple.chart(svg, data);
+      myChart.setBounds(60, 30, 900, 500)
+      var x = myChart.addCategoryAxis("x", ["Day (Enter Date)"]);
+      x.timeField = "Day (Enter Date)";
+      x.dateParseFormat = "%d/%m/%Y";
+      x.tickFormat = "%d %B";
+      // x.addOrderRule("Day (Enter Date)");
+      myChart.addMeasureAxis("y", "Time (Enter Decimal of 1 hour)");
+      // myChart.addMeasureAxis("p", "Time (Enter Decimal of 1 hour)");
+      // myChart.addMeasureAxis("z", "Time (Enter Decimal of 1 hour)");
+      var s = myChart.addSeries(["Customer"], dimple.plot.line);
+      s.interpolation = "cardinal";
+      // ring.innerRadius = "40%";
+      // myChart.addLegend(65, 10, 800, 20, "right");
+      myChart.draw();
+    });
+  </script>
+</div>
+</html>
