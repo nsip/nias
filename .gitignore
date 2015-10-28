@@ -1,4 +1,5 @@
 
 *.log
+*.pid
 
 kafka/logs/server.log.2015-10-23-13
