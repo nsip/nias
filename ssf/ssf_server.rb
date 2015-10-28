@@ -57,11 +57,11 @@ get "/privacy" do
 	@profile = params['profile']
 	if @profile.nil? 
 		# List known privacy profiles
-		@d = Dir["./ssf/services/privacyfilters/*.xpath"].map{|x| x[/\/([^\/]+).xpath$/, 1]}
+		@d = Dir["#{__dir__}/services/privacyfilters/*.xpath"].map{|x| x[/\/([^\/]+).xpath$/, 1]}
 		erb :privacyfilters
 	else
 		# Edit privacy profile named
-		@file = File.open("./ssf/services/privacyfilters/#{@profile}.xpath", "r")
+		@file = File.open("#{__dir__}/services/privacyfilters/#{@profile}.xpath", "r")
 		@contents = @file.read
 		@file.close
 		erb :create
@@ -72,7 +72,7 @@ end
 post "/privacy" do
 	@profile = params['profile']
 	if !@profile.nil?
-		@logfile = File.open("./ssf/services/privacyfilters/#{@profile}.xpath","w")
+		@logfile = File.open("#{__dir__}/services/privacyfilters/#{@profile}.xpath","w")
     		@logfile.truncate(@logfile.size)
     		@logfile.write(params[:file])
     		@logfile.close
