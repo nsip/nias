@@ -9,6 +9,7 @@ Messages are received from the single stream sifxml.validated. The key of the re
 Each object in the stream is filtered according to privacy filters defined in ./privacyfilters/*.xpath.
 
 The key of the received message is "topic"."stream". Each message is passed to a stram for each privacy setting simultaneously:
+* "topic"."stream".none
 * "topic"."stream".low
 * "topic"."stream".medium
 * "topic"."stream".high
@@ -90,19 +91,26 @@ loop do
   	    messages = []
 	    messages = consumer.fetch
 	    messages.each do |m|
-      	    puts "processing message no.: #{m.offset}, #{m.key}\n\n"
 
-		input = Nokogiri::XML(m.value) do |config|
+                       # Payload from sifxml.ingest contains as its first line a header line with the original topic
+                        header = m.value.lines[0]
+                        payload = m.value.lines[1..-1].join
+			topic = header[/TOPIC: (.+)/, 1]
+
+      	    puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}\n\n"
+
+		input = Nokogiri::XML(payload) do |config|
         		config.nonet.noblanks
 		end
 		if(input.errors.empty?) 
 	      		item_key = "ts_entry:#{ sprintf('%09d', m.offset) }"
+			out[:none] = input
 			out[:extreme] = apply_filter(input, @filter[:extreme])
 			out[:high] = apply_filter(out[:extreme], @filter[:high])
 			out[:medium] = apply_filter(out[:high], @filter[:medium])
 			out[:low] = apply_filter(out[:medium], @filter[:low])
-			[:low, :medium, :high, :extreme].each {|x|
-				outbound_messages << Poseidon::MessageToSend.new( "#{m.key}.#{x}", out[x].to_s, item_key ) 
+			[:none, :low, :medium, :high, :extreme].each {|x|
+				outbound_messages << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
 			}
 		end
 

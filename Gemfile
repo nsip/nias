@@ -32,5 +32,3 @@ gem 'moneta'
 # process matrix parameters in URLs
 gem 'rack-matrix_params'
 
-
-

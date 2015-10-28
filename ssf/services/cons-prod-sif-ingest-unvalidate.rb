@@ -43,13 +43,17 @@ loop do
 	    messages = consumer.fetch
 	    messages.each do |m|
   	    
-	  	    puts "processing message no.: #{m.offset}, #{m.key}\n\n"
+	  	    puts "Unvalidate: processing message no.: #{m.offset}, #{m.key}\n\n"
+
+			# Payload from sifxml.ingest contains as its first line a header line with the original topic
+			header = m.value.lines[0]
+			payload = m.value.lines[1..-1].join
 
 			# each ingest message is a group of objects of the same class, e.g. 
 			# <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
 			# Parse each message as a unit; pass them on as individual objects
 
-			doc = Nokogiri::XML(m.value) do |config|
+			doc = Nokogiri::XML(payload) do |config|
 	        		config.nonet.noblanks
 			end
 		
@@ -57,12 +61,12 @@ loop do
 					xsd_errors = [] #@xsd.validate(doc)
 					if(xsd_errors.empty?) 
 			      		item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
-						doc.xpath("/*/node()").each { |x| outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", x.to_s, item_key ) }
+						doc.xpath("/*/node()").each { |x| outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", header + x.to_s, item_key ) }
 					else
-						outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} validity error:\n" + xsd_errors.map{|e| e.message}.join("\n") + "\n" + m.value, "invalid" )
+						outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", header + "Message #{m.offset} validity error:\n" + xsd_errors.map{|e| e.message}.join("\n") + "\n" + m.value, "invalid" )
 					end
 				else
-					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value, "invalid" )
+					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", header + "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value, "invalid" )
 				end
 		end
 

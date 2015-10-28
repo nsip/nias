@@ -23,6 +23,7 @@ configure do
 	# enable :sessions
 
 	# All received XML messages are also sent from /:topic:/stream to a global sifxml.ingest topic, for validation by microservice
+	# The source topic/stream is injected into the header line TOPIC: topic/stream before the XML payload
 	set :xmltopic, 'sifxml.ingest'
 end
 
@@ -139,7 +140,7 @@ post "/:topic/:stream" do
 		when 'application/xml' then 
 			msg = msg.to_s
 			puts "topic is: #{settings.xmltopic} : topic name is #{topic_name}\n\n"
-			messages << Poseidon::MessageToSend.new( "#{settings.xmltopic}", msg, "#{topic_name}" )
+			messages << Poseidon::MessageToSend.new( "#{settings.xmltopic}", "TOPIC: #{topic_name}\n#{msg}", "#{topic_name}" )
 		when 'text/csv' then msg = msg.to_hash.to_json
 		end
 		messages << Poseidon::MessageToSend.new( "#{topic_name}", msg, "#{strm}" )

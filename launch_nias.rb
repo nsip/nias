@@ -77,15 +77,20 @@ def launch
   banner 'Starting indexer services'
 
   services = [
-                'cons-prod-privacyfilter.rb',
-                'cons-prod-sif-ingest-unvalidate.rb'
-                # 'cons-prod-sif-ingest-validate.rb',
+                {:name => 'cons-prod-privacyfilter.rb', :options  => ''},
+		{:name => 'filtered_client.rb', :options => '-p 1234'},
+                # {:name => 'cons-prod-sif-ingest-unvalidate.rb', :options => ''},
+                {:name =>'cons-prod-sif-ingest-validate.rb', :options => ''}
               ]
+
+  options = [
+	'',
+	]
 
 
   services.each_with_index do | service, i |
 
-      @pids["ts:#{i}"] = Process.spawn( 'ruby', "./ssf/services/#{service}" )
+      @pids["ts:#{i}"] = Process.spawn( 'ruby', "./ssf/services/#{service[:name]}" , service[:options] )
 
   end
 
@@ -109,10 +114,13 @@ def shut_down
     banner "\n Core Services shutting down...\n\n"
 
     File.readlines( @pid_file ).each do |line|
-
-        Process.kill :INT, line.chomp.to_i
-        sleep 2
-
+	begin
+        	Process.kill :INT, line.chomp.to_i
+        	sleep 2
+        rescue Exception => e
+                puts e.message
+                puts e.backtrace.inspect
+        end
     end
 
     File.delete( @pid_file ) if File.exist?( @pid_file )

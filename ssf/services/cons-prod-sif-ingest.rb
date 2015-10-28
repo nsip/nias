@@ -15,7 +15,7 @@ require 'nokogiri' # xml support
 @outbound2 = 'sifxml.errors'
 
 
-@xsd = Nokogiri::XML::Schema(File.open("./ssf/services/xsd/sif1.3/SIF_Message1.3_3.x.xsd"))
+@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif1.3/SIF_Message1.3_3.x.xsd"))
 # @xsd = Nokogiri::XML::Schema(File.open("xsd/sif1.3/xml.xsd"))
 
 # create consumer
@@ -26,7 +26,7 @@ consumer = Poseidon::PartitionConsumer.new("cons-prod-ingest", "localhost", 9092
 # set up producer pool - busier the broker the better for speed
 producers = []
 (1..10).each do | i |
-	p = Poseidon::Producer.new(["localhost:9092"], "cons-prod-ingest", {:partitioner => Proc.new { |key, partition_count| 0 } })
+	p = Poseidon::Producer.new(["localhost:9092"], "cons-prod-sif-ingest", {:partitioner => Proc.new { |key, partition_count| 0 } })
 	producers << p
 end
 pool = producers.cycle
@@ -39,25 +39,30 @@ loop do
   	    messages = []
 	    messages = consumer.fetch
 	    messages.each do |m|
-      	    puts "processing message no.: #{m.offset}, #{m.key}\n\n"
+      	    puts "Ingest: processing message no.: #{m.offset}, #{m.key}\n\n"
+
+                       # Payload from sifxml.ingest contains as its first line a header line with the original topic
+                        header = m.value.lines[0]
+                        payload = m.value.lines[1..-1].join
+
 
 		# each ingest message is a group of objects of the same class, e.g. 
 		# <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
 		# Parse each message as a unit; pass them on as individual objects
 
-		doc = Nokogiri::XML(m.value) do |config|
+		doc = Nokogiri::XML(payload) do |config|
         		config.nonet.noblanks
 		end
 		if(doc.errors.empty?) 
 			xsd_errors = [] #@xsd.validate(doc)
 			if(xsd_errors.empty?) 
 	      		item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
-				doc.xpath("/*/node()").each { |x| outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", x.to_s, item_key ) }
+				doc.xpath("/*/node()").each { |x| outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", header + x.to_s, item_key ) }
 			else
-				outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} validity error:\n" + xsd_errors.map{|e| e.message}.join("\n") + "\n" + m.value, "invalid" )
+				outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", header + "Message #{m.offset} validity error:\n" + xsd_errors.map{|e| e.message}.join("\n") + "\n" + m.value, "invalid" )
 			end
 		else
-			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value, "invalid" )
+			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", header + "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value, "invalid" )
 		end
 		end
 
