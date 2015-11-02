@@ -1,0 +1,71 @@
+<!-- ssf.erb -->
+
+<div class="container">
+  
+	<!-- header -->
+    <section class="header">
+    	<!-- <img class="value-img" src="images/watch.svg"> -->
+    	<img class="value-img" src="images/mail.svg" width="160" height="160">
+    	<!-- <img class="value-img" src="images/deadlines.svg" width="132" height="132"> -->
+        <div class="row">
+        	<div class="twelve columns" style="margin-top: 5%">
+                <h4>NIAS - SSF</h4>
+                <p>SIF Store + Forward</p>
+            </br></br></br>
+            </div>
+        </div>
+    </section>
+
+    <!-- known topics list -->
+    <div class="docs-section" id="server_info"> 
+		<h6 class="docs-header">Server Details...</h6>
+
+		<div class="row">
+    		<div class="seven columns" id="collection_text">
+    			<h6 class="docs-header">SSF Server</h6>
+				<div><ul>
+
+					<li>Name: <%= env['SERVER_NAME'] %></li>
+					<li>Port: <%= env['SERVER_PORT'] %></li>
+					<li>Environment: <%= settings.environment %></li>
+
+				</ul></div>
+    		</div>
+
+    		<div class="five columns" id="topics_list">
+    			<h6 class="docs-header">Known Topics:</h6>
+				<div><ul>
+
+						<% @topics.each do | topic | %>
+							<li><a href="<%= topic %>"><%= topic %></a></li>
+						<% end %>
+
+				</ul></div>	
+    		</div>
+    	</div>
+
+	</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
