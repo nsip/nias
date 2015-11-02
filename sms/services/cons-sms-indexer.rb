@@ -10,14 +10,18 @@
 # 
 # id: The guid or RefId of the object - if none supplied by inbound data will have been created during ingest
 # 
-# links: [] Anarray of other object references that this object knows about i.e. a StudentSchoolEnrolment will
+# links: [] An array of other object references that this object knows about i.e. a StudentSchoolEnrolment will
 # contain its own refid, the refid of a schoolinfo and the refid of a studentpersonal
-# 
+#
 # The SMS builds a bi-directional graph of all references, all nodes are traversable so intermedate objects
 # can be invivisble to the user unless specifically needed.
 # 
 # Links can be followed in either direction meaning aggregate queries can be made for high-level objects such as district/lea
 # 
+# The SMS also takes in all alternate (human-readable) IDs for the same object, and creates a hash from that ID to the GUID/RefID.
+# The hash uses the id type as key and the id as value.
+# So if "XYZZY" is the LocalId for the object with RefId "1", and it is also the StateProvinceId for the object with RefId "2",
+# then the Redis hash "XYZZY" with have XYZZY[localid] = 1, XYZZY[stateprovinceid] = 2
 # 
 
 require 'json'
@@ -59,6 +63,10 @@ loop do
 				@redis.sadd idx_hash['type'], idx_hash['id']
 				
 				@redis.sadd idx_hash['id'], idx_hash['links'] unless idx_hash['links'].empty?
+
+				idx_hash['otherids'].each do |key, value|
+					@redis.hset value, key, id_hash['id']
+				end
 
 				# then add id to sets for links
 				idx_hash['links'].each do | link |
