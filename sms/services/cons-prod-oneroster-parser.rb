@@ -57,65 +57,65 @@ loop do
 		idx_hash = JSON.parse( m.value )
 
                # type of converted CSV One Roster record depends on presence of particular field
-                idx[:type] = 'orgs' if idx_hash.haskey?("metadata.boarding")
-                idx[:type] = 'users' if idx_hash.haskey?("username")
-                idx[:type] = 'courses' if idx_hash.haskey?("courseCode")
-                idx[:type] = 'classes' if idx_hash.haskey?("classCode")
-                idx[:type] = 'enrollments' if idx_hash.haskey?("primary")
-                idx[:type] = 'academicSessions' if idx_hash.haskey?("startDate")
-                idx[:type] = 'demographics' if idx_hash.haskey?("sex")
+                idx[:type] = 'orgs' if idx_hash.has_key?("metadata.boarding")
+                idx[:type] = 'users' if idx_hash.has_key?("username")
+                idx[:type] = 'courses' if idx_hash.has_key?("courseCode")
+                idx[:type] = 'classes' if idx_hash.has_key?("classCode")
+                idx[:type] = 'enrollments' if idx_hash.has_key?("primary")
+                idx[:type] = 'academicSessions' if idx_hash.has_key?("startDate")
+                idx[:type] = 'demographics' if idx_hash.has_key?("sex")
 
                         idx[:id] = idx[:type] == 'demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
 
-			if(idx_hash.haskey?("parentSourcedId")) {
+			if(idx_hash.has_key?("parentSourcedId")) 
 				idx[:links] << idx_hash["parentSourcedId"]
-			}
-			if(idx_hash.haskey?("orgSourcedId")) {
+			end
+			if(idx_hash.has_key?("orgSourcedId")) 
 				idx[:links] << idx_hash["orgSourcedId"]
-			}
-			if(idx_hash.haskey?("courseSourcedId")) {
+			end
+			if(idx_hash.has_key?("courseSourcedId")) 
 				idx[:links] << idx_hash["courseSourcedId"]
-			}
-			if(idx_hash.haskey?("schoolSourcedId")) {
+			end
+			if(idx_hash.has_key?("schoolSourcedId")) 
 				idx[:links] << idx_hash["schoolSourcedId"]
-			}
-			if(idx_hash.haskey?("termSourcedId")) {
+			end
+			if(idx_hash.has_key?("termSourcedId")) 
 				idx[:links] << idx_hash["termSourcedId"]
-			}
-			if(idx_hash.haskey?("classSourcedId")) {
+			end
+			if(idx_hash.has_key?("classSourcedId")) 
 				idx[:links] << idx_hash["classSourcedId"]
-			}
-			if(idx_hash.haskey?("userSourcedId")) {
+			end
+			if(idx_hash.has_key?("userSourcedId")) 
 				idx[:links] << idx_hash["userSourcedId"]
-			}
-			if(idx_hash.haskey?("orgSourcedIds")) {
+			end
+			if(idx_hash.has_key?("orgSourcedIds")) 
 				idx_hash["orgSourcedIds"].split(',').each { |x|
 					idx[:links] << x
 				}
-			}
-			if(idx_hash.haskey?("agents")) {
+			end
+			if(idx_hash.has_key?("agents")) 
 				idx_hash["agents"].split(',').each { |x|
 					idx[:links] << x
 				}
-			}
+			end
 
 
 			# other identifiers
-			if(idx_hash.haskey?("identifier") and idx[:type] == 'orgs') {
+			if(idx_hash.has_key?("identifier") and idx[:type] == 'orgs')
 				idx[:otherids][:acaraids] = idx_hash["identifier"]
-			}
-			if(idx_hash.haskey?("userId") and idx[:type] == 'users') {
+			end
+			if(idx_hash.has_key?("userId") and idx[:type] == 'users') 
 				idx[:otherids][:userId] = idx_hash["userId"]
-			}
-			if(idx_hash.haskey?("identifier") and idx[:type] == 'users') {
+			end
+			if(idx_hash.has_key?("identifier") and idx[:type] == 'users') 
 				idx[:otherids][:localid] = idx_hash["identifier"]
-			}
-			if(idx_hash.haskey?("courseCode") and idx[:type] == 'courses') {
+			end
+			if(idx_hash.has_key?("courseCode") and idx[:type] == 'courses') 
 				idx[:otherids][:localid] = idx_hash["courseCode"]
-			}
-			if(idx_hash.haskey?("classCode") and idx[:type] == 'classes') {
+			end
+			if(idx_hash.has_key?("classCode") and idx[:type] == 'classes') 
 				idx[:otherids][:localid] = idx_hash["classCode"]
-			}
+			end
 
 
 
