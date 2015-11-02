@@ -37,60 +37,37 @@ def launch
   # just in case an old one gets left behind, delete on startup
   File.delete( @pid_file ) if File.exist?( @pid_file )
 
-  banner 'Starting NIAS services'
+  banner 'Starting NIAS SSF services'
 
-  # banner 'Starting zookeeper' 
-  # Process.daemon( true, true )
-
-  # @pids['zk'] = Process.spawn( './kafka/bin/zookeeper-server-start.sh', './kafka/config/zookeeper.properties' )
-
-  # banner 'Waiting for ZK to come up'
-  # sleep 5
-
-
-  # banner 'Starting kafka' 
-  # @pids['kafka'] = Process.spawn( './kafka/bin/kafka-server-start.sh', './kafka/config/server.properties' )
-
-
-  # banner 'Starting SMS Redis'
-  # @pids['sms-redis'] = Process.spawn( 'redis-server', './sms/sms-redis.conf' )
-
-  # banner 'Starting SSF server'
-  # @pids['ssf'] = Process.spawn( 'ruby', './ssf/ssf_server.rb', '-e', 'production' )  
-
-  # banner 'Kafka logs will be created under /tmp/kafka'
-  # banner 'Zookeeper logs will be created under /tmp/zookeeper'
-  # banner 'Redis backups will be created under /tmp/redis'
-
-  # puts "ZK pid = #{@pids['zk']}"
-  # puts "Kafka pid = #{@pids['kafka']}"
-
-  # File.open(@pid_file, 'w') {|f| 
-  #   f.puts "#{@pids['kafka']}"
-  #   f.puts "#{@pids['zk']}"
-  #   f.puts "#{@pids['sms-redis']}"
-  #   f.puts "#{@pids['ssf']}"
-  # }
-
-  # banner "pid file written to #{@pid_file}"
-
-  banner 'Starting indexer services'
-
-  services = [
+  ssf_services = [
                 {:name => 'cons-prod-privacyfilter.rb', :options  => ''},
 		{:name => 'filtered_client.rb', :options => '-p 1234'},
                 # {:name => 'cons-prod-sif-ingest-unvalidate.rb', :options => ''},
                 {:name =>'cons-prod-sif-ingest-validate.rb', :options => ''}
+                {:name =>'cons-prod-sif-ingest.rb', :options => ''}
               ]
 
-  options = [
-	'',
-	]
+
+  ssf_services.each_with_index do | service, i |
+
+      @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/ssf/services/#{service[:name]}", service[:options] )
+
+  end
+  
 
 
-  services.each_with_index do | service, i |
+  banner 'Starting NIAS SMS services'
 
-      @pids["ts:#{i}"] = Process.spawn( 'ruby', "./ssf/services/#{service[:name]}" , service[:options] )
+  sms_services = [
+
+                  'cons-prod-sif-parser.rb',
+                  'cons-sms-indexer.rb',
+                  'cons-sms-storage.rb'
+                ]
+
+  sms_services.each_with_index do | service, i |
+
+      @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/sms/services/#{service}" )
 
   end
 
@@ -114,13 +91,14 @@ def shut_down
     banner "\n Core Services shutting down...\n\n"
 
     File.readlines( @pid_file ).each do |line|
-	begin
-        	Process.kill :INT, line.chomp.to_i
-        	sleep 2
-        rescue Exception => e
-                puts e.message
-                puts e.backtrace.inspect
-        end
+      begin
+              Process.kill :INT, line.chomp.to_i
+              sleep 2
+      rescue Exception => e  
+          puts e.message  
+          puts e.backtrace.inspect  
+      end
+
     end
 
     File.delete( @pid_file ) if File.exist?( @pid_file )

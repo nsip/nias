@@ -56,6 +56,7 @@
 
 require 'sinatra'
 require 'sinatra/reloader' if development?
+require 'sinatra/base'
 require 'json'
 require 'csv'
 require 'redis'
@@ -63,16 +64,21 @@ require 'redis'
 require_relative 'sms_query'
 
 
-configure do
+class SMSQueryServer < Sinatra::Base
 
-	 set :smsq, SMSQuery.new
 
-end
+	configure do
 
-get "/" do
+		 set :smsq, SMSQuery.new
 
-	@result = settings.smsq.known_collections
-	erb :collections
+	end
+
+	get "/sms" do
+
+		@result = settings.smsq.known_collections
+		erb :collections
+
+	end
 
 end
 
