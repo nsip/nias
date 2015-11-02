@@ -2,7 +2,7 @@
 
 
 # service reads validated xml messages from the sif validation service.
-# Parses mesages to estabish promary id, and then simply saves whole message to key value storage
+# Parses mesages to estabish primary id, and then simply saves whole message to key value storage
 # with id as key and message as value.
 
 # Uses the Moneta abstraction driver which allows for unified simple put/get interface over any number of 
@@ -40,11 +40,14 @@ loop do
 	    
 	    messages.each do |m|
 
-	    	# create 'empty' index tuple, links will be unused here but keeps all parsing code consistent
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :links => []}      	
+	    	# create 'empty' index tuple, otherids and links will be unused here but keeps all parsing code consistent
+			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => []}      	
+
+                header = m.value.lines[0]
+                payload = m.value.lines[1..-1].join
 
       		# read xml message
-      		nodes = Nokogiri::XML( m.value ) do |config|
+      		nodes = Nokogiri::XML( payload ) do |config|
         		config.nonet.noblanks
 			end      		
 

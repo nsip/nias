@@ -91,6 +91,8 @@ Using httpie
 
 http post :4567/timesheet/ingest Content-Type:text/csv < JulyCombined.csv
 
+http post :4567/test/test1 Content-Type:application/xml < test_data/timetable.xml
+
 Browser http://localhost:5678/timesheet
 
 

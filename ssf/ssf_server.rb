@@ -130,7 +130,7 @@ class SSFServer < Sinatra::Base
 			case request.media_type
 			when 'application/json' then msg = msg.to_json
 			when 'application/xml' then 
-				msg = msg.to_s
+				msg =  "TOPIC: #{topic_name}\n" + msg.to_s
 				topic = "#{settings.xmltopic}"
 				key = "#{topic_name}"
 			when 'text/csv' then msg = msg.to_hash.to_json

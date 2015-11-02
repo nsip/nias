@@ -65,7 +65,7 @@ loop do
       				@redis.sadd idx_hash['id'], idx_hash['links'] unless idx_hash['links'].empty?
 
 				idx_hash['otherids'].each do |key, value|
-					@redis.hset value, key, id_hash['id']
+					@redis.hset value, key, idx_hash['id']
 				end
 
 				# then add id to sets for links
