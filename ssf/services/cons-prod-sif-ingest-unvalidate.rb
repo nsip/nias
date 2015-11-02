@@ -19,7 +19,6 @@ require 'nokogiri' # xml support
 
 
 @xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif1.3/SIF_Message1.3_3.x.xsd"))
-# @xsd = Nokogiri::XML::Schema(File.open("xsd/sif1.3/xml.xsd"))
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new("cons-prod-ingest", "localhost", 9092,

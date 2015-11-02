@@ -3,10 +3,11 @@
 
 source 'https://rubygems.org'
 
-ruby '2.2.0'
+ruby '2.2.3'
 
 # redis client interface
 gem 'redis'
+gem 'hiredis', '>= 0.6.0' 
 
 # web tools
 gem 'sinatra'
@@ -28,6 +29,8 @@ gem 'nokogiri'
 
 # interface for lmdb
 gem 'moneta'
+gem 'lmdb'
+
 
 # process matrix parameters in URLs
 gem 'rack-matrix_params'

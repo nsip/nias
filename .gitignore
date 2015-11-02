@@ -6,3 +6,6 @@ kafka/logs/server.log.2015-10-23-13
 *.pid
 
 kafka/logs/*
+*.pid
+
+*.lock

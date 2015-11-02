@@ -78,7 +78,7 @@ consumer = Poseidon::PartitionConsumer.new("cons-prod-privacyfilter", "localhost
 # set up producer pool - busier the broker the better for speed
 producers = []
 (1..10).each do | i |
-	p = Poseidon::Producer.new(["localhost:9092"], "cons-prod-ingest", {:partitioner => Proc.new { |key, partition_count| 0 } })
+	p = Poseidon::Producer.new(["localhost:9092"], "cons-prod-privacyfilter", {:partitioner => Proc.new { |key, partition_count| 0 } })
 	producers << p
 end
 pool = producers.cycle
@@ -95,6 +95,7 @@ loop do
 		input = Nokogiri::XML(m.value) do |config|
         		config.nonet.noblanks
 		end
+		
 		if(input.errors.empty?) 
 	      		item_key = "ts_entry:#{ sprintf('%09d', m.offset) }"
 			out[:extreme] = apply_filter(input, @filter[:extreme])
@@ -121,7 +122,7 @@ loop do
 
   # trap to allow console interrupt
   trap("INT") { 
-    puts "\ncons-prod-ingest service shutting down...\n\n"
+    puts "\ncons-prod-privacyfilter service shutting down...\n\n"
     consumer.close
     exit 130 
   } 

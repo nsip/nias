@@ -49,29 +49,29 @@ loop do
 
       		idx_hash = JSON.parse( m.value )
 
-      		puts "\n\nMessage : - #{idx_hash.inspect}\n\n"
+      		# puts "\n\nMessage : - #{idx_hash.inspect}\n\n"
 
-      		# no responses needed from redis so pipeline for speed
-      		@redis.pipelined do
+        	# no responses needed from redis so pipeline for speed
+    		  @redis.pipelined do
 
-				@redis.sadd 'known:collections', idx_hash['type']
+      				@redis.sadd 'known:collections', idx_hash['type']
 
-				@redis.sadd idx_hash['type'], idx_hash['id']
-				
-				@redis.sadd idx_hash['id'], idx_hash['links'] unless idx_hash['links'].empty?
+      				@redis.sadd idx_hash['type'], idx_hash['id']
+      				
+      				@redis.sadd idx_hash['id'], idx_hash['links'] unless idx_hash['links'].empty?
 
-				# then add id to sets for links
-				idx_hash['links'].each do | link |
+      				# then add id to sets for links
+      				idx_hash['links'].each do | link |
 
-					refs = []
-					refs = idx_hash['links'].reject { |n| n == link } # can ignore self-links
-					refs << idx_hash['id']
+                  refs = []
+                  refs = idx_hash['links'].reject { |n| n == link } # can ignore self-links
+                  refs << idx_hash['id']
 
-					@redis.sadd link, refs unless refs.empty?
+                  @redis.sadd link, refs unless refs.empty?
 
-				end
+      				end
 
-			end
+    			end
   		
   		end
 

@@ -103,7 +103,7 @@ loop do
 				idx[:links] << node.parent.content
 			end
 
-			puts "\nIndex = #{idx.to_json}\n\n"
+			puts "\nParser Index = #{idx.to_json}\n\n"
 
 			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
   		
