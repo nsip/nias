@@ -9,3 +9,5 @@ kafka/logs/*
 *.pid
 
 *.lock
+
+*.lock
