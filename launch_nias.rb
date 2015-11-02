@@ -62,7 +62,9 @@ def launch
 
                   'cons-prod-sif-parser.rb',
                   'cons-sms-indexer.rb',
-                  'cons-sms-storage.rb'
+                  'cons-sms-storage.rb',
+		  'cons-oneroster-sms-storage.rb', 
+		  'cons-prod-oneroster-parser.rb',
                 ]
 
   sms_services.each_with_index do | service, i |
