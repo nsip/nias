@@ -19,7 +19,7 @@ class HookupServer < Sinatra::Base
 # the ids are presumed to be appended to what is already there
 # 
 
-@outbound = 'sms.indexer'
+outbound = 'sms.indexer'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 
@@ -49,7 +49,7 @@ pool = producers.cycle
 
 			puts "\nParser Index = #{idx.to_json}\n\n"
 
-			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
+			outbound_messages << Poseidon::MessageToSend.new( "#{outbound}", idx.to_json, "indexed" )
   		
   		end
 
@@ -62,10 +62,9 @@ pool = producers.cycle
 
 			puts "\nParser Index = #{idx.to_json}\n\n"
 
-			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
+			outbound_messages << Poseidon::MessageToSend.new( "#{outbound}", idx.to_json, "indexed" )
   		
   		end
-
   		# send results to indexer to create sms data graph
   		outbound_messages.each_slice(20) do | batch |
 			pool.next.send_messages( batch )
