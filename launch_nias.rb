@@ -43,7 +43,7 @@ def launch
                 {:name => 'cons-prod-privacyfilter.rb', :options  => ''},
 		{:name => 'filtered_client.rb', :options => '-p 1234'},
                 # {:name => 'cons-prod-sif-ingest-unvalidate.rb', :options => ''},
-                {:name =>'cons-prod-sif-ingest-validate.rb', :options => ''}
+                {:name =>'cons-prod-sif-ingest-validate.rb', :options => ''},
                 {:name =>'cons-prod-sif-ingest.rb', :options => ''}
               ]
 
