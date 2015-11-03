@@ -43,16 +43,16 @@ def read_filter(filepath, level)
 end
 
 @filter[:low] = []
-read_filter("./ssf/services/privacyfilters/low.xpath", :low)
+read_filter("#{__dir__}/privacyfilters/low.xpath", :low)
 
 
 # cumulative filters: the fields to filter in the next highest sensitivity are added on to the previous sensitivity's
 @filter[:medium] = Array.new(@filter[:low])
-read_filter("./ssf/services/privacyfilters/medium.xpath", :medium)
+read_filter("#{__dir__}/privacyfilters/medium.xpath", :medium)
 @filter[:high] = Array.new(@filter[:medium])
-read_filter("./ssf/services/privacyfilters/high.xpath", :high)
+read_filter("#{__dir__}/privacyfilters/high.xpath", :high)
 @filter[:extreme] = Array.new(@filter[:high])
-read_filter("./ssf/services/privacyfilters/extreme.xpath", :extreme)
+read_filter("#{__dir__}/privacyfilters/extreme.xpath", :extreme)
 
 # redact all textual content of xml (a Node)
 def redact(xml, redaction)
@@ -104,14 +104,18 @@ loop do
 		end
 		
 		if(input.errors.empty?) 
-	      		item_key = "ts_entry:#{ sprintf('%09d', m.offset) }"
+      		item_key = "prv_filter:#{ sprintf('%09d', m.offset) }"
 			out[:none] = input
 			out[:extreme] = apply_filter(input, @filter[:extreme])
 			out[:high] = apply_filter(out[:extreme], @filter[:high])
 			out[:medium] = apply_filter(out[:high], @filter[:medium])
 			out[:low] = apply_filter(out[:medium], @filter[:low])
 			[:none, :low, :medium, :high, :extreme].each {|x|
-				outbound_messages << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
+				if x == :none
+					outbound_messages << Poseidon::MessageToSend.new( "#{topic}", out[x].to_s, item_key ) 	
+				else
+					outbound_messages << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
+				end
 			}
 		end
 

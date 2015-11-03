@@ -76,7 +76,8 @@ def launch
               'sifxml.validated',
               'sms.indexer',
               'sifxml.ingest',
-              'sifxml.errors'
+              'sifxml.errors',
+              'oneroster.validated'
             ]
 
   topics.each do | topic |
