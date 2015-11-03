@@ -1,6 +1,4 @@
 
-
-
 <div class="container">
   
 	<!-- header -->
@@ -25,64 +23,208 @@
 				
 				<li class="navbar-item"><a class="navbar-link" href="#edit_help">How To Edit Profiles</a></li>
 				
-				<% @d.each do |line| %>
-					<li class="navbar-item"><a class="navbar-link" href="sps?profile=<%= line %>"><%= line %></a></li>
-				<% end %>
+				<li class="navbar-item"><a class="navbar-link" href="#low">Low</a></li>
+                <li class="navbar-item"><a class="navbar-link" href="#medium">Medium</a></li>
+                <li class="navbar-item"><a class="navbar-link" href="#high">High</a></li>
+                <li class="navbar-item"><a class="navbar-link" href="#extreme">Extreme</a></li>
 
-                <li class="navbar-item"><a class="navbar-link" href="#test">Profile Tester</a></li>
+
+                <li class="navbar-item"><a class="navbar-link" href="#test">Profile Samples</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- collections list -->
-    <div class="docs-section" id="collections"> 
-		<h6 class="docs-header">Profile Definition...</h6>
+
+    <!-- Generic Editing Instructions -->
+    <div class="docs-section" id="edit_help"> 
+		<h6 class="docs-header">Editing Privacy Profiles</h6>
 
 		<div class="row">
-    		<div class="seven columns" id="collection_text">
-    			<h6 class="docs-header">Profile Name</h6>
-				<div><p>profile description...</p></div>	
+
+    		<div class="nine columns" id="edit_instructions">
+                <ul>
+                    <li>Each field to be filtered is defined with an XPath
+                    <li>Comments are preceded with #
+                    <li>The redaction string to be inserted is delimited from the XPath by a colon. The default redaction string is REDACTED
+                    <li>Any XML attributes to be filtered need to be specified explicitly
+                    <li>If any rules overlap, specify the narrower rule after the more specific, so that the specific text to be replaced (and suited to the type of the field) overwrites the default replcament text applied throughout the node
+                </ul>                       
     		</div>
 
-    		<div class="five columns" id="collection_list">
-    			<h6 class="docs-header">Profile editor:</h6>
-				<div>
-					<p>
-						<ul>
-						</ul>
-						
-					</p>
-				</div>	
+    		<div class="three columns" id="spacer">
+				<p>						
+				</p>	
     		</div>
     	</div>
 
 	</div>
 
-    <!-- lightweight query interface -->
-    <div class="docs-section" id="query_ui"> 
-		<h6 class="docs-header">Profile Explorer</h6>
 
-		<div class="row">
-    		<div class="seven columns" id="query_text">
-    			<h6 class="docs-header">Privacy profile testing </h6>
-				<div>
-					<p>
-						input interface here....
-					</p>
-				</div>	
-    		</div>
+    <!-- Editor for Low Profile -->
+    <div class="docs-section" id="low"> 
+        <h6 class="docs-header">Privacy Profile Definition - 'Low' Profile</h6>
 
-    		<div class="five columns" id="collection_list">
-    			<h6 class="docs-header">SPS Result:</h6>
-				<div>
-					<p>
-						output interface here...
-					</p>
-				</div>	
-    		</div>
-    	</div>
+        <div class="row">
+            <div class="twelve columns">
 
-	</div>
+                <form action="/privacy?profile=low" method="post" id="profile_form_low">
+                    <textarea style="width:100%;height:550px" name="file"><%= @profiles['low'] %></textarea>
+                    <div class="row">
+                        <input type="submit" value="Save">  
+                        <br/>
+                        <div id="low_msg"></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <script>
+            $(function () {
+                $("#profile_form_low").submit(function (e) {
+                    e.preventDefault(); //STOP default action
+                    $.ajax({
+                        url: $(this).attr("action"),
+                        type: "POST",
+                        data: $(this).serialize(),
+                        success: function (data, textStatus, jqXHR) {
+                            // alert('Profile Low has been updated.');
+                            $( "#low_msg" ).text( "Privacy Profile Low Successfully Updated" ).show().fadeOut( 2500 );
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            // alert('Error when saving profile');
+                           $( "#low_msg" ).text( "Error Updating Profile" ).show().fadeOut( 2500 );  
+                        }
+                    });
+                    return false;
+                });
+            });    
+        </script>                
+    </div>
+
+
+    <!-- Editor for Medium Profile -->
+    <div class="docs-section" id="medium"> 
+        <h6 class="docs-header">Privacy Profile Definition - 'Medium' Profile</h6>
+
+        <div class="row">
+            <div class="twelve columns">
+
+                <form action="/privacy?profile=medium" method="post" id="profile_form_medium">
+                    <textarea style="width:100%;height:550px" name="file"><%= @profiles['medium'] %></textarea>
+                    <div class="row">
+                        <input type="submit" value="Save">
+                        <br/>
+                        <div id='med_msg'></div>  
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <script>
+            $(function () {
+                $("#profile_form_medium").submit(function (e) {
+                    e.preventDefault(); //STOP default action
+                    $.ajax({
+                        url: $(this).attr("action"),
+                        type: "POST",
+                        data: $(this).serialize(),
+                        success: function (data, textStatus, jqXHR) {
+                            // alert('Profile Low has been updated.');
+                            $( "#med_msg" ).text( "Privacy Profile Medium Successfully Updated" ).show().fadeOut( 2500 );
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            // alert('Error when saving profile');
+                           $( "#med_msg" ).text( "Error Updating Profile" ).show().fadeOut( 2500 );  
+                        }
+                    });
+                    return false;
+                });
+            });    
+        </script>                
+    </div>
+
+    <!-- Editor for High Profile -->
+    <div class="docs-section" id="high"> 
+        <h6 class="docs-header">Privacy Profile Definition - 'High' Profile</h6>
+
+        <div class="row">
+            <div class="twelve columns">
+
+                <form action="/privacy?profile=high" method="post"id="profile_form_high">
+                    <textarea style="width:100%;height:550px" name="file"><%= @profiles['high'] %></textarea>
+                    <div class="row">
+                        <input type="submit" value="Save">  
+                        <br/>
+                        <div id='hi_msg'></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <script>
+            $(function () {
+                $("#profile_form_high").submit(function (e) {
+                    e.preventDefault(); //STOP default action
+                    $.ajax({
+                        url: $(this).attr("action"),
+                        type: "POST",
+                        data: $(this).serialize(),
+                        success: function (data, textStatus, jqXHR) {
+                            // alert('Profile Low has been updated.');
+                            $( "#hi_msg" ).text( "Privacy Profile High Successfully Updated" ).show().fadeOut( 2500 );
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            // alert('Error when saving profile');
+                           $( "#hi_msg" ).text( "Error Updating Profile" ).show().fadeOut( 2500 );  
+                        }
+                    });
+                    return false;
+                });
+            });    
+        </script>                
+    </div>
+
+    <!-- Editor for Extreme Profile -->
+    <div class="docs-section" id="extreme"> 
+        <h6 class="docs-header">Privacy Profile Definition - 'Extreme' Profile</h6>
+
+        <div class="row">
+            <div class="twelve columns">
+
+                <form action="/privacy?profile=extreme" method="post" id="profile_form_extreme">
+                    <textarea style="width:100%;height:550px" name="file"><%= @profiles['extreme'] %></textarea>
+                    <div class="row">
+                        <input type="submit" value="Save">  
+                        <br/>
+                        <div id='xtr_msg'></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <script>
+            $(function () {
+                $("#profile_form_extreme").submit(function (e) {
+                    e.preventDefault(); //STOP default action
+                    $.ajax({
+                        url: $(this).attr("action"),
+                        type: "POST",
+                        data: $(this).serialize(),
+                        success: function (data, textStatus, jqXHR) {
+                            // alert('Profile Low has been updated.');
+                            $( "#xtr_msg" ).text( "Privacy Profile Extreme Successfully Updated" ).show().fadeOut( 2500 );
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            // alert('Error when saving profile');
+                           $( "#xtr_msg" ).text( "Error Updating Profile" ).show().fadeOut( 2500 );  
+                        }
+                    });
+                    return false;
+                });
+            });    
+        </script>                
+    </div>
+
 
 
 

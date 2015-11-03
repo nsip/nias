@@ -14,18 +14,19 @@ class SPSServer < Sinatra::Base
 
 
 	get "/sps" do
-		@profile = params['profile']
-		if @profile.nil? 
-			# List known privacy profiles
-			@d = Dir["#{__dir__}/services/privacyfilters/*.xpath"].map{|x| x[/\/([^\/]+).xpath$/, 1]}
-			erb :privacyfilters
-		else
-			# Edit privacy profile named
-			@file = File.open("#{__dir__}/services/privacyfilters/#{@profile}.xpath", "r")
-			@contents = @file.read
-			@file.close
-			erb :create
+
+		@profiles = {}
+		['low','medium','high','extreme'].each do | prf_name |
+
+			file = File.open("#{__dir__}/services/privacyfilters/#{prf_name}.xpath", "r")
+			contents = file.read
+			file.close
+			@profiles[prf_name] = contents
+
 		end
+
+		erb :privacyfilters
+
 	end
 
 	# receive edit of privacy profile
@@ -36,7 +37,7 @@ class SPSServer < Sinatra::Base
 	    		@logfile.truncate(@logfile.size)
 	    		@logfile.write(params[:file])
 	    		@logfile.close
-	    		redirect '/sps'
+	    		puts "\n\nPrivacy Profile #{@profile} has been updated\n\n"
 		end
 	end
 
