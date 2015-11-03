@@ -11,3 +11,5 @@ kafka/logs/*
 *.lock
 
 *.lock
+
+*.lock

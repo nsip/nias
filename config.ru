@@ -5,10 +5,10 @@ require './ssf/sif_privacy_server'
 require './sms/sms_query_server'
 
 
-
+use SMSQueryServer
 use SPSServer
 use SSFServer
-use SMSQueryServer
+
 
 run NIASServer
 

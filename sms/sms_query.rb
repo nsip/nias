@@ -34,7 +34,7 @@ class SMSQuery
 	# key value store and return the full payload
 	# 
 	# 
-	def find( q_item, q_collection)
+	def find( q_item, q_collection )
 
 		puts "\n\nquerying...\n\n"
 		result = []
@@ -53,8 +53,9 @@ class SMSQuery
 
 		puts "direct query took: #{q_direct_finish - q_direct_start}\n\n"
 		puts "result is #{result.count} items\n\n"
+		# puts "result is #{result.inspect} and empty is: #{result.empty?}\n\n"
 
-		# if no direct resuults then try indirect
+		# if no direct results then try indirect
 		if result.empty? 
 
 			tmp = @idgen.encode( rand(1...999) )
@@ -84,6 +85,18 @@ class SMSQuery
 
 	end
 
+	# 
+	# convenience menthod to just get members of a collection
+	# 
+	def collection_only( name )
+
+		result = []
+		result = @redis.smembers name
+
+		return result
+
+	end
+
 	# provide the list of collections creates in the sms
 	# 
 	# returns an array of collection names e.g. StudentPersonal, SchoolInfo etc.
@@ -99,13 +112,13 @@ end
 
 # test script
 
-smsq = SMSQuery.new
+# smsq = SMSQuery.new
 
-puts "\nKnown collections: #{smsq.known_collections}\n\n"
+# puts "\nKnown collections: #{smsq.known_collections}\n\n"
 
-result = smsq.find( '4a7f6df3-fcaf-45ba-9665-a2508b9d93be', 'StaffAssignment' )
+# result = smsq.find( '4a7f6df3-fcaf-45ba-9665-a2508b9d93be', 'StaffAssignment' )
 
-puts "\n Query result is #{result}\n\n"
+# puts "\n Query result is #{result}\n\n"
 
 
 
