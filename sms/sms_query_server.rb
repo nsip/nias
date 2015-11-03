@@ -37,7 +37,7 @@
 # attendance records within an LEA or District - since invoices/attendance are linked to schools and schools are linked to
 # LEAs then again the intermediate objects are rendered invisible, but the correct dataset is returned.
 #
-# Finally the optional 'defer' parameter can be passed to any query (it's assumed to be false if not present).
+# The optional 'defer' parameter can be passed to any query (it's assumed to be false if not present).
 # 
 # Passing true for this parameter means that results of a query will be posted to a temporary topic/queue on the
 # SSF server.
@@ -53,13 +53,16 @@
 # The query interface does contain a limit for returned items set to a sensible value, so that any query that produces 
 # a result-set larger than that value will automatically be deferred in order to prevent any user or the system from being
 # overwhelmed by the volume of data.
+# 
+# The optional 'include_messages' parameter will return the full xml of all found entities, when this parameter is set to 
+# false (the default) then only relevant references are returned to keep payload small.
 
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'sinatra/base'
 require 'json'
 require 'csv'
-require 'redis'
+require 'moneta'
 
 require_relative 'sms_query'
 
@@ -69,16 +72,107 @@ class SMSQueryServer < Sinatra::Base
 
 	configure do
 
-		 set :smsq, SMSQuery.new
+		 set :store, Moneta.new( :LMDB, dir: '/tmp/moneta', db: 'sif-messages')
 
 	end
 
 	get "/sms" do
 
-		@result = settings.smsq.known_collections
+		smsq = SMSQuery.new
+		@result = smsq.known_collections
 		erb :collections
 
 	end
+
+
+	get "/sms/collections" do
+
+		smsq = SMSQuery.new
+		@result = smsq.known_collections
+
+		return "\n\nSMS Known Collections:\n\n#{@result}\n\n"
+	end
+
+	# Main search method...
+	# 
+	# takes 2 paramters:
+	# 
+	# id: an onject's unique id
+	# collection: name of an object collection
+	# 
+	# if neither is provided will throw an error
+	# 
+	# optional parameters:
+	# 
+	# include_messages: boolean (false by default) - if set to true query will return all xml mesasges associated
+	# with the query; by default will just return all object references.
+	# 
+	# defer: boolean (false by default) - if set to true results will not be returned directly but will be written
+	# to a temporary ssf queue - the url of the queue will be returned as the query result
+	# 
+	get "/sms/find" do
+
+
+		collection = params['collection'] || nil
+		id = params['id'] || nil
+
+
+		if params['include_messages'] == 'true'
+			include_messages = true
+		else
+			include_messages = false
+		end
+
+
+		if params['defer'] == 'true'
+			defer = true
+		else
+			defer = false
+		end
+
+
+		puts "\n\nCollection : #{collection}\n\nId : #{id}\n\n"
+
+		halt( 400, "Must have at least one query parameter 'id' or 'collection'." ) unless ( collection || id )
+
+		results = []
+		smsq = SMSQuery.new
+
+		if collection && id
+			results = smsq.find( id, collection )
+		elsif collection
+			results = smsq.collection_only( collection )
+		else
+			# assume if only single item requested the whole message is wanted
+			include_messages = true
+			results << id
+		end
+
+		return "#{results}" unless !results.empty?
+
+		response = []
+    	results.each do | result |
+    		
+    		record = {}
+    		
+    		record[:id] = result
+    		if include_messages
+    			record[:data] = settings.store[result]
+    		end
+
+    		response << record.to_json
+
+    	end
+
+		return "#{response.to_json}"
+
+
+	end
+
+
+
+
+
 
 end
 

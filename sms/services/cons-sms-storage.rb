@@ -79,7 +79,8 @@ loop do
 			# write the message to storage with its own refid as the key
 			# puts "\n\nkey value pair will be:\n\nKEY: #{idx[:id]}\n\nVALUE:\n\n#{nodes.to_s}"
 
-			@store["#{idx[:id]}"] = nodes.to_s
+			@store["#{idx[:id]}"] = nodes.to_xml
+			# @store["#{idx[:id]}"] = nodes.to_s
   		
   		end
 

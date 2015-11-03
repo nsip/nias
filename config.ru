@@ -6,11 +6,10 @@ require './ssf/hookup_ids_server.rb'
 require './sms/sms_query_server'
 
 
-
+use SMSQueryServer
 use SPSServer
 use SSFServer
 use HookupServer
-use SMSQueryServer
 
 run NIASServer
 
