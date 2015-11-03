@@ -175,6 +175,16 @@ class SSFServer < Sinatra::Base
 		return 202
 	end
 
+	# 
+	# add privacy profile extension to q name if supported and pass on
+	# 
+	get "/:topic/:stream/:profile" do
+
+		path = "/#{params['topic']}/#{params['stream']}.#{params['profile']}"
+		redirect path
+
+	end
+
 
 	# read messages from a stream
 	# 
