@@ -1,4 +1,4 @@
-<message>
+<TimeTables xmlns="http://www.sifassociation.org/au/datamodel/1.3">
     <TimeTable RefId="7f06140a-a5c1-42eb-9235-a794f65f0f2c">
         <SchoolInfoRefId>dfe626b0-0e6e-4363-92a0-54ef1b190c6e</SchoolInfoRefId>
         <SchoolYear>2014</SchoolYear>
@@ -311,4 +311,4 @@
             </TimeTableDay>
         </TimeTableDayList>
     </TimeTable>
-</message>
+</TimeTables>

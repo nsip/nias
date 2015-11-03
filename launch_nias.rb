@@ -40,17 +40,17 @@ def launch
   banner 'Starting NIAS SSF services'
 
   ssf_services = [
-                # 'cons-prod-privacyfilter.rb',
-                # 'cons-prod-sif-ingest-validate.rb',
-                # 'cons-prod-sif-ingest.rb',
-                # 'cons-prod-privacyfilter.rb',
-                'cons-prod-sif-ingest-unvalidate.rb'
+                {:name => 'cons-prod-privacyfilter.rb', :options  => ''},
+		#{:name => 'filtered_client.rb', :options => '-p 1234'},
+                # {:name => 'cons-prod-sif-ingest-unvalidate.rb', :options => ''},
+                {:name =>'cons-prod-sif-ingest-validate.rb', :options => ''},
+                {:name =>'cons-prod-sif-ingest.rb', :options => ''}
               ]
 
 
   ssf_services.each_with_index do | service, i |
 
-      @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/ssf/services/#{service}" )
+      @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/ssf/services/#{service[:name]}", service[:options] )
 
   end
   
@@ -62,7 +62,9 @@ def launch
 
                   'cons-prod-sif-parser.rb',
                   'cons-sms-indexer.rb',
-                  'cons-sms-storage.rb'
+                  'cons-sms-storage.rb',
+		  'cons-oneroster-sms-storage.rb', 
+		  'cons-prod-oneroster-parser.rb',
                 ]
 
   sms_services.each_with_index do | service, i |
@@ -91,7 +93,6 @@ def shut_down
     banner "\n Core Services shutting down...\n\n"
 
     File.readlines( @pid_file ).each do |line|
-      
       begin
               Process.kill :INT, line.chomp.to_i
               sleep 2

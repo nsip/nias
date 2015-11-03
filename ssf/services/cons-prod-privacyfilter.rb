@@ -9,6 +9,7 @@ Messages are received from the single stream sifxml.validated. The key of the re
 Each object in the stream is filtered according to privacy filters defined in ./privacyfilters/*.xpath.
 
 The key of the received message is "topic"."stream". Each message is passed to a stram for each privacy setting simultaneously:
+* "topic"."stream".none
 * "topic"."stream".low
 * "topic"."stream".medium
 * "topic"."stream".high
@@ -41,17 +42,17 @@ def read_filter(filepath, level)
 	end
 end
 
-@filter[:extreme] = []
-read_filter("./ssf/services/privacyfilters/extreme.xpath", :extreme)
-
-
-# cumulative filters: the fields to filter in the next lowest sensitivity are added on to the previous sensitivity's
-@filter[:high] = Array.new(@filter[:extreme])
-read_filter("./ssf/services/privacyfilters/high.xpath", :high)
-@filter[:medium] = Array.new(@filter[:high])
-read_filter("./ssf/services/privacyfilters/medium.xpath", :medium)
-@filter[:low] = Array.new(@filter[:medium])
+@filter[:low] = []
 read_filter("./ssf/services/privacyfilters/low.xpath", :low)
+
+
+# cumulative filters: the fields to filter in the next highest sensitivity are added on to the previous sensitivity's
+@filter[:medium] = Array.new(@filter[:low])
+read_filter("./ssf/services/privacyfilters/medium.xpath", :medium)
+@filter[:high] = Array.new(@filter[:medium])
+read_filter("./ssf/services/privacyfilters/high.xpath", :high)
+@filter[:extreme] = Array.new(@filter[:high])
+read_filter("./ssf/services/privacyfilters/extreme.xpath", :extreme)
 
 # redact all textual content of xml (a Node)
 def redact(xml, redaction)
@@ -90,20 +91,27 @@ loop do
   	    messages = []
 	    messages = consumer.fetch
 	    messages.each do |m|
-      	    puts "processing message no.: #{m.offset}, #{m.key}\n\n"
 
-		input = Nokogiri::XML(m.value) do |config|
+                       # Payload from sifxml.ingest contains as its first line a header line with the original topic
+                        header = m.value.lines[0]
+                        payload = m.value.lines[1..-1].join
+			topic = header[/TOPIC: (.+)/, 1]
+
+      	    puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}\n\n"
+
+		input = Nokogiri::XML(payload) do |config|
         		config.nonet.noblanks
 		end
 		
 		if(input.errors.empty?) 
 	      		item_key = "ts_entry:#{ sprintf('%09d', m.offset) }"
+			out[:none] = input
 			out[:extreme] = apply_filter(input, @filter[:extreme])
 			out[:high] = apply_filter(out[:extreme], @filter[:high])
 			out[:medium] = apply_filter(out[:high], @filter[:medium])
 			out[:low] = apply_filter(out[:medium], @filter[:low])
-			[:low, :medium, :high, :extreme].each {|x|
-				outbound_messages << Poseidon::MessageToSend.new( "#{m.key}.#{x}", out[x].to_s, item_key ) 
+			[:none, :low, :medium, :high, :extreme].each {|x|
+				outbound_messages << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
 			}
 		end
 

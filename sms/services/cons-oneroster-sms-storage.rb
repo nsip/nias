@@ -1,7 +1,7 @@
-# cons-sms-storage.rb
+# cons-oneroster-sms-storage.rb
 
 
-# service reads validated xml messages from the sif validation service.
+# service reads validated JSON messages from the One Roster validation service.
 # Parses mesages to estabish primary id, and then simply saves whole message to key value storage
 # with id as key and message as value.
 
@@ -13,18 +13,17 @@
 # Note most embedded databases and k/v stores are binary distriutions so need to be installed on the target platform independently.
 
 require 'json'
-require 'nokogiri'
 require 'poseidon'
 require 'hashids'
 require 'moneta'
 
-@inbound = 'sifxml.validated'
+@inbound = 'oneroster.validated'
 
-@store = Moneta.new( :LMDB, dir: '/tmp/moneta', db: 'sif-messages')
+@store = Moneta.new( :LMDB, dir: '/tmp/moneta', db: 'oneroster-messages')
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 
-@service_name = 'cons-sms-storage'
+@service_name = 'cons-oneroster-sms-storage'
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092,
@@ -41,46 +40,28 @@ loop do
 	    messages.each do |m|
 
 	    	# create 'empty' index tuple, otherids and links will be unused here but keeps all parsing code consistent
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => []}      	
+			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ) }
 
-                header = m.value.lines[0]
-                payload = m.value.lines[1..-1].join
+      		# read JSON message
+                idx_hash = JSON.parse( m.value )
 
-      		# read xml message
-      		nodes = Nokogiri::XML( payload ) do |config|
-        		config.nonet.noblanks
-			end      		
+		# type of converted CSV One Roster record depends on presence of particular field
+		idx[:type] = 'orgs' if idx_hash.has_key?("metadata.boarding")
+		idx[:type] = 'users' if idx_hash.has_key?("username")
+		idx[:type] = 'courses' if idx_hash.has_key?("courseCode")
+		idx[:type] = 'classes' if idx_hash.has_key?("classCode")
+		idx[:type] = 'enrollments' if idx_hash.has_key?("primary")
+		idx[:type] = 'academicSessions' if idx_hash.has_key?("startDate")
+		idx[:type] = 'demographics' if idx_hash.has_key?("sex")
 
-			# for rare nodes like StudentContactRelationship can be no mandatory refid
-			# optional refid will already be captured in [links] as child node
-			# but need to parse for the object type and assign the optional refid back to the object
-			
-			# type is always first node
-			idx[:type] = nodes.root.name
-
-			# concatenate name and see id refid exists, if not create a random one
-			refs = nodes.css( "#{nodes.root.name}RefId" )
-			idx[:id] = refs.children.first unless refs.empty?
-
-			# ...now deal with vast majority of normal sif xml types
-
-			# get any pure refids
-			root_types = nodes.xpath("//@RefId")  
-			root_types.each do | node |
-				# puts node.parent.name
-				# puts node.child
-				# puts "\n\nType: #{node.parent.name} - ID: #{node.child}\n\n"
-				idx[:type] = node.parent.name
-				idx[:id] = node.child
-			end
+			idx[:id] = idx[:type] == 'demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
 
 			puts "\nStorage Index = #{idx.to_json}\n\n"
 
 			# write the message to storage with its own refid as the key
 			# puts "\n\nkey value pair will be:\n\nKEY: #{idx[:id]}\n\nVALUE:\n\n#{nodes.to_s}"
 
-			@store["#{idx[:id]}"] = nodes.to_xml
-			# @store["#{idx[:id]}"] = nodes.to_s
+			@store["#{idx[:id]}"] = m.value
   		
   		end
 

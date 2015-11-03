@@ -6,9 +6,11 @@
 # parses message to find refid & type of message and to build index of
 # all other references contained in the xml message
 # 
-# Extracts id, type and [links] from each message e.g. <refid> <StudentSchoolEnrolment> [<StudentPersonalRefId><SchoolInfoRefId>] 
+# Extracts GUID id (RefID), other ids, type and [links] from each message 
+#
+# e.g. <refid> [OtherIdType => OtherId] <StudentSchoolEnrolment> [<StudentPersonalRefId><SchoolInfoRefId>] 
 # 
-# this  [ 'tuple' id - type - [links] ]
+# this  [ 'tuple' id - {otherids} - type - [links] ]
 # 
 # is then passed on to the sms indexing service
 # 
@@ -49,10 +51,13 @@ loop do
 	    messages.each do |m|
 
 	    	# create 'empty' index tuple
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :links => []}      	
+			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => []}      	
+
+		header = m.value.lines[0]
+                payload = m.value.lines[1..-1].join
 
       		# read xml message
-      		nodes = Nokogiri::XML( m.value ) do |config|
+      		nodes = Nokogiri::XML( payload ) do |config|
         		config.nonet.noblanks
 			end      		
 
@@ -79,7 +84,7 @@ loop do
 				idx[:id] = node.child
 			end
 
-			# any nodes that have refid suffix
+			# any node attributes that have refid suffix
 			references = nodes.xpath( "//@*[substring(name(), string-length(name()) - 4) = 'RefId']" )
 			references.each do | node |
 				# puts node.name
@@ -101,6 +106,36 @@ loop do
 				# puts node.child
 				# puts node.parent.content
 				idx[:links] << node.parent.content
+			end
+
+			# any LocalIds
+			localids = nodes.xpath("//LocalId")
+			localids.each do |node|
+				idx[:otherids][:localid] = node.child
+			end
+
+			# any StateProvinceIds
+			stateprovinceids = nodes.xpath("//StateProvinceId")
+			stateprovinceids.each do |node|
+				idx[:otherids][:stateprovinceids] = node.child
+			end
+
+			# any ACARAIds
+			acaraids = nodes.xpath("//ACARAId")
+			acaraids.each do |node|
+				idx[:otherids][:acaraids] = node.child
+			end
+
+			# any Electronic IDs
+			electronicids = nodes.xpath("//ElectronicIdList/ElectronicId")
+			electronicids.each do |node|
+				idx[:otherids]["electronicid"+node.attribute("Type")] = node.child
+			end
+
+			# any Other IDs
+			otherids = nodes.xpath("//OtherIdList/OtherId")
+			otherids.each do |node|
+				idx[:otherids][node.attribute("Type")] = node.child
 			end
 
 			puts "\nParser Index = #{idx.to_json}\n\n"

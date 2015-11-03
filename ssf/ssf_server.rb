@@ -25,6 +25,7 @@ class SSFServer < Sinatra::Base
 		# enable :sessions
 
 		# All received XML messages are also sent from /:topic:/stream to a global sifxml.ingest topic, for validation by microservice
+		# The source topic/stream is injected into the header line TOPIC: topic/stream before the XML payload
 		set :xmltopic, 'sifxml.ingest'
 
 	end
@@ -108,6 +109,9 @@ class SSFServer < Sinatra::Base
 		case request.media_type
 		when 'application/json' then raw_messages = JSON.parse( request.body.read )
 		when 'application/xml' then 
+			#msg = msg.to_s
+			#puts "topic is: #{settings.xmltopic} : topic name is #{topic_name}\n\n"
+			#messages << Poseidon::MessageToSend.new( "#{settings.xmltopic}", "TOPIC: #{topic_name}\n#{msg}", "#{topic_name}" )
 		#	doc = Nokogiri::XML( request.body.read )
 		#	raw_messages = doc.xpath( "//message")
 			# we will leave parsing the XML to the microservice cons-prod-ingest.rb
@@ -126,7 +130,7 @@ class SSFServer < Sinatra::Base
 			case request.media_type
 			when 'application/json' then msg = msg.to_json
 			when 'application/xml' then 
-				msg = msg.to_s
+				msg =  "TOPIC: #{topic_name}\n" + msg.to_s
 				topic = "#{settings.xmltopic}"
 				key = "#{topic_name}"
 			when 'text/csv' then msg = msg.to_hash.to_json

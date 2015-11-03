@@ -9,7 +9,7 @@ require 'nokogiri' # xml support
 
 
 
-# tiny web service to handle the editing and maintenance of provacy profiles
+# tiny web service to handle the editing and maintenance of privacy profiles
 class SPSServer < Sinatra::Base
 
 

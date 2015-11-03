@@ -15,8 +15,8 @@ require 'nokogiri' # xml support
 @outbound2 = 'sifxml.errors'
 
 
-@xsd = Nokogiri::XML::Schema(File.open("xsd/sif1.3/SIF_Message1.3_3.x.xsd"))
-# @xsd = Nokogiri::XML::Schema(File.open("xsd/sif1.3/xml.xsd"))
+@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif1.3/SIF_Message1.3_3.x.xsd"))
+@namespace = 'http://www.sifassociation.org/au/datamodel/1.3'
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new("cons-prod-ingest", "localhost", 9092,
@@ -39,25 +39,40 @@ loop do
   	    messages = []
 	    messages = consumer.fetch
 	    messages.each do |m|
-      	    puts "processing message no.: #{m.offset}, #{m.key}\n\n"
+      	    puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
+
+                        # Payload from sifxml.ingest contains as its first line a header line with the original topic
+                        header = m.value.lines[0]
+                        payload = m.value.lines[1..-1].join
 
 		# each ingest message is a group of objects of the same class, e.g. 
 		# <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
-		# Parse each message as a unit; pass them on as individual objects
+		# If message is not well-formed, pass it to sifxml.errors as a unit
+		# If message is well-formed, break it up into its constituent objects, and parse each separately
+		# This allows us to bypass the SIF constraint that all objects must be of the same type
 
-		doc = Nokogiri::XML(m.value) do |config|
+		doc = Nokogiri::XML(payload) do |config|
         		config.nonet.noblanks
 		end
 		if(doc.errors.empty?) 
-			xsd_errors = @xsd.validate(doc)
-			if(xsd_errors.empty?) 
-	      		item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
-				doc.xpath("/*/node()").each { |x| outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", x.to_s, item_key ) }
-			else
-				outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} validity error:\n" + xsd_errors.map{|e| e.message}.join("\n") + "\n" + m.value, "invalid" )
+			doc.xpath("/*/node()").each do |x|
+				root = x.xpath("local-name(/)")
+				parent = Nokogiri::XML::Node.new root+"s", doc
+				parent.default_namespace = @namespace
+				x.parent = parent
+				xsd_errors = @xsd.validate(parent.document)
+				if(xsd_errors.empty?) 
+puts "Validated!"
+	      				item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
+					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", header + x.to_s, item_key ) 
+				else
+puts "Invalid!"
+					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", header + "Message #{m.offset} validity error:\n" + xsd_errors.map{|e| e.message}.join("\n") + "\n" + parent.document.to_s, "invalid" )
+				end
 			end
 		else
-			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value, "invalid" )
+puts "Not Well-Formed!"
+			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", header + "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value, "invalid" )
 		end
 		end
 
