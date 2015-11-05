@@ -117,6 +117,16 @@ class SMSQueryServer < Sinatra::Base
 		collection = params['collection'] || nil
 		id = params['id'] || nil
 
+		# handle the fact that empty but non-nil params can be passed via url
+		if collection != nil && collection.length == 0
+			collection = nil
+		end
+		if id != nil && id.length == 0
+			id = nil
+		end
+ 
+		# puts "\n\ncollection: #{collection.inspect}"
+		# puts "id: #{id.inspect}\n\n"
 
 		if params['include_messages'] == 'true'
 			include_messages = true
