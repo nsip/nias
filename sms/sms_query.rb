@@ -79,6 +79,10 @@ class SMSQuery
 			puts "\n\nindirect query took #{q_indirect_finish - q_indirect_start}\n\n"
 			puts "\n\nresult is #{result.value.count} items\n\n"
 
+			if result.value.count == 0
+				result = []
+			end
+
 		end
 
 		return result
@@ -116,7 +120,9 @@ end
 
 # puts "\nKnown collections: #{smsq.known_collections}\n\n"
 
-# result = smsq.find( '4a7f6df3-fcaf-45ba-9665-a2508b9d93be', 'StaffAssignment' )
+# result = smsq.find( 'D3E34B359D75101A8C3D00AA001A1652', 'SchoolInfo' )
+
+# puts result.inspect
 
 # puts "\n Query result is #{result}\n\n"
 
