@@ -79,7 +79,7 @@ class SMSQueryServer < Sinatra::Base
 	get "/sms" do
 
 		smsq = SMSQuery.new
-		@result = smsq.known_collections
+		@coll_result = smsq.known_collections
 		erb :collections
 
 	end
@@ -87,10 +87,11 @@ class SMSQueryServer < Sinatra::Base
 
 	get "/sms/collections" do
 
+		@result = []
 		smsq = SMSQuery.new
 		@result = smsq.known_collections
 
-		return "\n\nSMS Known Collections:\n\n#{@result}\n\n"
+		return @result.to_json
 	end
 
 	# Main search method...
@@ -148,7 +149,7 @@ class SMSQueryServer < Sinatra::Base
 			results << id
 		end
 
-		return "#{results}" unless !results.empty?
+		return [{id: 0, data: 'No results found'}].to_json unless !results.empty?
 
 		response = []
     	results.each do | result |
@@ -160,11 +161,11 @@ class SMSQueryServer < Sinatra::Base
     			record[:data] = settings.store[result]
     		end
 
-    		response << record.to_json
+    		response << record
 
     	end
 
-		return "#{response.to_json}"
+		return response.to_json
 
 
 	end
