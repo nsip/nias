@@ -81,6 +81,8 @@ class SMSQuery
 
 			if result.value.count == 0
 				result = []
+			else
+				result = result.value
 			end
 
 		end
@@ -120,7 +122,7 @@ end
 
 # puts "\nKnown collections: #{smsq.known_collections}\n\n"
 
-# result = smsq.find( 'D3E34B359D75101A8C3D00AA001A1652', 'SchoolInfo' )
+# result = smsq.find( '01b6fa17-c20f-4b23-be9a-5ea799308cf5', 'TimeTable' )
 
 # puts result.inspect
 

@@ -24,7 +24,7 @@
             <ul class="navbar-list">
                 <li class="navbar-item"><a class="navbar-link" href="#collections">Collections</a></li>
                 <li class="navbar-item"><a class="navbar-link" href="#query_ui">Query</a></li>                
-                <li class="navbar-item"><a class="navbar-link" href="#graph">View</a></li>
+                <!-- <li class="navbar-item"><a class="navbar-link" href="#graph">View</a></li> -->
             </ul>
         </div>
     </nav>
@@ -66,7 +66,7 @@
             <!-- <form> -->
             <div class="row">
                 <div class="six columns">
-                    <label for="collections1">From Collection</label>
+                    <label for="collections1">From Collection -> </label>
                     <select class="u-full-width" id="collections1">
                         <% @coll_result.sort! %>
                         <% @coll_result.each do | collection | %>
@@ -125,12 +125,12 @@
                 $("#query").click(function(){
 
                     var collection = $("#collections2").val();
-                    var item = $("#item").val();
+                    var item = $("#item :selected").text();
                     var request = {};
 
                     request.collection = collection;
                     request.include_messages = true;
-                    if (item) { request.id = item };
+                    request.id = item;
 
                     $("#results").empty();
                     $.getJSON("/sms/find", request, function(result){
