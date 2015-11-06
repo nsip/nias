@@ -26,17 +26,19 @@ require 'hashids'
 @inbound = 'sifxml.validated'
 @outbound = 'sms.indexer'
 
+@servicename = 'cons-prod-sif-parser'
+
 @idgen = Hashids.new( 'nsip random temp uid' )
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new("cons-prod-sif-parser", "localhost", 9092,
+consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
                                            @inbound, 0, :latest_offset)
 
 
 # set up producer pool - busier the broker the better for speed
 producers = []
 (1..10).each do | i |
-	p = Poseidon::Producer.new(["localhost:9092"], "cons-prod-sif-parser", {:partitioner => Proc.new { |key, partition_count| 0 } })
+	p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
 	producers << p
 end
 @pool = producers.cycle
@@ -161,7 +163,7 @@ loop do
 
   # trap to allow console interrupt
   trap("INT") { 
-    puts "\ncons-prod-sif-parser service shutting down...\n\n"
+    puts "\n#{@servicename} service shutting down...\n\n"
     exit 130 
   } 
 

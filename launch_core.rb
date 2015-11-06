@@ -1,15 +1,16 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 
-puts "\n\nStarting in: #{File.expand_path(File.dirname(__FILE__))}\n\n"
+puts "\n\nStarting in: #{__dir__}\n\n"
 
-dir = File.expand_path(File.dirname(__FILE__))
+# create root node for data files in /tmp
+FileUtils.mkdir '/tmp/nias' unless File.directory? '/tmp/nias'
 
-# create log area for redis - directory needs to pre-exist
-FileUtils.mkdir '/tmp/redis' unless File.directory? '/tmp/redis'
+# create storage area for redis - directory needs to pre-exist
+FileUtils.mkdir '/tmp/nias/redis' unless File.directory? '/tmp/nias/redis'
 
 # create working area for moneta key-value store - needs to pre-exist
-FileUtils.mkdir '/tmp/moneta' unless File.directory? '/tmp/moneta'
+FileUtils.mkdir '/tmp/nias/moneta' unless File.directory? '/tmp/nias/moneta'
 
 def banner( text )
 
@@ -56,10 +57,10 @@ def launch
   banner 'Web services running on localhost:9292/'  
 
 
-  banner 'Kafka logs will be created under /tmp/kafka'
-  banner 'Zookeeper logs will be created under /tmp/zookeeper'
-  banner 'Redis backups will be created under /tmp/redis'
-  banner 'SIF Key Value store will be created under /tmp/moneta'
+  banner 'Kafka logs will be created under /tmp/nias/kafka'
+  banner 'Zookeeper logs will be created under /tmp/nias/zookeeper'
+  banner 'Redis backups will be created under /tmp/nias/redis'
+  banner 'SIF Key Value store will be created under /tmp/nias/moneta'
 
   File.open(@pid_file, 'w') {|f| 
     f.puts "#{@pids['kafka']}"
@@ -71,6 +72,9 @@ def launch
   banner "pid file written to #{@pid_file}"
 
   banner 'Creating known topics'
+
+  # give time for zookeeper-kafka hookup
+  sleep 5
 
   topics = [
               'sifxml.validated',
@@ -91,6 +95,8 @@ def launch
     Process.wait pid 
   
   end
+
+  banner 'Core topics created.'
 
   banner 'Core NIAS services are up.'
 

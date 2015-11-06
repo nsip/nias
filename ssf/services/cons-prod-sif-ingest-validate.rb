@@ -14,19 +14,20 @@ require 'nokogiri' # xml support
 @outbound1 = 'sifxml.validated'
 @outbound2 = 'sifxml.errors'
 
+@servicename = 'cons-prod-sif-ingest-validate'
 
 @xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif1.3/SIF_Message1.3_3.x.xsd"))
 @namespace = 'http://www.sifassociation.org/au/datamodel/1.3'
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new("cons-prod-ingest", "localhost", 9092,
+consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
                                            @inbound, 0, :latest_offset)
 
 
 # set up producer pool - busier the broker the better for speed
 producers = []
 (1..10).each do | i |
-	p = Poseidon::Producer.new(["localhost:9092"], "cons-prod-ingest", {:partitioner => Proc.new { |key, partition_count| 0 } })
+	p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
 	producers << p
 end
 pool = producers.cycle
@@ -98,7 +99,7 @@ puts "Not Well-Formed!"
 
   # trap to allow console interrupt
   trap("INT") { 
-    puts "\ncons-prod-sif-ingest service shutting down...\n\n"
+    puts "\n#{@servicename} service shutting down...\n\n"
     consumer.close
     exit 130 
   } 

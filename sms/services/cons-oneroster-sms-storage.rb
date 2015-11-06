@@ -19,7 +19,7 @@ require 'moneta'
 
 @inbound = 'oneroster.validated'
 
-@store = Moneta.new( :LMDB, dir: '/tmp/moneta', db: 'oneroster-messages')
+@store = Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 

@@ -72,7 +72,7 @@ class SMSQueryServer < Sinatra::Base
 
 	configure do
 
-		 set :store, Moneta.new( :LMDB, dir: '/tmp/moneta', db: 'sif-messages')
+		 set :store, Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
 
 	end
 
