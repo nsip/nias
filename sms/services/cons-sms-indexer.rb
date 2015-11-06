@@ -55,7 +55,7 @@ loop do
 
       		idx_hash = JSON.parse( m.value )
 
-      		puts "\n\nMessage : - #{idx_hash.inspect}\n\n"
+      		# puts "\n\nIndexer Message : - #{idx_hash.inspect}\n\n"
 
         	# no responses needed from redis so pipeline for speed
     		  @redis.pipelined do
@@ -66,12 +66,12 @@ loop do
       				
       				@redis.sadd idx_hash['id'], idx_hash['links'] unless idx_hash['links'].empty?
 
-				idx_hash['otherids'].each do |key, value|
-					@redis.hset value, key, idx_hash['id']
-				end
+      				idx_hash['otherids'].each do |key, value|
+      					@redis.hset "oid:#{value}", key, idx_hash['id']
+      				end
 
-				# then add id to sets for links
-				idx_hash['links'].each do | link |
+      				# then add id to sets for links
+      				idx_hash['links'].each do | link |
                   			refs = []
                   			refs = idx_hash['links'].reject { |n| n == link } # can ignore self-links
                   			refs << idx_hash['id']
