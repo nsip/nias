@@ -1,9 +1,21 @@
+GIT
+  remote: git://github.com/sinatra/sinatra-contrib.git
+  revision: 66892d3789ba23f157b17d67570479e97d7eaa95
+  specs:
+    sinatra-contrib (1.4.6)
+      backports (>= 2.0)
+      multi_json
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.0)
+      tilt (>= 1.3, < 3)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    backports (3.6.6)
+    backports (3.6.7)
     daemons (1.2.3)
-    eventmachine (1.0.7)
+    eventmachine (1.0.8)
     hashids (1.0.2)
     hiredis (0.6.0)
     lmdb (0.4.8)
@@ -25,16 +37,9 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
-    sinatra-contrib (1.4.6)
-      backports (>= 2.0)
-      multi_json
-      rack-protection
-      rack-test
-      sinatra (~> 1.4.0)
-      tilt (>= 1.3, < 3)
-    thin (1.6.3)
+    thin (1.6.4)
       daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0)
+      eventmachine (~> 1.0, >= 1.0.4)
       rack (~> 1.0)
     tilt (2.0.1)
     zk (1.9.6)
@@ -54,7 +59,7 @@ DEPENDENCIES
   rack-matrix_params
   redis
   sinatra
-  sinatra-contrib
+  sinatra-contrib!
   thin
   zk
 

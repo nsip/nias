@@ -11,7 +11,8 @@ gem 'hiredis', '>= 0.6.0'
 
 # web tools
 gem 'sinatra'
-gem 'sinatra-contrib'
+gem 'sinatra-contrib', github: 'sinatra/sinatra-contrib'
+
 # evented server for sinatra
 gem 'thin'
 
