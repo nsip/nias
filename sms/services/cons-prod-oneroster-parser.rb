@@ -57,15 +57,15 @@ loop do
 		idx_hash = JSON.parse( m.value )
 
                # type of converted CSV One Roster record depends on presence of particular field
-                idx[:type] = 'oneroster-orgs' if idx_hash.has_key?("metadata.boarding")
-                idx[:type] = 'oneroster-users' if idx_hash.has_key?("username")
-                idx[:type] = 'oneroster-courses' if idx_hash.has_key?("courseCode")
-                idx[:type] = 'oneroster-classes' if idx_hash.has_key?("classCode")
-                idx[:type] = 'oneroster-enrollments' if idx_hash.has_key?("primary")
-                idx[:type] = 'oneroster-academicSessions' if idx_hash.has_key?("startDate")
-                idx[:type] = 'oneroster-demographics' if idx_hash.has_key?("sex")
+                idx[:type] = 'oneroster_orgs' if idx_hash.has_key?("metadata.boarding")
+                idx[:type] = 'oneroster_users' if idx_hash.has_key?("username")
+                idx[:type] = 'oneroster_courses' if idx_hash.has_key?("courseCode")
+                idx[:type] = 'oneroster_classes' if idx_hash.has_key?("classCode")
+                idx[:type] = 'oneroster_enrollments' if idx_hash.has_key?("primary")
+                idx[:type] = 'oneroster_academicSessions' if idx_hash.has_key?("startDate")
+                idx[:type] = 'oneroster_demographics' if idx_hash.has_key?("sex")
 
-                        idx[:id] = idx[:type] == 'oneroster-demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
+                        idx[:id] = idx[:type] == 'oneroster_demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
 
 			if(idx_hash.has_key?("parentSourcedId")) 
 				idx[:links] << idx_hash["parentSourcedId"]
@@ -93,7 +93,7 @@ loop do
 					idx[:links] << x
 				}
 			end
-			if(idx_hash.has_key?("agents")) 
+			if(idx_hash.has_key?("agents") and not idx_hash["agents"].nil? )
 				idx_hash["agents"].split(',').each { |x|
 					idx[:links] << x
 				}
@@ -101,20 +101,20 @@ loop do
 
 
 			# other identifiers
-			if(idx_hash.has_key?("identifier") and idx[:type] == 'oneroster-orgs')
-				idx[:otherids][:OneRoster-identifier] = idx_hash["identifier"]
+			if(idx_hash.has_key?("identifier") and idx[:type] == 'oneroster_orgs')
+				idx[:otherids][:oneroster_identifier] = idx_hash["identifier"]
 			end
-			if(idx_hash.has_key?("userId") and idx[:type] == 'oneroster-users') 
-				idx[:otherids][:OneRoster-userId] = idx_hash["userId"]
+			if(idx_hash.has_key?("userId") and idx[:type] == 'oneroster_users') 
+				idx[:otherids][:oneroster_userId] = idx_hash["userId"]
 			end
-			if(idx_hash.has_key?("identifier") and idx[:type] == 'oneroster-users') 
-				idx[:otherids][:OneRoster-identifier] = idx_hash["identifier"]
+			if(idx_hash.has_key?("identifier") and idx[:type] == 'oneroster_users') 
+				idx[:otherids][:oneroster_identifier] = idx_hash["identifier"]
 			end
-			if(idx_hash.has_key?("courseCode") and idx[:type] == 'oneroster-courses') 
-				idx[:otherids][:OneRoster-courseCode] = idx_hash["courseCode"]
+			if(idx_hash.has_key?("courseCode") and idx[:type] == 'oneroster_courses') 
+				idx[:otherids][:oneroster_courseCode] = idx_hash["courseCode"]
 			end
-			if(idx_hash.has_key?("classCode") and idx[:type] == 'oneroster-classes') 
-				idx[:otherids][:OneRoster-classCode] = idx_hash["classCode"]
+			if(idx_hash.has_key?("classCode") and idx[:type] == 'oneroster_classes') 
+				idx[:otherids][:oneroster_classCode] = idx_hash["classCode"]
 			end
 
 

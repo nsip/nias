@@ -96,9 +96,9 @@ loop do
         	# no responses needed from redis so pipeline for speed
     		  @redis.pipelined do
 
-      				@redis.sadd 'known:collections', idx_hash['type'] unless idx_hash['type'].empty?
+      				@redis.sadd 'known:collections', idx_hash['type'] unless (idx_hash['type'].nil? or idx_hash['type'].empty?)
 
-      				@redis.sadd idx_hash['type'], idx_hash['id'] unless idx_hash['type'].empty?
+      				@redis.sadd idx_hash['type'], idx_hash['id'] unless (idx_hash['type'].nil? or idx_hash['type'].empty?)
       				
       				@redis.sadd idx_hash['id'], idx_hash['links'] unless idx_hash['links'].empty?
 

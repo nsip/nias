@@ -33,6 +33,7 @@ end
 
 
 cursor = -1
+outbound_messages = []
 
 loop do
 
@@ -43,35 +44,36 @@ loop do
 		if(cursor != 0) then
 			cursor = 0 if cursor == -1
 			idscan = @redis.sscan 'other:ids', cursor
+	
+			puts "Read #{idscan[1].length} ids"
 			cursor = idscan[0]
 			idscan[1].each do |x| # for each other-id 
 				# if they have a SIF local id value and a OneRoster id value that are the same, then we have identified
 				# a match between their corresponding guids
-				match = @redis.hmget x, 'identifier', 'localId'
-				unless(match[0].nil? and match[1].nil?) 
+				#puts ">> " + @redis.hgetall(x).to_s
+				match = @redis.hmget x, 'oneroster_identifier', 'oneroster_userId', 'oneroster_courseCode', 'oneroster_classCode', 'localid'
+				#puts x + ': ' + match.join(',')
+				unless(match[0].nil? or match[4].nil?) 
 					idx[:id] = match[0]				
-					idx[:equivalentids] = [match[1]]				
+					idx[:equivalentids] = [match[4]]
 					puts "\nParser Index = #{idx.to_json}\n\n"
                         		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
 				end
-				match = @redis.hmget x, 'userId', 'localId'
-				unless(match[0].nil? and match[1].nil?) 
-					idx[:id] = match[0]				
-					idx[:equivalentids] = [match[1]]				
+				unless(match[1].nil? or match[4].nil?) 
+					idx[:id] = match[1]				
+					idx[:equivalentids] = [match[4]]				
 					puts "\nParser Index = #{idx.to_json}\n\n"
                         		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
 				end
-				match = @redis.hmget x, 'courseCode', 'localId'
-				unless(match[0].nil? and match[1].nil?) 
-					idx[:id] = match[0]				
-					idx[:equivalentids] = [match[1]]				
+				unless(match[2].nil? or match[4].nil?) 
+					idx[:id] = match[2]				
+					idx[:equivalentids] = [match[4]]				
 					puts "\nParser Index = #{idx.to_json}\n\n"
                         		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
 				end
-				match = @redis.hmget x, 'classCode', 'localId'
-				unless(match[0].nil? and match[1].nil?) 
-					idx[:id] = match[0]				
-					idx[:equivalentids] = [match[1]]				
+				unless(match[3].nil? or match[4].nil?) 
+					idx[:id] = match[3]				
+					idx[:equivalentids] = [match[4]]				
 					puts "\nParser Index = #{idx.to_json}\n\n"
                         		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
 				end
@@ -80,6 +82,7 @@ loop do
 
 		# send results to indexer to create sms data graph
                 outbound_messages.each_slice(20) do | batch |
+puts batch
                         @pool.next.send_messages( batch )
                 end
 
