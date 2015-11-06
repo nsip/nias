@@ -112,12 +112,7 @@ class SSFServer < Sinatra::Base
 		case request.media_type
 		when 'application/json' then raw_messages = JSON.parse( request.body.read )
 		when 'application/xml' then 
-			#msg = msg.to_s
-			#puts "topic is: #{settings.xmltopic} : topic name is #{topic_name}\n\n"
-			#messages << Poseidon::MessageToSend.new( "#{settings.xmltopic}", "TOPIC: #{topic_name}\n#{msg}", "#{topic_name}" )
-		#	doc = Nokogiri::XML( request.body.read )
-		#	raw_messages = doc.xpath( "//message")
-			# we will leave parsing the XML to the microservice cons-prod-ingest.rb
+			# we will leave parsing the XML to the microservice cons-prod-sif-ingest.rb
 			raw_messages << request.body.read 
 		when 'text/csv' then raw_messages = CSV.parse( request.body.read , {:headers=>true})
 		else

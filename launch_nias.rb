@@ -1,12 +1,7 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 
-puts "\n\nStarting in: #{File.expand_path(File.dirname(__FILE__))}\n\n"
-
-dir = File.expand_path(File.dirname(__FILE__))
-
-# create log area for redis - directory needs to pre-exist
-FileUtils.mkdir '/tmp/redis' unless File.directory? '/tmp/redis'
+puts "\n\nStarting in: #{__dir__}\n\n"
 
 def banner( text )
 

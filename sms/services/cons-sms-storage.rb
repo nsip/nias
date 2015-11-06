@@ -20,7 +20,7 @@ require 'moneta'
 
 @inbound = 'sifxml.validated'
 
-@store = Moneta.new( :LMDB, dir: '/tmp/moneta', db: 'sif-messages')
+@store = Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 

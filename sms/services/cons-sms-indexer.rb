@@ -36,8 +36,10 @@ require 'redis'
 
 @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
 
+@servicename = 'cons-sms-indexer'
+
 # create consumer
-@consumer = Poseidon::PartitionConsumer.new("cons-sms-indexer", "localhost", 9092,
+@consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
                                            @inbound, 0, :latest_offset)
 
 
@@ -53,7 +55,7 @@ loop do
 
       		idx_hash = JSON.parse( m.value )
 
-      		# puts "\n\nMessage : - #{idx_hash.inspect}\n\n"
+      		puts "\n\nMessage : - #{idx_hash.inspect}\n\n"
 
         	# no responses needed from redis so pipeline for speed
     		  @redis.pipelined do
@@ -93,7 +95,7 @@ loop do
 
   # trap to allow console interrupt
   trap("INT") { 
-    puts "\ncons-prod-sms-indexer service shutting down...\n\n"
+    puts "\n#{@servicename} service shutting down...\n\n"
     exit 130 
   } 
 

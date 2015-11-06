@@ -122,7 +122,7 @@ end
 
 # puts "\nKnown collections: #{smsq.known_collections}\n\n"
 
-# result = smsq.find( '01b6fa17-c20f-4b23-be9a-5ea799308cf5', 'TimeTable' )
+# result = smsq.find( 'a58986d8-069c-4df6-829a-ed8ea09d06db', 'StudentPersonal' )
 
 # puts result.inspect
 
