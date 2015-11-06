@@ -73,7 +73,7 @@ loop do
 
       		idx_hash = JSON.parse( m.value )
 
-      		puts "\n\nMessage : - #{idx_hash.inspect}\n\n"
+      		# puts "\n\nIndexer Message : - #{idx_hash.inspect}\n\n"
 
 		# get the nodes equivalent to the current node
 		prev_equivalents = @redis.smembers "equivalent:ids:#{idx_hash['id']}"
@@ -107,7 +107,7 @@ loop do
 				end
 
 				idx_hash['otherids'].each do |key, value|
-					@redis.hset value, key, idx_hash['id']
+					@redis.hset "oid:#{value}", key, idx_hash['id']
 					@redis.sadd 'other:ids', value
 				end
 
@@ -119,9 +119,12 @@ loop do
 
 					@redis.sadd "equivalent:ids:#{equiv}", refs unless refs.empty?
 				end
+      				idx_hash['otherids'].each do |key, value|
+      					@redis.hset "oid:#{value}", key, idx_hash['id']
+      				end
 
-				# then add id to sets for links
-				idx_hash['links'].each do | link |
+      				# then add id to sets for links
+      				idx_hash['links'].each do | link |
                   			refs = []
                   			refs = idx_hash['links'].reject { |n| n == link } # can ignore self-links
                   			refs << idx_hash['id']
