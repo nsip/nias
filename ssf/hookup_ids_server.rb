@@ -2,12 +2,15 @@
 require 'sinatra' 
 require 'sinatra/reloader' if development?
 require 'sinatra/base'
+require 'sinatra/content_for'
 require 'hashids' # temp non-colliding client & producer id generator
 require 'json'
 require 'poseidon'
 
 # tiny web service to link one GUID to a sequence of other GUIDs on Redis
 class HookupServer < Sinatra::Base
+
+	helpers Sinatra::ContentFor
 
 # Given the request ?sourceid=x,x,x,x&targetid=y,y,y,y
 # generates biridirectonal links to the sms.indexer topic, of the form

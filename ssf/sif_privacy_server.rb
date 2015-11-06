@@ -2,6 +2,7 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'sinatra/base'
+require 'sinatra/content_for'
 require 'json'
 require 'csv'
 require 'hashids' # temp non-colliding client & producer id generator
@@ -12,6 +13,7 @@ require 'nokogiri' # xml support
 # tiny web service to handle the editing and maintenance of privacy profiles
 class SPSServer < Sinatra::Base
 
+	helpers Sinatra::ContentFor
 
 	get "/sps" do
 

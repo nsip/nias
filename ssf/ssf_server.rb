@@ -3,6 +3,7 @@
 
 require 'sinatra'
 require 'sinatra/reloader' if development?
+require 'sinatra/content_for'
 require 'sinatra/base'
 require 'json'
 require 'csv'
@@ -14,6 +15,8 @@ require 'nokogiri' # xml support
 
 
 class SSFServer < Sinatra::Base
+
+	helpers Sinatra::ContentFor
 
 	configure do
 		# create an interface to the zookeeper node
