@@ -6,16 +6,16 @@
 # parses message to find refid & type of message and to build index of
 # all other references contained in the xml message
 # 
-# Extracts GUID id (RefID), other ids, type and [links] from each message 
+# Extracts GUID id (RefID), other ids, equivalent ids, type and [links] from each message 
 #
 # e.g. <refid> [OtherIdType => OtherId] <StudentSchoolEnrolment> [<StudentPersonalRefId><SchoolInfoRefId>] 
 # 
-# this  [ 'tuple' id - {otherids} - type - [links] ]
+# this  [ 'tuple' id - [equvalent-ids] - {otherids} - type - [links] ]
 # 
 # is then passed on to the sms indexing service
 # 
 # this is done so that indexer only deals with abstract tuples of this type, which can therefore come
-# from ANY parsed input; doesn't have to be SIF messages, cna be IMS, CSV etc. etc.
+# from ANY parsed input; doesn't have to be SIF messages, can be IMS, CSV etc. etc.
 # 
 
 require 'json'
@@ -50,22 +50,22 @@ loop do
 	    messages.each do |m|
 
 	    	# create 'empty' index tuple
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => []}      	
+			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => []}      	
 
 
       		# read JSON message
 		idx_hash = JSON.parse( m.value )
 
                # type of converted CSV One Roster record depends on presence of particular field
-                idx[:type] = 'orgs' if idx_hash.has_key?("metadata.boarding")
-                idx[:type] = 'users' if idx_hash.has_key?("username")
-                idx[:type] = 'courses' if idx_hash.has_key?("courseCode")
-                idx[:type] = 'classes' if idx_hash.has_key?("classCode")
-                idx[:type] = 'enrollments' if idx_hash.has_key?("primary")
-                idx[:type] = 'academicSessions' if idx_hash.has_key?("startDate")
-                idx[:type] = 'demographics' if idx_hash.has_key?("sex")
+                idx[:type] = 'oneroster-orgs' if idx_hash.has_key?("metadata.boarding")
+                idx[:type] = 'oneroster-users' if idx_hash.has_key?("username")
+                idx[:type] = 'oneroster-courses' if idx_hash.has_key?("courseCode")
+                idx[:type] = 'oneroster-classes' if idx_hash.has_key?("classCode")
+                idx[:type] = 'oneroster-enrollments' if idx_hash.has_key?("primary")
+                idx[:type] = 'oneroster-academicSessions' if idx_hash.has_key?("startDate")
+                idx[:type] = 'oneroster-demographics' if idx_hash.has_key?("sex")
 
-                        idx[:id] = idx[:type] == 'demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
+                        idx[:id] = idx[:type] == 'oneroster-demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
 
 			if(idx_hash.has_key?("parentSourcedId")) 
 				idx[:links] << idx_hash["parentSourcedId"]
@@ -101,20 +101,20 @@ loop do
 
 
 			# other identifiers
-			if(idx_hash.has_key?("identifier") and idx[:type] == 'orgs')
-				idx[:otherids][:acaraids] = idx_hash["identifier"]
+			if(idx_hash.has_key?("identifier") and idx[:type] == 'oneroster-orgs')
+				idx[:otherids][:OneRoster-identifier] = idx_hash["identifier"]
 			end
-			if(idx_hash.has_key?("userId") and idx[:type] == 'users') 
-				idx[:otherids][:userId] = idx_hash["userId"]
+			if(idx_hash.has_key?("userId") and idx[:type] == 'oneroster-users') 
+				idx[:otherids][:OneRoster-userId] = idx_hash["userId"]
 			end
-			if(idx_hash.has_key?("identifier") and idx[:type] == 'users') 
-				idx[:otherids][:localid] = idx_hash["identifier"]
+			if(idx_hash.has_key?("identifier") and idx[:type] == 'oneroster-users') 
+				idx[:otherids][:OneRoster-identifier] = idx_hash["identifier"]
 			end
-			if(idx_hash.has_key?("courseCode") and idx[:type] == 'courses') 
-				idx[:otherids][:localid] = idx_hash["courseCode"]
+			if(idx_hash.has_key?("courseCode") and idx[:type] == 'oneroster-courses') 
+				idx[:otherids][:OneRoster-courseCode] = idx_hash["courseCode"]
 			end
-			if(idx_hash.has_key?("classCode") and idx[:type] == 'classes') 
-				idx[:otherids][:localid] = idx_hash["classCode"]
+			if(idx_hash.has_key?("classCode") and idx[:type] == 'oneroster-classes') 
+				idx[:otherids][:OneRoster-classCode] = idx_hash["classCode"]
 			end
 
 

@@ -46,15 +46,15 @@ loop do
                 idx_hash = JSON.parse( m.value )
 
 		# type of converted CSV One Roster record depends on presence of particular field
-		idx[:type] = 'orgs' if idx_hash.has_key?("metadata.boarding")
-		idx[:type] = 'users' if idx_hash.has_key?("username")
-		idx[:type] = 'courses' if idx_hash.has_key?("courseCode")
-		idx[:type] = 'classes' if idx_hash.has_key?("classCode")
-		idx[:type] = 'enrollments' if idx_hash.has_key?("primary")
-		idx[:type] = 'academicSessions' if idx_hash.has_key?("startDate")
-		idx[:type] = 'demographics' if idx_hash.has_key?("sex")
+		idx[:type] = 'oneroster-orgs' if idx_hash.has_key?("metadata.boarding")
+		idx[:type] = 'oneroster-users' if idx_hash.has_key?("username")
+		idx[:type] = 'oneroster-courses' if idx_hash.has_key?("courseCode")
+		idx[:type] = 'oneroster-classes' if idx_hash.has_key?("classCode")
+		idx[:type] = 'oneroster-enrollments' if idx_hash.has_key?("primary")
+		idx[:type] = 'oneroster-academicSessions' if idx_hash.has_key?("startDate")
+		idx[:type] = 'oneroster-demographics' if idx_hash.has_key?("sex")
 
-			idx[:id] = idx[:type] == 'demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
+			idx[:id] = idx[:type] == 'oneroster-demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
 
 			puts "\nStorage Index = #{idx.to_json}\n\n"
 

@@ -13,6 +13,8 @@ require 'cgi'
 
 #use Rack::MatrixParams
 
+class FilteredClient < Sinatra::Base
+
 
 # Client to SSF: given request for localhost:1234/topic/stream;contextId=filter,
 # display contents of Kafka stream topic.stream.filter
@@ -151,7 +153,7 @@ HTML
 
 end
 
-
+end
 
 
 

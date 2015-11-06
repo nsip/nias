@@ -10,7 +10,7 @@
 #
 # e.g. <refid> [OtherIdType => OtherId] <StudentSchoolEnrolment> [<StudentPersonalRefId><SchoolInfoRefId>] 
 # 
-# this  [ 'tuple' id - {otherids} - type - [links] ]
+# this  [ 'tuple' id - [equivalentids] - {otherids} - type - [links] ]
 # 
 # is then passed on to the sms indexing service
 # 
@@ -53,7 +53,7 @@ loop do
 	    messages.each do |m|
 
 	    	# create 'empty' index tuple
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => []}      	
+			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [] }      	
 
 		header = m.value.lines[0]
                 payload = m.value.lines[1..-1].join
