@@ -47,9 +47,9 @@ pool = producers.cycle
 	    	@sourceid.split(',').each do |m|
 
 	    	# create 'empty' index tuple
-			idx = { :type => nil, :id => @ids[0], :otherids => {}, :links => [], :equivalent-ids => []}      	
+			idx = { :type => nil, :id => @ids[0], :otherids => {}, :links => [], :equivalentids => []}      	
 
-			idx[:equivalent-ids] = @ids[1..-1]
+			idx[:equivalentids] = @ids[1..-1]
 
 			puts "\nParser Index = #{idx.to_json}\n\n"
 

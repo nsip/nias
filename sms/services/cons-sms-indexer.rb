@@ -108,7 +108,8 @@ loop do
 
 				idx_hash['otherids'].each do |key, value|
 					@redis.hset "oid:#{value}", key, idx_hash['id']
-					@redis.sadd 'other:ids', value
+					@redis.sadd 'other:ids', "oid:#{value}"
+puts "#####" + "oid:#{value}" + " " + key + " " + idx_hash['id']
 				end
 
 				# extract equivalent ids
@@ -119,9 +120,6 @@ loop do
 
 					@redis.sadd "equivalent:ids:#{equiv}", refs unless refs.empty?
 				end
-      				idx_hash['otherids'].each do |key, value|
-      					@redis.hset "oid:#{value}", key, idx_hash['id']
-      				end
 
       				# then add id to sets for links
       				idx_hash['links'].each do | link |
@@ -155,45 +153,5 @@ loop do
   sleep 1
   
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -46,7 +46,7 @@ pool = producers.cycle
 	    	@sourceid.split(',').each do |m|
 
 	    	# create 'empty' index tuple
-			idx = { :type => nil, :id => m, :otherids => {}, :links => [], :equivalent-ids => []}      	
+			idx = { :type => nil, :id => m, :otherids => {}, :links => [], :equivalentids => []}      	
 
 			idx[:links] = @targetid.split(',')
 
@@ -59,7 +59,7 @@ pool = producers.cycle
 	    	@targetid.split(',').each do |m|
 
 	    	# create 'empty' index tuple
-			idx = { :type => nil, :id => m, :otherids => {}, :links => [], :equivalent-ids => []}      	
+			idx = { :type => nil, :id => m, :otherids => {}, :links => [], :equivalentids => []}      	
 
 			idx[:links] = @sourceid.split(',')
 

@@ -50,7 +50,8 @@ loop do
 			idscan[1].each do |x| # for each other-id 
 				# if they have a SIF local id value and a OneRoster id value that are the same, then we have identified
 				# a match between their corresponding guids
-				#puts ">> " + @redis.hgetall(x).to_s
+#puts ">> #{x} " + @redis.hgetall(x).to_s 
+				
 				match = @redis.hmget x, 'oneroster_identifier', 'oneroster_userId', 'oneroster_courseCode', 'oneroster_classCode', 'localid'
 				#puts x + ': ' + match.join(',')
 				unless(match[0].nil? or match[4].nil?) 
@@ -82,7 +83,6 @@ loop do
 
 		# send results to indexer to create sms data graph
                 outbound_messages.each_slice(20) do | batch |
-puts batch
                         @pool.next.send_messages( batch )
                 end
 
