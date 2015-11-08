@@ -168,8 +168,8 @@
 		$("#item").change(function() {
                     var item = $("#item :selected").text();
 var mydiv = document.getElementById("chartContainer");
-while ( mydiv.firstChild ) mydiv.removeChild( mydiv.firstChild );
-    	var svg = dimple.newSvg("#chartContainer", "400px", "400px");
+//while ( mydiv.firstChild ) mydiv.removeChild( mydiv.firstChild );
+    	var svg = dimple.newSvg("#chartContainer", "500px", "200px");
     	d3.json("/graph_data/linked_collections?id="+ item, function (data) {
       	var myChart = new dimple.chart(svg, data);
   	//myChart.setBounds(20, 20, 460, 360)
