@@ -55,8 +55,8 @@ loop do
 	    	# create 'empty' index tuple
 			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [] }      	
 
-		header = m.value.lines[0]
-                payload = m.value.lines[1..-1].join
+			header = m.value.lines[0]
+            payload = m.value.lines[1..-1].join
 
       		# read xml message
       		nodes = Nokogiri::XML( payload ) do |config|
@@ -140,7 +140,7 @@ loop do
 				idx[:otherids][node.attribute("Type")] = node.child
 			end
 
-			puts "\nParser Index = #{idx.to_json}\n\n"
+			# puts "\nParser Index = #{idx.to_json}\n\n"
 
 			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
   		
