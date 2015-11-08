@@ -6,16 +6,16 @@
 # parses message to find refid & type of message and to build index of
 # all other references contained in the xml message
 # 
-# Extracts GUID id (RefID), other ids, type and [links] from each message 
+# Extracts GUID id (RefID), other ids, equivalent ids, type and [links] from each message 
 #
 # e.g. <refid> [OtherIdType => OtherId] <StudentSchoolEnrolment> [<StudentPersonalRefId><SchoolInfoRefId>] 
 # 
-# this  [ 'tuple' id - {otherids} - type - [links] ]
+# this  [ 'tuple' id - [equvalent-ids] - {otherids} - type - [links] ]
 # 
 # is then passed on to the sms indexing service
 # 
 # this is done so that indexer only deals with abstract tuples of this type, which can therefore come
-# from ANY parsed input; doesn't have to be SIF messages, cna be IMS, CSV etc. etc.
+# from ANY parsed input; doesn't have to be SIF messages, can be IMS, CSV etc. etc.
 # 
 
 require 'json'
@@ -50,22 +50,22 @@ loop do
 	    messages.each do |m|
 
 	    	# create 'empty' index tuple
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => []}      	
+			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => []}      	
 
 
       		# read JSON message
 		idx_hash = JSON.parse( m.value )
 
                # type of converted CSV One Roster record depends on presence of particular field
-                idx[:type] = 'orgs' if idx_hash.has_key?("metadata.boarding")
-                idx[:type] = 'users' if idx_hash.has_key?("username")
-                idx[:type] = 'courses' if idx_hash.has_key?("courseCode")
-                idx[:type] = 'classes' if idx_hash.has_key?("classCode")
-                idx[:type] = 'enrollments' if idx_hash.has_key?("primary")
-                idx[:type] = 'academicSessions' if idx_hash.has_key?("startDate")
-                idx[:type] = 'demographics' if idx_hash.has_key?("sex")
+                idx[:type] = 'oneroster_orgs' if idx_hash.has_key?("metadata.boarding")
+                idx[:type] = 'oneroster_users' if idx_hash.has_key?("username")
+                idx[:type] = 'oneroster_courses' if idx_hash.has_key?("courseCode")
+                idx[:type] = 'oneroster_classes' if idx_hash.has_key?("classCode")
+                idx[:type] = 'oneroster_enrollments' if idx_hash.has_key?("primary")
+                idx[:type] = 'oneroster_academicSessions' if idx_hash.has_key?("startDate")
+                idx[:type] = 'oneroster_demographics' if idx_hash.has_key?("sex")
 
-                        idx[:id] = idx[:type] == 'demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
+                        idx[:id] = idx[:type] == 'oneroster_demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
 
 			if(idx_hash.has_key?("parentSourcedId")) 
 				idx[:links] << idx_hash["parentSourcedId"]
@@ -93,7 +93,7 @@ loop do
 					idx[:links] << x
 				}
 			end
-			if(idx_hash.has_key?("agents")) 
+			if(idx_hash.has_key?("agents") and not idx_hash["agents"].nil? )
 				idx_hash["agents"].split(',').each { |x|
 					idx[:links] << x
 				}
@@ -101,20 +101,20 @@ loop do
 
 
 			# other identifiers
-			if(idx_hash.has_key?("identifier") and idx[:type] == 'orgs')
-				idx[:otherids][:acaraids] = idx_hash["identifier"]
+			if(idx_hash.has_key?("identifier") and idx[:type] == 'oneroster_orgs')
+				idx[:otherids][:oneroster_identifier] = idx_hash["identifier"]
 			end
-			if(idx_hash.has_key?("userId") and idx[:type] == 'users') 
-				idx[:otherids][:userId] = idx_hash["userId"]
+			if(idx_hash.has_key?("userId") and idx[:type] == 'oneroster_users') 
+				idx[:otherids][:oneroster_userId] = idx_hash["userId"]
 			end
-			if(idx_hash.has_key?("identifier") and idx[:type] == 'users') 
-				idx[:otherids][:localid] = idx_hash["identifier"]
+			if(idx_hash.has_key?("identifier") and idx[:type] == 'oneroster_users') 
+				idx[:otherids][:oneroster_identifier] = idx_hash["identifier"]
 			end
-			if(idx_hash.has_key?("courseCode") and idx[:type] == 'courses') 
-				idx[:otherids][:localid] = idx_hash["courseCode"]
+			if(idx_hash.has_key?("courseCode") and idx[:type] == 'oneroster_courses') 
+				idx[:otherids][:oneroster_courseCode] = idx_hash["courseCode"]
 			end
-			if(idx_hash.has_key?("classCode") and idx[:type] == 'classes') 
-				idx[:otherids][:localid] = idx_hash["classCode"]
+			if(idx_hash.has_key?("classCode") and idx[:type] == 'oneroster_classes') 
+				idx[:otherids][:oneroster_classCode] = idx_hash["classCode"]
 			end
 
 

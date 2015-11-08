@@ -1,0 +1,4 @@
+sourcedId,status,dateLast,modified,title,grade,courseSourcedId,classCode,location,schoolSourcedId,termSourcedId,subjects
+19D5D22B-9B0A-4306-958A-F3DA19D0248C,active,2015-11-06,Biology,11,,Bio11a,scheduled,321,,1,Biology
+55C67E52-25BD-4028-8818-CE1C40C5F183,active,2015-11-06,Chemistry,11,,Chem11a,scheduled,121,,1,Chemistry
+A13AA91D-FC38-420B-9FAE-63F8551A6B49,active,2015-11-06,Physics,11,,Phys11a,scheduled,121,,1,Physics

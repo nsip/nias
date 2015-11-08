@@ -98,6 +98,7 @@ loop do
 				topic = header[/TOPIC: (.+)/, 1]
 
       	    	# puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}\n\n"
+      	    	# puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}... #{m.value.lines[1]}\n\n"
 
 				input = Nokogiri::XML(payload) do |config|
         			config.nonet.noblanks
