@@ -94,11 +94,26 @@ class SMSQueryServer < Sinatra::Base
 		return @result.to_json
 	end
 
+	# Local id search method
+	# takes 2 parameters
+	# id: an object's local id
+	# collection: name of an object collection
+	# resolves local id to GUID, and redirects query to main search
+
+	get "/sms/localfind" do
+		collection = params['collection'] || nil
+		id = params['id'] || nil
+		smsq = SMSQuery.new
+		guid = smsq.local_id_resolver(id) || nil
+		new_url = request.fullpath.gsub(/id=[^&]+/, 'id='+guid ).gsub(/\/localfind/, '/find')
+		redirect new_url
+	end
+
 	# Main search method...
 	# 
 	# takes 2 paramters:
 	# 
-	# id: an onject's unique id
+	# id: an object's unique id
 	# collection: name of an object collection
 	# 
 	# if neither is provided will throw an error

@@ -36,6 +36,8 @@ class SMSQuery
 	# 
 	def find( q_item, q_collection )
 
+		return [] if q_item.nil?
+
 		puts "\n\nquerying...\n\n"
 		result = []
 
@@ -111,6 +113,24 @@ class SMSQuery
 
 		return @redis.smembers('known:collections').to_a
 
+	end
+
+	# resolve a local identifier to a GUID
+	def local_id_resolver( id )
+		otheridhash = @redis.hgetall "oid:#{id}"
+		ret = nil
+		if otheridhash.has_key?('localid')
+			ret = otheridhash['localid']
+		elsif otheridhash.has_key?('oneroster_identifier')
+			ret = otheridhash['localid']
+		elsif otheridhash.has_key?('oneroster_userId')
+			ret = otheridhash['userId']
+		elsif otheridhash.has_key?('oneroster_courseCode')
+			ret = otheridhash['localid']
+		elsif otheridhash.has_key?('oneroster_classCode')
+			ret = otheridhash['localid']
+		end
+		return ret
 	end
 
 end
