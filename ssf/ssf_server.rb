@@ -134,7 +134,8 @@ class SSFServer < Sinatra::Base
 			when 'text/csv' then msg = msg.to_hash.to_json
 			end
 
-			# puts "topic is: #{topic} : key is #{key}\n\n"
+			puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
+			
 			messages << Poseidon::MessageToSend.new( "#{topic}", msg, "#{key}" )
 			
 			# write to default for audit if required
@@ -178,8 +179,12 @@ class SSFServer < Sinatra::Base
 	# 
 	get "/:topic/:stream/:profile" do
 
-		path = "/#{params['topic']}/#{params['stream']}.#{params['profile']}"
-		redirect path
+		topic = params['topic']
+		stream = "#{params['stream']}.#{params['profile']}"
+		path = "/#{topic}/#{stream}"
+		# puts "\n\nNew Path is #{path}\n\n"
+		status, headers, body = call env.merge("PATH_INFO" => "#{path}")
+  		[status, headers, body]		
 
 	end
 
