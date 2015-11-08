@@ -53,7 +53,7 @@ loop do
 	    messages.each do |m|
 
 	    	# create 'empty' index tuple
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [] }      	
+			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil }      	
 
 			header = m.value.lines[0]
             payload = m.value.lines[1..-1].join
@@ -140,6 +140,8 @@ loop do
 				idx[:otherids][node.attribute("Type")] = node.child
 			end
 
+			idx[:label] = extract_label(idx[:id], nodes)
+
 			# puts "\nParser Index = #{idx.to_json}\n\n"
 
 			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
@@ -171,7 +173,102 @@ loop do
   
 end
 
-
-
+# extract human readable label based on object
+def extract_label(id, nodes)
+	type = nodes.root.name
+	ret = nil
+	case type
+	when "Activity"
+		ret = nodes.xpath("//Title")
+	when "AggregateStatisticInfo"
+		ret = nodes.xpath("//StatisticName")
+	when "Assessment", "Sif3Assessment"
+		ret = nodes.xpath("//Name")
+	when "AssessmentAdministration", "Sif3AssessmentAdministration"
+		ret = nodes.xpath("//AdministrationName")
+	when "Sif3AssessmentAsset"
+		ret = nodes.xpath("//AssetName")
+	when "AssessmentForm", "Sif3AssessmentForm"
+		ret = nodes.xpath("//FormName")
+	when "AssessmentItem", "Sif3AssessmentItem"
+		ret = nodes.xpath("//ItemLabel")
+	when "Sif3AssessmentRubric"
+		ret = nodes.xpath("//RubricName")
+	when "Sif3AssessmentScoreTable"
+		ret = nodes.xpath("//ScoreTableName")
+	when "Sif3AssessmentSection"
+		ret = nodes.xpath("//SectionName")
+	when "Sif3AssessmentSession"
+		ret = nodes.xpath("//SessionName")
+	when "AssessmentSubTest"
+		ret = nodes.xpath("//Name")
+	when "Sif3AssessmentSubTest"
+		ret = nodes.xpath("//SubTestName")
+	when "CalendarDate"
+		ret = nodes.xpath("//@Date")
+	when "CalendarSummary"
+		ret = nodes.xpath("//LocalId")
+	when "ChargedLocationInfo"
+		ret = nodes.xpath("//Name")
+	when "Debtor"
+		ret = nodes.xpath("//BillingName")
+	when "EquipmentInfo"
+		ret = nodes.xpath("//Name")
+	when "FinancialAccount"
+		ret = nodes.xpath("//AccountNumber")
+	when "GradingAssignment"
+		ret = nodes.xpath("//Description")
+	when "Invoice"
+		ret = nodes.xpath("//FormNumber")
+	when "LEAInfo"
+		ret = nodes.xpath("//LEAName")
+	when "LearningResource"
+		ret = nodes.xpath("//Name")
+	when "LearningStandardDocument"
+		ret = nodes.xpath("//Title")
+	when "LearningStandardItem"
+		ret = nodes.xpath("//StatementCodes/StatementCode[1]")
+	when "PaymentReceipt"
+		ret = nodes.xpath("//ReceivedTransactionId")
+	when "PurchaseOrder"
+		ret = nodes.xpath("//FormNumber")
+	when "ReportAuthorityInfo"
+		ret = nodes.xpath("//AuthorityName")
+	when "ResourceBooking"
+		ret = nodes.xpath("//ResourceLocalId") + " " nodes.xpath("//StartDateTime")
+	when "RoomInfo"
+		ret = nodes.xpath("//RoomNumber")
+	when "ScheduledActivity"
+		ret = nodes.xpath("//ActivityName")
+	when "SchoolCourse"
+		ret = nodes.xpath("//CourseCode")
+	when "SchoolInfo"
+		ret = nodes.xpath("//SchoolName")
+	when "SectionInfo"
+		ret = nodes.xpath("//LocalId")
+	when "StaffPersonal", "StudentContactPersonal", "StudentPersonal"
+		ret = nodes.xpath("//PersonInfo/Name/FullName")
+		ret = nodes.xpath("//PersonInfo/Name/GivenName") + " " + nodes.xpath("//PersonInfo/Name/FamilyName") if ret.nil? or ret.empty?
+	when "StudentActivityInfo"
+		ret = nodes.xpath("//Title")
+	when "TeachingGroup"
+		ret = nodes.xpath("//ShortName")
+	when "TermInfo"
+		ret = nodes.xpath("//TermCode")
+	when "TimeTable"
+		ret = nodes.xpath("//Title")
+	when "TimeTableCell"
+		ret = nodes.xpath("//DayId") + ":" + nodes.xpath("//PeriodId")
+	when "TimeTableSubject"
+		ret = nodes.xpath("//CourseLocalId") 
+		ret = nodes.xpath("//SubjectShortName") if ret.nil? or ret.empty?
+		ret = nodes.xpath("//SubjectLongName") if ret.nil? or ret.empty?
+	when "VendorInfo"
+		ret = nodes.xpath("//Name/FullName")
+		ret = nodes.xpath("//Name/GivenName") + " " + nodes.xpath("//Name/FamilyName") if ret.nil? or ret.empty?
+	end
+	ret = id if ret.nil?  or ret.empty?
+	return ret
+end
 
 

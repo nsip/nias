@@ -41,7 +41,7 @@ loop do
 	    messages.each do |m|
 
 	    	# create 'empty' index tuple, otherids and links will be unused here but keeps all parsing code consistent
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => []}   
+		idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil}   
 
                 header = m.value.lines[0]
                 payload = m.value.lines[1..-1].join

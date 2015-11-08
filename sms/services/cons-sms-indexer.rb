@@ -6,7 +6,7 @@
 # 
 # the result is always a tuple structure of the form:
 #
-# ( id, type, [equivalent-ids], {other-ids}, [links] ) 
+# ( id, type, [equivalent-ids], {other-ids}, [links] , label) 
 #
 # id: The guid or RefId of the object - if none supplied by inbound data will have been created during ingest
 #
@@ -24,6 +24,8 @@
 # then the Redis hash "XYZZY" with have XYZZY[localid] = 1, XYZZY[stateprovinceid] = 2 
 # The mapping of other-id -> type is meant to have a unique value (ref id). For that reason, if two different schemas are used,
 # containing the same other-id, these need to be differentiated in name: e.g. localId in SIF vs identifier in OneRoster
+#
+# label: a human-readable label for the object. Used e.g. in graphs
 # 
 # links: [] An array of other object references that this object knows about i.e. a StudentSchoolEnrolment will
 # contain its own refid, the refid of a schoolinfo and the refid of a studentpersonal
@@ -41,6 +43,7 @@
 # * (id): set, contains all links to and from that id
 # * (other_id): hash: key is identifier type, value is id
 # * equivalent:ids:(equivalent-id): set, contains all equivalent ids
+# * labels: hash: key is GUID, value is human-readable label
 
 require 'json'
 require 'nokogiri'
@@ -95,6 +98,8 @@ loop do
 
         	# no responses needed from redis so pipeline for speed
     		  @redis.pipelined do
+
+				@redis.hset "labels", id_hash['id'], idx_hash['label'] unless (idx_hash['label'].nil?)
 
       				@redis.sadd 'known:collections', idx_hash['type'] unless (idx_hash['type'].nil? or idx_hash['type'].empty?)
 

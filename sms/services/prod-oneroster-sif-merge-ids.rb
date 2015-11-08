@@ -39,7 +39,7 @@ loop do
 
   begin
                # create 'empty' index tuple
-                        idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => []}    
+                idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil}    
 
 		if(cursor != 0) then
 			cursor = 0 if cursor == -1

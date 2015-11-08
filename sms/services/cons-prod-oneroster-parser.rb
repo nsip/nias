@@ -6,11 +6,11 @@
 # parses message to find refid & type of message and to build index of
 # all other references contained in the xml message
 # 
-# Extracts GUID id (RefID), other ids, equivalent ids, type and [links] from each message 
+# Extracts GUID id (RefID), other ids, equivalent ids, type, label and [links] from each message 
 #
 # e.g. <refid> [OtherIdType => OtherId] <StudentSchoolEnrolment> [<StudentPersonalRefId><SchoolInfoRefId>] 
 # 
-# this  [ 'tuple' id - [equvalent-ids] - {otherids} - type - [links] ]
+# this  [ 'tuple' id - [equvalent-ids] - {otherids} - type - [links] - label ]
 # 
 # is then passed on to the sms indexing service
 # 
@@ -50,7 +50,7 @@ loop do
 	    messages.each do |m|
 
 	    	# create 'empty' index tuple
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => []}      	
+			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil }      	
 
 
       		# read JSON message
@@ -64,6 +64,21 @@ loop do
                 idx[:type] = 'oneroster_enrollments' if idx_hash.has_key?("primary")
                 idx[:type] = 'oneroster_academicSessions' if idx_hash.has_key?("startDate")
                 idx[:type] = 'oneroster_demographics' if idx_hash.has_key?("sex")
+
+		case idx[:type]
+		when 'oneroster_orgs'
+			idx[:label] = idx_hash["name"]
+		when 'oneroster_users'
+			idx[:label] = idx_hash["givenName"] + " " + idx_hash["familyName"]
+		when 'oneroster_courses'
+			idx[:label] = idx_hash["courseCode"].empty? ? idx_hash["title"] : idx_hash["courseCode"]
+		when 'oneroster_classes'
+			idx[:label] = idx_hash["classCode"].empty? ? idx_hash["title"] : idx_hash["classCode"]
+		when 'oneroster_academicSessions'
+			idx[:label] = idx_hash["title"]
+		else
+			idx[:label] = idx[:id]
+		end
 
                         idx[:id] = idx[:type] == 'oneroster_demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
 
