@@ -5,11 +5,11 @@ require 'nokogiri' # xml support
 
 =begin
 Consumer of validated SIF/XML messages. 
-Messages are received from the single stream sifxml.validated. The key of the received message is "topic"."stream". 
+Messages are received from the single stream sifxml.validated. The header of the received message is "topic/stream". 
 Each object in the stream is filtered according to privacy filters defined in ./privacyfilters/*.xpath.
 
-The key of the received message is "topic"."stream". Each message is passed to a stram for each privacy setting simultaneously:
-* "topic"."stream".none
+The header of the received message is "topic"."stream". Each message is passed to a stram for each privacy setting simultaneously:
+* "topic"."stream".unfiltered
 * "topic"."stream".low
 * "topic"."stream".medium
 * "topic"."stream".high
@@ -92,39 +92,49 @@ loop do
 	    messages = consumer.fetch
 	    messages.each do |m|
 
-                       # Payload from sifxml.ingest contains as its first line a header line with the original topic
-                        header = m.value.lines[0]
-                        payload = m.value.lines[1..-1].join
-			topic = header[/TOPIC: (.+)/, 1]
+               # Payload from sifxml.ingest contains as its first line a header line with the original topic
+                header = m.value.lines[0]
+                payload = m.value.lines[1..-1].join
+				topic = header[/TOPIC: (.+)/, 1]
 
-      	    puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}... #{m.value.lines[1]}\n\n"
+      	    	# puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}\n\n"
 
-		input = Nokogiri::XML(payload) do |config|
-        		config.nonet.noblanks
-		end
-		
-		if(input.errors.empty?) 
-      		item_key = "prv_filter:#{ sprintf('%09d', m.offset) }"
-			out[:none] = input
-			out[:extreme] = apply_filter(input, @filter[:extreme])
-			out[:high] = apply_filter(out[:extreme], @filter[:high])
-			out[:medium] = apply_filter(out[:high], @filter[:medium])
-			out[:low] = apply_filter(out[:medium], @filter[:low])
-			[:none, :low, :medium, :high, :extreme].each {|x|
-				if x == :none
-					outbound_messages << Poseidon::MessageToSend.new( "#{topic}", out[x].to_s, item_key ) 	
-				else
-					outbound_messages << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
+				input = Nokogiri::XML(payload) do |config|
+        			config.nonet.noblanks
 				end
-			}
+
+				# puts "\n\nInput:\n\n#{input.to_xml}\n\n"
+		
+				if(input.errors.empty?) 
+		      		item_key = "prv_filter:#{ sprintf('%09d', m.offset) }"
+					
+					out[:none] = input
+					out[:extreme] = apply_filter(input, @filter[:extreme])
+					out[:high] = apply_filter(out[:extreme], @filter[:high])
+					out[:medium] = apply_filter(out[:high], @filter[:medium])
+					out[:low] = apply_filter(out[:medium], @filter[:low])
+
+					# puts "\n\nOut\n = #{out.to_s}\n\n"
+
+					[:none, :low, :medium, :high, :extreme].each {|x|
+						if x == :none
+							# puts "\n\nSending: to #{topic}.unfiltered\n\n#{out[x].to_s}\n\nkey: #{item_key}"
+							outbound_messages << Poseidon::MessageToSend.new( "#{topic}", out[x].to_s, item_key ) 	
+						else
+							# puts "\n\nSending: to #{topic}.#{x}\n\n#{out[x].to_s}\n\nkey: #{item_key}"
+							outbound_messages << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
+						end
+					}
+				end
+	
 		end
 
 		outbound_messages.each_slice(20) do | batch |
 			pool.next.send_messages( batch )
-	   end
-	
-	end
+   		end
+		
 		# puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
+  
   rescue Poseidon::Errors::UnknownTopicOrPartition
     puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
     sleep 30
