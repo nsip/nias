@@ -76,7 +76,7 @@ loop do
 
       		idx_hash = JSON.parse( m.value )
 
-      		# puts "\n\nIndexer Message : - #{idx_hash.inspect}\n\n"
+      		#puts "\n\nIndexer Message : - #{idx_hash.inspect}\n\n"
 
 		# get the nodes equivalent to the current node
 		prev_equivalents = @redis.smembers "equivalent:ids:#{idx_hash['id']}"
@@ -99,7 +99,7 @@ loop do
         	# no responses needed from redis so pipeline for speed
     		  @redis.pipelined do
 
-				@redis.hset "labels", id_hash['id'], idx_hash['label'] unless (idx_hash['label'].nil?)
+				@redis.hset 'labels', idx_hash['id'], idx_hash['label'] unless (idx_hash['label'].nil?)
 
       				@redis.sadd 'known:collections', idx_hash['type'] unless (idx_hash['type'].nil? or idx_hash['type'].empty?)
 
@@ -114,7 +114,7 @@ loop do
 				idx_hash['otherids'].each do |key, value|
 					@redis.hset "oid:#{value}", key, idx_hash['id']
 					@redis.sadd 'other:ids', "oid:#{value}"
-puts "#####" + "oid:#{value}" + " " + key + " " + idx_hash['id']
+#puts "#####" + "oid:#{value}" + " " + key + " " + idx_hash['id']
 				end
 
 				# extract equivalent ids

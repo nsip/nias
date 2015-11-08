@@ -64,7 +64,7 @@ loop do
 				x.parent = parent
 				xsd_errors = @xsd.validate(parent.document)
 				if(xsd_errors.empty?) 
-puts "Validated!"
+#puts "Validated!"
 	      			item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
 	      			msg = header + x.to_s
 					# puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"

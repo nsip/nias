@@ -23,6 +23,127 @@ require 'nokogiri'
 require 'poseidon'
 require 'hashids'
 
+
+# extract human readable label based on object
+# id is GUID, nodes is Nokogiri-parsed XML
+def extract_label(id, nodes)
+	type = nodes.root.name
+	ret = nil
+	case type
+	when "Activity"
+		ret = nodes.at_xpath("//Title").child
+	when "AggregateStatisticInfo"
+		ret = nodes.at_xpath("//StatisticName").child
+	when "Assessment", "Sif3Assessment"
+		ret = nodes.at_xpath("//Name").child
+	when "AssessmentAdministration", "Sif3AssessmentAdministration"
+		ret = nodes.at_xpath("//AdministrationName").child
+	when "Sif3AssessmentAsset"
+		ret = nodes.at_xpath("//AssetName").child
+	when "AssessmentForm", "Sif3AssessmentForm"
+		ret = nodes.at_xpath("//FormName").child
+	when "AssessmentItem", "Sif3AssessmentItem"
+		ret = nodes.at_xpath("//ItemLabel").child
+	when "Sif3AssessmentRubric"
+		ret = nodes.at_xpath("//RubricName").child
+	when "Sif3AssessmentScoreTable"
+		ret = nodes.at_xpath("//ScoreTableName").child
+	when "Sif3AssessmentSection"
+		ret = nodes.at_xpath("//SectionName").child
+	when "Sif3AssessmentSession"
+		ret = nodes.at_xpath("//SessionName").child
+	when "AssessmentSubTest"
+		ret = nodes.at_xpath("//Name").child
+	when "Sif3AssessmentSubTest"
+		ret = nodes.at_xpath("//SubTestName").child
+	when "CalendarDate"
+		ret = nodes.at_xpath("//@Date").content
+	when "CalendarSummary"
+		ret = nodes.at_xpath("//LocalId").child
+	when "ChargedLocationInfo"
+		ret = nodes.at_xpath("//Name").child
+	when "Debtor"
+		ret = nodes.at_xpath("//BillingName").child
+	when "EquipmentInfo"
+		ret = nodes.at_xpath("//Name").child
+	when "FinancialAccount"
+		ret = nodes.at_xpath("//AccountNumber").child
+	when "GradingAssignment"
+		ret = nodes.at_xpath("//Description").child
+	when "Invoice"
+		ret = nodes.at_xpath("//FormNumber").child
+	when "LEAInfo"
+		ret = nodes.at_xpath("//LEAName").child
+	when "LearningResource"
+		ret = nodes.at_xpath("//Name").child
+	when "LearningStandardDocument"
+		ret = nodes.at_xpath("//Title").child
+	when "LearningStandardItem"
+		ret = nodes.at_xpath("//StatementCodes/StatementCode[1]").child
+	when "PaymentReceipt"
+		ret = nodes.at_xpath("//ReceivedTransactionId").child
+	when "PurchaseOrder"
+		ret = nodes.at_xpath("//FormNumber").child
+	when "ReportAuthorityInfo"
+		ret = nodes.at_xpath("//AuthorityName").child
+	when "ResourceBooking"
+		ret1 = nodes.at_xpath("//ResourceLocalId").child 
+		ret2 = nodes.at_xpath("//ResourceLocalId").child 
+		ret = ret1.to_s + " " + ret2.to_s
+	when "RoomInfo"
+		ret = nodes.at_xpath("//RoomNumber").child
+	when "ScheduledActivity"
+		ret = nodes.at_xpath("//ActivityName").child
+	when "SchoolCourse"
+		ret = nodes.at_xpath("//CourseCode").child
+	when "SchoolInfo"
+		ret = nodes.at_xpath("//SchoolName").child
+	when "SectionInfo"
+		ret = nodes.at_xpath("//LocalId").child
+	when "StaffPersonal", "StudentContactPersonal", "StudentPersonal"
+		fname = nodes.at_xpath("//PersonInfo/Name/FullName")
+		if(fname.nil?)
+			ret1 = nodes.at_xpath("//PersonInfo/Name/GivenName").child 
+			ret2 = nodes.at_xpath("//PersonInfo/Name/FamilyName").child 
+			ret = ret1.to_s + " " + ret2.to_s
+		else
+			ret = fname.child
+		end
+	when "StudentActivityInfo"
+		ret = nodes.at_xpath("//Title").child
+	when "TeachingGroup"
+		ret = nodes.at_xpath("//ShortName").child
+	when "TermInfo"
+		ret = nodes.at_xpath("//TermCode").child
+	when "TimeTable"
+		ret = nodes.at_xpath("//Title").child
+	when "TimeTableCell"
+		ret = nodes.at_xpath("//DayId").child.to_s + ":" + nodes.at_xpath("//PeriodId").child.to_s
+	when "TimeTableSubject"
+		nodes1 = nodes.at_xpath("//CourseLocalId")
+		nodes1 = nodes.at_xpath("//SubjectShortName").child if nodes1.nil? 
+		nodes1 = nodes.at_xpath("//SubjectLongName").child if nodes1.nil? 
+		ret = nodes1.child
+	when "VendorInfo"
+		fname = nodes.at_xpath("//Name/FullName").child
+		if(fname.nil?)
+			ret1 = nodes.at_xpath("//Name/GivenName").child 
+			ret2 = nodes.at_xpath("//Name/FamilyName").child 
+			ret = ret1.to_s + " " + ret2.to_s
+		else
+			ret = fname.child
+		end
+	end
+	ret = id if ret.nil?  
+	return ret
+end
+
+
+
+
+
+
+
 @inbound = 'sifxml.validated'
 @outbound = 'sms.indexer'
 
@@ -172,103 +293,4 @@ loop do
   sleep 1
   
 end
-
-# extract human readable label based on object
-def extract_label(id, nodes)
-	type = nodes.root.name
-	ret = nil
-	case type
-	when "Activity"
-		ret = nodes.xpath("//Title")
-	when "AggregateStatisticInfo"
-		ret = nodes.xpath("//StatisticName")
-	when "Assessment", "Sif3Assessment"
-		ret = nodes.xpath("//Name")
-	when "AssessmentAdministration", "Sif3AssessmentAdministration"
-		ret = nodes.xpath("//AdministrationName")
-	when "Sif3AssessmentAsset"
-		ret = nodes.xpath("//AssetName")
-	when "AssessmentForm", "Sif3AssessmentForm"
-		ret = nodes.xpath("//FormName")
-	when "AssessmentItem", "Sif3AssessmentItem"
-		ret = nodes.xpath("//ItemLabel")
-	when "Sif3AssessmentRubric"
-		ret = nodes.xpath("//RubricName")
-	when "Sif3AssessmentScoreTable"
-		ret = nodes.xpath("//ScoreTableName")
-	when "Sif3AssessmentSection"
-		ret = nodes.xpath("//SectionName")
-	when "Sif3AssessmentSession"
-		ret = nodes.xpath("//SessionName")
-	when "AssessmentSubTest"
-		ret = nodes.xpath("//Name")
-	when "Sif3AssessmentSubTest"
-		ret = nodes.xpath("//SubTestName")
-	when "CalendarDate"
-		ret = nodes.xpath("//@Date")
-	when "CalendarSummary"
-		ret = nodes.xpath("//LocalId")
-	when "ChargedLocationInfo"
-		ret = nodes.xpath("//Name")
-	when "Debtor"
-		ret = nodes.xpath("//BillingName")
-	when "EquipmentInfo"
-		ret = nodes.xpath("//Name")
-	when "FinancialAccount"
-		ret = nodes.xpath("//AccountNumber")
-	when "GradingAssignment"
-		ret = nodes.xpath("//Description")
-	when "Invoice"
-		ret = nodes.xpath("//FormNumber")
-	when "LEAInfo"
-		ret = nodes.xpath("//LEAName")
-	when "LearningResource"
-		ret = nodes.xpath("//Name")
-	when "LearningStandardDocument"
-		ret = nodes.xpath("//Title")
-	when "LearningStandardItem"
-		ret = nodes.xpath("//StatementCodes/StatementCode[1]")
-	when "PaymentReceipt"
-		ret = nodes.xpath("//ReceivedTransactionId")
-	when "PurchaseOrder"
-		ret = nodes.xpath("//FormNumber")
-	when "ReportAuthorityInfo"
-		ret = nodes.xpath("//AuthorityName")
-	when "ResourceBooking"
-		ret = nodes.xpath("//ResourceLocalId") + " " nodes.xpath("//StartDateTime")
-	when "RoomInfo"
-		ret = nodes.xpath("//RoomNumber")
-	when "ScheduledActivity"
-		ret = nodes.xpath("//ActivityName")
-	when "SchoolCourse"
-		ret = nodes.xpath("//CourseCode")
-	when "SchoolInfo"
-		ret = nodes.xpath("//SchoolName")
-	when "SectionInfo"
-		ret = nodes.xpath("//LocalId")
-	when "StaffPersonal", "StudentContactPersonal", "StudentPersonal"
-		ret = nodes.xpath("//PersonInfo/Name/FullName")
-		ret = nodes.xpath("//PersonInfo/Name/GivenName") + " " + nodes.xpath("//PersonInfo/Name/FamilyName") if ret.nil? or ret.empty?
-	when "StudentActivityInfo"
-		ret = nodes.xpath("//Title")
-	when "TeachingGroup"
-		ret = nodes.xpath("//ShortName")
-	when "TermInfo"
-		ret = nodes.xpath("//TermCode")
-	when "TimeTable"
-		ret = nodes.xpath("//Title")
-	when "TimeTableCell"
-		ret = nodes.xpath("//DayId") + ":" + nodes.xpath("//PeriodId")
-	when "TimeTableSubject"
-		ret = nodes.xpath("//CourseLocalId") 
-		ret = nodes.xpath("//SubjectShortName") if ret.nil? or ret.empty?
-		ret = nodes.xpath("//SubjectLongName") if ret.nil? or ret.empty?
-	when "VendorInfo"
-		ret = nodes.xpath("//Name/FullName")
-		ret = nodes.xpath("//Name/GivenName") + " " + nodes.xpath("//Name/FamilyName") if ret.nil? or ret.empty?
-	end
-	ret = id if ret.nil?  or ret.empty?
-	return ret
-end
-
 

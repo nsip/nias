@@ -62,8 +62,9 @@ class SMSVizQuery
 		students.each do |student|
 			classes1 = @redis.sinter student, 'TeachingGroup'
 			classes1.each do |class1|
-				absences_per_class[class1] = [] if absences_per_class[class1].nil?
-				absences_per_class[class1] << attendances[student]
+				label = @redis.hget 'labels', class1
+				absences_per_class[label] = [] if absences_per_class[label].nil?
+				absences_per_class[label] << attendances[student]
 			end
 		end
 		absences_per_class.each do |key, value|
@@ -78,7 +79,8 @@ class SMSVizQuery
 		absentees = attendances.keys.sort { |x, y| attendances[y] <=> attendances[x] }
 		results = []
 		absentees[0..20].each do |x|
-			results << {:student => x, :absences => attendances[x] }
+			label = @redis.hget 'labels', x
+			results << {:student => label, :absences => attendances[x] }
 		end
 		return results
 	end
