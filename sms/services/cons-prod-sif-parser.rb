@@ -23,6 +23,127 @@ require 'nokogiri'
 require 'poseidon'
 require 'hashids'
 
+
+# extract human readable label based on object
+# id is GUID, nodes is Nokogiri-parsed XML
+def extract_label(id, nodes)
+	type = nodes.root.name
+	ret = nil
+	case type
+	when "Activity"
+		ret = nodes.at_xpath("//Title").child
+	when "AggregateStatisticInfo"
+		ret = nodes.at_xpath("//StatisticName").child
+	when "Assessment", "Sif3Assessment"
+		ret = nodes.at_xpath("//Name").child
+	when "AssessmentAdministration", "Sif3AssessmentAdministration"
+		ret = nodes.at_xpath("//AdministrationName").child
+	when "Sif3AssessmentAsset"
+		ret = nodes.at_xpath("//AssetName").child
+	when "AssessmentForm", "Sif3AssessmentForm"
+		ret = nodes.at_xpath("//FormName").child
+	when "AssessmentItem", "Sif3AssessmentItem"
+		ret = nodes.at_xpath("//ItemLabel").child
+	when "Sif3AssessmentRubric"
+		ret = nodes.at_xpath("//RubricName").child
+	when "Sif3AssessmentScoreTable"
+		ret = nodes.at_xpath("//ScoreTableName").child
+	when "Sif3AssessmentSection"
+		ret = nodes.at_xpath("//SectionName").child
+	when "Sif3AssessmentSession"
+		ret = nodes.at_xpath("//SessionName").child
+	when "AssessmentSubTest"
+		ret = nodes.at_xpath("//Name").child
+	when "Sif3AssessmentSubTest"
+		ret = nodes.at_xpath("//SubTestName").child
+	when "CalendarDate"
+		ret = nodes.at_xpath("//@Date").content
+	when "CalendarSummary"
+		ret = nodes.at_xpath("//LocalId").child
+	when "ChargedLocationInfo"
+		ret = nodes.at_xpath("//Name").child
+	when "Debtor"
+		ret = nodes.at_xpath("//BillingName").child
+	when "EquipmentInfo"
+		ret = nodes.at_xpath("//Name").child
+	when "FinancialAccount"
+		ret = nodes.at_xpath("//AccountNumber").child
+	when "GradingAssignment"
+		ret = nodes.at_xpath("//Description").child
+	when "Invoice"
+		ret = nodes.at_xpath("//FormNumber").child
+	when "LEAInfo"
+		ret = nodes.at_xpath("//LEAName").child
+	when "LearningResource"
+		ret = nodes.at_xpath("//Name").child
+	when "LearningStandardDocument"
+		ret = nodes.at_xpath("//Title").child
+	when "LearningStandardItem"
+		ret = nodes.at_xpath("//StatementCodes/StatementCode[1]").child
+	when "PaymentReceipt"
+		ret = nodes.at_xpath("//ReceivedTransactionId").child
+	when "PurchaseOrder"
+		ret = nodes.at_xpath("//FormNumber").child
+	when "ReportAuthorityInfo"
+		ret = nodes.at_xpath("//AuthorityName").child
+	when "ResourceBooking"
+		ret1 = nodes.at_xpath("//ResourceLocalId").child 
+		ret2 = nodes.at_xpath("//ResourceLocalId").child 
+		ret = ret1.to_s + " " + ret2.to_s
+	when "RoomInfo"
+		ret = nodes.at_xpath("//RoomNumber").child
+	when "ScheduledActivity"
+		ret = nodes.at_xpath("//ActivityName").child
+	when "SchoolCourse"
+		ret = nodes.at_xpath("//CourseCode").child
+	when "SchoolInfo"
+		ret = nodes.at_xpath("//SchoolName").child
+	when "SectionInfo"
+		ret = nodes.at_xpath("//LocalId").child
+	when "StaffPersonal", "StudentContactPersonal", "StudentPersonal"
+		fname = nodes.at_xpath("//PersonInfo/Name/FullName")
+		if(fname.nil?)
+			ret1 = nodes.at_xpath("//PersonInfo/Name/GivenName").child 
+			ret2 = nodes.at_xpath("//PersonInfo/Name/FamilyName").child 
+			ret = ret1.to_s + " " + ret2.to_s
+		else
+			ret = fname.child
+		end
+	when "StudentActivityInfo"
+		ret = nodes.at_xpath("//Title").child
+	when "TeachingGroup"
+		ret = nodes.at_xpath("//ShortName").child
+	when "TermInfo"
+		ret = nodes.at_xpath("//TermCode").child
+	when "TimeTable"
+		ret = nodes.at_xpath("//Title").child
+	when "TimeTableCell"
+		ret = nodes.at_xpath("//DayId").child.to_s + ":" + nodes.at_xpath("//PeriodId").child.to_s
+	when "TimeTableSubject"
+		nodes1 = nodes.at_xpath("//CourseLocalId")
+		nodes1 = nodes.at_xpath("//SubjectShortName").child if nodes1.nil? 
+		nodes1 = nodes.at_xpath("//SubjectLongName").child if nodes1.nil? 
+		ret = nodes1.child
+	when "VendorInfo"
+		fname = nodes.at_xpath("//Name/FullName").child
+		if(fname.nil?)
+			ret1 = nodes.at_xpath("//Name/GivenName").child 
+			ret2 = nodes.at_xpath("//Name/FamilyName").child 
+			ret = ret1.to_s + " " + ret2.to_s
+		else
+			ret = fname.child
+		end
+	end
+	ret = id if ret.nil?  
+	return ret
+end
+
+
+
+
+
+
+
 @inbound = 'sifxml.validated'
 @outbound = 'sms.indexer'
 
@@ -53,7 +174,7 @@ loop do
 	    messages.each do |m|
 
 	    	# create 'empty' index tuple
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [] }      	
+			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil }      	
 
 			header = m.value.lines[0]
             payload = m.value.lines[1..-1].join
@@ -140,6 +261,8 @@ loop do
 				idx[:otherids][node.attribute("Type")] = node.child
 			end
 
+			idx[:label] = extract_label(idx[:id], nodes)
+
 			# puts "\nParser Index = #{idx.to_json}\n\n"
 
 			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
@@ -170,8 +293,4 @@ loop do
   sleep 1
   
 end
-
-
-
-
 

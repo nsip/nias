@@ -20,7 +20,7 @@ require 'moneta'
 
 @inbound = 'sifxml.validated'
 
-@store = Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
+@store = Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages', mapsize: 1_000_000_000)
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 
@@ -41,7 +41,7 @@ loop do
 	    messages.each do |m|
 
 	    	# create 'empty' index tuple, otherids and links will be unused here but keeps all parsing code consistent
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => []}   
+		idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil}   
 
                 header = m.value.lines[0]
                 payload = m.value.lines[1..-1].join
@@ -74,7 +74,7 @@ loop do
 				idx[:id] = node.child
 			end
 
-			puts "\nStorage Index = #{idx.to_json}\n\n"
+			#puts "\nStorage Index = #{idx.to_json}\n\n"
 
 			# write the message to storage with its own refid as the key
 			# puts "\n\nkey value pair will be:\n\nKEY: #{idx[:id]}\n\nVALUE:\n\n#{nodes.to_s}"
