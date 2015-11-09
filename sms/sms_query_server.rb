@@ -60,6 +60,7 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'sinatra/base'
+require 'sinatra/contrib'
 require 'json'
 require 'csv'
 require 'moneta'
@@ -69,6 +70,7 @@ require_relative 'sms_query'
 
 class SMSQueryServer < Sinatra::Base
 
+	helpers Sinatra::ContentFor
 
 	configure do
 
