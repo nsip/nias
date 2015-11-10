@@ -41,10 +41,10 @@
 				<div id="dashboardchart1">
 					<h6>Average absences per class</h6>
 					<script>
-				        var svg1 = dimple.newSvg("#dashboardchart1", "100%", "400px");
+				        var svg1 = dimple.newSvg("#dashboardchart1", "100%", "500px");
 				        d3.json("/graph_data/attendance_per_class", function (data) {
 				        var myChart = new dimple.chart(svg1, data);
-				        //myChart.setBounds(20, 20, 460, 360)
+				        myChart.setBounds("5%", "5%", "100%", "70%")
 				        var x = myChart.addCategoryAxis("x", "class");
 				        myChart.addMeasureAxis("y", "average absences");
 				        myChart.addSeries(null, dimple.plot.bar);
@@ -63,10 +63,10 @@
 				<div id="dashboardchart2">
 					<h6>Most absent students</h6>
 					<script>
-				        var svg2 = dimple.newSvg("#dashboardchart2", "100%", "400px");
+				        var svg2 = dimple.newSvg("#dashboardchart2", "100%", "500px");
 				        d3.json("/graph_data/most_absent_students", function (data) {
 				        var myChart = new dimple.chart(svg2, data);
-				        //myChart.setBounds(20, 20, 460, 360)
+				        myChart.setBounds("5%", "5%", "100%", "70%")
 				        var x = myChart.addCategoryAxis("x", "student");
 				        myChart.addMeasureAxis("y", "absences");
 				        myChart.addSeries(null, dimple.plot.bar);

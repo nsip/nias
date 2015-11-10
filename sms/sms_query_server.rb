@@ -66,6 +66,7 @@ require 'csv'
 require 'moneta'
 
 require_relative 'sms_query'
+require_relative 'oneroster_sif_merge'
 
 
 class SMSQueryServer < Sinatra::Base
@@ -198,7 +199,19 @@ class SMSQueryServer < Sinatra::Base
 	end
 
 
+	get "/sms/merge_ids" do
+	
+		orsm = OneRosterSifMerge.new
 
+		begin
+			orsm.merge_ids
+		rescue 
+			return 500, 'Error executing SIF OneRoster id merge.'
+		end
+
+		return 200, 'SIF - OneRoster id merge complete'
+
+	end
 
 
 

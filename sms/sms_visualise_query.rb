@@ -9,7 +9,7 @@ class SMSVizQuery
 
 	def initialize
                 @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
-                @hashid = Hashids.new( 'nsip timesheeting' )
+                @hashid = Hashids.new( 'nsip sms_visualise_query' )
                 @expiry_seconds = 120 #update this for production
                 @rand_space = 10000
         end
