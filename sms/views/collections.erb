@@ -1,9 +1,10 @@
 <!-- collections.erb -->
 
+<% content_for :title do %>
+      <title>NIAS SMS: SIF Memory Store</title>
+<% end %>
 
 <div class="container">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
-  <script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
   
 	<!-- header -->
     <section class="header">
@@ -57,116 +58,43 @@
 				</div>	
     		</div>
     	</div>
-
 	</div>
 
     <!-- lightweight query interface -->
     <div class="docs-section" id="query_ui"> 
 		<h6 class="docs-header">Query Explorer</h6>
-
-        <div> 
-            <!-- <form> -->
             <div class="row">
-                <div class="six columns">
-                    <label for="collections1">From Collection -> </label>
-                    <select class="u-full-width" id="collections1">
-                        <% @coll_result.sort! %>
-                        <% @coll_result.each do | collection | %>
-                            <option value="<%= collection %>"><%= collection %></option>    
-                        <% end %>
-                    </select>
-                </div>
-                <div class="six columns">
-                    <label for="item">Item</label>
-                    <select class="u-full-width" id="item">
-                        <!-- selector has no values until collection is chosen to select an item from -->
-                    </select>
-                </div>
+
+            <div class="six columns">
+                <label for="collections1">( From Collection... )</label>
+                <select class="u-full-width" id="collections1">
+                    <% @coll_result.sort! %>
+                    <% @coll_result.each do | collection | %>
+                        <option value="<%= collection %>"><%= collection %></option>    
+                    <% end %>
+                </select>
+
+                <label for="item">Item</label>
+                <select class="u-full-width" id="item">
+                    <!-- selector has no values until collection is chosen to select an item from -->
+                </select>
+
+                <label for="collections2">Relationship Collection</label>
+                <select class="u-full-width" id="collections2">
+                    <% @coll_result.sort! %>
+                    <% @coll_result.each do | collection | %>
+                        <option value="<%= collection %>"><%= collection %></option>    
+                    <% end %>
+                </select>
+
+                <button class="button-primary" id="query">Run Query</button>                                
             </div>
 
-            <div class="row">
-                <div class="six columns"><br/></div>
-                <div class="six columns">
-                    <label for="collections2">Relationship Collection</label>
-                    <select class="u-full-width" id="collections2">
-                        <% @coll_result.sort! %>
-                        <% @coll_result.each do | collection | %>
-                            <option value="<%= collection %>"><%= collection %></option>    
-                        <% end %>
-                    </select>
-                </div>
+            <div class="six columns">
+                <div id="chartContainer"></div>
             </div>
 
-            <div class="row">
-                <div class="six columns"><br/></div>                
-                <div class="six columns">
-                    <!-- <label for="query">Query</label> -->
-                    <!-- <input class="button-primary" type="submit" value="Query"> -->
-                    <button class="button-primary" id="query">Run Query</button>                                
-                </div>
-            </div>
-
-            <!-- handler for collection-to-find-an-item selector -->
-            <script>
-                // force user to choose a collection
-                $("#collections1 option:first").before( $('<option>',{value: 0,text: ''}));
-                
-                $("#collections1").change(function () {
-                    $("#item").find("option:gt(0)").remove();
-                    $("#item").find("option:first").text("Loading...");
-                    $.getJSON("/sms/find", {
-                        collection: $(this).val()
-                    }, function (json) {
-                        $("#item").find("option:first").text("");
-                        for (var i = 0; i < json.length; i++) {
-                            $("<option/>").attr("value", json[i].id).text(json[i].id).appendTo($("#item"));
-                        }
-                    });
-                });
-
-		$("#item").change(function() {
-                    var item = $("#item :selected").text();
-var mydiv = document.getElementById("chartContainer");
-//while ( mydiv.firstChild ) mydiv.removeChild( mydiv.firstChild );
-    	var svg = dimple.newSvg("#chartContainer", "600px", "200px");
-    	d3.json("/graph_data/linked_collections?id="+ item, function (data) {
-      	var myChart = new dimple.chart(svg, data);
-  	//myChart.setBounds(20, 20, 460, 360)
-      	myChart.addMeasureAxis("p", "data");
-      	var ring = myChart.addSeries("collection", dimple.plot.pie);
-      	ring.innerRadius = "50%";
-      	myChart.addLegend(400, 20, 90, 300, "left");
-      		myChart.draw();
-	});
-		});
-
-                $("#query").click(function(){
-
-                    var collection = $("#collections2").val();
-                    var item = $("#item :selected").text();
-                    var request = {};
-
-                    request.collection = collection;
-                    request.include_messages = true;
-                    request.id = item;
-
-		    
-                    $("#results").empty();
-                    $.getJSON("/sms/find", request, function(result){
-                        $.each(result, function(i, field){
-                            $("#results").append( field.id + "<br/><br/>" + field.data + "<br/><br/>");
-                        });
-                    });
-                });
-
-
-            </script>
-
-        <!-- </form> -->
         </div>
-
-	<div id="chartContainer" />
-
 
         <div class="row">
             <div class="twelve columns">
@@ -178,13 +106,63 @@ var mydiv = document.getElementById("chartContainer");
                 <!-- </pre>  -->
             </div>
         </div>
-	
+
+        <!-- handler for collection-to-find-an-item selector -->
+        <script>
+            // force user to choose a collection
+            $("#collections1 option:first").before( $('<option>',{value: 0,text: ''}));
+            
+            $("#collections1").change(function () {
+                $("#item").find("option:gt(0)").remove();
+                $("#item").find("option:first").text("Loading...");
+                $.getJSON("/sms/find", {
+                    collection: $(this).val()
+                }, function (json) {
+                    $("#item").find("option:first").text("");
+                    for (var i = 0; i < json.length; i++) {
+                        $("<option/>").attr("value", json[i].id).text(json[i].id).appendTo($("#item"));
+                    }
+                });
+            });
+
+    		$("#item").change(function() {
+
+                var item = $("#item :selected").text();
+                $("#chartContainer").empty();
+
+                var svg = dimple.newSvg("#chartContainer", "100%", "200px");
+                
+                d3.json("/graph_data/linked_collections?id="+ item, function (data) {
+                    var myChart = new dimple.chart(svg, data);
+                    myChart.setBounds("20%", "10%", "60%", "80%")
+                    myChart.addMeasureAxis("x", "data");
+                    myChart.addCategoryAxis("y", "collection");
+                    var ring = myChart.addSeries("collection", dimple.plot.bar);
+                    myChart.draw();
+                });
+            });
+
+            $("#query").click(function(){
+
+                var collection = $("#collections2").val();
+                var item = $("#item :selected").text();
+                var request = {};
+
+                request.collection = collection;
+                request.include_messages = true;
+                request.id = item;
+
+	    
+                $("#results").empty();
+                $.getJSON("/sms/find", request, function(result){
+                    $.each(result, function(i, field){
+                        $("#results").append( field.id + "<br/><br/>" + field.data + "<br/><br/>");
+                    });
+                });
+            });
+
+        </script>
     </div>
-
-
-<!-- <textarea class="u-full-width" placeholder="Query Results..." id="results"></textarea> -->
-
-
 
 </div>
 
