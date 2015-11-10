@@ -120,14 +120,15 @@
                 }, function (json) {
                     $("#item").find("option:first").text("");
                     for (var i = 0; i < json.length; i++) {
-                        $("<option/>").attr("value", json[i].id).text(json[i].id).appendTo($("#item"));
+                        $("<option/>").attr("value", json[i].id).text(json[i].label).appendTo($("#item"));
                     }
                 });
             });
 
     		$("#item").change(function() {
 
-                var item = $("#item :selected").text();
+                // var item = $("#item :selected").text();
+                var item = $("#item").val();
                 $("#chartContainer").empty();
 
                 var svg = dimple.newSvg("#chartContainer", "100%", "200px");
@@ -145,7 +146,8 @@
             $("#query").click(function(){
 
                 var collection = $("#collections2").val();
-                var item = $("#item :selected").text();
+                //var item = $("#item :selected").text();
+                var item = $("#item").val();
                 var request = {};
 
                 request.collection = collection;
