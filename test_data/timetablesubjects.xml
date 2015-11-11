@@ -1,4 +1,4 @@
-<TimeTableSubjects xmlns="http://www.sifassociation.org/au/datamodel/1.3">
+<TimeTableSubjects xmlns="http://www.sifassociation.org/au/datamodel/3.4">
     <TimeTableSubject RefId="b7d0ff84-021a-472a-b98d-65f17bb71fa9">
         <SubjectLocalId>PHYS 662</SubjectLocalId>
         <AcademicYear>

@@ -1,4 +1,4 @@
-<TimeTables xmlns="http://www.sifassociation.org/au/datamodel/1.3">
+<TimeTables xmlns="http://www.sifassociation.org/au/datamodel/3.4">
     <TimeTable RefId="46aa00b6-618f-4d5a-8b5e-8bb3dd56361f">
         <SchoolInfoRefId>1e5aa150-ca94-45a0-a893-9ec427ee2160</SchoolInfoRefId>
         <SchoolYear>2014</SchoolYear>

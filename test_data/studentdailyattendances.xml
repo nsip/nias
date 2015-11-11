@@ -1,4 +1,4 @@
-<StudentDailyAttendances xmlns="http://www.sifassociation.org/au/datamodel/1.3">
+<StudentDailyAttendances xmlns="http://www.sifassociation.org/au/datamodel/3.4">
 
 <StudentDailyAttendance RefId="911c758f-b684-4fcd-ad66-aaf88dc6b5da">
   <StudentPersonalRefId>f467de35-5e5d-4e73-91ba-18a983158943</StudentPersonalRefId>

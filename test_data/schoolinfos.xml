@@ -1,4 +1,4 @@
-<SchoolInfos xmlns="http://www.sifassociation.org/au/datamodel/1.3">
+<SchoolInfos xmlns="http://www.sifassociation.org/au/datamodel/3.4">
     <SchoolInfo RefId="1e5aa150-ca94-45a0-a893-9ec427ee2160">
         <LocalId>72868</LocalId>
         <StateProvinceId>4</StateProvinceId>
