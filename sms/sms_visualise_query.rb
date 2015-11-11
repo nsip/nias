@@ -85,5 +85,21 @@ class SMSVizQuery
 		return results
 	end
 
+
+
+	# track invoices vs paymentreceipts for each debtor
+	def payment_delinquency
+		debtors = @redis.smembers('Debtor')
+		labels = {}
+		results = []
+		debtors.each do |d|
+			studentcontact = @redis.sinter d, 'StudentContactPersonal'
+			labels[d] = @redis.hget 'labels', studentcontact[0]
+			invoices = @redis.sinter d, 'Invoice'
+			receipts = @redis.sinter d, 'PaymentReceipt'
+			results << {:debtor => labels[d], :delinquency => invoices.size - receipts.size }
+		end
+		return results.sort {|a, b| b[:delinquency] <=> a[:delinquency] }
+	end
 end
 

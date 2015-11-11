@@ -41,4 +41,11 @@ class GraphServer < Sinatra::Base
 		return results.to_json
 	end
 
+	get "/graph_data/payment_delinquency" do
+		viz = SMSVizQuery.new
+	        content_type 'application/json'
+		results = viz.payment_delinquency
+		return results.to_json
+	end
+
 end
