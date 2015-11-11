@@ -1,4 +1,4 @@
-<StaffAssignments xmlns="http://www.sifassociation.org/au/datamodel/1.3">
+<StaffAssignments xmlns="http://www.sifassociation.org/au/datamodel/3.4">
     <StaffAssignment RefId="2b4bb852-be60-45b9-aba7-a64cf0e7ff9c">
         <SchoolInfoRefId>1e5aa150-ca94-45a0-a893-9ec427ee2160</SchoolInfoRefId>
         <SchoolYear>2014</SchoolYear>

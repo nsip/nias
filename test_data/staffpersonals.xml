@@ -1,4 +1,4 @@
-<StaffPersonals xmlns="http://www.sifassociation.org/au/datamodel/1.3">
+<StaffPersonals xmlns="http://www.sifassociation.org/au/datamodel/3.4">
     <StaffPersonal RefId="fed1c1e0-ef1d-4600-a482-7d44d1ce2359">
         <LocalId>52799</LocalId>
         <StateProvinceId>9128016</StateProvinceId>

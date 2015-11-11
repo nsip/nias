@@ -1,4 +1,4 @@
-<TimeTableCells xmlns="http://www.sifassociation.org/au/datamodel/1.3">
+<TimeTableCells xmlns="http://www.sifassociation.org/au/datamodel/3.4">
     <TimeTableCell RefId="345cde2d-730a-48d2-ba3c-c6efed1ea036">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>69b82f09-b948-477c-af13-700e5fad5ecc</TimeTableSubjectRefId>
