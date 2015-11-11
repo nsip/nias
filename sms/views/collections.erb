@@ -99,11 +99,10 @@
         <div class="row">
             <div class="twelve columns">
                 <label for="results">Results</label>
-                <!-- <pre class="code-example"> -->
-                    <!-- <code class="code-example-body prettyprint" id="results"> -->
-                    <div id="results">    
-                    </div>
-                <!-- </pre>  -->
+                <pre class="code-example">
+                    <code class="code-example-body prettyprint" id="results">
+                    </code>
+                </pre> 
             </div>
         </div>
 
@@ -158,7 +157,11 @@
                 $("#results").empty();
                 $.getJSON("/sms/find", request, function(result){
                     $.each(result, function(i, field){
-                        $("#results").append( field.id + "<br/><br/>" + field.data + "<br/><br/>");
+                        $("#results").append( '<br/><br/>' );
+                        $("#results").append( document.createTextNode(field.id));
+                        $("#results").append( '<br/><br/>' );
+                        $("#results").append( document.createTextNode(field.data));
+                        $("#results").append( '<br/>' );
                     });
                 });
             });
