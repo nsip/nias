@@ -117,6 +117,7 @@
                 $.getJSON("/sms/find", {
                     collection: $(this).val()
                 }, function (json) {
+		    json = json.sort(function(a,b) {return a.label.localeCompare( b.label )});
                     $("#item").find("option:first").text("");
                     for (var i = 0; i < json.length; i++) {
                         $("<option/>").attr("value", json[i].id).text(json[i].label).appendTo($("#item"));
