@@ -79,7 +79,7 @@
 		</div>		    		
 	</div>
 
-    <div class="docs-section" id="finance_dashbaord">
+    <div class="docs-section" id="finance_dashboard">
 		<h6 class="docs-header">Finance</h6>
 		<div class="row">
     		<div class="twelve columns">
@@ -103,7 +103,7 @@
 		<div class="row">
     		<div class="twelve columns">
 				<div id="dashboardchart4">
-					<h6>Delinquent debtors</h6>
+					<h6>Delinquent debtors #Payments Missed</h6>
 					<script>
 				        var svg4 = dimple.newSvg("#dashboardchart4", "100%", "500px");
 				        d3.json("/graph_data/payment_delinquency", function (data) {
@@ -112,7 +112,7 @@
 				        //var x = myChart.addCategoryAxis("y", "delinquency");
 				        myChart.addMeasureAxis("p", "debtor");
 				        myChart.addSeries("delinquency", dimple.plot.pie);
-				        myChart.addLegend(500, 20, 90, 300, "left");
+				        myChart.addLegend(10, 40, 90, 300, "left");
 		                myChart.draw();
 				        });
 					</script>
