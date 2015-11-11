@@ -79,8 +79,9 @@ class SMSQuery
 				end
 				result = result.value.count == 0 ? [] : result.value
 			end
-puts q
-puts result
+
+# puts q
+# puts result
 
 			if result.empty? then
 			puts "Query failed on excluding schools\n\n"
