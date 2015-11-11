@@ -5,13 +5,13 @@
 //StudentPersonal/MedicalAlertMessages/MedicalAlertMessage
 //StudentPersonal/StateProvinceId
 //StudentDailyAttendance/AttendanceCode
-//StudentDailyAttendance/AttendanceCode/Code:999
+//StudentDailyAttendance/AttendanceCode/Code
 //StudentDailyAttendance/AttendanceNote
 //StudentParticipation
 //StudentPeriodAttendance/AttendanceCode
-//StudentPeriodAttendance/AttendanceCode/Code:999
+//StudentPeriodAttendance/AttendanceCode/Code
 //StudentPeriodAttendance/AttendanceComment
-//StudentContactRelationship/ContactFlags/InterventionOrder:X
+//StudentContactRelationship/ContactFlags/InterventionOrder
 //StudentSDTN
 //SummaryEnrollmentInfo
 
