@@ -58,37 +58,49 @@ class SMSQuery
 		# puts "result is #{result.inspect} and empty is: #{result.empty?}\n\n"
 
 		# if no direct results then try indirect
-		if result.empty? 
+		# initially, we exclude SchoolInfo, which is tied to everything, and will return too many objects
+		if result.empty? then
 
 			tmp = @idgen.encode( rand(1...999) )
 			q_indirect_start = Time.now
 
 			q = []
-			q = @redis.smembers q_item
-
-			return result unless !q.empty? # return empty results if item not in db
+			#q = @redis.smembers q_item
+			q = @redis.sdiff q_item, "SchoolInfo"
+			
+			#return result unless !q.empty? # return empty results if item not in db
 
 			# puts "\n\nindirect sinter - #{q.inspect}\n\n"
+			unless q.empty? then
+				@redis.pipelined do
+					@redis.sunionstore tmp, q.to_a
+					result = @redis.sinter tmp, q_collection
+					@redis.expire tmp, 5 
+				end
+				result = result.value.count == 0 ? [] : result.value
+			end
+puts q
+puts result
 
-			@redis.pipelined do
-				@redis.sunionstore tmp, q.to_a
-				result = @redis.sinter tmp, q_collection
-				@redis.expire tmp, 5 
+			if result.empty? then
+			puts "Query failed on excluding schools\n\n"
+				# include Schools back in
+				q = @redis.smembers q_item
+				return result if q.empty? # return empty results if item not in db
+
+				tmp = @idgen.encode( rand(1...999) )
+				@redis.pipelined do
+					@redis.sunionstore tmp, q.to_a
+					result = @redis.sinter tmp, q_collection
+					@redis.expire tmp, 5 
+				end
+				result = result.value.count == 0 ? [] : result.value
 			end
 
 			q_indirect_finish = Time.now
-
-			puts "\n\nindirect query took #{q_indirect_finish - q_indirect_start}\n\n"
-			puts "\n\nresult is #{result.value.count} items\n\n"
-
-			if result.value.count == 0
-				result = []
-			else
-				result = result.value
-			end
-
+			#puts "\n\nindirect query took #{q_indirect_finish - q_indirect_start}\n\n"
+			#puts "\n\nresult is #{result.value.count} items\n\n"
 		end
-
 		return result
 
 	end
