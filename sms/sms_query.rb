@@ -133,6 +133,13 @@ class SMSQuery
 		return ret
 	end
 
+	# get label for a GUID
+	def get_label (id) 
+		ret = @redis.hget "labels", id
+		ret = id if ret.nil? or ret.empty?
+		return ret
+	end
+
 end
 
 

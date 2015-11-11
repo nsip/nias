@@ -63,7 +63,10 @@ def extract_label(id, nodes)
 	when "ChargedLocationInfo"
 		ret = nodes.at_xpath("//Name").child
 	when "Debtor"
-		ret = nodes.at_xpath("//BillingName").child
+		bname = nodes.at_xpath("//BillingName")
+		unless(bname.nil?)
+			ret = bname.child
+		end
 	when "EquipmentInfo"
 		ret = nodes.at_xpath("//Name").child
 	when "FinancialAccount"
@@ -71,7 +74,10 @@ def extract_label(id, nodes)
 	when "GradingAssignment"
 		ret = nodes.at_xpath("//Description").child
 	when "Invoice"
-		ret = nodes.at_xpath("//FormNumber").child
+		fnumber = nodes.at_xpath("//FormNumber")
+		unless(fnumber.nil?)
+			ret = fnumber.child
+		end
 	when "LEAInfo"
 		ret = nodes.at_xpath("//LEAName").child
 	when "LearningResource"

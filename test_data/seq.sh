@@ -8,8 +8,16 @@ http post :9292/test/test1 Content-Type:application/xml < teachinggroups.xml
 http post :9292/test/test1 Content-Type:application/xml < timetablecells.xml
 http post :9292/test/test1 Content-Type:application/xml < timetables.xml
 http post :9292/test/test1 Content-Type:application/xml < timetablesubjects.xml
+<<<<<<< HEAD
 # http post :9292/test/test1 Content-Type:application/xml < studentcontactrelationships.xml
 # http post :9292/test/test1 Content-Type:application/xml < studentcontactpersonals.xml
+=======
+http post :9292/test/test1 Content-Type:application/xml < studentcontactrelationships.xml
+http post :9292/test/test1 Content-Type:application/xml < studentcontactpersonals.xml
+http post :9292/test/test1 Content-Type:application/xml < debtors.xml
+http post :9292/test/test1 Content-Type:application/xml < invoices.xml
+http post :9292/test/test1 Content-Type:application/xml < paymentreceipts.xml
+>>>>>>> nsip/master
 
 # http post :9292/oneroster/validated Content-Type:text/csv < usersfromsif.csv
 # http post :9292/oneroster/validated Content-Type:text/csv < classes.csv

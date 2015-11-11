@@ -16,8 +16,8 @@ require 'nokogiri' # xml support
 
 @servicename = 'cons-prod-sif-ingest-validate'
 
-@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif1.3/SIF_Message1.3_3.x.xsd"))
-@namespace = 'http://www.sifassociation.org/au/datamodel/1.3'
+@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif3.4/SIF_Message3.4.xsd"))
+@namespace = 'http://www.sifassociation.org/au/datamodel/3.4'
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
@@ -67,7 +67,7 @@ loop do
 #puts "Validated!"
 	      			item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
 	      			msg = header + x.to_s
-					# puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"
+#puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"
 					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 				else
 puts "Invalid!"
