@@ -27,7 +27,7 @@
         <div class="container">
             <ul class="navbar-list">
                 <li class="navbar-item"><a class="navbar-link" href="#attendance_dashboard">Attendance</a></li>
-                <li class="navbar-item"><a class="navbar-link" href="#query_ui">Finance</a></li>                
+                <li class="navbar-item"><a class="navbar-link" href="#finance_dashboard">Finance</a></li>                
                 <!-- <li class="navbar-item"><a class="navbar-link" href="#graph">View</a></li> -->
             </ul>
         </div>
@@ -79,6 +79,48 @@
 		</div>		    		
 	</div>
 
+    <div class="docs-section" id="finance_dashbaord">
+		<h6 class="docs-header">Finance</h6>
+		<div class="row">
+    		<div class="twelve columns">
+				<div id="dashboardchart3">
+					<h6>Delinquent debtors</h6>
+					<script>
+				        var svg3 = dimple.newSvg("#dashboardchart3", "100%", "500px");
+				        d3.json("/graph_data/payment_delinquency", function (data) {
+				        var myChart = new dimple.chart(svg3, data);
+				        myChart.setBounds("5%", "5%", "100%", "70%")
+				        var x = myChart.addCategoryAxis("x", "debtor");
+				        myChart.addMeasureAxis("y", "delinquency");
+				        myChart.addSeries(null, dimple.plot.bar);
+				        //myChart.addLegend(500, 20, 90, 300, "left");
+		                myChart.draw();
+				        });
+					</script>
+				</div>
+			</div>
+		</div>		    		
+		<div class="row">
+    		<div class="twelve columns">
+				<div id="dashboardchart4">
+					<h6>Delinquent debtors</h6>
+					<script>
+				        var svg4 = dimple.newSvg("#dashboardchart4", "100%", "500px");
+				        d3.json("/graph_data/payment_delinquency", function (data) {
+				        var myChart = new dimple.chart(svg4, data);
+				        myChart.setBounds("5%", "5%", "100%", "70%")
+				        //var x = myChart.addCategoryAxis("y", "delinquency");
+				        myChart.addMeasureAxis("p", "debtor");
+				        myChart.addSeries("delinquency", dimple.plot.pie);
+				        myChart.addLegend(500, 20, 90, 300, "left");
+		                myChart.draw();
+				        });
+					</script>
+				</div>
+			</div>
+		</div>		    		
+	</div>
+    </div>
 
 </div> 
 

@@ -2,7 +2,7 @@
     <TimeTableCell RefId="345cde2d-730a-48d2-ba3c-c6efed1ea036">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>69b82f09-b948-477c-af13-700e5fad5ecc</TimeTableSubjectRefId>
-        <TeachingGroupRefId>4835cbbb-0f2b-4b90-a28e-7e92b7839095</TeachingGroupRefId>
+        <TeachingGroupRefId>d5838225-18c0-4520-8fe6-0f7bbadaa632</TeachingGroupRefId>
         <RoomInfoRefId>8b096115-1395-4ccb-b5e3-ffd4ea68a0f5</RoomInfoRefId>
         <StaffPersonalRefId>b59b2519-04f8-43d9-8547-dea287f95b5c</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -19,7 +19,7 @@
     <TimeTableCell RefId="6619e5d1-2ee3-44a7-9c5b-c4265062ac0c">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>cda6359b-9fef-47ac-8fcf-0d2d83f302f5</TimeTableSubjectRefId>
-        <TeachingGroupRefId>d663d7de-c34b-4ad6-9c9d-04e6bf9eac8c</TeachingGroupRefId>
+        <TeachingGroupRefId>8e91a169-d9bc-4ed4-98d2-ece6b0a0635f</TeachingGroupRefId>
         <RoomInfoRefId>c88bca1b-034a-4d67-b8b4-207dfc34aeaf</RoomInfoRefId>
         <StaffPersonalRefId>214aaab9-80df-4976-889b-825fba534473</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -36,7 +36,7 @@
     <TimeTableCell RefId="6e670046-9e0d-4a26-b6b3-b82105149556">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>7d09bb1f-5a0e-4f7b-8152-c5e9d53ae044</TimeTableSubjectRefId>
-        <TeachingGroupRefId>13cbd16f-c25f-43c8-a1ea-d559318cd27f</TeachingGroupRefId>
+        <TeachingGroupRefId>3c474508-2d05-43d9-a8ee-c218574a1fad</TeachingGroupRefId>
         <RoomInfoRefId>c88bca1b-034a-4d67-b8b4-207dfc34aeaf</RoomInfoRefId>
         <StaffPersonalRefId>e9a9b154-e246-450f-a285-b8caea0f195a</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -53,7 +53,7 @@
     <TimeTableCell RefId="bb552ea0-a609-4615-964a-6b6d01d62c0a">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>f53802b6-ddf3-45dd-a2ee-b0b4ec9bbe3d</TimeTableSubjectRefId>
-        <TeachingGroupRefId>680e755c-73f4-44fb-9684-61c20886852b</TeachingGroupRefId>
+        <TeachingGroupRefId>18f799f2-c0d7-4094-bf34-8c022e60c74c</TeachingGroupRefId>
         <RoomInfoRefId>154f489c-94e9-42a6-958f-44ba968c310c</RoomInfoRefId>
         <StaffPersonalRefId>09378d44-08f7-453d-a703-7a128eef6128</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -70,7 +70,7 @@
     <TimeTableCell RefId="413c577b-953a-4445-ac73-f8ac31c945e1">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>f413142e-d8eb-40bb-8f37-aa4cd952343b</TimeTableSubjectRefId>
-        <TeachingGroupRefId>919f8dbd-3d60-47c8-8e7c-b1b0c54a1bc9</TeachingGroupRefId>
+        <TeachingGroupRefId>3a257d98-9703-40cd-92e9-6c5621da3308</TeachingGroupRefId>
         <RoomInfoRefId>39d69cae-effa-4a90-8c18-dfbb7efa973a</RoomInfoRefId>
         <StaffPersonalRefId>be7fd84c-da3f-4e27-aa25-1d544ee81f58</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -87,7 +87,7 @@
     <TimeTableCell RefId="3856c5d0-7577-4f26-8a2b-84e303837cf2">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>fbf47d71-6ea6-44d6-960b-4c4358eec605</TimeTableSubjectRefId>
-        <TeachingGroupRefId>772abb5b-5a1a-4459-a86f-801cf28764dd</TeachingGroupRefId>
+        <TeachingGroupRefId>57ddb486-6b8e-4ae3-a134-dad62e23c7e0</TeachingGroupRefId>
         <RoomInfoRefId>9eac6cdf-331e-45cd-ba2f-b238955e9315</RoomInfoRefId>
         <StaffPersonalRefId>be7fd84c-da3f-4e27-aa25-1d544ee81f58</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -104,7 +104,7 @@
     <TimeTableCell RefId="4c911dbc-21df-46b7-8551-c6f43f847d51">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>30c5aee0-bc5f-4cd0-8651-059170fca5e8</TimeTableSubjectRefId>
-        <TeachingGroupRefId>8701ffe6-21a4-4739-a2b7-dec60c21d840</TeachingGroupRefId>
+        <TeachingGroupRefId>7b4b1bca-51a3-4a7a-82b8-1270fb0ffe2f</TeachingGroupRefId>
         <RoomInfoRefId>8b096115-1395-4ccb-b5e3-ffd4ea68a0f5</RoomInfoRefId>
         <StaffPersonalRefId>be7fd84c-da3f-4e27-aa25-1d544ee81f58</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -121,7 +121,7 @@
     <TimeTableCell RefId="c4eeeea5-d143-4788-a6fb-2babeb3c3aa6">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>b4797883-f5ac-4b90-ba54-009cbd1e3b1b</TimeTableSubjectRefId>
-        <TeachingGroupRefId>a98e4db6-db7b-4a15-8cad-bcdf7bb8f47a</TeachingGroupRefId>
+        <TeachingGroupRefId>aca52e1f-a19d-45f4-a5fd-0aeae9f64046</TeachingGroupRefId>
         <RoomInfoRefId>5a0e4ed7-c48a-4d79-999f-7c3ef1a4ac47</RoomInfoRefId>
         <StaffPersonalRefId>2398d68f-8bd3-42a2-883e-1bccca86620c</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -138,7 +138,7 @@
     <TimeTableCell RefId="ebf62735-8c4c-4733-8e61-55e9cb640f98">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>e8baa723-38ed-4656-91a6-804ddc68e3c1</TimeTableSubjectRefId>
-        <TeachingGroupRefId>e92c4a2f-cc67-42b1-83fc-b3348adecb65</TeachingGroupRefId>
+        <TeachingGroupRefId>97b9cbba-0827-4a47-bf5a-d49e2caec55a</TeachingGroupRefId>
         <RoomInfoRefId>39d69cae-effa-4a90-8c18-dfbb7efa973a</RoomInfoRefId>
         <StaffPersonalRefId>e9a9b154-e246-450f-a285-b8caea0f195a</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -155,7 +155,7 @@
     <TimeTableCell RefId="f6cd0901-0916-4894-b85a-5fc75674079e">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>9f1340f1-8af3-4b71-a952-ab8d3e8dc783</TimeTableSubjectRefId>
-        <TeachingGroupRefId>94ee8ccf-742d-429b-adaa-15f4f0c5aee0</TeachingGroupRefId>
+        <TeachingGroupRefId>3cde662e-335d-404d-bf46-38d2df5a3212</TeachingGroupRefId>
         <RoomInfoRefId>45bc719a-e7cf-4125-b372-2ff05a26515a</RoomInfoRefId>
         <StaffPersonalRefId>09378d44-08f7-453d-a703-7a128eef6128</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -172,7 +172,7 @@
     <TimeTableCell RefId="c16fb7a7-0ff9-4d38-9246-c1216ea3050c">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>976cc7f1-24dc-468f-a6a6-dce16d15cafc</TimeTableSubjectRefId>
-        <TeachingGroupRefId>2f34f847-6295-4357-bf95-5541d186802b</TeachingGroupRefId>
+        <TeachingGroupRefId>d5838225-18c0-4520-8fe6-0f7bbadaa632</TeachingGroupRefId>
         <RoomInfoRefId>154f489c-94e9-42a6-958f-44ba968c310c</RoomInfoRefId>
         <StaffPersonalRefId>288bbf30-3a74-4ba4-aebe-c2ec14d468b8</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -189,7 +189,7 @@
     <TimeTableCell RefId="6483180b-1b2b-4fda-a40f-b9ab58bb0486">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>b3c48c3b-1f96-45fa-9153-ce587d8050b2</TimeTableSubjectRefId>
-        <TeachingGroupRefId>5f513ea0-a393-4475-8e17-84f176ab416d</TeachingGroupRefId>
+        <TeachingGroupRefId>cf239dd8-4ae0-4951-a036-f5abcc435f88</TeachingGroupRefId>
         <RoomInfoRefId>5ba6f2c4-45aa-4602-9003-41cb0179fa54</RoomInfoRefId>
         <StaffPersonalRefId>95e01530-db12-456d-83e1-4f83c2610837</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -206,7 +206,7 @@
     <TimeTableCell RefId="8022c92e-1098-4480-be7e-bc9e2b250842">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>3ef554ba-6c49-4479-9b36-e71405fe65b8</TimeTableSubjectRefId>
-        <TeachingGroupRefId>e396cb9d-1264-4e9c-acf4-9013b0e966ae</TeachingGroupRefId>
+        <TeachingGroupRefId>57ddb486-6b8e-4ae3-a134-dad62e23c7e0</TeachingGroupRefId>
         <RoomInfoRefId>8b096115-1395-4ccb-b5e3-ffd4ea68a0f5</RoomInfoRefId>
         <StaffPersonalRefId>b85505a6-e933-47f2-ad0a-f0aed9bc8dc9</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -223,7 +223,7 @@
     <TimeTableCell RefId="483337d6-d882-4621-9ec8-2dee531b1713">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>565ec893-d341-497f-a8c0-4d9b408e9b5a</TimeTableSubjectRefId>
-        <TeachingGroupRefId>9a600765-2db7-45ee-aacc-7aa042e3db85</TeachingGroupRefId>
+        <TeachingGroupRefId>7c3b36b5-8d03-4a3c-91ee-6fcd6c20c9c5</TeachingGroupRefId>
         <RoomInfoRefId>2b5fa528-cff4-42d7-b847-58ef172fa106</RoomInfoRefId>
         <StaffPersonalRefId>4707c971-1be9-458b-91a5-2ef7cbb07f60</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -240,7 +240,7 @@
     <TimeTableCell RefId="2b7bd2cc-375c-4f0b-bd54-4743faf5eecb">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>af950d93-87ba-4d22-bd0d-57d6a98e2f3b</TimeTableSubjectRefId>
-        <TeachingGroupRefId>fe9f8875-3c76-4ef6-bbf5-fb7044a1e782</TeachingGroupRefId>
+        <TeachingGroupRefId>3cde662e-335d-404d-bf46-38d2df5a3212</TeachingGroupRefId>
         <RoomInfoRefId>154f489c-94e9-42a6-958f-44ba968c310c</RoomInfoRefId>
         <StaffPersonalRefId>df0e8de7-474e-45f6-81f3-c5fd3d75bce8</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -257,7 +257,7 @@
     <TimeTableCell RefId="a022165c-e782-4876-9f4b-4d5d6810fbd8">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>3557e3e2-e258-405e-8330-0f2cbd440a34</TimeTableSubjectRefId>
-        <TeachingGroupRefId>5591bc8f-e0fb-4c31-afb5-a2ceeb801265</TeachingGroupRefId>
+        <TeachingGroupRefId>821db405-4624-41eb-b019-44290f641c09</TeachingGroupRefId>
         <RoomInfoRefId>2b5fa528-cff4-42d7-b847-58ef172fa106</RoomInfoRefId>
         <StaffPersonalRefId>2398d68f-8bd3-42a2-883e-1bccca86620c</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -274,7 +274,7 @@
     <TimeTableCell RefId="8b629db0-0ed3-482a-9bed-0a485bff407c">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>0e730335-e828-4fef-aeb7-0512bde97aac</TimeTableSubjectRefId>
-        <TeachingGroupRefId>cf239dd8-4ae0-4951-a036-f5abcc435f88</TeachingGroupRefId>
+        <TeachingGroupRefId>a17b337a-b5d7-426a-a950-0c5fea71d2c6</TeachingGroupRefId>
         <RoomInfoRefId>9319c7f8-7aa0-4c77-9930-7aa11c46c73a</RoomInfoRefId>
         <StaffPersonalRefId>2398d68f-8bd3-42a2-883e-1bccca86620c</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -291,7 +291,7 @@
     <TimeTableCell RefId="119197e2-c545-4c82-8590-a8c5107ef9dd">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>b52521e4-8d58-43d0-a2bd-87be0363270a</TimeTableSubjectRefId>
-        <TeachingGroupRefId>6bb30d17-b71e-46c0-88cb-d535ec699ecd</TeachingGroupRefId>
+        <TeachingGroupRefId>772abb5b-5a1a-4459-a86f-801cf28764dd</TeachingGroupRefId>
         <RoomInfoRefId>2b5fa528-cff4-42d7-b847-58ef172fa106</RoomInfoRefId>
         <StaffPersonalRefId>95e01530-db12-456d-83e1-4f83c2610837</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -308,7 +308,7 @@
     <TimeTableCell RefId="7bf8c6a7-94af-4e61-85fb-9809d1adf937">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>dd36244a-b8b9-44fe-bc7e-6eb80d1c08f9</TimeTableSubjectRefId>
-        <TeachingGroupRefId>8186daa8-4fdd-426a-ab58-63a7dd55a7d5</TeachingGroupRefId>
+        <TeachingGroupRefId>f97722e8-481f-4eba-a38d-a0aff820ee75</TeachingGroupRefId>
         <RoomInfoRefId>c88bca1b-034a-4d67-b8b4-207dfc34aeaf</RoomInfoRefId>
         <StaffPersonalRefId>64e221ab-e20b-4a87-8204-4a5abd8b2310</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -325,7 +325,7 @@
     <TimeTableCell RefId="eda62657-d4c7-4b61-a4f9-e2320ccfa4d4">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>0b29392a-e4f8-4c2f-96a3-7287b8a7c310</TimeTableSubjectRefId>
-        <TeachingGroupRefId>d8381424-4060-48a1-b139-308c8f98926c</TeachingGroupRefId>
+        <TeachingGroupRefId>d1bc36b4-5712-4c4c-94e8-867475838cfb</TeachingGroupRefId>
         <RoomInfoRefId>8b096115-1395-4ccb-b5e3-ffd4ea68a0f5</RoomInfoRefId>
         <StaffPersonalRefId>df0e8de7-474e-45f6-81f3-c5fd3d75bce8</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -342,7 +342,7 @@
     <TimeTableCell RefId="6d5c77b7-b59c-40ad-b385-714f56fb7e73">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>7285cc8f-20d0-4e8a-aa51-77013db9b52a</TimeTableSubjectRefId>
-        <TeachingGroupRefId>220c30a2-7e90-4f02-b6ad-31f5aee51bb1</TeachingGroupRefId>
+        <TeachingGroupRefId>a1375df4-381e-45cd-a9b9-9f4acd4ba391</TeachingGroupRefId>
         <RoomInfoRefId>982b604a-00ac-487c-ae5a-bd62aae4b3a6</RoomInfoRefId>
         <StaffPersonalRefId>214aaab9-80df-4976-889b-825fba534473</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -359,7 +359,7 @@
     <TimeTableCell RefId="f2ef30f9-47d6-47dc-b385-b48932d3c516">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>a3727fab-0161-44ea-b17c-9b658110dbbf</TimeTableSubjectRefId>
-        <TeachingGroupRefId>75eee9e6-da52-4ab4-9720-884adf67e8fe</TeachingGroupRefId>
+        <TeachingGroupRefId>ff9dc94b-18d6-40f4-853a-2d9f2d94ebd2</TeachingGroupRefId>
         <RoomInfoRefId>c88bca1b-034a-4d67-b8b4-207dfc34aeaf</RoomInfoRefId>
         <StaffPersonalRefId>df0e8de7-474e-45f6-81f3-c5fd3d75bce8</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -376,7 +376,7 @@
     <TimeTableCell RefId="a8e2e8cb-a6f5-4b6b-be03-5842931ca560">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>7d401e95-d76a-4761-ba21-ccb5a264b849</TimeTableSubjectRefId>
-        <TeachingGroupRefId>f60fb6f1-1ac7-451d-a65e-c82ab9d9c065</TeachingGroupRefId>
+        <TeachingGroupRefId>a71ed7ec-2265-413b-8b10-8b1ffcf704b3</TeachingGroupRefId>
         <RoomInfoRefId>45bc719a-e7cf-4125-b372-2ff05a26515a</RoomInfoRefId>
         <StaffPersonalRefId>66c93422-fac4-4c1e-bb29-1b5769a82c41</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -393,7 +393,7 @@
     <TimeTableCell RefId="0d80b546-4289-4010-a4b3-45fcd6565800">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>7b5170f2-113e-499c-910b-4620a961e077</TimeTableSubjectRefId>
-        <TeachingGroupRefId>821db405-4624-41eb-b019-44290f641c09</TeachingGroupRefId>
+        <TeachingGroupRefId>b227207b-d8fa-45cb-af8c-8859887f046d</TeachingGroupRefId>
         <RoomInfoRefId>154f489c-94e9-42a6-958f-44ba968c310c</RoomInfoRefId>
         <StaffPersonalRefId>e9a9b154-e246-450f-a285-b8caea0f195a</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -410,7 +410,7 @@
     <TimeTableCell RefId="f738bc9b-96ca-4855-b6be-3818b637aa21">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>238c59b6-7e30-463c-aa50-a7f6a2e804d0</TimeTableSubjectRefId>
-        <TeachingGroupRefId>ff9dc94b-18d6-40f4-853a-2d9f2d94ebd2</TeachingGroupRefId>
+        <TeachingGroupRefId>43f18d93-3c93-4f4c-b97c-5c2dd011f77c</TeachingGroupRefId>
         <RoomInfoRefId>5a0e4ed7-c48a-4d79-999f-7c3ef1a4ac47</RoomInfoRefId>
         <StaffPersonalRefId>fed1c1e0-ef1d-4600-a482-7d44d1ce2359</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -427,7 +427,7 @@
     <TimeTableCell RefId="48763268-0fca-45a1-9699-4d276319eac5">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>0404fe97-617c-4354-85dd-02a88056dc58</TimeTableSubjectRefId>
-        <TeachingGroupRefId>c413885c-f7ae-40b1-81af-88148be0effa</TeachingGroupRefId>
+        <TeachingGroupRefId>d0ae864e-6089-4b4b-8e5e-0d66011e47aa</TeachingGroupRefId>
         <RoomInfoRefId>6c6a4b47-1db1-493b-a60d-3d4731b15bab</RoomInfoRefId>
         <StaffPersonalRefId>64e221ab-e20b-4a87-8204-4a5abd8b2310</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -444,7 +444,7 @@
     <TimeTableCell RefId="9725e750-4622-4008-81ae-667a03d51a8e">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>a6163431-88ed-4545-80a9-a1d4fd574c3c</TimeTableSubjectRefId>
-        <TeachingGroupRefId>176ec60d-f69f-4f3c-a9af-8672113e9b31</TeachingGroupRefId>
+        <TeachingGroupRefId>f97722e8-481f-4eba-a38d-a0aff820ee75</TeachingGroupRefId>
         <RoomInfoRefId>154f489c-94e9-42a6-958f-44ba968c310c</RoomInfoRefId>
         <StaffPersonalRefId>64e221ab-e20b-4a87-8204-4a5abd8b2310</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -461,7 +461,7 @@
     <TimeTableCell RefId="9424ca6b-aa01-4343-a0db-8fa5cd3dcc64">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>80e50f42-af48-4d3d-877f-32b53d6affe1</TimeTableSubjectRefId>
-        <TeachingGroupRefId>fa8315fe-8b64-4262-a73b-6241544117ce</TeachingGroupRefId>
+        <TeachingGroupRefId>75eee9e6-da52-4ab4-9720-884adf67e8fe</TeachingGroupRefId>
         <RoomInfoRefId>5ba6f2c4-45aa-4602-9003-41cb0179fa54</RoomInfoRefId>
         <StaffPersonalRefId>cef8aa68-554e-4771-82f5-d54568a7e909</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -478,7 +478,7 @@
     <TimeTableCell RefId="c146d3fb-0fb0-4289-9171-5a8d24f62e22">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>a6031650-1249-4085-8985-e7cace122965</TimeTableSubjectRefId>
-        <TeachingGroupRefId>8e8bdb86-f955-4d56-a73d-be95c2a9b27a</TeachingGroupRefId>
+        <TeachingGroupRefId>1fb00ee5-9b06-4b0e-b5d8-5baa0cb78af4</TeachingGroupRefId>
         <RoomInfoRefId>5ba6f2c4-45aa-4602-9003-41cb0179fa54</RoomInfoRefId>
         <StaffPersonalRefId>be7fd84c-da3f-4e27-aa25-1d544ee81f58</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -495,7 +495,7 @@
     <TimeTableCell RefId="15a41856-bfd0-4450-abcd-ae53e6018dc9">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>86fe416a-730e-4999-ba38-ef9bd6e3459c</TimeTableSubjectRefId>
-        <TeachingGroupRefId>7f8f0e76-1cc3-4839-bce4-67501806df1a</TeachingGroupRefId>
+        <TeachingGroupRefId>16562c73-86bb-4a5a-8339-5f1a2c2a4c0f</TeachingGroupRefId>
         <RoomInfoRefId>2b5fa528-cff4-42d7-b847-58ef172fa106</RoomInfoRefId>
         <StaffPersonalRefId>b59b2519-04f8-43d9-8547-dea287f95b5c</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -512,7 +512,7 @@
     <TimeTableCell RefId="8559d2ae-38ae-4d44-89dd-7fd77fb2f0b6">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>a6a2c856-be9a-425e-82e7-6e4c14dff7b2</TimeTableSubjectRefId>
-        <TeachingGroupRefId>e55521e4-f7e0-4f30-affa-fb7abe1916e8</TeachingGroupRefId>
+        <TeachingGroupRefId>919f8dbd-3d60-47c8-8e7c-b1b0c54a1bc9</TeachingGroupRefId>
         <RoomInfoRefId>9eac6cdf-331e-45cd-ba2f-b238955e9315</RoomInfoRefId>
         <StaffPersonalRefId>d005e766-c6ee-47cc-af52-f926ffd5dced</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -529,7 +529,7 @@
     <TimeTableCell RefId="94e9b469-52d4-4d98-9468-6be03429c0be">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>11404e09-d5e4-4a3d-90f5-06899f732294</TimeTableSubjectRefId>
-        <TeachingGroupRefId>3baa3118-359a-49f8-a8ee-7c61239a62b3</TeachingGroupRefId>
+        <TeachingGroupRefId>16562c73-86bb-4a5a-8339-5f1a2c2a4c0f</TeachingGroupRefId>
         <RoomInfoRefId>6c6a4b47-1db1-493b-a60d-3d4731b15bab</RoomInfoRefId>
         <StaffPersonalRefId>fed1c1e0-ef1d-4600-a482-7d44d1ce2359</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -546,7 +546,7 @@
     <TimeTableCell RefId="67326016-bdba-47e1-82fa-83a37a294a2b">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>5240b024-f84e-4780-8c32-c9a511323d48</TimeTableSubjectRefId>
-        <TeachingGroupRefId>6a78f5d1-2ea8-4cb8-84d1-13ea83ec6193</TeachingGroupRefId>
+        <TeachingGroupRefId>d663d7de-c34b-4ad6-9c9d-04e6bf9eac8c</TeachingGroupRefId>
         <RoomInfoRefId>9319c7f8-7aa0-4c77-9930-7aa11c46c73a</RoomInfoRefId>
         <StaffPersonalRefId>d005e766-c6ee-47cc-af52-f926ffd5dced</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -563,7 +563,7 @@
     <TimeTableCell RefId="484681fa-c7fb-426a-8bf9-f62e226569bb">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>bcb26235-eb13-4a3a-a1c7-5c65723e10ac</TimeTableSubjectRefId>
-        <TeachingGroupRefId>13184dda-8374-4b01-bc45-236f24c47db5</TeachingGroupRefId>
+        <TeachingGroupRefId>de4015c6-6b4b-4434-bf0b-cb24a47a8c78</TeachingGroupRefId>
         <RoomInfoRefId>9eac6cdf-331e-45cd-ba2f-b238955e9315</RoomInfoRefId>
         <StaffPersonalRefId>b85505a6-e933-47f2-ad0a-f0aed9bc8dc9</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -580,7 +580,7 @@
     <TimeTableCell RefId="d200a1da-88dd-42a4-a4c6-62c467ea23dd">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>6e63b3be-824d-46d5-8d45-7570eab1d040</TimeTableSubjectRefId>
-        <TeachingGroupRefId>086ca104-7d6b-4f0a-9f53-426eeb191a13</TeachingGroupRefId>
+        <TeachingGroupRefId>24f4429d-fa9c-454b-a2a8-39725ed022aa</TeachingGroupRefId>
         <RoomInfoRefId>8b096115-1395-4ccb-b5e3-ffd4ea68a0f5</RoomInfoRefId>
         <StaffPersonalRefId>b59b2519-04f8-43d9-8547-dea287f95b5c</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -597,7 +597,7 @@
     <TimeTableCell RefId="96ee7e34-f9ae-4b71-ae09-e7880c1bb8a9">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>2c753456-b9dc-4f0e-aa30-caea38fe13d4</TimeTableSubjectRefId>
-        <TeachingGroupRefId>d0ae864e-6089-4b4b-8e5e-0d66011e47aa</TeachingGroupRefId>
+        <TeachingGroupRefId>85284bee-4712-4d77-9929-17131545ed2b</TeachingGroupRefId>
         <RoomInfoRefId>6c6a4b47-1db1-493b-a60d-3d4731b15bab</RoomInfoRefId>
         <StaffPersonalRefId>214aaab9-80df-4976-889b-825fba534473</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -614,7 +614,7 @@
     <TimeTableCell RefId="27dca9fc-d7c3-43e1-a67d-1cabe1713adb">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>0e416e77-2749-47f1-ab29-cf820ce7200c</TimeTableSubjectRefId>
-        <TeachingGroupRefId>d716d1b8-6bef-4fd5-b5f2-0ff0936c2b8c</TeachingGroupRefId>
+        <TeachingGroupRefId>79cbe17f-f663-4569-bf0e-22672864f2c0</TeachingGroupRefId>
         <RoomInfoRefId>8b096115-1395-4ccb-b5e3-ffd4ea68a0f5</RoomInfoRefId>
         <StaffPersonalRefId>95e01530-db12-456d-83e1-4f83c2610837</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -631,7 +631,7 @@
     <TimeTableCell RefId="6358981e-e4ba-4c28-a118-3d01392082d4">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>0af68137-54fb-4d00-86dc-aa36350b0d8c</TimeTableSubjectRefId>
-        <TeachingGroupRefId>64f905ea-a5e5-41ea-8bb1-e107e2e08563</TeachingGroupRefId>
+        <TeachingGroupRefId>772abb5b-5a1a-4459-a86f-801cf28764dd</TeachingGroupRefId>
         <RoomInfoRefId>5a0e4ed7-c48a-4d79-999f-7c3ef1a4ac47</RoomInfoRefId>
         <StaffPersonalRefId>68f36e64-a029-4b37-abf3-7dc591021439</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -648,7 +648,7 @@
     <TimeTableCell RefId="7f963cef-9e14-4f9b-ab29-070fc7ef73e1">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>4ab3c24e-157e-4d20-b11f-c1c021a1ff9d</TimeTableSubjectRefId>
-        <TeachingGroupRefId>3c474508-2d05-43d9-a8ee-c218574a1fad</TeachingGroupRefId>
+        <TeachingGroupRefId>09bc13d1-90c6-45f3-bec8-802653fb6a9f</TeachingGroupRefId>
         <RoomInfoRefId>154f489c-94e9-42a6-958f-44ba968c310c</RoomInfoRefId>
         <StaffPersonalRefId>214aaab9-80df-4976-889b-825fba534473</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -665,7 +665,7 @@
     <TimeTableCell RefId="43e27c17-4e9c-419f-855c-c0e79d5a149e">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>f1faff74-64c6-463e-92fb-63202f7568dd</TimeTableSubjectRefId>
-        <TeachingGroupRefId>2e423c15-7167-4015-b466-4c771003acee</TeachingGroupRefId>
+        <TeachingGroupRefId>72126491-ff5c-4e4b-aff1-3ee160cfeb61</TeachingGroupRefId>
         <RoomInfoRefId>6c6a4b47-1db1-493b-a60d-3d4731b15bab</RoomInfoRefId>
         <StaffPersonalRefId>68f36e64-a029-4b37-abf3-7dc591021439</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -682,7 +682,7 @@
     <TimeTableCell RefId="f367c99a-557f-46d3-90b3-3cd21fc26245">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>7bcb6cca-59a4-447a-a180-9ba5c382c899</TimeTableSubjectRefId>
-        <TeachingGroupRefId>81242448-74b8-4212-88da-ee87eeb07f84</TeachingGroupRefId>
+        <TeachingGroupRefId>0e335f75-52e0-4cc8-866d-a0913c2fcaa3</TeachingGroupRefId>
         <RoomInfoRefId>45bc719a-e7cf-4125-b372-2ff05a26515a</RoomInfoRefId>
         <StaffPersonalRefId>d005e766-c6ee-47cc-af52-f926ffd5dced</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -699,7 +699,7 @@
     <TimeTableCell RefId="b57b748c-3310-46f4-b636-2088307f2642">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>876384b3-07b5-45c8-b0b6-edcb9869862e</TimeTableSubjectRefId>
-        <TeachingGroupRefId>86b789eb-225f-4e6a-864e-ab0624f3ff7d</TeachingGroupRefId>
+        <TeachingGroupRefId>5ea7554b-a0fa-4e29-89fc-5ab420d4618a</TeachingGroupRefId>
         <RoomInfoRefId>2b5fa528-cff4-42d7-b847-58ef172fa106</RoomInfoRefId>
         <StaffPersonalRefId>2398d68f-8bd3-42a2-883e-1bccca86620c</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -716,7 +716,7 @@
     <TimeTableCell RefId="50b31337-ad94-453e-ad3f-ecec0631e99e">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>6ec761eb-cca1-4ee2-a82c-3b20d71fc76e</TimeTableSubjectRefId>
-        <TeachingGroupRefId>878e5fd0-7ccb-444e-9f5a-675aea29c933</TeachingGroupRefId>
+        <TeachingGroupRefId>437eec83-f36b-4e41-9301-bc926e2c26f4</TeachingGroupRefId>
         <RoomInfoRefId>9eac6cdf-331e-45cd-ba2f-b238955e9315</RoomInfoRefId>
         <StaffPersonalRefId>e9a9b154-e246-450f-a285-b8caea0f195a</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -733,7 +733,7 @@
     <TimeTableCell RefId="73fe87c5-ab2e-441c-ae9c-7684e1b53b75">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>2cf88b5e-90a4-4396-98b9-1770dc0a4400</TimeTableSubjectRefId>
-        <TeachingGroupRefId>03fff291-eb43-42dd-a494-50976a50d59d</TeachingGroupRefId>
+        <TeachingGroupRefId>1a233f4d-bb46-472d-af7b-dc41c6cb6f88</TeachingGroupRefId>
         <RoomInfoRefId>6c6a4b47-1db1-493b-a60d-3d4731b15bab</RoomInfoRefId>
         <StaffPersonalRefId>214aaab9-80df-4976-889b-825fba534473</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -750,7 +750,7 @@
     <TimeTableCell RefId="60753277-c23f-457a-b394-b11692d1bf5e">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>bacd7807-14e5-4614-a08d-ae9d12a7605f</TimeTableSubjectRefId>
-        <TeachingGroupRefId>5d41eaee-55ea-41a7-b255-f7a3d8a8ed70</TeachingGroupRefId>
+        <TeachingGroupRefId>9c243601-ac37-42fe-91ca-57a968e268bf</TeachingGroupRefId>
         <RoomInfoRefId>982b604a-00ac-487c-ae5a-bd62aae4b3a6</RoomInfoRefId>
         <StaffPersonalRefId>b59b2519-04f8-43d9-8547-dea287f95b5c</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -767,7 +767,7 @@
     <TimeTableCell RefId="16c8c013-be59-49fc-890d-54afc0b9904a">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>4560bec9-b3ef-463c-94b2-90c79b4e82a3</TimeTableSubjectRefId>
-        <TeachingGroupRefId>80810792-9397-4e3f-9022-816ce950808c</TeachingGroupRefId>
+        <TeachingGroupRefId>321fa958-74e6-4de9-abd3-284c60bbcd3c</TeachingGroupRefId>
         <RoomInfoRefId>9319c7f8-7aa0-4c77-9930-7aa11c46c73a</RoomInfoRefId>
         <StaffPersonalRefId>4707c971-1be9-458b-91a5-2ef7cbb07f60</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -784,7 +784,7 @@
     <TimeTableCell RefId="3e5457dc-0faa-4f98-8caf-4dc4effbca52">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>a58d6c2e-37eb-4053-ae3f-b5d8ef80439e</TimeTableSubjectRefId>
-        <TeachingGroupRefId>5eb40c27-e8ae-4341-a13b-84fd6ab10846</TeachingGroupRefId>
+        <TeachingGroupRefId>16562c73-86bb-4a5a-8339-5f1a2c2a4c0f</TeachingGroupRefId>
         <RoomInfoRefId>2b5fa528-cff4-42d7-b847-58ef172fa106</RoomInfoRefId>
         <StaffPersonalRefId>dad98a49-a026-46d3-b299-3813a1e63e95</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -801,7 +801,7 @@
     <TimeTableCell RefId="880c437f-b928-40d5-96a7-a4d9cb0941e6">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>8f1ffb1b-32f3-4afa-aaca-e8e45a00b6ba</TimeTableSubjectRefId>
-        <TeachingGroupRefId>1e69bc6b-3cde-4bd0-83b1-cf354c88df4f</TeachingGroupRefId>
+        <TeachingGroupRefId>2e73d367-a5a0-4b75-ae2b-95e3026e828d</TeachingGroupRefId>
         <RoomInfoRefId>154f489c-94e9-42a6-958f-44ba968c310c</RoomInfoRefId>
         <StaffPersonalRefId>09378d44-08f7-453d-a703-7a128eef6128</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -818,7 +818,7 @@
     <TimeTableCell RefId="3f887167-fa11-4894-81ce-9b3a68cbb405">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>47afeb53-9ac1-4b19-81da-9d2f0c5106bf</TimeTableSubjectRefId>
-        <TeachingGroupRefId>447ab4f9-0232-4dd8-b409-80b5521b1d2e</TeachingGroupRefId>
+        <TeachingGroupRefId>f82fdb38-8c62-444f-99cc-c8278f1c8f99</TeachingGroupRefId>
         <RoomInfoRefId>39d69cae-effa-4a90-8c18-dfbb7efa973a</RoomInfoRefId>
         <StaffPersonalRefId>68f36e64-a029-4b37-abf3-7dc591021439</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -835,7 +835,7 @@
     <TimeTableCell RefId="bbd66904-776f-4bf5-9d09-40e52bd29e4a">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>69d86e70-92db-4eeb-9683-20c6b0695825</TimeTableSubjectRefId>
-        <TeachingGroupRefId>e17645ba-7e53-4a96-88b1-5b24556fbbb6</TeachingGroupRefId>
+        <TeachingGroupRefId>6308af79-8564-43fe-96ba-adec056b90ea</TeachingGroupRefId>
         <RoomInfoRefId>154f489c-94e9-42a6-958f-44ba968c310c</RoomInfoRefId>
         <StaffPersonalRefId>66c93422-fac4-4c1e-bb29-1b5769a82c41</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -852,7 +852,7 @@
     <TimeTableCell RefId="a5adcdb5-a89c-451f-881a-075faa8f4606">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>8d742ee4-6524-43fe-9ccc-48dcb3c5da5e</TimeTableSubjectRefId>
-        <TeachingGroupRefId>ab0911ca-9f22-46cf-b318-2a467593929b</TeachingGroupRefId>
+        <TeachingGroupRefId>5591bc8f-e0fb-4c31-afb5-a2ceeb801265</TeachingGroupRefId>
         <RoomInfoRefId>982b604a-00ac-487c-ae5a-bd62aae4b3a6</RoomInfoRefId>
         <StaffPersonalRefId>b85505a6-e933-47f2-ad0a-f0aed9bc8dc9</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -869,7 +869,7 @@
     <TimeTableCell RefId="5dd6f441-cb35-467c-97f2-6fc65c378fe5">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>383d4dbf-2735-4067-ab81-983d0af7d40f</TimeTableSubjectRefId>
-        <TeachingGroupRefId>53a17359-c4dc-49b5-8494-bdf9057dfe72</TeachingGroupRefId>
+        <TeachingGroupRefId>39c4a174-aa4a-41cb-a547-b89c92320e26</TeachingGroupRefId>
         <RoomInfoRefId>2b5fa528-cff4-42d7-b847-58ef172fa106</RoomInfoRefId>
         <StaffPersonalRefId>df0e8de7-474e-45f6-81f3-c5fd3d75bce8</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -886,7 +886,7 @@
     <TimeTableCell RefId="f605b865-3a5e-48f2-ae94-1601c0c2a729">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>e92f1ba8-f64f-4b77-8bf1-adefde784cee</TimeTableSubjectRefId>
-        <TeachingGroupRefId>d65b6854-5cd1-4a80-857f-2cbf1d4ef7cd</TeachingGroupRefId>
+        <TeachingGroupRefId>75eee9e6-da52-4ab4-9720-884adf67e8fe</TeachingGroupRefId>
         <RoomInfoRefId>5ba6f2c4-45aa-4602-9003-41cb0179fa54</RoomInfoRefId>
         <StaffPersonalRefId>09378d44-08f7-453d-a703-7a128eef6128</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -903,7 +903,7 @@
     <TimeTableCell RefId="450bc19c-f1f8-458f-b7e9-acf9ccd60a38">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>e199a6f9-7d71-47b5-83df-17444ca3380c</TimeTableSubjectRefId>
-        <TeachingGroupRefId>1aa45bd4-0be8-4a5f-bfca-4bc0d4153af8</TeachingGroupRefId>
+        <TeachingGroupRefId>9c243601-ac37-42fe-91ca-57a968e268bf</TeachingGroupRefId>
         <RoomInfoRefId>2b5fa528-cff4-42d7-b847-58ef172fa106</RoomInfoRefId>
         <StaffPersonalRefId>df0e8de7-474e-45f6-81f3-c5fd3d75bce8</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -920,7 +920,7 @@
     <TimeTableCell RefId="4956fafc-a7f1-4f28-983f-c22def5b5782">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>9b3274eb-be1a-4e8b-af21-b4541a6fdbc9</TimeTableSubjectRefId>
-        <TeachingGroupRefId>1fb00ee5-9b06-4b0e-b5d8-5baa0cb78af4</TeachingGroupRefId>
+        <TeachingGroupRefId>e526c181-dddb-4fb4-a5cc-33a5eedf40e5</TeachingGroupRefId>
         <RoomInfoRefId>39d69cae-effa-4a90-8c18-dfbb7efa973a</RoomInfoRefId>
         <StaffPersonalRefId>dad98a49-a026-46d3-b299-3813a1e63e95</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -937,7 +937,7 @@
     <TimeTableCell RefId="4b417a5a-42da-4071-a4a8-c42945ca0986">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>beb7db53-dd8b-4f5a-9887-3f03a9f82f1e</TimeTableSubjectRefId>
-        <TeachingGroupRefId>c55e081d-1c94-4beb-961f-bfcdbad233f7</TeachingGroupRefId>
+        <TeachingGroupRefId>821db405-4624-41eb-b019-44290f641c09</TeachingGroupRefId>
         <RoomInfoRefId>5ba6f2c4-45aa-4602-9003-41cb0179fa54</RoomInfoRefId>
         <StaffPersonalRefId>b59b2519-04f8-43d9-8547-dea287f95b5c</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -954,7 +954,7 @@
     <TimeTableCell RefId="8733cc5e-d54f-4073-a83a-689df5b7cf60">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>3f6148c1-0cc3-46bf-9f9e-b653eee72dab</TimeTableSubjectRefId>
-        <TeachingGroupRefId>a1375df4-381e-45cd-a9b9-9f4acd4ba391</TeachingGroupRefId>
+        <TeachingGroupRefId>62b3ef7b-eeb0-4c3e-baa6-8001cfe64585</TeachingGroupRefId>
         <RoomInfoRefId>5a0e4ed7-c48a-4d79-999f-7c3ef1a4ac47</RoomInfoRefId>
         <StaffPersonalRefId>66c93422-fac4-4c1e-bb29-1b5769a82c41</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -971,7 +971,7 @@
     <TimeTableCell RefId="bdc2adef-92e8-410f-b53d-9455ae9dc815">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>07b6685f-e470-4fa3-8ea9-c72324360b24</TimeTableSubjectRefId>
-        <TeachingGroupRefId>8f70bd51-e99e-440d-b68b-552fdb6b5033</TeachingGroupRefId>
+        <TeachingGroupRefId>2ba321f1-30ec-4aa7-9842-01b86a653cb7</TeachingGroupRefId>
         <RoomInfoRefId>8b096115-1395-4ccb-b5e3-ffd4ea68a0f5</RoomInfoRefId>
         <StaffPersonalRefId>b85505a6-e933-47f2-ad0a-f0aed9bc8dc9</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -988,7 +988,7 @@
     <TimeTableCell RefId="00e236a2-1c5b-4497-8271-4baf65878d2b">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>f35e5fcb-1cd9-4a56-a667-403a27fd7a7f</TimeTableSubjectRefId>
-        <TeachingGroupRefId>da2c634f-ffb6-48fa-95a6-52991e1b2b3b</TeachingGroupRefId>
+        <TeachingGroupRefId>d5838225-18c0-4520-8fe6-0f7bbadaa632</TeachingGroupRefId>
         <RoomInfoRefId>5a0e4ed7-c48a-4d79-999f-7c3ef1a4ac47</RoomInfoRefId>
         <StaffPersonalRefId>dad98a49-a026-46d3-b299-3813a1e63e95</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
@@ -1005,7 +1005,7 @@
     <TimeTableCell RefId="17e1e2e0-d2cb-474f-8c50-a05965c4adf9">
         <TimeTableRefId>46aa00b6-618f-4d5a-8b5e-8bb3dd56361f</TimeTableRefId>
         <TimeTableSubjectRefId>1d25ac17-1788-49aa-81c1-4f2d7ae74042</TimeTableSubjectRefId>
-        <TeachingGroupRefId>3597700a-3b21-4fd9-b430-986800630d9e</TeachingGroupRefId>
+        <TeachingGroupRefId>d8ab749a-03ae-48c3-b40f-a727a48cd95d</TeachingGroupRefId>
         <RoomInfoRefId>8b096115-1395-4ccb-b5e3-ffd4ea68a0f5</RoomInfoRefId>
         <StaffPersonalRefId>e9a9b154-e246-450f-a285-b8caea0f195a</StaffPersonalRefId>
         <TimeTableLocalId>87013</TimeTableLocalId>
