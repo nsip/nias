@@ -92,7 +92,8 @@ class SMSVizQuery
 		debtors = @redis.smembers('Debtor')
 		labels = {}
 		results = []
-		debtors.each do |d|
+		# do only every third debtor, to make data more tractable to visualise
+		debtors.select {|x| debtors.index(x) % 3 == 0}.each do |d|
 			studentcontact = @redis.sinter d, 'StudentContactPersonal'
 			labels[d] = @redis.hget 'labels', studentcontact[0]
 			invoices = @redis.sinter d, 'Invoice'

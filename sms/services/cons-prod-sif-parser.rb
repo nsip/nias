@@ -126,10 +126,7 @@ def extract_label(id, nodes)
 	when "TimeTableCell"
 		ret = nodes.at_xpath("//DayId").child.to_s + ":" + nodes.at_xpath("//PeriodId").child.to_s
 	when "TimeTableSubject"
-		nodes1 = nodes.at_xpath("//CourseLocalId")
-		nodes1 = nodes.at_xpath("//SubjectShortName").child if nodes1.nil? 
-		nodes1 = nodes.at_xpath("//SubjectLongName").child if nodes1.nil? 
-		ret = nodes1.child
+		ret = nodes.at_xpath("//SubjectLocalId").child
 	when "VendorInfo"
 		fname = nodes.at_xpath("//Name/FullName").child
 		if(fname.nil?)
