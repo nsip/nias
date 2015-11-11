@@ -93,13 +93,15 @@ class SMSVizQuery
 		labels = {}
 		results = []
 		# do only every third debtor, to make data more tractable to visualise
-		debtors.select {|x| debtors.index(x) % 3 == 0}.each do |d|
+		debtors.each do |d|
 			studentcontact = @redis.sinter d, 'StudentContactPersonal'
 			labels[d] = @redis.hget 'labels', studentcontact[0]
 			invoices = @redis.sinter d, 'Invoice'
 			receipts = @redis.sinter d, 'PaymentReceipt'
 			results << {:debtor => labels[d], :delinquency => invoices.size - receipts.size }
-		end
+		end	
+		# chop out more results at higher delinquency, to make data more tractable to visualise
+		results.select! {|x| x[:delinquency]-7 < rand(5) } 
 		return results.sort {|a, b| b[:delinquency] <=> a[:delinquency] }
 	end
 end
