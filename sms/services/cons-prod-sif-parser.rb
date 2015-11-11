@@ -74,7 +74,10 @@ def extract_label(id, nodes)
 	when "GradingAssignment"
 		ret = nodes.at_xpath("//Description").child
 	when "Invoice"
-		ret = nodes.at_xpath("//FormNumber").child
+		fnumber = nodes.at_xpath("//FormNumber")
+		unless(fnumber.nil?)
+			ret = fnumber.child
+		end
 	when "LEAInfo"
 		ret = nodes.at_xpath("//LEAName").child
 	when "LearningResource"

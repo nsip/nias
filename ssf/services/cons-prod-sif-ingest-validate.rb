@@ -67,7 +67,7 @@ loop do
 #puts "Validated!"
 	      			item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
 	      			msg = header + x.to_s
-					# puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"
+#puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"
 					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 				else
 puts "Invalid!"
