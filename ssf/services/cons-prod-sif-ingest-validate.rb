@@ -16,8 +16,8 @@ require 'nokogiri' # xml support
 
 @servicename = 'cons-prod-sif-ingest-validate'
 
-@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif1.3/SIF_Message1.3_3.x.xsd"))
-@namespace = 'http://www.sifassociation.org/au/datamodel/1.3'
+@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif3.4/SIF_Message3.4.xsd"))
+@namespace = 'http://www.sifassociation.org/au/datamodel/3.4'
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
