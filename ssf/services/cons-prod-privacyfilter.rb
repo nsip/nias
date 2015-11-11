@@ -43,16 +43,16 @@ def read_filter(filepath, level)
 end
 
 @filter[:low] = []
-read_filter("#{__dir__}/privacyfilters/low.xpath", :low)
+read_filter("#{__dir__}/privacyfilters/extreme.xpath", :low)
 
 
 # cumulative filters: the fields to filter in the next highest sensitivity are added on to the previous sensitivity's
 @filter[:medium] = Array.new(@filter[:low])
-read_filter("#{__dir__}/privacyfilters/medium.xpath", :medium)
+read_filter("#{__dir__}/privacyfilters/high.xpath", :medium)
 @filter[:high] = Array.new(@filter[:medium])
-read_filter("#{__dir__}/privacyfilters/high.xpath", :high)
+read_filter("#{__dir__}/privacyfilters/medium.xpath", :high)
 @filter[:extreme] = Array.new(@filter[:high])
-read_filter("#{__dir__}/privacyfilters/extreme.xpath", :extreme)
+read_filter("#{__dir__}/privacyfilters/low.xpath", :extreme)
 
 # redact all textual content of xml (a Node)
 def redact(xml, redaction)
@@ -109,10 +109,10 @@ loop do
 		      		item_key = "prv_filter:#{ sprintf('%09d', m.offset) }"
 					
 					out[:none] = input
-					out[:extreme] = apply_filter(input, @filter[:extreme])
-					out[:high] = apply_filter(out[:extreme], @filter[:high])
-					out[:medium] = apply_filter(out[:high], @filter[:medium])
-					out[:low] = apply_filter(out[:medium], @filter[:low])
+					out[:low] = apply_filter(input, @filter[:low])
+					out[:medium] = apply_filter(out[:low], @filter[:medium])
+					out[:high] = apply_filter(out[:medium], @filter[:high])
+					out[:extreme] = apply_filter(out[:high], @filter[:extreme])
 
 					# puts "\n\nOut\n = #{out.to_s}\n\n"
 
