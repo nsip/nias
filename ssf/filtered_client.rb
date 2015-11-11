@@ -64,14 +64,14 @@ end
 # call with offset=earliest to get oldest available message for topic/stream
 # call with offset=latest to get most recent available message for topic/stream
 # 
-get "/filtered/:topic/:stream" do
+get "/filtered/:topic/:stream/:profile" do
 
 	# check validity of route
 	tpc = params['topic']
 	#context = params['stream']['contextId']
 	strm = params['stream'].gsub(/;.*$/,'')
-	context = params['stream'][/^[^;]+;.*contextId=([^\&]+)/, 1]
-	filter = context.nil? ? 'none' : context
+	context = params['stream']
+	filter = params['profile']
 	topic_name = "#{tpc}.#{strm}.#{filter}"
 	if  !valid_route?( topic_name ) then
 		params.inspect
@@ -115,21 +115,6 @@ get "/filtered/:topic/:stream" do
 	# stream messages to client
 	stream do | out |
 		begin
-		hdr =  <<HTML
-		<HTML><HEAD><STYLE>
-		.record {
-			left: 20px;
-			font-family: monospace;
-			white-space:pre;
-		}
-		.redacted {
-			color: black; 
-			background-color: black;
-			white-space:nowrap;
-		}
-		</STYLE><BODY>
-HTML
-		out << hdr
 	    	messages.each do |msg|
 	    		# puts msg.value
 	    		record = { 

@@ -2,6 +2,19 @@
       <title>NIAS SPS : SIF Privacy Service</title>
 <% end %>
 
+<style>
+        .record {
+            left: 20px;
+            font-family: monospace;
+            white-space:pre;
+        }
+        .redacted {
+            color: black; 
+            background-color: black;
+            white-space:nowrap;
+        }
+</style>
+
 <div class="container">
   
 	<!-- header -->
@@ -228,7 +241,83 @@
         </script>                
     </div>
 
+    <div class="docs-section" id="test"> 
+        <h6 class="docs-header">See Profiles In Action</h6>
 
+        <div class="row">
+            <div class="four columns">
+                <p>Send XML data to /nsip/test and see the results below</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="three columns">
+                <button class="button-primary" id="btn_low">Run Low Filter</button>                                
+            </div>
+            <div class="three columns">
+                <button class="button-primary" id="btn_medium">Run Medium Filter</button>                                
+            </div>
+            <div class="three columns">
+                <button class="button-primary" id="btn_high">Run High Filter</button>                                
+            </div>
+            <div class="three columns">
+                <button class="button-primary" id="btn_extreme">Run Extreme Filter</button>                                
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="twelve columns">
+                <label for="results">Filter Results</label>
+                <pre class="code-example">
+                    <code class="code-example-body prettyprint" id="results">
+                    </code>
+                </pre> 
+            </div>
+        </div>
+
+        <script>
+
+            $("#btn_low").click(function(){
+                var request = {};
+                $("#results").empty();
+                $.get("/filtered/nsip/test/low", request, function(result){
+                        $("#results").append( result );
+                });
+            });
+
+            $("#btn_medium").click(function(){
+                var request = {};
+                $("#results").empty();
+                $.get("/filtered/nsip/test/medium", request, function(result){
+                        $("#results").append( result );
+                });
+            });            
+            
+            $("#btn_high").click(function(){
+                var request = {};
+                $("#results").empty();
+                $.get("/filtered/nsip/test/high", request, function(result){
+                        $("#results").append( result );
+                });
+            });
+
+            $("#btn_extreme").click(function(){
+                var request = {};
+                $("#results").empty();
+                $.get("/filtered/nsip/test/extreme", request, function(result){
+                        $("#results").append( result );
+                });
+            });
+
+
+        </script>
+
+
+    </div>
+
+
+    </div>
 
 
 
