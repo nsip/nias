@@ -81,7 +81,9 @@ def launch
               'sms.indexer',
               'sifxml.ingest',
               'sifxml.errors',
-              'oneroster.validated'
+              'oneroster.validated',
+              'nsip.test',
+              'test.test1'
             ]
 
   topics.each do | topic |
