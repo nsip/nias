@@ -43,7 +43,8 @@ class SMSVizQuery
 	# get all direct and indirect ids  that an id is connected to, and identify their collections
 	def linked_collections_and_types( id )
 		results = []
-		nodes = {id => 0}
+		nodes = {}
+		nodes[id] = 0
 		idx = 0
 		collections = @redis.smembers('known:collections')
 		collections.each do |collection|

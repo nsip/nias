@@ -154,7 +154,9 @@
 				if(!collections.hasOwnProperty(data[i].collection)) {
 					collections[data[i].collection] = (j < colours.length-1 ? j++ : j);
 				}
-                       		G.addNode(data[i].target, {color: colours[collections[data[i].collection]], labels: data[i].label});
+				if(data[i].target != 0) {
+                       			G.addNode(data[i].target, {color: colours[collections[data[i].collection]], labels: data[i].label});
+				}
 				G.addEdge(data[i].origin, data[i].target, { color : data[i].link == 'direct' ? 'black' : 'blue' });
                     	}
 			jsnx.draw(G, {
