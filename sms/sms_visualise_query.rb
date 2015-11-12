@@ -68,7 +68,8 @@ class SMSVizQuery
 							nodes[x] = idx
 						end
 						label = @redis.hget 'labels', x
-						results << { :collection => collection, :link => 'indirect', :id => x, :label => label , :origin => nodes[q1], :target => nodes[x] }
+						label = "[#{collection}]" if label[/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/]
+						results << { :collection => collection, :link => 'indirect', :id => x, :label => label , :origin => nodes[q1], :target => nodes[x] } unless (nodes[q1] == 0 and nodes[x] == 0)
 					end
 				end
 			else
@@ -78,7 +79,8 @@ class SMSVizQuery
 						idx+=1
 						nodes[x] = idx
 					end
-					results << { :collection => collection, :link => 'direct', :id => x, :label => label, :origin => 0 , :target => nodes[x] }
+					label = "[#{collection}]" if label[/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/]
+					results << { :collection => collection, :link => 'direct', :id => x, :label => label, :origin => 0 , :target => nodes[x] } unless nodes[x] == 0
 				end
 			end
 		end
