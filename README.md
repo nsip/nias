@@ -6,9 +6,15 @@ NSIP Integration As A Service - NIAS
 
 Installation Notes
 
+If you're running on mac you will need homebrew to install packages, and homebrew will need a suitable toolchain to build native code. If you have a mac developer account, homebrew will offer to fetch the command-line tools as part of its installation. The easiest alternative is just to install XCode which includes the tools.
+
 Ensure Ruby is at 2.2.3 as a minimum.
 
 rvm install ruby-2.2.3
+
+You will also need to install the 'bundler' gem to help with ruby code module dependencies. After rvm is installed just do
+
+> gem install bundler
 
 NIAS (& timesheet) use Redis. This is distributed from Redis.io as source and can be compiled for any platform, but most likely route to installation is to use package manager for the platform
 
@@ -28,7 +34,7 @@ like redis these are  C source distribution which can be built on the platform o
 'gem install gdbm'
 
 
-when services are running all kafka logs, redis dump files etc. will be created under /tmp e.g. /tmp/kafka /tmp/redis tmp/zookeeper
+when services are running all kafka logs, redis dump files etc. will be created under /tmp/nias e.g. /tmp/nias/kafka-logs /tmp/nias/redis tmp/zookeeper
 
 this is a reliable location on mac/linux but check it's writeable from current user account.
 
@@ -51,18 +57,18 @@ So:
 
 bash --login
 ./launch_core.rb
-./launch_timesheet.rb
-./launch_timesheet.rb -K
+./launch_nias.rb
+./launch_nias.rb -K
 ./launch_core.rb -K
 
 If crashed out of Kafka/Zookeeper and need to delete them:
 
-rm -fr  /tmp/kafka-logs
-rm -fr  /tmp/zookeeper
+rm -fr  /tmp/nias/kafka-logs
+rm -fr  /tmp/nias/zookeeper
 
+or to get rid of everything (does no harm, but will not work if core/nias are still running)
 
-
-
+rm -fr /tmp/nias
 
 /kafka
     contains the latest kafka/zookeeper distro, the config files in /kafka/config are the ones used to configure the tools
@@ -76,34 +82,30 @@ rm -fr  /tmp/zookeeper
 /test_data
     bunch of handy files to send to ssf 
 
-/timesheet
-    the nsip timesheet reporting solution. Included mostly because provides built out examples of typical indexing services into redis, redis querying and sinatra web ui - will not be part of the nias release
-    to run this, first launch core, then launch timesheet.
+We also recommend the installation of the 'httpie' package as a user-friendly curl replacement that we use in many of the testing scripts:
 
-/timesheet_data
-    The current combined data files for nsip team and the mapping file for workstream allocation.  
+> brew install httpie
 
+This will allow you to run ingestion test scripts in the /test_data area.
 
 Example:
 
 Using httpie
 
 
-http post :4567/timesheet/ingest Content-Type:text/csv < JulyCombined.csv
-
 http post :9292/test/test1 Content-Type:application/xml < test_data/timetable.xml
 
 http post :9292/oneroster/validated Content-Type:text/csv < test_data/users.csv
 
-Browser http://localhost:5678/timesheet
+http post :9292/test/json < 1k_student_personals.json
+(note json is the default content type so doesn't need to be expliclty stated, for xml and csv it does)
 
+All services can be found for ui at:
 
+localhost:9292/nias
 
+which has links to all the other services.
 
-The following API verbs are defined:
-
-/hookup?sourceid=x,x,x...&targetid=y,y,y...   : generates biridirectonal links to the sms.indexer topic
-/equiv?id=x,x,x... : generates assertions of ID equivalence to the sms.indexer topic
 
 
 
