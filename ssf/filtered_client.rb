@@ -118,7 +118,12 @@ get "/filtered/:topic/:stream/:profile" do
 	    	messages.each do |msg|
 	    		# puts msg.value
 	    		record = { 
-	    			:data => "<div class='record'>" + CGI.escapeHTML(msg.value).gsub("\n","<br/>").gsub("REDACTED","<span class='redacted'>REDACTED</span>") + '</div>',
+	    			:data => "<div class='record'>" + 
+					CGI.escapeHTML(msg.value).gsub("\n","<br/>").gsub("ZZREDACTED","<span class='redacted'>REDACTED</span>").
+					gsub("REDACTED","<span class='redacted'>REDACTED</span>").
+					gsub("1582-10-15","<span class='redacted'>REDACTED</span>").gsub("00000000-0000-0000-0000-000000000000","<span class='redacted'>REDACTED</span>") + 
+
+					'</div>',
 	    			:key => msg.key,
 	    			:consumer_offset => consumer.offset,
 	    			:hwm => consumer.highwater_mark,

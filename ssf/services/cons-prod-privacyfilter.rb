@@ -37,7 +37,7 @@ def read_filter(filepath, level)
 		next if line =~ /^#/
 		next unless line =~ /\S/
 		a = line.chomp.split(/:/)
-		a[1] = "REDACTED" if(a.size == 1)
+		a[1] = "ZZREDACTED" if(a.size == 1)
 		@filter[level] << {:path => a[0], :redaction => a[1]}
 	end
 end
