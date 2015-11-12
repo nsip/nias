@@ -48,4 +48,12 @@ class GraphServer < Sinatra::Base
 		return results.to_json
 	end
 
+	get "/graph_data/local_network" do
+		id = params['id']
+		viz = SMSVizQuery.new
+	        content_type 'application/json'
+		results = viz.linked_collections_and_types( id )
+		return results.to_json
+	end
+
 end

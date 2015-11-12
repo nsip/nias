@@ -40,6 +40,52 @@ class SMSVizQuery
 		return results
 	end
 
+	# get all direct and indirect ids  that an id is connected to, and identify their collections
+	def linked_collections_and_types( id )
+		results = []
+		nodes = {id => 0}
+		idx = 0
+		collections = @redis.smembers('known:collections')
+		collections.each do |collection|
+			datapoints = @redis.sinter id, collection
+			datapoints = datapoints.reject{|x| x == id}
+			if datapoints.nil? or datapoints.empty?
+				# indirect links
+				tmp = @hashid.encode( rand(1...999) )
+                        	q = []
+                        	#q = @redis.smembers id
+ 				q = @redis.sdiff id, "SchoolInfo"
+                        	next unless !q.empty? # return empty results if item not in db
+				q.each do |q1|
+					unless nodes.has_key?(q1)
+						idx+=1
+						nodes[q1] = idx
+					end
+                                	results1 = @redis.sinter q1, collection
+					results1.each do |x|
+						unless nodes.has_key?(x)
+							idx+=1
+							nodes[x] = idx
+						end
+						label = @redis.hget 'labels', x
+						results << { :collection => collection, :link => 'indirect', :id => x, :label => label , :origin => nodes[q1], :target => nodes[x] }
+					end
+				end
+			else
+				datapoints.each do |x|
+					label = @redis.hget 'labels', x
+					unless nodes.has_key?(x)
+						idx+=1
+						nodes[x] = idx
+					end
+					results << { :collection => collection, :link => 'direct', :id => x, :label => label, :origin => 0 , :target => nodes[x] }
+				end
+			end
+		end
+puts results
+		return results
+	end
+
 
 	# produce a count of attendances for all students
 	def attendance_counts

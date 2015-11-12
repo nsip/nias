@@ -92,6 +92,7 @@
 
             <div class="six columns">
                 <div id="chartContainer"></div>
+                <div id="networkContainer"></div>
             </div>
 
         </div>
@@ -130,6 +131,7 @@
                 // var item = $("#item :selected").text();
                 var item = $("#item").val();
                 $("#chartContainer").empty();
+                $("#networkContainer").empty();
 
                 var svg = dimple.newSvg("#chartContainer", "100%", "200px");
                 
@@ -141,6 +143,33 @@
                     var ring = myChart.addSeries("collection", dimple.plot.bar);
                     myChart.draw();
                 });
+
+		d3.json("/graph_data/local_network?id="+item, function (data) {
+			var G = new jsnx.Graph();
+			var colours = ['red', 'maroon', 'yellow', 'olive', 'lime', 'green', 'aqua', 'teal', 'blue', 'navy', 'fuchsia', 'purple'];
+			G.addNode(0, {labels: 'ME', color: 'black'} );
+			var collections = new Object();
+			var j = 0;
+                    	for (var i = 0; i < data.length; i++) {
+				if(!collections.hasOwnProperty(data[i].collection)) {
+					collections[data[i].collection] = (j < colours.length-1 ? j++ : j);
+				}
+                       		G.addNode(data[i].target, {color: colours[collections[data[i].collection]], labels: data[i].label});
+				G.addEdge(data[i].origin, data[i].target, { color : data[i].link == 'direct' ? 'black' : 'blue' });
+                    	}
+			jsnx.draw(G, {
+				element: '#chartContainer',
+				withLabels: true,
+				labels: 'labels',
+				nodeStyle : {
+					fill: function(d) { return d.data.color; }
+				},
+				edgeStyle: {
+					stroke: function(d) { return d.data.color; }
+				}
+				
+			});
+		});
             });
 
             $("#query").click(function(){
