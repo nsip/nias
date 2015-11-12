@@ -119,7 +119,9 @@ get "/filtered/:topic/:stream/:profile" do
 	    		# puts msg.value
 	    		record = { 
 	    			:data => "<div class='record'>" + 
-					CGI.escapeHTML(msg.value).gsub("\n","<br/>").gsub("ZZREDACTED","<span class='redacted'>REDACTED</span>").gsub("1582-10-15","<span class='redacted'>REDACTED</span>").gsub("00000000-0000-0000-0000-000000000000","<span class='redacted'>REDACTED</span>") + 
+					CGI.escapeHTML(msg.value).gsub("\n","<br/>").gsub("ZZREDACTED","<span class='redacted'>REDACTED</span>").
+					gsub("REDACTED","<span class='redacted'>REDACTED</span>").
+					gsub("1582-10-15","<span class='redacted'>REDACTED</span>").gsub("00000000-0000-0000-0000-000000000000","<span class='redacted'>REDACTED</span>") + 
 
 					'</div>',
 	    			:key => msg.key,
