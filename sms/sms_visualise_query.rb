@@ -4,14 +4,21 @@ require 'hashids'
 require 'date'
 require 'json'
 # query interface for the redis datasets to produce visualisation queries
+require 'moneta'
+require 'nokogiri'
 
 class SMSVizQuery
+
+	@languagecodes = {}
 
 	def initialize
                 @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
                 @hashid = Hashids.new( 'nsip sms_visualise_query' )
                 @expiry_seconds = 120 #update this for production
                 @rand_space = 10000
+		@store = Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
+		@languagecodes = {'1201' => 'English', '7100' => 'Chinese, nfd', '2201' => 'Greek',
+			'5203' => 'Hindi', '9601' => 'Klingon' }
         end
 
 	# counts ids in all collections that an id is connected to
@@ -43,7 +50,7 @@ class SMSVizQuery
 	# get all direct and indirect ids  that an id is connected to, and identify their collections
 	def linked_collections_and_types( id )
 		results = []
-		nodes = {}
+		nodes = {}  # maps GUIDs in graph to ordinal numbers, used to describe node connections in graph
 		nodes[id] = 0
 		idx = 0
 		collections = @redis.smembers('known:collections')
@@ -69,6 +76,7 @@ class SMSVizQuery
 							nodes[x] = idx
 						end
 						label = @redis.hget 'labels', x
+						# if label is GUID, fallback on collection name
 						label = "[#{collection}]" if label[/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/]
 						results << { :collection => collection, :link => 'indirect', :id => x, :label => label , :origin => nodes[q1], :target => nodes[x] } unless (nodes[q1] == 0 and nodes[x] == 0)
 					end
@@ -80,12 +88,12 @@ class SMSVizQuery
 						idx+=1
 						nodes[x] = idx
 					end
+					# if label is GUID, fallback on collection name
 					label = "[#{collection}]" if label[/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/]
 					results << { :collection => collection, :link => 'direct', :id => x, :label => label, :origin => 0 , :target => nodes[x] } unless nodes[x] == 0
 				end
 			end
 		end
-puts results
 		return results
 	end
 
@@ -152,6 +160,24 @@ puts results
 		# chop out more results at higher delinquency, to make data more tractable to visualise
 		results.select! {|x| x[:delinquency]-7 < rand(5) } 
 		return results.sort {|a, b| b[:delinquency] <=> a[:delinquency] }
+	end
+
+	# the foregoing queries illustrated visualisations based on Redis. Most of the object attributes are not in Redis,
+	# and are accessed only in LMDB. This query illustrates visualisation based on parsing the XML in the object store.
+
+	def language_background_against_debtors
+		debtors = @redis.smembers('Debtor')
+		labels = {}
+		results = []
+		debtors.each do |d|
+			studentcontact = @redis.sinter d, 'StudentContactPersonal'
+			label = @redis.hget 'labels', studentcontact[0]
+			studentcontact.each do |sc|
+				xml = Nokogiri::XML(@store[sc])
+				xml.xpath("//LanguageList/Language[LanguageType='1']/Code").each { |x| results << {:debtor => label, :language => @languagecodes[x.child.to_s] } }
+			end
+		end
+		return results
 	end
 end
 

@@ -48,6 +48,13 @@ class GraphServer < Sinatra::Base
 		return results.to_json
 	end
 
+	get "/graph_data/debtor_languages" do
+		viz = SMSVizQuery.new
+	        content_type 'application/json'
+		results = viz.language_background_against_debtors
+		return results.to_json
+	end
+
 	get "/graph_data/local_network" do
 		id = params['id']
 		viz = SMSVizQuery.new
