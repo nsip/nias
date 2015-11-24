@@ -27,7 +27,7 @@
             <ul class="navbar-list">
                 <li class="navbar-item"><a class="navbar-link" href="#collections">Collections</a></li>
                 <li class="navbar-item"><a class="navbar-link" href="#query_ui">Query</a></li>                
-                <!-- <li class="navbar-item"><a class="navbar-link" href="#graph">View</a></li> -->
+                <li class="navbar-item"><a class="navbar-link" href="#graph">View</a></li>
             </ul>
         </div>
     </nav>
@@ -94,7 +94,6 @@
                 <div id="chartContainer"></div>
 		</div>
 	</div>
-                <div id="networkContainer" ></div>
 
 
         <div class="row">
@@ -131,7 +130,6 @@
                 // var item = $("#item :selected").text();
                 var item = $("#item").val();
                 $("#chartContainer").empty();
-                $("#networkContainer").empty();
 
                 var svg = dimple.newSvg("#chartContainer", "100%", "200px");
                 
@@ -143,6 +141,98 @@
                     var ring = myChart.addSeries("collection", dimple.plot.bar);
                     myChart.draw();
                 });
+
+            $("#query").click(function(){
+
+                var collection = $("#collections2").val();
+                //var item = $("#item :selected").text();
+                var item = $("#item").val();
+                var request = {};
+
+                request.collection = collection;
+                request.include_messages = true;
+                request.id = item;
+
+	    
+                $("#results").empty();
+                $.getJSON("/sms/find", request, function(result){
+                    $.each(result, function(i, field){
+                        $("#results").append( '<br/><br/>' );
+                        $("#results").append( document.createTextNode(field.id));
+                        $("#results").append( '<br/><br/>' );
+                        $("#results").append( document.createTextNode(field.data));
+                        $("#results").append( '<br/>' );
+                    });
+                });
+            });
+            
+    	});
+
+        </script>
+    </div>
+
+
+    <!-- lightweight query interface -->
+    <div class="docs-section" id="graph"> 
+		<h6 class="docs-header">View Network Diagram</h6>
+            <div class="row">
+
+            <div class="six columns">
+                <label for="collections11">( From Collection... )</label>
+                <select class="u-full-width" id="collections11">
+                    <% @coll_result.sort! %>
+                    <% @coll_result.each do | collection | %>
+                        <option value="<%= collection %>"><%= collection %></option>    
+                    <% end %>
+                </select>
+
+                <label for="item">Item</label>
+                <select class="u-full-width" id="item1">
+                    <!-- selector has no values until collection is chosen to select an item from -->
+                </select>
+
+                <label for="collections12">Relationship Collection</label>
+                <select class="u-full-width" id="collections12">
+                    <% @coll_result.sort! %>
+                    <% @coll_result.each do | collection | %>
+                        <option value="<%= collection %>"><%= collection %></option>    
+                    <% end %>
+                </select>
+
+            </div>
+
+            
+	</div>
+                <div id="networkContainer" ></div>
+
+
+        
+
+        <!-- handler for collection-to-find-an-item selector -->
+        <script>
+            // force user to choose a collection
+            $("#collections11 option:first").before( $('<option>',{value: 0,text: ''}));
+            
+            $("#collections11").change(function () {
+                $("#item1").find("option:gt(0)").remove();
+                $("#item1").find("option:first").text("Loading...");
+                $.getJSON("/sms/find", {
+                    collection: $(this).val()
+                }, function (json) {
+		    json = json.sort(function(a,b) {return a.label.localeCompare( b.label )});
+                    $("#item1").find("option:first").text("");
+                    for (var i = 0; i < json.length; i++) {
+                        $("<option/>").attr("value", json[i].id).text(json[i].label).appendTo($("#item1"));
+                    }
+                });
+            });
+
+    		$("#item1").change(function() {
+
+                // var item = $("#item :selected").text();
+                var item = $("#item1").val();
+                $("#networkContainer").empty();
+
 
 		d3.json("/graph_data/local_network?id="+item, function (data) {
 			var G = new jsnx.Graph();
@@ -269,32 +359,11 @@ Array.prototype.union = function(y) {
 
 	});
 
-            $("#query").click(function(){
-
-                var collection = $("#collections2").val();
-                //var item = $("#item :selected").text();
-                var item = $("#item").val();
-                var request = {};
-
-                request.collection = collection;
-                request.include_messages = true;
-                request.id = item;
-
-	    
-                $("#results").empty();
-                $.getJSON("/sms/find", request, function(result){
-                    $.each(result, function(i, field){
-                        $("#results").append( '<br/><br/>' );
-                        $("#results").append( document.createTextNode(field.id));
-                        $("#results").append( '<br/><br/>' );
-                        $("#results").append( document.createTextNode(field.data));
-                        $("#results").append( '<br/>' );
-                    });
-                });
-            });
+           
 
         </script>
     </div>
+
 
 </div>
 
