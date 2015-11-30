@@ -9,12 +9,12 @@ require 'nokogiri'
 require 'poseidon'
 require 'hashids'
 require 'csv'
-
+require_relative 'cvsheaders-naplan'
 
 @inbound = 'naplan.sifxml'
 @outbound = 'naplan.csvstudents'
 
-@servicename = 'cons-prod-sif-parser'
+@servicename = 'cons-prod-sif2scv-studentpersonal-naplanreg-parser'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 
@@ -37,64 +37,6 @@ def lookup_xpath(nodes, xpath)
 	#return "" if @ret.empty?
 	return @ret.child
 end
-
-@csvheaders = [ 
-	'Local School Student ID', 
-	'Sector Student ID' , 
-	'Diocesan Student ID', 
-	'Other Student ID', 
-	'TAA Student ID',
-	'Jurisdiction Student ID', 
-	'National Student ID', 
-	'Platform Student ID',
-	'Previous Local School Student ID', 
-	'Previous Sector Student ID' , 
-	'Previous Diocesan Student ID', 
-	'Previous Other Student ID', 
-	'Previous TAA Student ID',
-	'Previous Jurisdiction Student ID', 
-	'Previous National Student ID', 
-	'Previous Platform Student ID',
-	'Family Name',
-	'Given Name',
-	'Preferred Given Name',
-	'Middle Name',
-	'Date Of Birth',
-	'Sex',
-	'Student Country of Birth',
-	'Education Support',
-	'Full Fee Paying Student',
-	'Visa Code',
-	'Indigenous Status',
-	'LBOTE Status',
-	'Student Main Language Other than English Spoken at Home',
-	'Year Level',
-	'Test Level',
-	'FTE',
-	'Home Group',
-	'Class Code',
-	'ASL School ID',
-	'Local School ID',
-	'Local Campus ID',
-	'Main School Flag',
-	'Other School ID',
-	'Reporting School ID',
-	'Home Schooled Student',
-	'Sensitive',
-	'Offline Delivery',
-	'Parent 1 School Education',
-	'Parent 1 Non-School Education',
-	'Parent 1 Occupation',
-	'Parent 1 Main Language Other than English Spoken at Home',
-	'Parent 2 School Education',
-	'Parent 2 Non-School Education',
-	'Parent 2 Occupation',
-	'Parent 2 Main Language Other than English Spoken at Home',
-	'Address Line 1',
-	'Address Line 2',
-	'Locality',
-	'Postcode',
-]
 
 def csv_object2array(csv)
 	@ret = Array.new(@csvheaders.length)

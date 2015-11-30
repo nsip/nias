@@ -4,12 +4,13 @@
 # and generates csv equivalent records in naplan/sifxmlout stream
 
 
+require 'nokogiri'
 require 'json'
 require 'poseidon'
 require 'hashids'
 require 'csv'
 require 'securerandom'
-require 'cvsheaders-naplan.rb'
+require_relative 'cvsheaders-naplan'
 
 @inbound = 'naplan.csv'
 @outbound = 'naplan.sifxmlout'
@@ -17,7 +18,6 @@ require 'cvsheaders-naplan.rb'
 @idgen = Hashids.new( 'nsip random temp uid' )
 
 @servicename = 'cons-prod-csv2sif-studentpersonal-naplanreg-parser'
-
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
@@ -35,16 +35,14 @@ end
 loop do
 
   begin
-  		messages = []
+  	    messages = []
 	    messages = consumer.fetch
 	    outbound_messages = []
 	    
 	    messages.each do |m|
-		#m = @csvheaders.join(',') +  "\r" + m
-		CSV.parse(m, {:headers = @csvheaders}) do |row|
-
+		row = JSON.parse(m.value) 
 			xml = <<XML
-<StudentPersonal RefId="#{SecureRanom.uuid}">
+<StudentPersonal RefId="#{SecureRandom.uuid}">
   <LocalId>#{row['Local School Student ID']}</LocalId>
   <StateProvinceId>#{row['Jurisdiction Student ID']}</StateProvinceId>
   <OtherIdList>
@@ -128,12 +126,15 @@ loop do
 
 XML
 
-			nodes = Nokogiri::XML( payload ) do |config|
+			nodes = Nokogiri::XML( xml ) do |config|
                         	config.nonet.noblanks
                         end
-			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", nodes.to_s, "indexed" )
-  		
-  		end
+			nodes.xpath('//StudentPersonal//child::*[not(node())]').each do |node|
+  				node.remove
+			end
+			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", nodes.root.to_s, "indexed" )
+		end
+
 
   		# send results to indexer to create sms data graph
   		outbound_messages.each_slice(20) do | batch |
