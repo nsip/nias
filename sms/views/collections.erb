@@ -125,7 +125,7 @@
                 });
             });
 
-    		$("#item").change(function() {
+    	    $("#item").change(function() {
 
                 // var item = $("#item :selected").text();
                 var item = $("#item").val();
@@ -141,13 +141,15 @@
                     var ring = myChart.addSeries("collection", dimple.plot.bar);
                     myChart.draw();
                 });
+            });
 
-            $("#query").click(function(){
+            $("#query").unbind("click").click(function(){
 
                 var collection = $("#collections2").val();
                 //var item = $("#item :selected").text();
                 var item = $("#item").val();
                 var request = {};
+		var seen = {};
 
                 request.collection = collection;
                 request.include_messages = true;
@@ -155,8 +157,11 @@
 
 	    
                 $("#results").empty();
+		
                 $.getJSON("/sms/find", request, function(result){
                     $.each(result, function(i, field){
+			if(seen[field.id]) { return true; }
+			seen[field.id]  = true;
                         $("#results").append( '<br/><br/>' );
                         $("#results").append( document.createTextNode(field.id));
                         $("#results").append( '<br/><br/>' );
@@ -164,7 +169,6 @@
                         $("#results").append( '<br/>' );
                     });
                 });
-            });
             
     	});
 

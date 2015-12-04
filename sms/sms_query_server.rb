@@ -193,7 +193,6 @@ class SMSQueryServer < Sinatra::Base
     		response << record
 
     	end
-
 		return response.to_json
 
 
