@@ -188,7 +188,7 @@ class SMSQueryServer < Sinatra::Base
     		if include_messages
     			record[:data] = settings.store[result]
     		end
-		record[:label] = smsq.get_label(result)
+			record[:label] = smsq.get_label(result)
 
     		response << record
 
