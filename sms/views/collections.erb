@@ -27,7 +27,7 @@
             <ul class="navbar-list">
                 <li class="navbar-item"><a class="navbar-link" href="#collections">Collections</a></li>
                 <li class="navbar-item"><a class="navbar-link" href="#query_ui">Query</a></li>                
-                <li class="navbar-item"><a class="navbar-link" href="#graph">View</a></li>
+                <!-- <li class="navbar-item"><a class="navbar-link" href="#graph">View</a></li> -->
             </ul>
         </div>
     </nav>
@@ -65,307 +65,112 @@
 		<h6 class="docs-header">Query Explorer</h6>
             <div class="row">
 
-            <div class="six columns">
-                <label for="collections1">( From Collection... )</label>
-                <select class="u-full-width" id="collections1">
-                    <% @coll_result.sort! %>
-                    <% @coll_result.each do | collection | %>
-                        <option value="<%= collection %>"><%= collection %></option>    
-                    <% end %>
-                </select>
+                <div class="six columns">
+                    <label for="collections1">( From Collection... )</label>
+                    <select class="u-full-width" id="collections1">
+                        <% @coll_result.sort! %>
+                        <% @coll_result.each do | collection | %>
+                            <option value="<%= collection %>"><%= collection %></option>    
+                        <% end %>
+                    </select>
 
-                <label for="item">Item</label>
-                <select class="u-full-width" id="item">
-                    <!-- selector has no values until collection is chosen to select an item from -->
-                </select>
+                    <label for="item">Item</label>
+                    <select class="u-full-width" id="item">
+                        <!-- selector has no values until collection is chosen to select an item from -->
+                    </select>
 
-                <label for="collections2">Relationship Collection</label>
-                <select class="u-full-width" id="collections2">
-                    <% @coll_result.sort! %>
-                    <% @coll_result.each do | collection | %>
-                        <option value="<%= collection %>"><%= collection %></option>    
-                    <% end %>
-                </select>
+                    <label for="collections2">Relationship Collection</label>
+                    <select class="u-full-width" id="collections2">
+                        <% @coll_result.sort! %>
+                        <% @coll_result.each do | collection | %>
+                            <option value="<%= collection %>"><%= collection %></option>    
+                        <% end %>
+                    </select>
 
-                <button class="button-primary" id="query">Run Query</button>                                
+                    <button class="button-primary" id="query">Run Query</button>                                
+                </div>
+
+                <div class="six columns">
+                    <div id="chartContainer"></div>
+                </div>
+
             </div>
 
-            <div class="six columns">
-                <div id="chartContainer"></div>
-		</div>
-	</div>
 
-
-        <div class="row">
-            <div class="twelve columns">
-                <label for="results">Results</label>
-                <pre class="code-example">
-                    <code class="code-example-body prettyprint" id="results">
-                    </code>
-                </pre> 
+            <div class="row">
+                <div class="twelve columns">
+                    <label for="results">Results</label>
+                    <pre class="code-example">
+                        <code class="code-example-body prettyprint" id="results">
+                        </code>
+                    </pre> 
+                </div>
             </div>
-        </div>
 
-        <!-- handler for collection-to-find-an-item selector -->
-        <script>
-            // force user to choose a collection
-            $("#collections1 option:first").before( $('<option>',{value: 0,text: ''}));
-            
-            $("#collections1").change(function () {
-                $("#item").find("option:gt(0)").remove();
-                $("#item").find("option:first").text("Loading...");
-                $.getJSON("/sms/find", {
-                    collection: $(this).val()
-                }, function (json) {
-		    json = json.sort(function(a,b) {return a.label.localeCompare( b.label )});
-                    $("#item").find("option:first").text("");
-                    for (var i = 0; i < json.length; i++) {
-                        $("<option/>").attr("value", json[i].id).text(json[i].label).appendTo($("#item"));
-                    }
-                });
-            });
-
-    	    $("#item").change(function() {
-
-                // var item = $("#item :selected").text();
-                var item = $("#item").val();
-                $("#chartContainer").empty();
-
-                var svg = dimple.newSvg("#chartContainer", "100%", "200px");
+            <!-- handler for collection-to-find-an-item selector -->
+            <script>
+                // force user to choose a collection
+                $("#collections1 option:first").before( $('<option>',{value: 0,text: ''}));
                 
-                d3.json("/graph_data/linked_collections?id="+ item, function (data) {
-                    var myChart = new dimple.chart(svg, data);
-                    myChart.setBounds("20%", "10%", "60%", "80%")
-                    myChart.addMeasureAxis("x", "data");
-                    myChart.addCategoryAxis("y", "collection");
-                    var ring = myChart.addSeries("collection", dimple.plot.bar);
-                    myChart.draw();
-                });
-            });
-
-            $("#query").unbind("click").click(function(){
-
-                var collection = $("#collections2").val();
-                //var item = $("#item :selected").text();
-                var item = $("#item").val();
-                var request = {};
-		var seen = {};
-
-                request.collection = collection;
-                request.include_messages = true;
-                request.id = item;
-
-	    
-                $("#results").empty();
-		
-                $.getJSON("/sms/find", request, function(result){
-                    $.each(result, function(i, field){
-			if(seen[field.id]) { return true; }
-			seen[field.id]  = true;
-                        $("#results").append( '<br/><br/>' );
-                        $("#results").append( document.createTextNode(field.id));
-                        $("#results").append( '<br/><br/>' );
-                        $("#results").append( document.createTextNode(field.data));
-                        $("#results").append( '<br/>' );
+                $("#collections1").change(function () {
+                    $("#item").find("option:gt(0)").remove();
+                    $("#item").find("option:first").text("Loading...");
+                    $.getJSON("/sms/find", {
+                        collection: $(this).val()
+                    }, function (json) {
+                        json = json.sort(function(a,b) {return a.label.localeCompare( b.label )});
+                        $("#item").find("option:first").text("");
+                        for (var i = 0; i < json.length; i++) {
+                            $("<option/>").attr("value", json[i].id).text(json[i].label).appendTo($("#item"));
+                        }
                     });
                 });
-            
-    	});
 
-        </script>
-    </div>
+        		$("#item").change(function() {
 
+                    // var item = $("#item :selected").text();
+                    var item = $("#item").val();
+                    $("#chartContainer").empty();
 
-    <!-- lightweight query interface -->
-    <div class="docs-section" id="graph"> 
-		<h6 class="docs-header">View Network Diagram</h6>
-            <div class="row">
-
-            <div class="six columns">
-                <label for="collections11">( From Collection... )</label>
-                <select class="u-full-width" id="collections11">
-                    <% @coll_result.sort! %>
-                    <% @coll_result.each do | collection | %>
-                        <option value="<%= collection %>"><%= collection %></option>    
-                    <% end %>
-                </select>
-
-                <label for="item">Item</label>
-                <select class="u-full-width" id="item1">
-                    <!-- selector has no values until collection is chosen to select an item from -->
-                </select>
-
-                <label for="collections12">Relationship Collection</label>
-                <select class="u-full-width" id="collections12">
-                    <% @coll_result.sort! %>
-                    <% @coll_result.each do | collection | %>
-                        <option value="<%= collection %>"><%= collection %></option>    
-                    <% end %>
-                </select>
-
-            </div>
-
-            
-	</div>
-                <div id="networkContainer" ></div>
-
-
-        
-
-        <!-- handler for collection-to-find-an-item selector -->
-        <script>
-            // force user to choose a collection
-            $("#collections11 option:first").before( $('<option>',{value: 0,text: ''}));
-            
-            $("#collections11").change(function () {
-                $("#item1").find("option:gt(0)").remove();
-                $("#item1").find("option:first").text("Loading...");
-                $.getJSON("/sms/find", {
-                    collection: $(this).val()
-                }, function (json) {
-		    json = json.sort(function(a,b) {return a.label.localeCompare( b.label )});
-                    $("#item1").find("option:first").text("");
-                    for (var i = 0; i < json.length; i++) {
-                        $("<option/>").attr("value", json[i].id).text(json[i].label).appendTo($("#item1"));
-                    }
+                    var svg = dimple.newSvg("#chartContainer", "100%", "200px");
+                    
+                    d3.json("/graph_data/linked_collections?id="+ item, function (data) {
+                        var myChart = new dimple.chart(svg, data);
+                        myChart.setBounds("20%", "10%", "60%", "80%")
+                        myChart.addMeasureAxis("x", "data");
+                        myChart.addCategoryAxis("y", "collection");
+                        var ring = myChart.addSeries("collection", dimple.plot.bar);
+                        myChart.draw();
+                    });
                 });
-            });
 
-    		$("#item1").change(function() {
+                
+                $("#query").click(function(){
 
-                // var item = $("#item :selected").text();
-                var item = $("#item1").val();
-                $("#networkContainer").empty();
+                    var collection = $("#collections2").val();
+                    //var item = $("#item :selected").text();
+                    var item = $("#item").val();
+                    var request = {};
 
+                    request.collection = collection;
+                    request.include_messages = true;
+                    request.id = item;
 
-		d3.json("/graph_data/local_network?id="+item, function (data) {
-			var G = new jsnx.Graph();
-			var colours = ['red', 'maroon', 'yellow', 'olive', 'lime', 'green', 'aqua', 'teal', 'blue', 'fuchsia', 'purple'];
-			G.addNode(0, {labels: 'ME', color: 'white'} );
-			var collections = new Object();
-			var j = 0;
-			var seenedge = {};
-                    	for (var i = 0; i < data.length; i++) {
-				if(!collections.hasOwnProperty(data[i].collection)) {
-					collections[data[i].collection] = (j < colours.length-1 ? j++ : j);
-				}
-				if(data[i].target != 0) {
-                       			G.addNode(data[i].target, {color: colours[collections[data[i].collection]], labels: data[i].label, hide: false});
-				}
-				if((data[i].target + ':' + data[i].origin) in seenedge == false) {
-					seenedge[data[i].target + ':' + data[i].origin] = 1;
-					seenedge[data[i].origin + ':' + data[i].target] = 1;
-					G.addEdge(data[i].origin, data[i].target, { color : data[i].link == 'direct' ? 'black' : 'blue' });
-				}
-                    	}
-			jsnx.draw(G, {
-				element: '#networkContainer',
-				withLabels: true,
-				labels: 'labels',
-				nodeStyle : {
-					fill: function(d) { return d.data.color; }
-				},
-				edgeStyle: {
-					stroke: function(d) { return d.data.color; }
-				},
-				nodeAttr: {
-					id: function(d) { return 'node-' + d.node; // assign unique ID
-        				}
-				},
-				labelAttr: {
-					id: function(d) { return 'label-' + d.node; // assign unique ID
-        				}
-				},
-				edgeAttr: {
-				 	id: function(d) {return 'edge-' + ((d.edge[0] < d.edge[1]) ? 
-						(d.edge[0] + '_' + d.edge[1]) : (d.edge[1] + '_' + d.edge[0])) ; } 
-				},
-				height: 800
-			}, true);
+    	    
+                    $("#results").empty();
+                    $.getJSON("/sms/find", request, function(result){
+                        $.each(result, function(i, field){
+                            $("#results").append( '<br/><br/>' );
+                            $("#results").append( document.createTextNode(field.id));
+                            $("#results").append( '<br/><br/>' );
+                            $("#results").append( document.createTextNode(field.data));
+                            $("#results").append( '<br/>' );
+                        });
+                    });
+                });
+                
 
-		Array.prototype.diff = function(a) { if(a.length === 0) {return this;} return this.filter(function(i) {return a.indexOf(i) < 0;}); };
-Array.prototype.union = function(y) {
-  var obj = {};
-  for (var i = this.length-1; i >= 0; -- i)
-     obj[this[i]] = this[i];
-  for (var i = y.length-1; i >= 0; -- i)
-     obj[y[i]] = y[i];
-  var res = []
-  for (var k in obj) {
-    if (obj.hasOwnProperty(k))  // <-- optional
-      res.push(obj[k]);
-  }
-  return res;
-};
-
-
-		function descendants0(d, seen){
-			var s = G.neighbors(d);
-			seen.push(d);
-			var ret = [];
-			var ret1 = [];
-			s = s.diff(seen).diff([0]);
-			if (s.length === 0) {return seen;}
-			s.forEach( function(i) {
-				ret1 = descendants0(i, seen);
-				ret1 = ret.diff(seen);
-				ret = ret.union(ret1);
-			});
-			return seen.union(ret).diff([0]);
-		}
-
-		function descendants(d) {
-			var ret = descendants0(d.node, []);
-			/* include 0 node only if child of d */
-			var s = G.neighbors(d.node);
-			if (s.indexOf(0) >= 0) { ret.push(0); }
-			return ret;
-		}
-
-		// event handler: http://stackoverflow.com/questions/16048564/jsnetworkx-altering-node-colors-accessing-neighbors
-		d3.selectAll('.node').on('click', function(d1) {
-			var desc = descendants(d1);
-			var H = G.subgraph(desc);		
-			if( d1.hide ) {
-				d1.hide = false;
-				H.nodes().forEach (function(n) { 
-					if(n == 0) { 
-					} else if(n == d1.node) {
-						d3.select('#node-' + n).attr('r' , 10); 
-					} else {
-						d3.select('#node-' + n).style('display' , 'block'); 
-						d3.select('#label-' + n).style('display' , 'block'); 
-					}
-				});
-				H.edges().forEach (function(n) { 
-					d3.select('#edge-' + ((n[0] < n[1]) ? (n[0] + '_' + n[1]) : (n[1] + '_' + n[0])) ).style('display' , 'block'); 
-				});
-			} else {
-				d1.hide = true;
-				H.nodes().forEach (function(n) { 
-					if(n == 0) {
-					} else if(n == d1.node) {
-						d3.select('#node-' + n).attr('r' , 20); 
-					} else {
-						d3.select('#node-' + n).style('display' , 'none'); 
-						d3.select('#label-' + n).style('display' , 'none'); 
-					}
-				});
-				H.edges().forEach( function(n) { 
-					d3.select('#edge-' + ((n[0] < n[1]) ? (n[0] + '_' + n[1]) : (n[1] + '_' + n[0])) ).style('display' , 'none'); 
-				});
-			}
-		});
-		
-		function update() {
-		}
-            });
-
-	});
-
-           
-
-        </script>
+            </script>
     </div>
 
 

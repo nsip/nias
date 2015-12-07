@@ -73,9 +73,6 @@ def launch
 
   banner 'Creating known topics'
 
-  # give time for zookeeper-kafka hookup
-  sleep 5
-
   topics = [
               'sifxml.validated',
               'sms.indexer',
@@ -83,7 +80,10 @@ def launch
               'sifxml.errors',
               'oneroster.validated',
               'nsip.test',
-              'test.test1'
+              'naplan.sifxml',
+              'naplan.csv',
+              'test.test1',
+              'json.test'
             ]
 
   topics.each do | topic |
