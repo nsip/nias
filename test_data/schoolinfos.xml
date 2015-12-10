@@ -1,8 +1,9 @@
 <SchoolInfos xmlns="http://www.sifassociation.org/au/datamodel/3.4">
-    <SchoolInfo RefId="1e5aa150-ca94-45a0-a893-9ec427ee2160">
+    <SchoolInfo RefId="1E5AA150-CA94-45A0-A893-9EC427EE2160">
         <LocalId>72868</LocalId>
         <StateProvinceId>4</StateProvinceId>
         <CommonwealthId>8</CommonwealthId>
+        <ACARAId>XYZZY123</ACARAId>
         <SchoolName>Stivers College</SchoolName>
         <SchoolType>Sec</SchoolType>
         <AddressList>
