@@ -1,20 +1,23 @@
-# cons-prod-sif-ingest.rb
+# cons-prod-sif-bulk-ingest.rb
 
 require 'poseidon'
 require 'nokogiri' # xml support
 
-# consumer of ingest SIF/XML messages. Each object in the stream is validated. Two streams of SIF created:
+# consumer of bulk ingest SIF/XML messages. 
+# Input stream consists of XML payload broken up into 1 MB chunks. Payload
+# is reassembled and then validated.
+# Two streams of SIF created:
 # * error stream, with malformed objects and associated error messages
 # * validated stream of parsed SIF objects
-# Messages are received from the single stream sifxml.ingest. The key of the received message is "topic"."stream". 
+# Messages are received from the single stream sifxml.bulkingest. The key of the received message is "topic"."stream". 
 # Messages are output to "topic"."stream".validated and "topic"."stream".errors
 
 
-@inbound = 'sifxml.ingest'
+@inbound = 'sifxml.bulkingest'
 @outbound1 = 'sifxml.validated'
 @outbound2 = 'sifxml.errors'
 
-@servicename = 'cons-prod-sif-ingest-validate'
+@servicename = 'cons-prod-sif-bulk-ingest-validate'
 
 @xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif3.4/SIF_Message3.4.xsd"))
 @namespace = 'http://www.sifassociation.org/au/datamodel/3.4'
@@ -32,7 +35,8 @@ producers = []
 end
 pool = producers.cycle
 
-
+payload = ""
+header = ""
 
 loop do
   begin
@@ -43,9 +47,17 @@ loop do
 	    messages.each do |m|
   	    # puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
 
-        # Payload from sifxml.ingest contains as its first line a header line with the original topic
-        header = m.value.lines[0]	
-        payload = m.value.lines[1..-1].join
+	if(payload.empty?) then
+	        # Payload from sifxml.bulkingest contains as its first line a header line with the original topic
+	        header = m.value.lines[0]	
+	        payload = m.value.lines[1..-1].join
+	    else
+	    	payload = payload + m.value
+	    end
+	    if payload.match( /===snip===/ ) then
+	    	payload = payload.gsub(/\n===snip===\n/, "")
+	    	next
+	    end
 
 		# each ingest message is a group of objects of the same class, e.g. 
 		# <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
@@ -58,37 +70,50 @@ loop do
 		end
 
 		if(doc.errors.empty?) 
-			doc.xpath("/*/node()").each do |x|
-				root = x.xpath("local-name(/)")
-				parent = Nokogiri::XML::Node.new root+"s", doc
-				parent.default_namespace = @namespace
-				x.parent = parent
-				xsd_errors = @xsd.validate(parent.document)
-				if(xsd_errors.empty?) 
-#puts "Validated!"
-	      			item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
-	      			msg = header + x.to_s
-#puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"
+			puts "Payload well-formed. Payload size: #{payload.size}";
+#			xsd_errors = @xsd.validate(parent.document)
+			doc.root.add_namespace nil, @namespace
+			xsd_errors = @xsd.validate(doc)
+			if(xsd_errors.empty?) 
+				#puts "Validated! "
+				doc.xpath("/*/node()").each_with_index do |x, i|
+					if (i%10000 == 0) then 
+						puts "#{i} records queued..." 
+					end
+					#root = x.xpath("local-name(/)")
+					#parent = Nokogiri::XML::Node.new root+"s", doc
+					#parent.default_namespace = @namespace
+					#x.parent = parent
+	      				item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
+	      				msg = header + x.to_s
 					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
-				else
-puts "Invalid!"
-					msg = header + "Message #{m.offset} validity error:\n" + 	
-									xsd_errors.map{|e| e.message}.join("\n") + "\n" + 
-									parent.document.to_s
-					# puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"					
-					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
-						header + "Message #{m.offset} validity error:\n" + 	
-						xsd_errors.map{|e| e.message}.join("\n") + "\n" + 
-						parent.document.to_s, "invalid" )
 				end
+			else
+				puts "Invalid!"
+				msg = header + "Message #{m.offset} validity error:\n" + 	
+					xsd_errors.map{|e| e.message + "\n...\n" + 
+					payload.lines[e.line - 3 .. e.line + 1].join("") +
+					"...\n"}.join("\n") + "\n" 
+					# puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"
+				puts msg
+				outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg , "invalid" )
 			end
 		else
-puts "Not Well-Formed!"
-			msg = header + "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value	
+			puts "Not Well-Formed!"
+			msg = header + "Message #{m.offset} well-formedness error:\n" + 
+					doc.errors.map{|e| e.message + "\n...\n" + 
+					payload.lines[e.line - 3 .. e.line + 1].join("") +
+					"...\n"}.join("\n") + "\n" 
+				#doc.errors.join("\n") + "\n" 	
 			# puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"
+			puts msg
 			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg, "invalid" )
 		end
+		payload = "" # clear payload for next iteration
+		
+		puts "Finished processing payload."
 		end
+
 
 		# debugging if needed
 		# outbound_messages.each do | msg |
@@ -102,7 +127,7 @@ puts "Not Well-Formed!"
 	   	end
 	
 
-		# puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
+	#	puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
   rescue Poseidon::Errors::UnknownTopicOrPartition
     puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
     sleep 30
