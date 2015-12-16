@@ -45,9 +45,8 @@ loop do
   	    messages = []
 	    messages = consumer.fetch
 	    messages.each do |m|
-  	    # puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
 
-	if(payload.empty?) then
+	    if(payload.empty?) then
 	        # Payload from sifxml.bulkingest contains as its first line a header line with the original topic
 	        header = m.value.lines[0]	
 	        payload = m.value.lines[1..-1].join
@@ -58,6 +57,8 @@ loop do
 	    	payload = payload.gsub(/\n===snip===\n/, "")
 	    	next
 	    end
+
+  	    puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
 
 		# each ingest message is a group of objects of the same class, e.g. 
 		# <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
@@ -77,7 +78,7 @@ loop do
 			if(xsd_errors.empty?) 
 				#puts "Validated! "
 				doc.xpath("/*/node()").each_with_index do |x, i|
-					if (i%10000 == 0) then 
+					if (i%10000 == 0 and i > 0) then 
 						puts "#{i} records queued..." 
 					end
 					#root = x.xpath("local-name(/)")

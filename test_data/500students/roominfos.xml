@@ -1,0 +1,793 @@
+<RoomInfos xmlns="http://www.sifassociation.org/au/datamodel/3.4">
+<RoomInfo RefId="6CDE101F-8E43-4DE1-B363-68EB62566CFA">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>001</LocalId>
+  <RoomNumber>001</RoomNumber>
+  <StaffList><StaffPersonalRefId>5B592077-CD2F-40B5-8D31-DCF1BDDD438B</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="0C118632-0F72-4F93-AF8D-94351F461A71">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>002</LocalId>
+  <RoomNumber>002</RoomNumber>
+  <StaffList><StaffPersonalRefId>9828072B-268E-41B2-95B6-BE663F2F9516</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="E7BC315F-C0D5-4C2B-913D-EE7F3D28FD10">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>003</LocalId>
+  <RoomNumber>003</RoomNumber>
+  <StaffList><StaffPersonalRefId>11690567-4277-44ED-8F52-51391A0DD2AC</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="E78711E3-4A7F-4422-B0AB-B1B6A26EF206">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>004</LocalId>
+  <RoomNumber>004</RoomNumber>
+  <StaffList><StaffPersonalRefId>10FED0B9-B5BD-450F-A735-50FE187F960A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="6A23641A-9703-4DDB-97D8-940E68DEF76D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>005</LocalId>
+  <RoomNumber>005</RoomNumber>
+  <StaffList><StaffPersonalRefId>85CDBB40-BADA-427E-833D-7667277E110F</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="3AB11F95-6181-4A06-810C-68148F853356">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>006</LocalId>
+  <RoomNumber>006</RoomNumber>
+  <StaffList><StaffPersonalRefId>99B82D81-C053-40AE-B59B-2263BE647F53</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="69C06E72-6F74-4959-973F-5C47D31E0230">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>007</LocalId>
+  <RoomNumber>007</RoomNumber>
+  <StaffList><StaffPersonalRefId>99463347-CEB3-45DF-AB26-954380632E65</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="78CF8AC1-D023-4BE4-B467-257D790D2218">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>008</LocalId>
+  <RoomNumber>008</RoomNumber>
+  <StaffList><StaffPersonalRefId>10FED0B9-B5BD-450F-A735-50FE187F960A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="54A4DB5F-558A-4A74-8D1B-62C616C27A86">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>009</LocalId>
+  <RoomNumber>009</RoomNumber>
+  <StaffList><StaffPersonalRefId>10627565-5DA8-4FE5-9D40-CFF850771376</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="9819CF82-4FB0-4DE7-BDA6-5D58613D04B0">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>010</LocalId>
+  <RoomNumber>010</RoomNumber>
+  <StaffList><StaffPersonalRefId>C1CE46DF-918A-49A2-8FB2-BC7C4622E299</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="9789EB4B-8B04-4DED-A741-6AB6EBCAF299">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>011</LocalId>
+  <RoomNumber>011</RoomNumber>
+  <StaffList><StaffPersonalRefId>428A38FE-31E4-40E4-A613-A8E1ED560E14</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="9553999F-6D74-45E1-9D90-4D8687DC08FC">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>012</LocalId>
+  <RoomNumber>012</RoomNumber>
+  <StaffList><StaffPersonalRefId>3A81C602-9D4A-4B46-9859-08CEDC3D1E9B</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="DF86D966-96F8-478F-8998-3A0A03E6851A">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>013</LocalId>
+  <RoomNumber>013</RoomNumber>
+  <StaffList><StaffPersonalRefId>939D0E0B-81FC-40E3-A0BF-513A8C29B816</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="6B992345-E28F-480C-A4CA-F66626C7B776">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>014</LocalId>
+  <RoomNumber>014</RoomNumber>
+  <StaffList><StaffPersonalRefId>D5DE4E24-09D7-47E2-AAC0-9171ED33948D</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="77E6F189-4035-46F7-882C-FDF2172C1F4E">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>015</LocalId>
+  <RoomNumber>015</RoomNumber>
+  <StaffList><StaffPersonalRefId>2CBAC89B-3B3C-44A5-958A-2436BDBC24DF</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="61B5D3E7-7967-4134-9D1A-08BFC65DE507">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>016</LocalId>
+  <RoomNumber>016</RoomNumber>
+  <StaffList><StaffPersonalRefId>3A81C602-9D4A-4B46-9859-08CEDC3D1E9B</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="85A42D45-6718-49E8-9539-5F981037F4A5">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>017</LocalId>
+  <RoomNumber>017</RoomNumber>
+  <StaffList><StaffPersonalRefId>6EBE8A50-FC63-4EFD-B093-E1536AD652C7</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="05678A84-A3AE-468D-9990-E92554BAF4E9">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>018</LocalId>
+  <RoomNumber>018</RoomNumber>
+  <StaffList><StaffPersonalRefId>ECD7AB92-87E7-4D74-9863-FED5E11AD698</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="0E709493-C77A-4E47-AA88-A6D461311795">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>019</LocalId>
+  <RoomNumber>019</RoomNumber>
+  <StaffList><StaffPersonalRefId>939D0E0B-81FC-40E3-A0BF-513A8C29B816</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="0584A1B5-C044-4D6B-849F-FB142F492DB7">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>020</LocalId>
+  <RoomNumber>020</RoomNumber>
+  <StaffList><StaffPersonalRefId>7978AF75-EAC5-48B3-8E7A-044AAFCD78B0</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="80991307-2237-4508-AAEB-4BAC3BF6CBD8">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>021</LocalId>
+  <RoomNumber>021</RoomNumber>
+  <StaffList><StaffPersonalRefId>4DDFDF32-D4F2-42AD-99B6-B45ABC0FB54A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="806D1A55-48E6-43CB-859F-D099BBB4D049">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>022</LocalId>
+  <RoomNumber>022</RoomNumber>
+  <StaffList><StaffPersonalRefId>101566C8-9BDF-4AC8-B945-261E6490F7B1</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="C1ABF3FC-7576-4E79-A38F-063E2D7C179D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>023</LocalId>
+  <RoomNumber>023</RoomNumber>
+  <StaffList><StaffPersonalRefId>95007EE3-20E8-49F9-BA94-9F781BD91348</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="C4E11AF1-B6B4-4B00-89A9-FE253BE4E149">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>024</LocalId>
+  <RoomNumber>024</RoomNumber>
+  <StaffList><StaffPersonalRefId>BF2D5318-74EF-4C59-A940-06DB81A22EFA</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="00CE15EE-263A-4592-B8F5-9A07A717701B">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>025</LocalId>
+  <RoomNumber>025</RoomNumber>
+  <StaffList><StaffPersonalRefId>9631824A-96BC-4FD1-BAD6-02C2BBF7B88E</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="A0030960-ACF1-4473-BFB1-785906BBA054">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>026</LocalId>
+  <RoomNumber>026</RoomNumber>
+  <StaffList><StaffPersonalRefId>99463347-CEB3-45DF-AB26-954380632E65</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="D47B118C-F739-4DDB-AF36-10BDBBC0C1FB">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>027</LocalId>
+  <RoomNumber>027</RoomNumber>
+  <StaffList><StaffPersonalRefId>9631824A-96BC-4FD1-BAD6-02C2BBF7B88E</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="B2C3F94C-72FA-431D-BBBB-8C6B27E8F6F2">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>028</LocalId>
+  <RoomNumber>028</RoomNumber>
+  <StaffList><StaffPersonalRefId>81E46583-475A-4840-A3C5-B6C5491FE281</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="DB2A84D9-BFCA-4E4F-A8AF-13974651B9CB">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>029</LocalId>
+  <RoomNumber>029</RoomNumber>
+  <StaffList><StaffPersonalRefId>7978AF75-EAC5-48B3-8E7A-044AAFCD78B0</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="12A1B410-0448-43BC-8066-13EE91A292BA">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>030</LocalId>
+  <RoomNumber>030</RoomNumber>
+  <StaffList><StaffPersonalRefId>101566C8-9BDF-4AC8-B945-261E6490F7B1</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="323E6B0D-35AC-4F4E-BCC0-6D661A430FBF">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>031</LocalId>
+  <RoomNumber>031</RoomNumber>
+  <StaffList><StaffPersonalRefId>958148F3-9937-4ED1-AA46-EE1F4331EC33</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="CC7B8C53-6817-433B-B779-BBD66CC86F5F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>032</LocalId>
+  <RoomNumber>032</RoomNumber>
+  <StaffList><StaffPersonalRefId>DC8DD82B-7936-4864-BE07-4329A5AEE79C</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="56D288BE-02DB-412A-88F6-D109708A06E7">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>033</LocalId>
+  <RoomNumber>033</RoomNumber>
+  <StaffList><StaffPersonalRefId>8D3A63B3-FE80-4317-B5A1-A7F6090377D1</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="653BC730-179B-4771-9E89-33721452603B">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>034</LocalId>
+  <RoomNumber>034</RoomNumber>
+  <StaffList><StaffPersonalRefId>02EA4BE8-35EF-44A6-965D-EEEE62617FC8</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="0C19CAB8-1547-45AA-B6E3-CDD0A1EDA030">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>035</LocalId>
+  <RoomNumber>035</RoomNumber>
+  <StaffList><StaffPersonalRefId>10627565-5DA8-4FE5-9D40-CFF850771376</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="200BC961-23D1-413F-8031-CE08DF8F9465">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>036</LocalId>
+  <RoomNumber>036</RoomNumber>
+  <StaffList><StaffPersonalRefId>99B82D81-C053-40AE-B59B-2263BE647F53</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="2F7820F7-8C94-4618-B559-03C7A36B2C75">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>037</LocalId>
+  <RoomNumber>037</RoomNumber>
+  <StaffList><StaffPersonalRefId>5E99F1CC-1A08-4C9F-832F-C11E5052A11C</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="DEC542B0-62E2-4E25-B4A2-578D2098C132">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>038</LocalId>
+  <RoomNumber>038</RoomNumber>
+  <StaffList><StaffPersonalRefId>D5DE4E24-09D7-47E2-AAC0-9171ED33948D</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="04DBC98A-8089-49FD-8955-F2627EC428FF">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>039</LocalId>
+  <RoomNumber>039</RoomNumber>
+  <StaffList><StaffPersonalRefId>E0EC47B3-943B-499A-AB51-587EFDCCCD67</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="03E889A8-08F1-4049-ABF9-53467F3E4CB2">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>040</LocalId>
+  <RoomNumber>040</RoomNumber>
+  <StaffList><StaffPersonalRefId>81E46583-475A-4840-A3C5-B6C5491FE281</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="15E8E613-F9EC-404B-AE44-89740092F3EA">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>041</LocalId>
+  <RoomNumber>041</RoomNumber>
+  <StaffList><StaffPersonalRefId>9828072B-268E-41B2-95B6-BE663F2F9516</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="0EFBEC3B-EA30-413B-944D-6C4F4FEDF052">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>042</LocalId>
+  <RoomNumber>042</RoomNumber>
+  <StaffList><StaffPersonalRefId>428A38FE-31E4-40E4-A613-A8E1ED560E14</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="CD7FBBA1-9B35-42B5-A124-06253F9B6475">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>043</LocalId>
+  <RoomNumber>043</RoomNumber>
+  <StaffList><StaffPersonalRefId>BF4CB416-6BD5-46B6-9ACC-2E43408E0F7E</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="1BBEC3DB-74AB-46F6-8106-230D505B6F17">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>044</LocalId>
+  <RoomNumber>044</RoomNumber>
+  <StaffList><StaffPersonalRefId>72400D9A-8F24-4BEB-A57C-26129705469D</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="D9CB1B64-FF96-46BA-BDF4-8232D56AB7A3">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>045</LocalId>
+  <RoomNumber>045</RoomNumber>
+  <StaffList><StaffPersonalRefId>2A4014A5-B98E-4140-AB7B-FC17183EE40F</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="10E0AA04-9FA5-49D0-AE8D-075050337AE3">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>046</LocalId>
+  <RoomNumber>046</RoomNumber>
+  <StaffList><StaffPersonalRefId>85CDBB40-BADA-427E-833D-7667277E110F</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="F2373638-8CCF-4F8B-A688-D0FE346D7BC3">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>047</LocalId>
+  <RoomNumber>047</RoomNumber>
+  <StaffList><StaffPersonalRefId>72400D9A-8F24-4BEB-A57C-26129705469D</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="E552E580-4B16-4C55-A708-3655ED9CB2CC">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>048</LocalId>
+  <RoomNumber>048</RoomNumber>
+  <StaffList><StaffPersonalRefId>5E99F1CC-1A08-4C9F-832F-C11E5052A11C</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="B525523E-6D40-4E27-8DB5-2EBEC1C0BB6A">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>049</LocalId>
+  <RoomNumber>049</RoomNumber>
+  <StaffList><StaffPersonalRefId>3D53BF10-2774-4728-926D-34C5C9E66E4A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="4D941F31-476E-49B6-BB40-757A448DF2C2">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>050</LocalId>
+  <RoomNumber>050</RoomNumber>
+  <StaffList><StaffPersonalRefId>C408E6FC-1D2E-4558-B023-5265AD5BFFA3</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="A5C5934D-48BA-409A-B801-639C9070129D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>051</LocalId>
+  <RoomNumber>051</RoomNumber>
+  <StaffList><StaffPersonalRefId>DC8DD82B-7936-4864-BE07-4329A5AEE79C</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="837D97A5-3F4A-4676-AEE8-B11F554183EB">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>052</LocalId>
+  <RoomNumber>052</RoomNumber>
+  <StaffList><StaffPersonalRefId>72400D9A-8F24-4BEB-A57C-26129705469D</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="15A71B9D-6303-4EB3-B3C4-E086E9615111">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>053</LocalId>
+  <RoomNumber>053</RoomNumber>
+  <StaffList><StaffPersonalRefId>7978AF75-EAC5-48B3-8E7A-044AAFCD78B0</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="384407AE-9633-4DF5-ADAB-A478FAC60132">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>054</LocalId>
+  <RoomNumber>054</RoomNumber>
+  <StaffList><StaffPersonalRefId>6EBE8A50-FC63-4EFD-B093-E1536AD652C7</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="17F20244-7957-4B25-AE5F-13D7858A5F9E">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>055</LocalId>
+  <RoomNumber>055</RoomNumber>
+  <StaffList><StaffPersonalRefId>80D53D2B-3CDA-48B2-98DE-E7B2E3CB8A8A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="912EA08D-39A5-4BB3-A2B3-71A555DA855F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>056</LocalId>
+  <RoomNumber>056</RoomNumber>
+  <StaffList><StaffPersonalRefId>3D53BF10-2774-4728-926D-34C5C9E66E4A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="1479745E-7B4F-46A6-AC17-EF2CB903CE57">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>057</LocalId>
+  <RoomNumber>057</RoomNumber>
+  <StaffList><StaffPersonalRefId>C408E6FC-1D2E-4558-B023-5265AD5BFFA3</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="FB6E4F8C-BC2F-4553-806A-A583A57C0862">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>058</LocalId>
+  <RoomNumber>058</RoomNumber>
+  <StaffList><StaffPersonalRefId>85CDBB40-BADA-427E-833D-7667277E110F</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="626068D6-216F-485F-9F86-C8001C1D320C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>059</LocalId>
+  <RoomNumber>059</RoomNumber>
+  <StaffList><StaffPersonalRefId>958148F3-9937-4ED1-AA46-EE1F4331EC33</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="081A29BF-BBB4-4BC3-B381-3FADC192ADB1">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>060</LocalId>
+  <RoomNumber>060</RoomNumber>
+  <StaffList><StaffPersonalRefId>C1CE46DF-918A-49A2-8FB2-BC7C4622E299</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="414A471E-BF35-4F48-BB5A-31F75319967A">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>061</LocalId>
+  <RoomNumber>061</RoomNumber>
+  <StaffList><StaffPersonalRefId>69048195-F5BC-4553-9355-0432A99FBD18</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="2DEAEEA3-A4FA-43D6-BF33-0DFC52D37BDD">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>062</LocalId>
+  <RoomNumber>062</RoomNumber>
+  <StaffList><StaffPersonalRefId>3D53BF10-2774-4728-926D-34C5C9E66E4A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="AF974588-2F44-4190-87FD-C271B37F7339">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>063</LocalId>
+  <RoomNumber>063</RoomNumber>
+  <StaffList><StaffPersonalRefId>3D53BF10-2774-4728-926D-34C5C9E66E4A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="061FA843-8D40-49F3-8EB1-5998B95183DB">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>064</LocalId>
+  <RoomNumber>064</RoomNumber>
+  <StaffList><StaffPersonalRefId>87E8ED26-B379-4A2D-84E5-3080D2A3F349</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="B6E98D1E-C312-47E3-98B4-192A9B155780">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>065</LocalId>
+  <RoomNumber>065</RoomNumber>
+  <StaffList><StaffPersonalRefId>87E8ED26-B379-4A2D-84E5-3080D2A3F349</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="22B8D00D-C3C7-4734-9EA7-2D3E41D40976">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>066</LocalId>
+  <RoomNumber>066</RoomNumber>
+  <StaffList><StaffPersonalRefId>BF2D5318-74EF-4C59-A940-06DB81A22EFA</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="9E99AAC0-D9F4-4974-A724-7120840B5AD4">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>067</LocalId>
+  <RoomNumber>067</RoomNumber>
+  <StaffList><StaffPersonalRefId>ECD7AB92-87E7-4D74-9863-FED5E11AD698</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="A2264A48-CA85-43A7-BA5D-56B5399068F9">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>068</LocalId>
+  <RoomNumber>068</RoomNumber>
+  <StaffList><StaffPersonalRefId>ABEA91F8-8BBA-4663-9E35-62FEFC911E62</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="18DAA719-568B-4632-8C42-ECED29BD00E0">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>069</LocalId>
+  <RoomNumber>069</RoomNumber>
+  <StaffList><StaffPersonalRefId>BF4CB416-6BD5-46B6-9ACC-2E43408E0F7E</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="146A69B7-A0FF-4C5B-9900-73F3F0B9F5B6">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>070</LocalId>
+  <RoomNumber>070</RoomNumber>
+  <StaffList><StaffPersonalRefId>958148F3-9937-4ED1-AA46-EE1F4331EC33</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="7D8DB335-9261-43EA-8B47-88275A9D3843">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>071</LocalId>
+  <RoomNumber>071</RoomNumber>
+  <StaffList><StaffPersonalRefId>ECD7AB92-87E7-4D74-9863-FED5E11AD698</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="FC5682C6-6C8D-42A8-B848-527A08AF62B8">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>072</LocalId>
+  <RoomNumber>072</RoomNumber>
+  <StaffList><StaffPersonalRefId>02EA4BE8-35EF-44A6-965D-EEEE62617FC8</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="6E6C123E-0D21-4E9B-874F-7AF72E81D7CB">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>073</LocalId>
+  <RoomNumber>073</RoomNumber>
+  <StaffList><StaffPersonalRefId>2D0CD1E4-4521-4DA5-880A-EF8D194E7263</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="327A7FAA-F710-46A5-8995-C4F28808A6D4">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>074</LocalId>
+  <RoomNumber>074</RoomNumber>
+  <StaffList><StaffPersonalRefId>85CDBB40-BADA-427E-833D-7667277E110F</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="7C99F16F-76DA-4586-84E0-F8A33453E420">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>075</LocalId>
+  <RoomNumber>075</RoomNumber>
+  <StaffList><StaffPersonalRefId>69048195-F5BC-4553-9355-0432A99FBD18</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="DAC68801-37B7-43C3-969C-E5140F8EE0DC">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>076</LocalId>
+  <RoomNumber>076</RoomNumber>
+  <StaffList><StaffPersonalRefId>E0EC47B3-943B-499A-AB51-587EFDCCCD67</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="75A0241B-74DE-4065-ABD7-45D8D3F36DD1">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>077</LocalId>
+  <RoomNumber>077</RoomNumber>
+  <StaffList><StaffPersonalRefId>69048195-F5BC-4553-9355-0432A99FBD18</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="8E037C47-B020-4291-AA3E-5856716B5257">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>078</LocalId>
+  <RoomNumber>078</RoomNumber>
+  <StaffList><StaffPersonalRefId>BF4CB416-6BD5-46B6-9ACC-2E43408E0F7E</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="C5C8474B-B284-4DF4-9890-A790796322E3">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>079</LocalId>
+  <RoomNumber>079</RoomNumber>
+  <StaffList><StaffPersonalRefId>2CBAC89B-3B3C-44A5-958A-2436BDBC24DF</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="695474A8-3159-4C03-B367-62C1440FE886">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>080</LocalId>
+  <RoomNumber>080</RoomNumber>
+  <StaffList><StaffPersonalRefId>9587C47D-E12F-40D9-9F3C-891546DDC33C</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="78710C54-9F2F-46CD-8DE3-DA66D52705E9">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>081</LocalId>
+  <RoomNumber>081</RoomNumber>
+  <StaffList><StaffPersonalRefId>3A81C602-9D4A-4B46-9859-08CEDC3D1E9B</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="5FAF6D91-10F3-4409-B785-96EA9E9E380C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>082</LocalId>
+  <RoomNumber>082</RoomNumber>
+  <StaffList><StaffPersonalRefId>80D53D2B-3CDA-48B2-98DE-E7B2E3CB8A8A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="FCD52639-1F38-4BD8-A152-56B0F4AFDA79">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>083</LocalId>
+  <RoomNumber>083</RoomNumber>
+  <StaffList><StaffPersonalRefId>9631824A-96BC-4FD1-BAD6-02C2BBF7B88E</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="E3C3205E-33C0-46FE-840F-D447553DF87D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>084</LocalId>
+  <RoomNumber>084</RoomNumber>
+  <StaffList><StaffPersonalRefId>2CBAC89B-3B3C-44A5-958A-2436BDBC24DF</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="7773F2A1-A356-4425-946D-F8AB1A8DBE8C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>085</LocalId>
+  <RoomNumber>085</RoomNumber>
+  <StaffList><StaffPersonalRefId>4A773F4E-5410-404E-992A-C5E309BAC374</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="ACF6F8D8-E8CC-4773-B67C-AC266A926EEB">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>086</LocalId>
+  <RoomNumber>086</RoomNumber>
+  <StaffList><StaffPersonalRefId>80D53D2B-3CDA-48B2-98DE-E7B2E3CB8A8A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="A6038DBA-AE3E-48F4-85C1-57F6CB137D2C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>087</LocalId>
+  <RoomNumber>087</RoomNumber>
+  <StaffList><StaffPersonalRefId>9587C47D-E12F-40D9-9F3C-891546DDC33C</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="C0F09CD5-F6E0-46F6-86DA-E86A731BE767">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>088</LocalId>
+  <RoomNumber>088</RoomNumber>
+  <StaffList><StaffPersonalRefId>8D3A63B3-FE80-4317-B5A1-A7F6090377D1</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="146672EC-05A3-4A4F-8D22-6B335B5666A2">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>089</LocalId>
+  <RoomNumber>089</RoomNumber>
+  <StaffList><StaffPersonalRefId>9828072B-268E-41B2-95B6-BE663F2F9516</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="CDB0AEE8-A01B-47DC-8505-F795F661B662">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>090</LocalId>
+  <RoomNumber>090</RoomNumber>
+  <StaffList><StaffPersonalRefId>C1CE46DF-918A-49A2-8FB2-BC7C4622E299</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="72C7B065-C956-4354-8D71-F8267DDE07DA">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>091</LocalId>
+  <RoomNumber>091</RoomNumber>
+  <StaffList><StaffPersonalRefId>AA96069C-10C2-452B-B86F-F5A8A7F444D9</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="A88D95AC-2B2B-493A-833B-06A6BF0A8972">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>092</LocalId>
+  <RoomNumber>092</RoomNumber>
+  <StaffList><StaffPersonalRefId>53929305-6728-4335-B0EA-7422A555F4DA</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="E92D8FBC-525C-48CC-9671-2AB5D8D508B1">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>093</LocalId>
+  <RoomNumber>093</RoomNumber>
+  <StaffList><StaffPersonalRefId>6E20B3D8-B2FF-40B7-BD72-C139EE7BDDF1</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="23877C19-0BDF-4072-96BB-4CD3B623B939">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>094</LocalId>
+  <RoomNumber>094</RoomNumber>
+  <StaffList><StaffPersonalRefId>80D53D2B-3CDA-48B2-98DE-E7B2E3CB8A8A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="22CF0B3F-6F4C-45A0-9640-6329C95B9328">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>095</LocalId>
+  <RoomNumber>095</RoomNumber>
+  <StaffList><StaffPersonalRefId>2CBAC89B-3B3C-44A5-958A-2436BDBC24DF</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="3CF54B94-1FEA-4BF5-B77B-6322F0E43D60">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>096</LocalId>
+  <RoomNumber>096</RoomNumber>
+  <StaffList><StaffPersonalRefId>02EA4BE8-35EF-44A6-965D-EEEE62617FC8</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="0C986AA3-8BD2-4DE8-8209-AECBB3FE39F6">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>097</LocalId>
+  <RoomNumber>097</RoomNumber>
+  <StaffList><StaffPersonalRefId>3D53BF10-2774-4728-926D-34C5C9E66E4A</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="45AD89BA-A9BD-4354-8A1F-B207579B158B">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>098</LocalId>
+  <RoomNumber>098</RoomNumber>
+  <StaffList><StaffPersonalRefId>BF2D5318-74EF-4C59-A940-06DB81A22EFA</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+
+<RoomInfo RefId="5F62459A-7367-4DD2-AF20-9ED5F25EF7B4">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <LocalId>099</LocalId>
+  <RoomNumber>099</RoomNumber>
+  <StaffList><StaffPersonalRefId>6E20B3D8-B2FF-40B7-BD72-C139EE7BDDF1</StaffPersonalRefId></StaffList>
+  <Capacity>25</Capacity>
+</RoomInfo>
+</RoomInfos>

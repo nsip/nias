@@ -1,0 +1,649 @@
+<TimeTableSubjects xmlns="http://www.sifassociation.org/au/datamodel/3.4">
+<TimeTableSubject RefId="DC39A5A7-DDD0-4027-86C5-D9710894F4DB">
+  <SubjectLocalId>1E</SubjectLocalId>
+  <AcademicYear><Code>1</Code></AcademicYear>
+  <SubjectShortName>1Engl</SubjectShortName>
+  <SubjectLongName>1 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="1408DFCA-D618-4B44-81A1-97821C9E1BDB">
+  <SubjectLocalId>2E</SubjectLocalId>
+  <AcademicYear><Code>2</Code></AcademicYear>
+  <SubjectShortName>2Engl</SubjectShortName>
+  <SubjectLongName>2 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="13F63C99-BA00-4964-9E2B-CFC824ABB94D">
+  <SubjectLocalId>3E</SubjectLocalId>
+  <AcademicYear><Code>3</Code></AcademicYear>
+  <SubjectShortName>3Engl</SubjectShortName>
+  <SubjectLongName>3 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="51DD18A5-3A39-44A6-B46D-E7CCBDD38C36">
+  <SubjectLocalId>4E</SubjectLocalId>
+  <AcademicYear><Code>4</Code></AcademicYear>
+  <SubjectShortName>4Engl</SubjectShortName>
+  <SubjectLongName>4 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="A5FD81EC-A017-496B-8475-13460D45AFE8">
+  <SubjectLocalId>5E</SubjectLocalId>
+  <AcademicYear><Code>5</Code></AcademicYear>
+  <SubjectShortName>5Engl</SubjectShortName>
+  <SubjectLongName>5 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="6C2D3CFF-92CA-472B-A93E-D2BFCDC9821B">
+  <SubjectLocalId>6E</SubjectLocalId>
+  <AcademicYear><Code>6</Code></AcademicYear>
+  <SubjectShortName>6Engl</SubjectShortName>
+  <SubjectLongName>6 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="709D818F-943D-4211-8FE0-76594BA9FEDB">
+  <SubjectLocalId>7E</SubjectLocalId>
+  <AcademicYear><Code>7</Code></AcademicYear>
+  <SubjectShortName>7Engl</SubjectShortName>
+  <SubjectLongName>7 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="7DEDA5C1-E511-4C53-8045-4E257B379A4E">
+  <SubjectLocalId>8E</SubjectLocalId>
+  <AcademicYear><Code>8</Code></AcademicYear>
+  <SubjectShortName>8Engl</SubjectShortName>
+  <SubjectLongName>8 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="469FF384-6381-446A-B7A1-8A2D6637BBE4">
+  <SubjectLocalId>9E</SubjectLocalId>
+  <AcademicYear><Code>9</Code></AcademicYear>
+  <SubjectShortName>9Engl</SubjectShortName>
+  <SubjectLongName>9 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="3232235D-B32F-4BB6-8356-21170FB7E045">
+  <SubjectLocalId>10E</SubjectLocalId>
+  <AcademicYear><Code>10</Code></AcademicYear>
+  <SubjectShortName>10Engl</SubjectShortName>
+  <SubjectLongName>10 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="E7C1E4C5-B943-434F-9828-B3B09D7AD3CC">
+  <SubjectLocalId>11E</SubjectLocalId>
+  <AcademicYear><Code>11</Code></AcademicYear>
+  <SubjectShortName>11Engl</SubjectShortName>
+  <SubjectLongName>11 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="E661A7D1-C9B3-4024-A423-C6EEB482A842">
+  <SubjectLocalId>12E</SubjectLocalId>
+  <AcademicYear><Code>12</Code></AcademicYear>
+  <SubjectShortName>12Engl</SubjectShortName>
+  <SubjectLongName>12 English</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="2FAE321E-F374-4C66-8215-042BD91AA28B">
+  <SubjectLocalId>1M</SubjectLocalId>
+  <AcademicYear><Code>1</Code></AcademicYear>
+  <SubjectShortName>1Math</SubjectShortName>
+  <SubjectLongName>1 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="2E2FE9B4-F12E-4285-8E24-C2F575D9FB24">
+  <SubjectLocalId>2M</SubjectLocalId>
+  <AcademicYear><Code>2</Code></AcademicYear>
+  <SubjectShortName>2Math</SubjectShortName>
+  <SubjectLongName>2 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="B2D0C0CD-37F6-42D5-B760-5B7C2A87DFDD">
+  <SubjectLocalId>3M</SubjectLocalId>
+  <AcademicYear><Code>3</Code></AcademicYear>
+  <SubjectShortName>3Math</SubjectShortName>
+  <SubjectLongName>3 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="49579522-CE1D-4B3B-BAD8-C96BA9E1CD88">
+  <SubjectLocalId>4M</SubjectLocalId>
+  <AcademicYear><Code>4</Code></AcademicYear>
+  <SubjectShortName>4Math</SubjectShortName>
+  <SubjectLongName>4 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="9BDFDCAF-6316-452B-BBDC-D6A144A75866">
+  <SubjectLocalId>5M</SubjectLocalId>
+  <AcademicYear><Code>5</Code></AcademicYear>
+  <SubjectShortName>5Math</SubjectShortName>
+  <SubjectLongName>5 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="EA12A979-E3DB-472E-A2AB-E4E1FEC08E6B">
+  <SubjectLocalId>6M</SubjectLocalId>
+  <AcademicYear><Code>6</Code></AcademicYear>
+  <SubjectShortName>6Math</SubjectShortName>
+  <SubjectLongName>6 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="5876A2A4-3958-48DD-97FB-88BD62100DB6">
+  <SubjectLocalId>7M</SubjectLocalId>
+  <AcademicYear><Code>7</Code></AcademicYear>
+  <SubjectShortName>7Math</SubjectShortName>
+  <SubjectLongName>7 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="59F9D416-5065-4C97-89B4-9F3FD72DF929">
+  <SubjectLocalId>8M</SubjectLocalId>
+  <AcademicYear><Code>8</Code></AcademicYear>
+  <SubjectShortName>8Math</SubjectShortName>
+  <SubjectLongName>8 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="861119E9-A859-4C3D-85AE-0944C9E0993B">
+  <SubjectLocalId>9M</SubjectLocalId>
+  <AcademicYear><Code>9</Code></AcademicYear>
+  <SubjectShortName>9Math</SubjectShortName>
+  <SubjectLongName>9 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="28F5E846-D2D4-4A87-9DA9-CAF61C9847F9">
+  <SubjectLocalId>10M</SubjectLocalId>
+  <AcademicYear><Code>10</Code></AcademicYear>
+  <SubjectShortName>10Math</SubjectShortName>
+  <SubjectLongName>10 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="55DA5A1C-6744-4E06-AD2B-96D4E7E58779">
+  <SubjectLocalId>11M</SubjectLocalId>
+  <AcademicYear><Code>11</Code></AcademicYear>
+  <SubjectShortName>11Math</SubjectShortName>
+  <SubjectLongName>11 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="6A6CBF7F-841F-4D91-8B93-6E7AE34925FA">
+  <SubjectLocalId>12M</SubjectLocalId>
+  <AcademicYear><Code>12</Code></AcademicYear>
+  <SubjectShortName>12Math</SubjectShortName>
+  <SubjectLongName>12 Maths</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="C01B9833-BB28-4696-AD6A-FB8CF6F3400D">
+  <SubjectLocalId>1H</SubjectLocalId>
+  <AcademicYear><Code>1</Code></AcademicYear>
+  <SubjectShortName>1Hist</SubjectShortName>
+  <SubjectLongName>1 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="65E31C1A-8045-45AA-B0B3-2EAF361ED217">
+  <SubjectLocalId>2H</SubjectLocalId>
+  <AcademicYear><Code>2</Code></AcademicYear>
+  <SubjectShortName>2Hist</SubjectShortName>
+  <SubjectLongName>2 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="453F21E0-6FD1-4399-A8A7-11D7FAC6D5A4">
+  <SubjectLocalId>3H</SubjectLocalId>
+  <AcademicYear><Code>3</Code></AcademicYear>
+  <SubjectShortName>3Hist</SubjectShortName>
+  <SubjectLongName>3 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="9492F050-85F3-4BF0-BBF9-03AAA263A6CC">
+  <SubjectLocalId>4H</SubjectLocalId>
+  <AcademicYear><Code>4</Code></AcademicYear>
+  <SubjectShortName>4Hist</SubjectShortName>
+  <SubjectLongName>4 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="8817E635-442C-416E-A324-419779A5E0FC">
+  <SubjectLocalId>5H</SubjectLocalId>
+  <AcademicYear><Code>5</Code></AcademicYear>
+  <SubjectShortName>5Hist</SubjectShortName>
+  <SubjectLongName>5 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="4EBC9D34-9F7B-4B85-906E-19ACA678DC51">
+  <SubjectLocalId>6H</SubjectLocalId>
+  <AcademicYear><Code>6</Code></AcademicYear>
+  <SubjectShortName>6Hist</SubjectShortName>
+  <SubjectLongName>6 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="B8293660-0480-4A97-A0F1-C3895231A529">
+  <SubjectLocalId>7H</SubjectLocalId>
+  <AcademicYear><Code>7</Code></AcademicYear>
+  <SubjectShortName>7Hist</SubjectShortName>
+  <SubjectLongName>7 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="84C92DCC-F2A6-4D4D-B759-180C3F12CFE3">
+  <SubjectLocalId>8H</SubjectLocalId>
+  <AcademicYear><Code>8</Code></AcademicYear>
+  <SubjectShortName>8Hist</SubjectShortName>
+  <SubjectLongName>8 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="5D1D6023-790A-4009-A1EA-CF0A94BF8F84">
+  <SubjectLocalId>9H</SubjectLocalId>
+  <AcademicYear><Code>9</Code></AcademicYear>
+  <SubjectShortName>9Hist</SubjectShortName>
+  <SubjectLongName>9 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="8865A020-68D3-4D8F-8565-36C3F821C886">
+  <SubjectLocalId>10H</SubjectLocalId>
+  <AcademicYear><Code>10</Code></AcademicYear>
+  <SubjectShortName>10Hist</SubjectShortName>
+  <SubjectLongName>10 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="884B9FA7-949B-45C6-B804-8E357E878C61">
+  <SubjectLocalId>11H</SubjectLocalId>
+  <AcademicYear><Code>11</Code></AcademicYear>
+  <SubjectShortName>11Hist</SubjectShortName>
+  <SubjectLongName>11 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="6DBCC270-65B9-4465-89E0-5AC07123D714">
+  <SubjectLocalId>12H</SubjectLocalId>
+  <AcademicYear><Code>12</Code></AcademicYear>
+  <SubjectShortName>12Hist</SubjectShortName>
+  <SubjectLongName>12 History</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="F4926CF7-3396-452A-9182-710CE5712445">
+  <SubjectLocalId>1S</SubjectLocalId>
+  <AcademicYear><Code>1</Code></AcademicYear>
+  <SubjectShortName>1Scie</SubjectShortName>
+  <SubjectLongName>1 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="F063E145-678D-42BF-B85C-8C94E216068E">
+  <SubjectLocalId>2S</SubjectLocalId>
+  <AcademicYear><Code>2</Code></AcademicYear>
+  <SubjectShortName>2Scie</SubjectShortName>
+  <SubjectLongName>2 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="3FF6F6C4-E1FF-4DE1-95A8-A35C1E5942D6">
+  <SubjectLocalId>3S</SubjectLocalId>
+  <AcademicYear><Code>3</Code></AcademicYear>
+  <SubjectShortName>3Scie</SubjectShortName>
+  <SubjectLongName>3 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="2CE5C547-D4EA-43AD-A581-01146DE44544">
+  <SubjectLocalId>4S</SubjectLocalId>
+  <AcademicYear><Code>4</Code></AcademicYear>
+  <SubjectShortName>4Scie</SubjectShortName>
+  <SubjectLongName>4 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="AA4D5A39-7A03-4DD0-80EC-F5BE9D188BDF">
+  <SubjectLocalId>5S</SubjectLocalId>
+  <AcademicYear><Code>5</Code></AcademicYear>
+  <SubjectShortName>5Scie</SubjectShortName>
+  <SubjectLongName>5 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="60A0F548-E566-45A1-94E5-DC13B6DEB46E">
+  <SubjectLocalId>6S</SubjectLocalId>
+  <AcademicYear><Code>6</Code></AcademicYear>
+  <SubjectShortName>6Scie</SubjectShortName>
+  <SubjectLongName>6 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="F3FEE23E-83C4-4CBC-8C59-F8D2D5D36536">
+  <SubjectLocalId>7S</SubjectLocalId>
+  <AcademicYear><Code>7</Code></AcademicYear>
+  <SubjectShortName>7Scie</SubjectShortName>
+  <SubjectLongName>7 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="4D215E4F-E788-4023-B4CB-6D725D4F29EA">
+  <SubjectLocalId>8S</SubjectLocalId>
+  <AcademicYear><Code>8</Code></AcademicYear>
+  <SubjectShortName>8Scie</SubjectShortName>
+  <SubjectLongName>8 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="32604405-6ACF-4F2E-96AF-E89F0A35725B">
+  <SubjectLocalId>9S</SubjectLocalId>
+  <AcademicYear><Code>9</Code></AcademicYear>
+  <SubjectShortName>9Scie</SubjectShortName>
+  <SubjectLongName>9 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="EF482646-D36C-4087-99D6-1DCC830DA517">
+  <SubjectLocalId>10S</SubjectLocalId>
+  <AcademicYear><Code>10</Code></AcademicYear>
+  <SubjectShortName>10Scie</SubjectShortName>
+  <SubjectLongName>10 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="1F3C3467-E2FC-4F31-8EED-033C66D4434E">
+  <SubjectLocalId>11S</SubjectLocalId>
+  <AcademicYear><Code>11</Code></AcademicYear>
+  <SubjectShortName>11Scie</SubjectShortName>
+  <SubjectLongName>11 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="5DF75BD2-1A4B-4695-8E6F-B6EB24B34B9C">
+  <SubjectLocalId>12S</SubjectLocalId>
+  <AcademicYear><Code>12</Code></AcademicYear>
+  <SubjectShortName>12Scie</SubjectShortName>
+  <SubjectLongName>12 Science</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="CD96D2D7-5AEF-4456-865F-BA7E95F26464">
+  <SubjectLocalId>1G</SubjectLocalId>
+  <AcademicYear><Code>1</Code></AcademicYear>
+  <SubjectShortName>1Geog</SubjectShortName>
+  <SubjectLongName>1 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="D46C76AE-A139-485B-BC99-751BC4E8C9D4">
+  <SubjectLocalId>2G</SubjectLocalId>
+  <AcademicYear><Code>2</Code></AcademicYear>
+  <SubjectShortName>2Geog</SubjectShortName>
+  <SubjectLongName>2 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="FAF67FE5-684A-4AEB-AB0F-F5C80FD71123">
+  <SubjectLocalId>3G</SubjectLocalId>
+  <AcademicYear><Code>3</Code></AcademicYear>
+  <SubjectShortName>3Geog</SubjectShortName>
+  <SubjectLongName>3 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="4DF3D71C-EE06-42AD-9065-9C38B06E6A79">
+  <SubjectLocalId>4G</SubjectLocalId>
+  <AcademicYear><Code>4</Code></AcademicYear>
+  <SubjectShortName>4Geog</SubjectShortName>
+  <SubjectLongName>4 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="3FDF6BF1-81CE-4264-B180-87545865E53C">
+  <SubjectLocalId>5G</SubjectLocalId>
+  <AcademicYear><Code>5</Code></AcademicYear>
+  <SubjectShortName>5Geog</SubjectShortName>
+  <SubjectLongName>5 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="7EA84D80-CF63-4011-8377-D4F26DC7E5F0">
+  <SubjectLocalId>6G</SubjectLocalId>
+  <AcademicYear><Code>6</Code></AcademicYear>
+  <SubjectShortName>6Geog</SubjectShortName>
+  <SubjectLongName>6 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="329E59C2-310D-4CFA-BD16-861EB06FEA25">
+  <SubjectLocalId>7G</SubjectLocalId>
+  <AcademicYear><Code>7</Code></AcademicYear>
+  <SubjectShortName>7Geog</SubjectShortName>
+  <SubjectLongName>7 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="14333E7B-7EB2-404A-BB42-EB3940894016">
+  <SubjectLocalId>8G</SubjectLocalId>
+  <AcademicYear><Code>8</Code></AcademicYear>
+  <SubjectShortName>8Geog</SubjectShortName>
+  <SubjectLongName>8 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="250F90C4-15E9-4BB4-ACB9-69B0DC7F085E">
+  <SubjectLocalId>9G</SubjectLocalId>
+  <AcademicYear><Code>9</Code></AcademicYear>
+  <SubjectShortName>9Geog</SubjectShortName>
+  <SubjectLongName>9 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="9EB0F03F-311F-4090-A87B-F709A00FCBF0">
+  <SubjectLocalId>10G</SubjectLocalId>
+  <AcademicYear><Code>10</Code></AcademicYear>
+  <SubjectShortName>10Geog</SubjectShortName>
+  <SubjectLongName>10 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="00F7FE37-FF1E-4C37-A3E4-39C5D4468BA4">
+  <SubjectLocalId>11G</SubjectLocalId>
+  <AcademicYear><Code>11</Code></AcademicYear>
+  <SubjectShortName>11Geog</SubjectShortName>
+  <SubjectLongName>11 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="3D704FB9-57DA-462F-B7A0-4C5522B02377">
+  <SubjectLocalId>12G</SubjectLocalId>
+  <AcademicYear><Code>12</Code></AcademicYear>
+  <SubjectShortName>12Geog</SubjectShortName>
+  <SubjectLongName>12 Geography</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="654E210F-9E46-44E3-AC32-BF2B43C12162">
+  <SubjectLocalId>1P</SubjectLocalId>
+  <AcademicYear><Code>1</Code></AcademicYear>
+  <SubjectShortName>1Phys</SubjectShortName>
+  <SubjectLongName>1 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="48B05CAF-83B5-41DF-9784-499567E1ECAC">
+  <SubjectLocalId>2P</SubjectLocalId>
+  <AcademicYear><Code>2</Code></AcademicYear>
+  <SubjectShortName>2Phys</SubjectShortName>
+  <SubjectLongName>2 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="24446733-E277-4F2A-90A5-173720DCF099">
+  <SubjectLocalId>3P</SubjectLocalId>
+  <AcademicYear><Code>3</Code></AcademicYear>
+  <SubjectShortName>3Phys</SubjectShortName>
+  <SubjectLongName>3 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="CAF8692E-77DC-4BBE-B856-837E58771CFE">
+  <SubjectLocalId>4P</SubjectLocalId>
+  <AcademicYear><Code>4</Code></AcademicYear>
+  <SubjectShortName>4Phys</SubjectShortName>
+  <SubjectLongName>4 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="399AA460-4407-486A-997F-B2245F0D9809">
+  <SubjectLocalId>5P</SubjectLocalId>
+  <AcademicYear><Code>5</Code></AcademicYear>
+  <SubjectShortName>5Phys</SubjectShortName>
+  <SubjectLongName>5 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="5EBC12A6-2503-4C7B-BE91-B1A3304DB9A7">
+  <SubjectLocalId>6P</SubjectLocalId>
+  <AcademicYear><Code>6</Code></AcademicYear>
+  <SubjectShortName>6Phys</SubjectShortName>
+  <SubjectLongName>6 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="17A3FEA5-929A-47D6-A13C-3AA887EF7C07">
+  <SubjectLocalId>7P</SubjectLocalId>
+  <AcademicYear><Code>7</Code></AcademicYear>
+  <SubjectShortName>7Phys</SubjectShortName>
+  <SubjectLongName>7 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="DF769677-9D7E-4178-B7B0-96699D46094F">
+  <SubjectLocalId>8P</SubjectLocalId>
+  <AcademicYear><Code>8</Code></AcademicYear>
+  <SubjectShortName>8Phys</SubjectShortName>
+  <SubjectLongName>8 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="9F97473F-2FC6-45BD-A4DC-A8F3ABE39965">
+  <SubjectLocalId>9P</SubjectLocalId>
+  <AcademicYear><Code>9</Code></AcademicYear>
+  <SubjectShortName>9Phys</SubjectShortName>
+  <SubjectLongName>9 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="07FB7CC3-22CC-42C7-938D-45A243663B10">
+  <SubjectLocalId>10P</SubjectLocalId>
+  <AcademicYear><Code>10</Code></AcademicYear>
+  <SubjectShortName>10Phys</SubjectShortName>
+  <SubjectLongName>10 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="61257116-8B4C-45C2-ABC2-8A1DCC96C81E">
+  <SubjectLocalId>11P</SubjectLocalId>
+  <AcademicYear><Code>11</Code></AcademicYear>
+  <SubjectShortName>11Phys</SubjectShortName>
+  <SubjectLongName>11 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+
+<TimeTableSubject RefId="BA2971DA-4BE4-47EE-83C7-5B43190909F9">
+  <SubjectLocalId>12P</SubjectLocalId>
+  <AcademicYear><Code>12</Code></AcademicYear>
+  <SubjectShortName>12Phys</SubjectShortName>
+  <SubjectLongName>12 PhysEd</SubjectLongName>
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+</TimeTableSubject>
+</TimeTableSubjects>

@@ -1,0 +1,32 @@
+<SchoolInfos xmlns="http://www.sifassociation.org/au/datamodel/3.4">
+    <SchoolInfo RefId="1E5AA150-CA94-45A0-A893-9EC427EE2160">
+        <LocalId>72868</LocalId>
+        <StateProvinceId>4</StateProvinceId>
+        <CommonwealthId>8</CommonwealthId>
+        <ACARAId>XYZZY123</ACARAId>
+        <SchoolName>Stivers College</SchoolName>
+        <SchoolType>Sec</SchoolType>
+        <AddressList>
+            <Address Type="0123" Role="012B">
+                <Street>
+                    <StreetNumber>221</StreetNumber>
+                    <StreetName>Jacquelin Terrace</StreetName>
+                </Street>
+                <City>MURWEH</City>
+                <StateProvince>QLD</StateProvince>
+                <PostalCode>4470</PostalCode>
+                <GridLocation/>
+            </Address>
+        </AddressList>
+        <ARIA>1.0</ARIA>
+        <OperationalStatus>O</OperationalStatus>
+        <Campus>
+            <SchoolCampusId>3</SchoolCampusId>
+            <CampusType>Sec</CampusType>
+            <AdminStatus>Y</AdminStatus>
+        </Campus>
+        <SchoolSector>Gov</SchoolSector>
+        <IndependentSchool>N</IndependentSchool>
+        <Entity_Open>1990-01-01</Entity_Open>
+    </SchoolInfo>
+</SchoolInfos>

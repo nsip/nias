@@ -7,7 +7,7 @@
         <SchoolName>Stivers College</SchoolName>
         <SchoolType>Sec</SchoolType>
         <AddressList>
-            <Address>
+            <Address Type="0123" Role="012B">
                 <Street>
                     <StreetNumber>221</StreetNumber>
                     <StreetName>Jacquelin Terrace</StreetName>
