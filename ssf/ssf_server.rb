@@ -91,11 +91,11 @@ class SSFServer < Sinatra::Base
 				end
 			end
 			
-			def post_messages( messages)
+			def post_messages( messages , compression_codec )
 				# set up producer pool - busier the broker the better for speed
 				producers = []
 				(1..10).each do | i |
-					p = Poseidon::Producer.new(["localhost:9092"], session['producer_id'], {:partitioner => Proc.new { |key, partition_count| 0 } })
+					p = Poseidon::Producer.new(["localhost:9092"], session['producer_id'], {:compression_codec => compression_codec , :partitioner => Proc.new { |key, partition_count| 0 } })
 					producers << p
 				end
 				pool = producers.cycle
@@ -177,11 +177,11 @@ class SSFServer < Sinatra::Base
 			
 		end
 
-		post_messages(messages)		
+		post_messages(messages, :none)		
 		return 202
 	end
 	
-	# bulk uploader: relaxes message limit from 1 MB to 50 MB, but splits up files into 1 MB segments, for reassembly to  
+	# bulk uploader: relaxes message limit from 1 MB to 50 MB, but splits up files into 1 MB segments, for reassembly 
 	# 
 	# 
 	post "/:topic/:stream/bulk" do
@@ -192,8 +192,8 @@ class SSFServer < Sinatra::Base
 		strm = params['stream']
 		topic_name = "#{tpc}.#{strm}"
 
-		if request.content_length.to_i > 50000000 then
-		 	halt 400, "SSF does not accept messages over 50 MB in size." 
+		if request.content_length.to_i > 500000000 then
+		 	halt 400, "SSF does not accept messages over 500 MB in size." 
 		end
 
 		# uncomment this block if you want to prevent dynamic creation
@@ -228,6 +228,8 @@ class SSFServer < Sinatra::Base
 
 			# Kafka has default message size of 1 MB. We chop message up into 950 KB chunks, with all but last terminating in "\n===snip==="
 			msgsplit = to_2d_array(msg, 972800)
+			#msgsplit = to_2d_array(msg, 51380224)
+			#msgsplit = to_2d_array(msg, 100000)
 			msgtail = msgsplit.pop
 			
 			msgsplit.each do |msg1|
@@ -240,7 +242,7 @@ class SSFServer < Sinatra::Base
 			
 		end
 
-		post_messages(messages)		
+		post_messages(messages, :none)		
 		return 202
 	end
 

@@ -9,7 +9,7 @@ Messages are received from the single stream sifxml.validated. The header of the
 Each object in the stream is filtered according to privacy filters defined in ./privacyfilters/*.xpath.
 
 The header of the received message is "topic"."stream". Each message is passed to a stram for each privacy setting simultaneously:
-* "topic"."stream".unfiltered
+* "topic"."stream".none
 * "topic"."stream".low
 * "topic"."stream".medium
 * "topic"."stream".high

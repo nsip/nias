@@ -1,1801 +1,1801 @@
 <StaffAssignments xmlns="http://www.sifassociation.org/au/datamodel/3.4">
-<StaffAssignment RefId="EF4FD9C2-923C-4B55-B0B6-5EA2BB8186B2">
+<StaffAssignment RefId="C92961C3-1A13-482A-B207-0D8E77DF4008">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>00EDCA91-6AA5-4B75-9C18-97113CFAFD45</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.42</JobFTE>
-  <Homegroup>4E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="3A805DEF-FE7A-4DC5-9B12-1AECA09B15E3">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>608B9E2E-F752-41E0-96C3-6E700058B823</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.02</JobFTE>
-  <Homegroup>2A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="4125284D-BCAB-47A2-B2A2-C09749664020">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B5ABD8FF-79D1-4C49-9937-3D52044B1FDA</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.61</JobFTE>
-  <Homegroup>3A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="505C85CD-B516-4B69-8F29-929CA60B2BA0">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>C8B6E2F9-C5FC-40AB-A51E-76157E896C49</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.25</JobFTE>
-  <Homegroup>10F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="110636D7-2901-4ECD-A336-8DBBCCBDD569">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>C91C58CC-DEA2-4286-95AA-70C1FC10219E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.68</JobFTE>
-  <Homegroup>5A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="F5209B4B-A35E-42F9-8CFA-3C6B3FE93DF1">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>ACEE4ACE-88B0-43E6-9C79-5A74952241D9</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.84</JobFTE>
-  <Homegroup>2A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="AE69240E-8A1C-49C3-A60D-1C2C3AD12114">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>678FB5A5-1689-4275-8716-C7F5DA44A76D</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.45</JobFTE>
-  <Homegroup>10E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="56874916-D93A-4A1A-ABEE-7D36D530AC16">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D37A97CD-ECAD-4229-85F0-F1C0E8C1AB21</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.85</JobFTE>
-  <Homegroup>10B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="F5E57A96-42DF-4BDD-81D9-75922F175240">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>2099143C-2D92-463F-B972-85EE9E858568</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.09</JobFTE>
-  <Homegroup>12E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="6CA9B961-E9BE-489D-8E64-A7CA944E2B84">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>C532A98E-D707-43DC-9611-7DB59BC11AF0</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.91</JobFTE>
-  <Homegroup>9F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="F9471895-50CB-4517-B1C1-067215609450">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>2EFA4FF4-3213-4693-BBC8-940E4267E33D</StaffPersonalRefId>
+  <StaffPersonalRefId>4B344056-5391-47C6-905A-B6F5D192F16F</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
   <JobFTE>0.12</JobFTE>
-  <Homegroup>4F</Homegroup>
+  <Homegroup>5F</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="7A80E296-BBCE-49A9-A15B-8ABFC086710B">
+<StaffAssignment RefId="AF1399BF-8F82-4003-9DAE-A39FEC710A1D">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>825DF847-04BD-46CF-A2CA-E0F574993E01</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.44</JobFTE>
-  <Homegroup>4C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="B0AD89D4-745D-40EE-BBFD-EE98FE823792">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>2FCFE4E3-E650-4638-A8AF-67D85552AA6B</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.86</JobFTE>
-  <Homegroup>1F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="70DBAB37-3C15-40C9-A066-7803532D6027">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>C7369FAC-ED61-4E6B-AF4B-EDA8780E6AF2</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.86</JobFTE>
-  <Homegroup>7A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="3F8BA1C5-FBAB-4527-823D-8CFB154F65B1">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>554BC0DA-DF19-4542-8E35-738AD8A8F448</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.97</JobFTE>
-  <Homegroup>6A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="3C1F8631-8C10-409D-9FED-20267DFBA0C7">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>621CEDA3-3881-4B1A-9A88-2FFBFABE8717</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.05</JobFTE>
-  <Homegroup>7E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="D6CC7A7A-D907-4096-B0F5-1B1114347B39">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>AF9434C1-74FF-442E-A834-90E408A308AC</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.19</JobFTE>
-  <Homegroup>8A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="32F99078-E781-40EF-B823-20839C5D905E">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D8949382-8A4D-47A2-9F8B-14FAFC0DB003</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.70</JobFTE>
-  <Homegroup>12C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="BEC7423F-8FB6-4E60-884D-C85E8F678B35">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>AE2435A2-8388-44BA-AC72-661230F55EB2</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.39</JobFTE>
-  <Homegroup>7D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="17A1DB6E-B1AC-4C7B-8D17-D4148D65B1D4">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>5164453B-EF27-4F82-9128-7ABE6F2BA363</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.46</JobFTE>
-  <Homegroup>5A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="BC41D19C-DB25-4858-AE3E-89844D2F3E9D">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>17F37722-8D81-4653-80A7-1EA2DC27AE84</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.56</JobFTE>
-  <Homegroup>7E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="C2D9AD16-4F22-4BA9-86AA-3D633F69FD2A">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>81D819B6-F445-479F-9D99-6217AF74210E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.98</JobFTE>
-  <Homegroup>8C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="930FDEEA-8A48-4912-A60F-D3B764CFEDEC">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>5ACA48AA-F664-4157-814E-60A06A70DCE3</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.14</JobFTE>
-  <Homegroup>1E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="6D9EBBCD-5407-49FA-8957-925C1CDAA28D">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>566CC13A-7AAF-402D-B9A3-EEA964CB55B1</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.64</JobFTE>
-  <Homegroup>6D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="3CE34A70-6F2E-4DE9-B0C1-CF12EB684388">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>55DA151D-B49D-4838-98BF-4D13EF0951C6</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.15</JobFTE>
-  <Homegroup>6D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="FDB990D4-06ED-4ECB-9CC3-93E308DF0199">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>0AC6CD2F-793B-4512-9076-D3406D71E09A</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.31</JobFTE>
-  <Homegroup>8C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="7727B881-C5FB-4E26-8039-443CF0698607">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>07ECF270-3B1F-42D3-B183-2F70111DFEA5</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.99</JobFTE>
-  <Homegroup>10E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="DC720358-0BF6-494B-BD60-B98D65D70548">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>9BE53E33-484E-43E2-BF97-59CDE7FAB3DC</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.57</JobFTE>
-  <Homegroup>4F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A3BF96C0-085C-4277-A575-7F579472F039">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>4EA073B7-F827-4768-9C55-38C40EFF7047</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.54</JobFTE>
-  <Homegroup>1A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="165AD4DA-7DCC-4414-AAAD-BFC8DDDE7D29">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>71401C00-E2D7-45AF-8CB8-C158CA0244A5</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.72</JobFTE>
-  <Homegroup>7C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="7D879D3F-3387-45A3-A4AA-5BCE5731FA0B">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>7F0660B1-7D56-4489-B6E9-3A0124E5D078</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.89</JobFTE>
-  <Homegroup>3E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="44F59724-B7DE-4DB2-952B-EE7EF9F23415">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D640DCE8-E622-4AA8-A1ED-CC2B7321BD79</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.48</JobFTE>
-  <Homegroup>3C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="E1F7FCCB-3912-412C-AF4A-F0537DDE9AE9">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>F71839AC-9D1B-42D9-ADF3-90E0E73D7122</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.16</JobFTE>
-  <Homegroup>7C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="55CCB433-9130-4A57-81BF-ACE4F47B43F0">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>DD2E702C-4EFE-4368-BFED-24B19A5EDD46</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.97</JobFTE>
-  <Homegroup>5C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A8C398D6-BF41-4F1C-99F5-BEEF8A9EFE63">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>607DF423-C111-4759-A540-26E540FC5C5D</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.36</JobFTE>
-  <Homegroup>10A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A311A213-7415-46FE-94D1-5A0A96C3A722">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>C1972904-8270-45DA-8821-0A2159C84F32</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.72</JobFTE>
-  <Homegroup>10B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="37F46C9F-9D88-4DAC-8728-63A93DCC7C43">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>F7090126-C2E5-4B7E-83EB-4D78B98571B8</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.69</JobFTE>
-  <Homegroup>12E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="6425BD80-8E54-44C2-9C15-B993094FC9A9">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>F2FCA480-BC3D-47F7-BEB7-462C6750007E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.64</JobFTE>
-  <Homegroup>5A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="FC28F78D-E691-4DA7-A831-4F4E054764B0">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>C1C2F80B-D70C-4E08-B2C2-1F16E038710D</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.92</JobFTE>
-  <Homegroup>11A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="8C70B761-3718-4BA9-BFBD-21B7F5227233">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>064F9B3A-E72B-4A5D-97A8-3E9C73A7493E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.69</JobFTE>
-  <Homegroup>9E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="502997D9-C11E-4419-90A2-2C442788088F">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>C332A569-D820-49E6-BFD1-B0C9200A16B3</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.54</JobFTE>
-  <Homegroup>1C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="EE72D99E-F351-4226-BB17-D1745ECE1B02">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>6F68D0A3-C1CB-45EF-913A-9A7F90BA9C13</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.13</JobFTE>
-  <Homegroup>7A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="376693C8-12FE-4855-8B55-D2E7811A1D98">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B2F7AC3E-A3E9-4B9C-AD31-F79786B5D25C</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.63</JobFTE>
-  <Homegroup>10A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="96914F3C-042C-4FFC-B467-1F70FDA694D5">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>AD6C5A84-6CF7-449A-8C5C-37C57EF4B725</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.64</JobFTE>
-  <Homegroup>6A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="B451108D-5220-481B-AA91-E56EC423B0FE">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>98074F9E-230C-4C89-8349-1DFE4019B264</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.28</JobFTE>
-  <Homegroup>12B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="F6938FFD-FC3A-4A08-ACF2-812E40DDB19A">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>23646B7D-6B5C-43BA-A326-BF08892B569B</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.78</JobFTE>
-  <Homegroup>12A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="7E88B61A-A7EB-4676-A6E5-161CCA6141DE">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>9C4FF940-FD88-4C24-A5C3-A2972999F43D</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.49</JobFTE>
-  <Homegroup>12B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="C165CFC1-6C57-4BBB-A3AA-C95CF749D0A8">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>A38D5049-648D-461D-828B-0A42CBD13D30</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.81</JobFTE>
-  <Homegroup>9E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="26C5841E-E502-4BCE-A9F1-40A3668FD805">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B8A109F4-BA12-48B1-AEAE-6B39B9D51878</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.33</JobFTE>
-  <Homegroup>7B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="809302EE-A4D2-450A-866E-3EFB0EEDCFD1">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>7BF8AE64-0A41-4F6A-8B7F-9E50F578FFA5</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.54</JobFTE>
-  <Homegroup>12A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="4CBE01BA-5B09-4769-803E-EF9F4BC3609B">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>04CD9E3F-0B29-4CE0-9DA9-AD4DAE2ACB23</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.65</JobFTE>
-  <Homegroup>10E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A24BFAFF-EF9B-486D-92C9-D8679E23F342">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D7FCC0A9-845E-4F78-A7B8-98875A1373F7</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.48</JobFTE>
-  <Homegroup>2A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="CD1FBBA9-F4F7-4F97-AD84-FCBBD127E8F8">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>2A1C25C6-B50F-4411-857F-C48C624136D3</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.01</JobFTE>
-  <Homegroup>5D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="E6E99464-4B8E-4672-AD96-189E585D7D19">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D966B559-A324-4AF8-BA30-295ED1A334E6</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.05</JobFTE>
-  <Homegroup>1D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="C9517341-8796-476F-B094-F7B31D58774C">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>6680E206-9474-41AB-940F-EDB76A1CD13B</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.10</JobFTE>
-  <Homegroup>3B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="1874AABF-CC06-47F8-BBA8-508BE84CD0F0">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>5911DC8C-EE21-4DEE-A2F9-45689A766966</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.30</JobFTE>
-  <Homegroup>8C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="4ACF4641-A075-4986-9F86-9C1D3EAB09CE">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>F7C43CFA-F8E0-47AA-9E2A-821B9D605183</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.72</JobFTE>
-  <Homegroup>9A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A7731230-2B9C-4EB5-8C3B-3CD9EFFAF192">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D93DA12E-C70A-4C1B-A0A3-2AD558679D23</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.99</JobFTE>
-  <Homegroup>12F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="0ACBA70F-C9B3-45C3-BFFF-7B417D738718">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B727642A-F2D6-47AE-AD16-AFD431A51D33</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.49</JobFTE>
-  <Homegroup>6B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="E73CF97C-4EA7-4C2C-8C97-EB472E1A058C">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>0085CD85-484F-4B84-A450-52CA98F24BF5</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.47</JobFTE>
-  <Homegroup>5D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="0EAEC8BB-0BFA-491D-B6BE-C5A914B71C1C">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>A917C26E-AB70-48A6-8908-C3D18B37C55E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.32</JobFTE>
-  <Homegroup>12F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="3858651C-EC14-4DE0-8DCA-4F20BEDAEE88">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>1CF1C840-E895-492A-A935-7D2E0BCCF946</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.48</JobFTE>
-  <Homegroup>9A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="F827861F-B6C2-4D56-AECE-0C4AD4CA43B7">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>4472F8DD-75C1-4B77-A40E-A1C8DD8FAE1E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.24</JobFTE>
-  <Homegroup>3A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="1DD406E4-C34B-4C9D-AE29-66E3F096781E">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>78ABF156-7B1B-48C3-B251-97A848A16B87</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.36</JobFTE>
-  <Homegroup>10F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="EDABBED3-E914-4780-8FD2-EE37656442E6">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>7503432C-3CE6-4B28-9289-F1746B9CBE0D</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.63</JobFTE>
-  <Homegroup>4B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="5404F0B4-BBDF-42F6-B738-D21F53952E35">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D3D11CB7-B767-436C-B306-39B819CFD625</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.66</JobFTE>
-  <Homegroup>5A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="7AA4489D-A23B-4C6F-A338-0787559A7BDB">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>0E9AB079-B87C-4E6E-AEA3-77942F86ECCB</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.04</JobFTE>
-  <Homegroup>3C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="D04AAB17-F637-4793-9845-8C4FD440631D">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>345321AA-8541-43ED-8BB5-4141AD6994B8</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.34</JobFTE>
-  <Homegroup>9C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="8F22B024-671C-477F-BFCE-348782AA03EA">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>BB1C5A87-EEB3-44A1-8AD3-D989A1CF2AEA</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.05</JobFTE>
-  <Homegroup>11C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="E474284B-208C-4B3C-8914-A71B927EB7A2">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>0E068F4A-04D2-4DFC-BD54-5B73FBC7E91F</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.43</JobFTE>
-  <Homegroup>2F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="82FDAB1B-3161-4C38-9E02-6E7F316CFA91">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>2E558400-15ED-4917-B73B-7E8BC4F4BC5D</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.46</JobFTE>
-  <Homegroup>6C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="78F5C51D-1F91-4467-97FA-589394621780">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>47B9AB88-8C35-475E-8A17-23CA356F0C85</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.67</JobFTE>
-  <Homegroup>10F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="9C1B3B39-9858-4048-8FCA-85FBD2971453">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>16A1047C-CB89-4900-9D61-DC2C9284073E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.14</JobFTE>
-  <Homegroup>1F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="3F75CE80-20F3-4667-A203-DAC628DE15A3">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>7B315F49-D645-4464-BD03-932262755F19</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.59</JobFTE>
-  <Homegroup>7F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="725CC65F-9B20-44D1-A455-BA314AC5BC8C">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>510F54DA-2E66-4B96-8DA7-2EE63CAA8293</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.18</JobFTE>
-  <Homegroup>11A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="4E2B53DB-639D-4878-AFEE-3E6D3E14D04D">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D97FC13F-02F6-4497-9BDC-328A2747A9EE</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.95</JobFTE>
-  <Homegroup>5B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A129CB05-7C4E-4DCD-B9B0-33B258AE5F2A">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B9827342-8A5F-4082-B4F9-AE9C12DA2760</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.05</JobFTE>
-  <Homegroup>12D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="8966B95E-4AC0-4BEB-8147-B92B21BF5738">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>31415C3D-97E6-48AE-99E7-237EBC114FC8</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.35</JobFTE>
-  <Homegroup>2C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="B3DD3CB5-8715-48DB-A5F4-63AB075BA666">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>9D4B6205-6928-47DB-84BC-E8EF08C5DB97</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.66</JobFTE>
-  <Homegroup>8E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="6627B641-6ADA-4285-9567-2C2D27B1AC5C">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>E53BA987-0B4D-45E9-823D-D262353836C0</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.28</JobFTE>
-  <Homegroup>4C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="5701F106-55A8-4006-AAEB-513D281A8C96">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>C63BA815-DD66-4DBB-98BB-FBF8138D3283</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.21</JobFTE>
-  <Homegroup>1B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="FD7B9007-50BF-47CF-A102-ABB97E98EE08">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D653200A-4C76-4960-B05F-2CCA55162D8D</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.09</JobFTE>
-  <Homegroup>10A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="0F393E33-CCE4-45AC-A5F3-DF4D89C2A824">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>49DC2E91-AD71-43C3-9F58-A1739300446F</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.36</JobFTE>
-  <Homegroup>10C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="5E3F88F1-91A0-4D5E-B55E-F0066EE4DFCF">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>1B3C5530-0A66-4869-95A2-2F3F13A33E43</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.90</JobFTE>
-  <Homegroup>6E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="D316B1BE-02E9-4691-B870-E5D044E9C5FF">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>588181B0-6B80-49C5-8AB5-8778CFD204DA</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.50</JobFTE>
-  <Homegroup>5B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="6426611D-329B-4DD3-9193-A34F26E0EEB7">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D6DDE7E4-44E5-4FAD-A9E8-502EABE243FD</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.15</JobFTE>
-  <Homegroup>6B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="4630E660-50A8-44FE-ABCE-95FDD2FE61FE">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D6916ABF-6FD0-4640-83E5-482E764D7A22</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.09</JobFTE>
-  <Homegroup>4D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="15D2D906-2DFB-40D9-B112-BCE9C25FC355">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B565ABA0-37C8-4B8B-946B-20624AEC9C17</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.06</JobFTE>
-  <Homegroup>5D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="15B80B1F-8606-486B-8576-BF3E49C90C8E">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>8A3B7D35-4792-4461-841E-AB4C50B74F11</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.09</JobFTE>
-  <Homegroup>3B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="2D80083D-B75A-4F60-A7EF-28CF9C002A4B">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>76CB210A-E9C8-4198-9CC5-AF8D1EB8ADA2</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.91</JobFTE>
-  <Homegroup>11C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="0BD73914-64D0-47AD-A9D4-E7A211D23F4B">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>323D8045-D892-487F-8F97-EC79496BEE30</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.04</JobFTE>
-  <Homegroup>7A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="D1FDEABF-2FAA-44B2-B32A-2016D0DB65FC">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>4E08DF4B-B7FF-4356-9886-7C3F80404087</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.20</JobFTE>
-  <Homegroup>5A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="7B281C7B-9008-49D2-A16E-86E00FD375E2">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>CF1C4E0B-545A-45AF-9F93-C339783B90E9</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.95</JobFTE>
-  <Homegroup>3C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="E9B7BB8A-E9C6-4DFB-9C07-3DF788CB530D">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>CB39AB83-E85B-4DC6-88D9-618D4BE53760</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.73</JobFTE>
-  <Homegroup>1C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="4AD8A21D-9107-4624-A4E2-78E7E76315D8">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>AA483E9B-6827-4BD1-A0D8-B1E361CC52BF</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.52</JobFTE>
-  <Homegroup>12C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="8273EFAE-E196-48B6-B0D1-656CFED2155A">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>3F6F0328-2690-4E7E-B704-226F7E07A76C</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.80</JobFTE>
-  <Homegroup>1D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A486F1CA-C3D3-48AC-B4E9-4A06909D421E">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>5D076BC3-068C-4CF5-856D-0AF01BE42AFB</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.00</JobFTE>
-  <Homegroup>9A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="0516819A-14E5-40F0-A9F1-3C3D048D357B">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>E74807E4-2E1A-4049-84C7-AF6890A1D712</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.28</JobFTE>
-  <Homegroup>8F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="01C808A0-D53F-42CF-9C44-774C3CEA2E23">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>03E4D220-5573-40CB-AA68-935F4557DC12</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.04</JobFTE>
-  <Homegroup>7F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="B87D0735-5475-47BC-9531-5628FD713CB7">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>5CC8E1BE-A9FD-47A5-9547-49EBB01FB3D9</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.80</JobFTE>
-  <Homegroup>5B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="2FC89634-1206-46C7-A43C-18EF63A54AEF">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>89BC0186-4A06-4003-B336-FCBBF525C0A9</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.18</JobFTE>
-  <Homegroup>10B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="E4A2ECE1-BC84-44C2-B7BB-CE548B285D25">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>0B18A69B-C463-4FE0-A204-80DA4452DBDC</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>1.00</JobFTE>
-  <Homegroup>5D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="8F275C1A-0ACD-4BA4-BEE3-417A0A3806AB">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>976D1960-4574-475A-A5B9-6F13970BA77E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.99</JobFTE>
-  <Homegroup>1B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="E5920242-D2A9-4C08-9255-5DC64B02BD5B">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>2C951107-EA87-46E5-A07D-0E7E90BF12E6</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.59</JobFTE>
-  <Homegroup>4D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="86A5B52D-D715-4DB2-AC8A-108EAFF87DE0">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>8CCBB180-F6C4-493C-9529-0082A20480A6</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.04</JobFTE>
-  <Homegroup>1D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="3533DC0D-8FD2-4464-906B-1B6A13176597">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>684C6DBB-21D5-4148-823D-BBE433B8A81C</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.30</JobFTE>
-  <Homegroup>3A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="4DCF5FF1-4B71-467B-8D2B-3CFD0F8521AA">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>49A30BF2-39DA-415D-9C43-1B39E2FCD9C4</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.27</JobFTE>
-  <Homegroup>6C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="5127B3C3-E9EE-44C1-B1B7-968308C67FF7">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>902E08F2-C098-4346-9C02-C857ABEF6D4F</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.13</JobFTE>
-  <Homegroup>3A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="DF81B0A6-464C-4218-820A-C6A37A253490">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>ECAE310C-4F6D-4F85-B34F-6BF9B929C94A</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.08</JobFTE>
-  <Homegroup>10E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="26317B45-15C3-4DE0-82F5-2353718A8E9D">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B13B0BD1-E4C4-47B8-A565-6FA024E7DF11</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.33</JobFTE>
-  <Homegroup>6D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A9DD5D4F-8B6E-4036-8375-94CC037C12A6">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B808D056-1B28-4145-BB85-F29C879E9E3E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.28</JobFTE>
-  <Homegroup>2A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A0BDADA8-80BD-4756-9C72-5FD3712360C9">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>3C3F5BBB-934D-4024-82FF-7B053D433AD4</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.63</JobFTE>
-  <Homegroup>4B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A8840C73-B143-4179-9B08-5427E0FB95DA">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>431C17AB-7C69-494E-A3C2-3FE0DB9F1253</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.02</JobFTE>
-  <Homegroup>2A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="B31655F0-630E-4F56-9DF3-CB94776C19CD">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>DBDB7BB8-8984-4BBC-B1DF-C1F2D4A1A977</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.51</JobFTE>
-  <Homegroup>9A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="C5A3E4C9-4318-404C-811C-B2E65091F725">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>9C4F0136-C23F-4832-8FCD-170F59A79055</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.64</JobFTE>
-  <Homegroup>7A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="D90BDF80-4302-42B1-B4A6-C26749B0CB05">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>16E4A260-4489-4B0D-862D-FDE3AA633936</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.13</JobFTE>
-  <Homegroup>8F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="31ED51F7-3C26-4CC5-97D0-9416DCE25F39">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B8ECB768-86C3-4A09-936D-B7C7742FB317</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.07</JobFTE>
-  <Homegroup>12B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="E4CB6342-9D4A-4E9C-B00D-F46F9CCEB2E3">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>63DF1E1A-69AC-4236-9F6B-694B046A550B</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.44</JobFTE>
-  <Homegroup>11B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="57A9D3FC-7DF2-458E-844E-CC926C91412B">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>E3B6D3DA-0238-4B7E-954E-450B74D85E77</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.10</JobFTE>
-  <Homegroup>1D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="855D887E-305F-40E4-97C2-1F16FD313621">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>41263B4B-E566-49C1-9EC5-0128AB8278DF</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.93</JobFTE>
-  <Homegroup>7D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="4731C951-634B-4F6E-9409-249B3333A7DC">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>49BFC0CE-82F5-47E9-9FB6-A5D2CA9902B6</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.48</JobFTE>
-  <Homegroup>5C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="C61C3F69-2D1D-4666-AE19-BEA07D714534">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>135B6F7D-9420-4FBF-A275-24F3DCA007DF</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.12</JobFTE>
-  <Homegroup>7B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="CACFBB65-686D-4276-9E30-DAA04B0ED756">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>EF3BAE84-16BA-484F-AFDB-9265FCF2CF76</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.66</JobFTE>
-  <Homegroup>6E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="E643CB8F-E8D1-4215-ABB5-99BFBF0DC167">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>4B29C83C-0637-4FB8-AB8F-D3E4DC5010D0</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.15</JobFTE>
-  <Homegroup>9C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="64F377EA-C82E-49F4-BC96-AC83384E452F">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>3B44DEAB-C83C-40A3-B734-E0644A529E38</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.24</JobFTE>
-  <Homegroup>7F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="59E5F0F3-F812-4AA6-833B-C4A29B8D7B61">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>FAF3032B-9412-40E8-97A7-94594DADEF15</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.41</JobFTE>
-  <Homegroup>7C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="6A25B168-546C-473B-8861-DFF3D4E3F3C8">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>63E586E7-832E-4D91-BDF9-0A3AFFC748D7</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.84</JobFTE>
-  <Homegroup>3D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="B306A107-8EFF-4783-9123-1459C7948815">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>5A10170F-57FE-4F5B-A386-D633F0D96D0F</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.22</JobFTE>
-  <Homegroup>6B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="4D6D25FE-DF8C-4702-9A4D-E0F5FEAA8002">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>F2D01C12-43DB-47BC-9ECD-E53BC54D85D0</StaffPersonalRefId>
+  <StaffPersonalRefId>2B0883BF-8530-4E11-8438-E2E24D2E2FB0</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
   <JobFTE>0.55</JobFTE>
-  <Homegroup>9B</Homegroup>
+  <Homegroup>8C</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="9DF06609-C359-4FD8-96D0-01BB95ADB822">
+<StaffAssignment RefId="A306A660-917C-458D-9D75-58E05B71CFC3">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>A736357A-887A-4E04-9551-6B326FEA06E3</StaffPersonalRefId>
+  <StaffPersonalRefId>D6BD54EB-E267-4624-B24B-88359EF7ECE6</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.83</JobFTE>
-  <Homegroup>4F</Homegroup>
+  <JobFTE>0.72</JobFTE>
+  <Homegroup>2A</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="654AC3B4-A03E-4D80-AEF5-AA8E4DFDFD36">
+<StaffAssignment RefId="F6A7A6AE-3AFB-45E9-A3E6-F008FEF0E5D0">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>CBA681D9-624D-4D42-B8D2-CE3EC81CB27D</StaffPersonalRefId>
+  <StaffPersonalRefId>C0549995-AF20-4A42-9540-0D9D78D60D6E</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.19</JobFTE>
+  <JobFTE>0.36</JobFTE>
+  <Homegroup>11C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="7109D8EA-D778-42BD-9761-5EE6A5E341C0">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>8BE6579A-AE5B-4D33-89E0-DB453E19EE45</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.04</JobFTE>
+  <Homegroup>10A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="5204476C-5BC5-4947-8039-2DE0BA973967">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>75AB9554-49A2-4318-B5B5-89F93FE22CD7</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.82</JobFTE>
   <Homegroup>11F</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="241D7E01-0513-4811-A3FC-10AC61034902">
+<StaffAssignment RefId="4A1D6BB8-367A-4BBC-B7D8-7A6277E68FE4">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>00AC0273-58AB-4BC6-A86D-E8179E35284E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.17</JobFTE>
-  <Homegroup>9D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="FAA6790B-9FBD-4DA7-9A66-A84C2855A42A">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>4AF6D712-1B3F-4171-9F70-0DEC40F90D9D</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.99</JobFTE>
-  <Homegroup>6D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="F6B76EF8-5369-4B9D-8BEF-63194E36F627">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>18304A90-4686-46CE-88ED-C86E2176C4C2</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.83</JobFTE>
-  <Homegroup>3C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="EC3440B6-48E6-46CA-BAF2-28493AEE1453">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>BBD31D3C-9EC8-40DF-B685-BD17AD217E38</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.36</JobFTE>
-  <Homegroup>7C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="AA3BD428-B77E-493A-95A9-690374A6852D">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>7F26DB32-DF63-4FB7-8941-D7A8CE9093D0</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.84</JobFTE>
-  <Homegroup>3B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A6A5DD68-56BF-4B65-B541-E72416E0678B">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>CC83E7BA-24DC-4A3F-8ED4-939EC430354E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.16</JobFTE>
-  <Homegroup>1C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="43510D26-45AF-4801-AB2A-F2DB3027FF3D">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D0CAEA34-9AF5-4631-92AF-D845A6BA3745</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.09</JobFTE>
-  <Homegroup>5C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="3CB516D2-DC67-45F2-B066-F9DB4591CA61">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>7F4E22D4-5BCB-47A3-B9D9-CC658B2E0A9E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.79</JobFTE>
-  <Homegroup>7A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="552FD239-9F2F-4A58-B5EC-41F695765533">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>3BF59FA0-054A-4238-819B-3D8FB632ECF8</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.52</JobFTE>
-  <Homegroup>1C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="21D100E7-53BF-4C0A-8167-15BE782B8F96">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>8C85B9B5-2F4D-491F-B5B2-C05BED816778</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.21</JobFTE>
-  <Homegroup>1E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="BCAF9085-F5E6-4637-9C7C-A43D83B6D6A9">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>9897E7FA-BF95-48D9-B26A-36320A4F4AE1</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.89</JobFTE>
-  <Homegroup>9B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="28567E11-E0C7-443E-8D0E-4BEAAEC742F3">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>5662A444-422E-46D6-835F-C5516636BDFD</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.04</JobFTE>
-  <Homegroup>11B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A77289F8-FAAC-4386-AD3C-4E691A18A6D4">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>97726C26-764C-4F95-85DD-C833EA898320</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.67</JobFTE>
-  <Homegroup>2C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="C7F08521-B3A9-4D2A-A79B-AF41610F35DB">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>1DB1D252-6101-4614-B91F-EECA41C5284B</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.20</JobFTE>
-  <Homegroup>3C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="C69F7A5F-6BBE-4708-8725-AA81A3A69D0A">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>A9EA42A0-6C84-472D-9ED6-9D12069097F2</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.19</JobFTE>
-  <Homegroup>5D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="644F3608-1FEF-4BA4-9941-28CD6FDE2F98">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>7D6F7130-37DA-4D90-B2C1-7C08243D283F</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.68</JobFTE>
-  <Homegroup>8A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="DFCEF8C3-A9B7-4C59-BA63-DBBBDA426EB2">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>61F3A2D7-EFF6-425D-86AB-675A5EF00D90</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.87</JobFTE>
-  <Homegroup>4E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="11282337-01E9-4C48-8950-36F835548D35">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>22CEC6AA-F995-407E-9B48-6AA33E9B9C9D</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.00</JobFTE>
-  <Homegroup>4E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="5E9E8067-8464-4E8D-8D49-651EC36CF429">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>4AA216F2-DC7B-432C-838B-0C0DFED35B85</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.93</JobFTE>
-  <Homegroup>1D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="B481F88E-2D6D-4320-8A82-41D0D905F4AB">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>EB7AE618-1111-404F-9CCA-7A6097066D71</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.05</JobFTE>
-  <Homegroup>9B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="EB77DA6D-AC49-4406-A9DA-4E53B5489E37">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>69EE8018-F652-4CB3-8F99-F0CFEE1E76DC</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.22</JobFTE>
-  <Homegroup>1B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="00C47747-3B25-4E13-9197-7E6A3FAFC899">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>2AE810FF-6C35-4CC2-A209-8109EE9043AC</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.17</JobFTE>
-  <Homegroup>1D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="3B66CE65-4EC1-43AC-B35B-6E33FA0A76E5">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B282223F-DEFB-4D9D-8362-AB361731634B</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.79</JobFTE>
-  <Homegroup>1D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="D63183BA-B5E8-466F-BB01-90BCA31B4181">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>539998FB-458A-4C0C-9AA6-C2DE2D11591D</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.25</JobFTE>
-  <Homegroup>8F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="D7789A40-6A86-4AC6-A54C-8CBE31AA8BD7">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D19B6149-68E7-4799-AB30-C6588D95EF2E</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.70</JobFTE>
-  <Homegroup>11D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="BAFB3B45-60D4-422D-A559-E0EBC7523645">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>BB61502E-FE20-4565-9F1E-945C72571839</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.62</JobFTE>
-  <Homegroup>6A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="E3587493-1F75-45C9-9375-DB3C2D9929A4">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>9F3A4D86-E0BE-4D10-A6A5-6BF2F2471C12</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.65</JobFTE>
-  <Homegroup>5A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="5051A4BC-BBA2-4C84-8F2F-E86C7C269B94">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>6ECA9B31-B248-425A-A0D7-203A97255BA0</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.49</JobFTE>
-  <Homegroup>9B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="C99A109A-45FD-4FDF-9E4D-00115559521E">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>642AD703-4063-43C6-A5AB-77515B7D1EEA</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.31</JobFTE>
-  <Homegroup>8B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="CB8CB621-F571-410F-8CDF-F3B6863EED33">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>65D5D890-BC65-4EC2-8D54-94CC0BF5D7B4</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.49</JobFTE>
-  <Homegroup>5D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="3411E1F7-37E4-48ED-A9E9-4CEFBC886DDD">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>7B3A8656-C382-4A73-90BF-C0AD9153BB88</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.16</JobFTE>
-  <Homegroup>8A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="25C5FC64-04B5-495D-8107-67C18F9A2A1E">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>E02A686F-91A2-4CEE-B037-D5F6B60B65FC</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.04</JobFTE>
-  <Homegroup>3D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="7B355AC4-81E2-4E3C-80C2-8D62EB3146F4">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>1FD0C06D-7486-4394-BED9-08EAC32744CD</StaffPersonalRefId>
+  <StaffPersonalRefId>39977E58-F6C8-4CCD-BF39-6F9548DAF216</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
   <JobFTE>0.80</JobFTE>
-  <Homegroup>2D</Homegroup>
+  <Homegroup>1F</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="872BD714-B163-42D4-BFF1-6AF1F3D919AA">
+<StaffAssignment RefId="B27166F8-5022-4120-B44B-7D5AAD09821F">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>534CD912-EBEE-4704-B1BC-FAF45E4D0829</StaffPersonalRefId>
+  <StaffPersonalRefId>64613DA8-47FC-466D-8020-F7DC1A571B40</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.78</JobFTE>
-  <Homegroup>9E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="5095CBC6-86F2-4A26-BC5B-A59997374A3E">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>1D4CA246-7A0F-4C3C-9790-5BD5745FB191</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.26</JobFTE>
-  <Homegroup>8D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="ECDAEA29-CA5C-4963-AB65-B61EB4E8CC1B">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>493B1C84-AA22-4833-A9E1-D21B265A1E73</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.42</JobFTE>
-  <Homegroup>2F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="F097DB95-E486-4E56-93B1-1850662C499B">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B7EB4F48-6DC6-4F45-BD0F-3E0E353F6134</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.07</JobFTE>
-  <Homegroup>3D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="F0030AFE-31B7-4000-B5B0-95F30DBBF0F4">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D58489CE-7C6E-4FA1-9907-D5316EC0B450</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.31</JobFTE>
-  <Homegroup>3F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="F8FAD708-AD61-47B3-8F58-1E45201BBFBB">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>F0D685D5-63B6-4582-9C1A-F47829E98362</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.79</JobFTE>
+  <JobFTE>0.73</JobFTE>
   <Homegroup>10C</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="F5382900-1508-4690-A693-7D58E82F99EE">
+<StaffAssignment RefId="E597C7EB-3F5C-4F26-9DA3-F3633D1FE707">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>AD9518E6-72F3-4589-83AF-41DF4DA08F28</StaffPersonalRefId>
+  <StaffPersonalRefId>A446F73F-8F5E-4429-80C9-3AA20725AEE1</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.29</JobFTE>
-  <Homegroup>8C</Homegroup>
+  <JobFTE>0.57</JobFTE>
+  <Homegroup>2E</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="AB1F3D94-3445-419D-B38A-D4555939A6F8">
+<StaffAssignment RefId="272D3EFB-8C71-4548-A4E5-FCF85B482548">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>18677565-4755-4E60-949A-46ED3D248C12</StaffPersonalRefId>
+  <StaffPersonalRefId>5D0A81FC-F737-4F70-A752-1DC5CE067A58</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.50</JobFTE>
-  <Homegroup>8B</Homegroup>
+  <JobFTE>0.35</JobFTE>
+  <Homegroup>11B</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="C9EA0F5F-4E9A-4A9B-A240-DEFD77BCC8C7">
+<StaffAssignment RefId="FCAA4E1C-2B09-490B-A507-6EA467E44660">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>53B164C1-0534-4FB4-9504-D59DAFFB5EAF</StaffPersonalRefId>
+  <StaffPersonalRefId>1A2E1D14-9C57-4CE3-A2B2-C2C73FC713E3</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.44</JobFTE>
+  <JobFTE>0.00</JobFTE>
   <Homegroup>6C</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="00D0B2F4-F3F7-4702-8224-86E44BEEB1AB">
+<StaffAssignment RefId="861C5B58-FD68-49F9-83EB-35CD7256EB01">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>1E0AF5CA-3FDF-457C-BE67-74D27E0CEFD5</StaffPersonalRefId>
+  <StaffPersonalRefId>61016168-27BE-4E96-B438-EAD08C611D3F</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.83</JobFTE>
+  <JobFTE>0.33</JobFTE>
+  <Homegroup>2C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D2B0B958-B5FE-4DD1-907B-8DDEEB605DC2">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>E12455C2-36E9-4146-BC47-DB941FE26BA0</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.64</JobFTE>
+  <Homegroup>2F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="35A589D2-9FF5-426C-9EB2-2CCAC6FF74AD">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>92D6F744-FC49-4DA8-9E9D-D0FD3A0A0D30</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.52</JobFTE>
+  <Homegroup>1F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="E03FFAEC-53E8-4CB1-8BA7-3B19CFD2CD3A">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>8DA5C6A1-A340-40D6-A71B-A6EF45666A3D</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.87</JobFTE>
+  <Homegroup>3E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="BE216BB5-DDBE-47A7-9474-AE6907D76CA5">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>7AF5A299-73D7-4824-BC56-1103ED786E5D</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.27</JobFTE>
+  <Homegroup>5D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A4749A07-4E09-4185-AF05-BA26BD4066AC">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>91F64961-71F8-4C80-B7D2-C80547AB471A</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.74</JobFTE>
+  <Homegroup>1A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="85ACCE96-D86A-41E8-83B2-27CD03710C70">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>C315156A-2BBB-4638-B1FD-1833E9F0B04D</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.15</JobFTE>
+  <Homegroup>9B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="E506C044-6C78-4FF7-A120-A50A38F59923">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>6EC9BEC8-07E7-4A78-A676-1252FC3D9E7C</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.51</JobFTE>
   <Homegroup>7B</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="2D4D9EED-ACAE-45D9-9FF3-111ED12E9C15">
+<StaffAssignment RefId="34604594-2064-4A4C-9CC8-57099191BE05">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>9D7A5D23-F1E1-42D2-8DD6-6C9EF82C7DB1</StaffPersonalRefId>
+  <StaffPersonalRefId>C9403E00-18C5-46E7-B132-260CCA599E35</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.79</JobFTE>
+  <JobFTE>0.45</JobFTE>
+  <Homegroup>3C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="67E30D36-0BCD-45C2-AEB0-6B577762E5B8">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>2C823C69-DDF4-4F32-8C7A-B6E14AFF0435</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.87</JobFTE>
+  <Homegroup>8E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="90F4C5DE-0D37-4009-A3D3-40D5179FE695">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>7CD4E2AE-1983-4BCF-A470-B26601238F01</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.42</JobFTE>
+  <Homegroup>7B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="F84D4734-683A-46D9-9D3E-A4C360540EEC">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>CC2E4031-30AB-47CA-BB32-3EE5187765CD</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.55</JobFTE>
+  <Homegroup>8A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="6A5482E4-9C98-41A4-8468-2DF80FB25F02">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>B5594A91-CF7A-4785-85AB-75B0DA3DD433</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.20</JobFTE>
+  <Homegroup>12A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="93222E93-259B-4D3D-AC58-D13DF685D24C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>70EB3595-BA09-4D5A-983B-A69D8E31AA54</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.92</JobFTE>
+  <Homegroup>4C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="C4091F81-8D80-45F8-8C70-6CF6A2572CA9">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>3CB83D39-DB20-401E-AD90-DC9E9EA1CDCA</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.92</JobFTE>
+  <Homegroup>9C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="0666EC78-2132-4C7E-9533-F0D62270D7BA">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>ED1EB427-B370-4FA8-874D-1ED2B6CB9919</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.85</JobFTE>
+  <Homegroup>5F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="F6129BFD-E485-4BF3-87E9-49B0E919D536">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>1919B19E-98F0-4E8F-9925-BCFC49353BCD</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.43</JobFTE>
+  <Homegroup>2D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="BE0CC827-6D11-40D3-98E4-EFFD6C735482">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>A6D57460-4DB9-41C5-A781-2027D9BAE440</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.51</JobFTE>
+  <Homegroup>11F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="BD40BD03-B840-475D-9E2F-CDC5D8F2FE55">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>7D0650E7-0EC2-4345-A676-A0EE2128D3F7</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.05</JobFTE>
+  <Homegroup>11F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="9D52CB55-BAF2-4ACE-93AA-C4A4BA8BCD4A">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>439698A3-A36A-445E-93FE-FE039A41C896</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.63</JobFTE>
+  <Homegroup>3E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="88F0C24D-A8E3-457D-BDC4-5B8FD07E5986">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>A99E9675-D82D-4E2E-9414-C3323430EF84</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.90</JobFTE>
+  <Homegroup>8A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="60E6C434-1856-4ED8-A4E6-E6D92E5A13CD">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>2E534D72-A390-4D53-9F5F-73A15B36CBDE</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.53</JobFTE>
+  <Homegroup>11B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="00991ECE-6CD8-481B-822D-7E005900AB9B">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>409087B2-80F3-4636-8768-CE44C084DB37</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.45</JobFTE>
+  <Homegroup>12B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="172988E8-2988-4B55-A0EC-0B175ABBFFF0">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>6122291A-E352-4FFA-B3B0-944361A71777</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.60</JobFTE>
+  <Homegroup>8B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="14E82208-F257-4ECE-ABE0-7637366C92B3">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>31919B79-446F-499E-AD58-FAAE56A8018F</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.91</JobFTE>
+  <Homegroup>6F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="919F182B-3E96-4CB3-A54E-275E85AAB649">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>745EC71E-CD74-4D79-9D4F-ACEAEA469C4B</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.16</JobFTE>
+  <Homegroup>5E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="0C3EBE8B-FA04-4794-8DBE-1414404969AF">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>23F087DD-369B-4F15-B72A-4CD84676BE62</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.29</JobFTE>
+  <Homegroup>6C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="7ACE7BA5-8664-43F5-9797-DB9691C49B93">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>6920E52C-BCA3-4D42-A44F-C5F29530904E</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.69</JobFTE>
+  <Homegroup>11D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="356E9CDB-4442-4369-9655-1E4F1F0D2199">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>D9129D93-B4D5-4A2E-9B03-845EF2D03B87</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.12</JobFTE>
+  <Homegroup>8F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="9E13D72A-F42E-4A85-BC99-207366349A4B">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>312EB5DF-366E-4394-B826-CE62BAD52878</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.44</JobFTE>
+  <Homegroup>1F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="34BBB5C8-5D3A-4E09-AB2A-CF5E70578454">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>072F9CD2-D890-4B75-99D5-854820100BB9</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.03</JobFTE>
+  <Homegroup>8E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="CCCA972D-9FD9-4564-8B72-3351FE51BDB2">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>025498CE-2832-418E-9A19-E474DCA39867</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.10</JobFTE>
+  <Homegroup>12C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="21D845BC-FA10-4D98-AC32-B353DC5CD30C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>C6A3D8DA-B617-425A-A430-0A71896EA53A</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.55</JobFTE>
+  <Homegroup>12D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A0FAE4BB-385C-465D-B11B-5FA38D5B4CBF">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>FC998A16-349F-420A-BE7E-3F8792E10CF5</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.90</JobFTE>
+  <Homegroup>6A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="6968EA86-59EA-40FB-9055-51B93A49FEF7">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>5B9D54B2-641A-441B-86D7-973E313D0683</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.93</JobFTE>
+  <Homegroup>4C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="3AD88DB7-E0BF-4D56-9408-5C48D08AE636">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>6B288E49-B818-45A9-B364-4D4698F52BFD</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.34</JobFTE>
+  <Homegroup>3F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="AFADC2D7-B051-48AC-9A9B-9501AB971D4E">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>C46E6474-C055-4668-839D-162C8964B703</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.60</JobFTE>
+  <Homegroup>8F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="93389A11-1FC3-49E6-83C8-7D0627003DFF">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>444251B5-7DEC-4EA8-87DA-9D0006F14CC5</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.33</JobFTE>
+  <Homegroup>4D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="9133ED4C-A50D-47E3-A2BF-DD0B8E94775A">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>0FE43AC3-92F4-4924-9AD8-5BD53FF8AA6D</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.19</JobFTE>
+  <Homegroup>1D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A7E271C5-D916-440C-A75E-96ED695BEA88">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>F4033BA7-A390-4E58-96D7-766D8CAB36DD</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.68</JobFTE>
+  <Homegroup>8F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="116E9C93-3AFE-457B-83F1-6797B6A3E146">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>07FB52BE-C8FF-471F-B6A6-39CBA7DD168A</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.59</JobFTE>
+  <Homegroup>1D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A37CA9B7-AEEF-4ADE-AAA5-6570D0DC6A2F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>BEB44E06-CDFF-473E-B746-36B6F852F4F1</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.60</JobFTE>
+  <Homegroup>11B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="6B23A65B-F940-4A16-B481-DAB399ED36E9">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>CC8A8E16-88B0-4203-BC1B-4FAA50204D2F</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.42</JobFTE>
+  <Homegroup>12A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A3CCA711-7E60-4FAC-821D-A9837991FC93">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>2EFA26A2-079A-42A1-9B3E-A3F26AFE2C5C</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.67</JobFTE>
+  <Homegroup>8E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="82C88992-3ADD-4497-9E43-9CC04BD4851D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>2C1A0341-69C0-4934-8862-D81FFB784958</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.02</JobFTE>
+  <Homegroup>10E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="90033BF8-77A7-4988-AF42-32D0AE1475E6">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>A9919FDE-BAD9-437A-8B77-0276ABFCAF6A</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.97</JobFTE>
+  <Homegroup>9D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="8963A7AE-FD24-493F-81A0-C3145FDE655D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>B47BBBC8-4898-4276-9FCA-0E306B79B3CD</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.22</JobFTE>
+  <Homegroup>1C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="CCB85C14-52D6-49B6-9D1B-D2CD892C5403">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>E6F0755A-0DDA-4DB6-89A6-FE3FEFF96B98</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.17</JobFTE>
+  <Homegroup>6B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="1122EC61-5F37-4A83-92D7-BD2AA81D4956">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>AC4701A4-332C-43ED-BE49-60E1121EB387</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.53</JobFTE>
+  <Homegroup>4F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="FC4FC3BF-BCF1-409B-8F4E-5E8076501F7F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>287CF4C7-06D8-46F8-B3A5-0416364816F5</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.69</JobFTE>
+  <Homegroup>4B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="FE78226D-9134-4D15-A45C-88E6C05CC1BD">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>9A9D1C82-D516-458B-B124-AE4D4016ED2A</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.17</JobFTE>
+  <Homegroup>12C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="0F040E48-048D-43BA-B035-23B490A5A6BB">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>3E311F94-C6CC-4ECB-80E2-E4FB15B856FB</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.45</JobFTE>
+  <Homegroup>12A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="7B0C35F3-D231-4AE7-867A-68398E40DBF9">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>D47D8991-FCE6-4B02-A6E6-4EAE1499C7E8</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.35</JobFTE>
+  <Homegroup>2F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A3757168-8E30-4A7C-A6B1-38BA0FA9A09F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>A2499A4A-DDA3-409E-B552-8F6354D01BD8</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.69</JobFTE>
+  <Homegroup>9A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="CA69BD22-A8A6-4E84-83E6-82A97BDA5119">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>4AD53E33-2597-44DD-8ED3-115D0762C5A2</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.20</JobFTE>
+  <Homegroup>2D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="ED1237AB-F3BA-48A6-8453-664CC6943573">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>590E7F58-68F2-44F1-B553-2A67F22650B0</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.67</JobFTE>
+  <Homegroup>5C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="AA7AAD00-0F71-430C-B6CB-75EEC9B50115">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>1E0BF638-BC97-4FAB-82BF-DC8AE7084EC8</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.45</JobFTE>
+  <Homegroup>9D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="2F34076A-D44F-443F-8FC8-FCEB8010F03D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>C8AD72B7-5510-422F-8D8D-34CF034281CF</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.02</JobFTE>
+  <Homegroup>9E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="CD822FEA-C451-4CC8-B4F4-5C533979C819">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>56DE1AE1-4246-4946-B55B-B0D8D2A283AF</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.12</JobFTE>
+  <Homegroup>3D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="28776076-A9B7-4C19-8CDF-B4965BDB2A8B">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>C824EF58-512F-40FD-9B82-2559A8CBFD52</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.85</JobFTE>
+  <Homegroup>11A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="7A538801-0B0A-419A-B39D-3E7FEBFC05CE">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>3255146E-528A-443D-916E-C1EB0C00847D</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.01</JobFTE>
+  <Homegroup>10B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="3A0A4311-6C02-4356-907A-A444B0463708">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>7BF33AD3-2483-4288-81B5-ADECF8294E28</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.58</JobFTE>
+  <Homegroup>3E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="7D6A8FE3-83B0-4A9E-BBC2-AEABED30E560">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>61E8DF5E-B11B-4BA2-B435-1164E35E1184</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.20</JobFTE>
+  <Homegroup>1C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="F6E532A1-D60B-4CE7-9541-EF53AFD9F54C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>40109FAC-7A8E-4C08-8DCD-00CD7C6A1263</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.78</JobFTE>
+  <Homegroup>1B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="207BC4EA-3568-4359-841E-A7BB75641AEF">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>37A2E26B-799E-4627-B2F3-4330E5A0791D</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.69</JobFTE>
+  <Homegroup>9C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A959C7AF-EBBF-403C-BDBD-3B14D96F8597">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>5920C11E-1EF0-4109-BD7D-1F7B1447C1E9</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.93</JobFTE>
+  <Homegroup>10A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A53050BB-4C0E-4565-B492-F4AC8B12B588">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>F8CD794D-8549-44C4-8A6A-891B86E1AF91</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.64</JobFTE>
+  <Homegroup>5B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="3ECD4F32-8C3A-4F73-BD71-FC78DF9D3822">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>FF829989-BFAA-4D02-8D90-5DE588E114FB</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.34</JobFTE>
+  <Homegroup>6F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="18E60D4E-3FA6-4787-ADCB-B64FFF8B3981">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>8D4C7F7C-1709-4E39-A0AA-8F2293DF6E17</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.24</JobFTE>
   <Homegroup>2B</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="3BF155CE-AAB9-40E3-86BE-BBE73D457790">
+<StaffAssignment RefId="1FFC7F1E-5824-4415-9F2C-D9E43C80549F">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>8EF8A276-28AC-4866-9EA4-91066780D993</StaffPersonalRefId>
+  <StaffPersonalRefId>0467552D-BB9C-4229-AC30-C2EE4A991800</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.39</JobFTE>
-  <Homegroup>3A</Homegroup>
+  <JobFTE>0.14</JobFTE>
+  <Homegroup>12A</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="B9B32A8C-A4EE-4066-95D6-A880D8DBF7FD">
+<StaffAssignment RefId="970E61D9-03C5-41E0-BC7F-686055DFDCA3">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B2406BC1-B836-40FD-B2A4-E60ED192FDF7</StaffPersonalRefId>
+  <StaffPersonalRefId>CD5648B6-194D-462A-9195-C65CC4641020</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.36</JobFTE>
+  <JobFTE>0.41</JobFTE>
+  <Homegroup>8B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="1D84C122-A0CF-4166-AA25-4AB99922C531">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>41927482-BAAD-4229-8B4B-1CA23917993C</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.24</JobFTE>
+  <Homegroup>7E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="2BADB204-B956-4C16-8F3D-C0BAF5CF7D03">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>C9F11A58-3794-4E70-9508-36644C073EC5</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.37</JobFTE>
+  <Homegroup>6B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="C399B2F6-D39D-45A3-9B48-CF0DD1CC3B6C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>8D622108-4D82-4444-AEC1-ED5FB6341A94</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.87</JobFTE>
+  <Homegroup>6F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D5612534-3108-40CF-94A6-33FD90EEF122">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>590AB120-7949-456E-9037-0E5B5A24FA31</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.16</JobFTE>
+  <Homegroup>3D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="667A82F1-9C06-4665-B71D-33A948314A01">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>6F9F8734-CC04-4879-BB96-55093E6BF970</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.25</JobFTE>
+  <Homegroup>3C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="EF8C4A4D-D2D9-4EBD-9E40-AC9F73618B50">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>189A1AEF-A871-40C6-90CB-E2CC060A7586</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.01</JobFTE>
+  <Homegroup>3D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D9717B1E-4474-42A5-A89B-168E3DE2EB08">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>AB56D2F8-59ED-40CD-BCD8-BF1C21744066</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.46</JobFTE>
+  <Homegroup>12D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="BF888F0C-2B4F-4F44-9BF3-A9D30EBBC122">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>DA2ABCE6-A895-4C19-A9C1-C6D1095A1023</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.03</JobFTE>
+  <Homegroup>4C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="F0AA2FD7-A7A0-48B7-AE4A-6EBB4EEC587F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>79C98B2A-B9C5-42FA-AD00-3A5336EB070A</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.53</JobFTE>
+  <Homegroup>10C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="1FF391D0-8796-4E3A-9928-2FC159D31C1E">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>12F271FD-4689-4552-A01A-C785D1A22D0F</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.06</JobFTE>
+  <Homegroup>12B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="24AF15C9-06CE-472B-B1A9-4FFD4EE94B9D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>C0EC9BFA-8974-4269-BC15-1434635AB8C9</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.78</JobFTE>
+  <Homegroup>10A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="BB1B9D5B-710E-4B69-AB35-1D08F3C5C9AC">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>539BED51-92FC-402B-BE6B-8A77525A673A</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.89</JobFTE>
+  <Homegroup>7E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="B1350AB4-9672-4665-88F1-1C8DEED99DBA">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>B9798C13-6B11-4D2E-9631-FDEA666973D2</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.56</JobFTE>
+  <Homegroup>12F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="6D5A3636-9D22-45B6-8957-D76B0DDA9359">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>D6D4B706-4693-4A82-8DE3-AD5E5B305919</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.59</JobFTE>
+  <Homegroup>10D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="851236CE-C01A-4A84-B262-20C28C82126F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>2C0E3F36-B0B5-45C1-AD21-15A8DA4DCC79</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.77</JobFTE>
+  <Homegroup>9E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D576836E-BBAA-4EE5-BFB1-B813C99F85D1">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>EC866CCA-CF82-4A85-BDB0-B47A03D99772</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.03</JobFTE>
+  <Homegroup>5C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="0672C482-E51B-4242-8027-41DA74903D38">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>96759FCA-36E7-4242-B69E-FFAF351BFCD0</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.26</JobFTE>
+  <Homegroup>12B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="9D2AE96F-FD81-4EE0-9803-8F616318BCA8">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>4E311AC1-7E1C-4AA1-96FF-FBC66E98AA50</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.24</JobFTE>
+  <Homegroup>5C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="E07DA785-E4BB-4709-94D2-6BE123F24A94">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>2949882C-425C-4A57-877A-9852ED113423</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.31</JobFTE>
+  <Homegroup>10A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="DA813282-C846-4536-A65C-16D47C2D406C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>86706E54-9B9E-4C1D-AA75-97123141574B</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.07</JobFTE>
+  <Homegroup>5C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="E3574BAE-8F9E-4B28-8B3F-E844DBF23A4F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>66D0CB3E-6903-40D1-8FDF-8FB89176FF77</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.22</JobFTE>
+  <Homegroup>8A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="284BB1B2-DA31-44B3-8E37-BC3FC9ED2D1D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>D0474151-B28D-4950-9E84-C7E1108BD085</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.44</JobFTE>
+  <Homegroup>10D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="DFA46A7F-4A3D-41A6-81FE-D990C7B522B6">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>E70794B6-335F-4B3D-863E-B44B3FE1706D</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.22</JobFTE>
+  <Homegroup>1D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="5CA48AE4-BE09-433B-A63E-D622C58F1E3F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>1402BDA9-74EA-4CAD-A3FC-E0CEB8A1410E</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.24</JobFTE>
+  <Homegroup>5E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="E688945A-D67A-4CE8-8309-B3D2DA3FC98B">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>CBFE607F-724F-4CC3-9017-DA9E2A329D69</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.04</JobFTE>
+  <Homegroup>7E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="273A2EC4-AD6B-475E-917C-276BB5A93A19">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>66562789-94E5-4F20-826A-F1A8E18A80C0</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.89</JobFTE>
+  <Homegroup>1F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="69B3695B-6765-4A6F-AD6D-B69835B37945">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>DBB14F3B-5AA0-425C-921E-1757FC124E75</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.00</JobFTE>
+  <Homegroup>12F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="7FDCB627-F749-4007-B8FE-072D0409000D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>23930A09-F205-4068-B8C6-3179AB5CCB6E</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.65</JobFTE>
+  <Homegroup>2C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="60114923-9464-4F3E-A5AE-D3E1E799F2FB">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>1BFED39A-3C56-4ADA-91F6-E9E79796D3FC</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.22</JobFTE>
+  <Homegroup>11E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="F19F7B7F-D495-416A-B4C6-5DA353E42DC8">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>908B5AB1-9FBB-49C8-A3E4-404C4CF27EED</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.43</JobFTE>
+  <Homegroup>12F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="3615C2C4-A214-4D81-B532-B0A87B4ACED5">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>B4DA136A-C3B2-4E7E-A9B4-B90AE7E4BA50</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.51</JobFTE>
+  <Homegroup>4D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="E2F28618-DED5-456F-8173-3488715F2433">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>95B28A2F-6773-4536-B47A-85BF13C7D1C4</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.66</JobFTE>
+  <Homegroup>5D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="BABD535E-3A13-49E1-B47B-AC2BDE7BA71C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>85EA1ACE-28AF-4D9C-9713-8357251CEF14</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.42</JobFTE>
   <Homegroup>4E</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="1E24C136-F9CC-4432-9262-1465A6ACCA50">
+<StaffAssignment RefId="18EB9DBA-CD9E-4D40-8850-B0CCC14B6CBD">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>6808E13B-2878-4166-8716-6742E46F9EBE</StaffPersonalRefId>
+  <StaffPersonalRefId>DC791CF6-EE75-4286-868C-A61CBFFDE010</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.38</JobFTE>
+  <Homegroup>8B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="F0513912-3FDE-403E-BF43-3F67E038D252">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>E035A54A-7362-4804-AF71-03A61CF97174</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.13</JobFTE>
+  <Homegroup>8D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D494784D-C169-48C9-8D2F-FE5390DCDC3F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>C8B80381-306C-44AC-B27D-BC33E198CFE6</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.39</JobFTE>
+  <Homegroup>8C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="2D6F972B-E0D4-4DF8-A21E-D5E5C8E927D2">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>A14F70DF-CA17-4ABC-BBBF-F6EA6E6E488D</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.40</JobFTE>
+  <Homegroup>7E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="144F4FD3-A853-467F-8C16-744D4EADD94F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>4C9D1A2D-1A0D-4CA0-9F27-0A35C57E7F1F</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.03</JobFTE>
+  <Homegroup>6E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A8C2D2AF-86F1-4597-9BF1-5A39AE6A6FF6">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>3CFBA4DE-920D-47E2-80DA-DB5C0E37522E</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.78</JobFTE>
+  <Homegroup>9F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D41949EF-7296-4F3F-AB01-7F2F935AE10A">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>D2654563-FEC8-40AD-835D-D61675DD64FC</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.41</JobFTE>
+  <Homegroup>5C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="7EE0FEAF-D522-424E-8D70-42F09DD1EC90">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>AE082FBA-66B8-46D4-88EE-E5D7B229AFE6</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.62</JobFTE>
+  <Homegroup>2F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="414B3022-636E-4105-98AC-4156B68CF6B4">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>A0795067-1366-4F5B-9F54-4FCC48D19D9F</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.41</JobFTE>
+  <Homegroup>3C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="E778454F-4849-4619-8E71-09125EF0F5C3">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>734F368C-8637-4DA3-9C50-C07467343FEB</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.10</JobFTE>
+  <Homegroup>7F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="0E59C95F-70C1-4812-8224-876A095B6710">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>E7C53744-127D-442D-A370-31A078A9A2D2</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.06</JobFTE>
+  <Homegroup>1A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="FEAF6010-4659-47D9-8C2E-ECEE17CB6B75">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>D42443EA-13CE-496C-973F-7CBDAD99B126</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.77</JobFTE>
+  <Homegroup>11C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="894C8617-B8AF-48AF-A358-A8A4041C11B4">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>B55AD5A2-809A-4469-AEB4-8ECFD1727CFE</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.72</JobFTE>
+  <Homegroup>6B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="9B014C58-0700-438B-AB55-0114EA43627C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>40BE6085-327E-40CE-AD86-8A2C60C38254</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.31</JobFTE>
+  <Homegroup>7D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="51FDFBEE-5C91-4BD0-88E6-28F1E44193C9">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>5E8F17CE-F98B-43C7-BE1B-8EF642ADF8ED</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.26</JobFTE>
+  <Homegroup>7D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="1C6D6B0B-ABBC-4D63-A345-407BE4794FB8">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>5A907A31-BBB2-47E6-A51B-A8959A65BA57</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.44</JobFTE>
+  <Homegroup>3A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="BD17E53E-A1AB-4DA7-92D8-0D0ED0735446">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>03FFE6F8-A7A1-4110-A7AB-4F982ED46525</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.20</JobFTE>
+  <Homegroup>6C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="735DAF6A-4B60-41DC-9C8D-4D0354341224">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>565A1C76-89B9-4E55-9796-78853DF848E9</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.49</JobFTE>
+  <Homegroup>11D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D058CBAD-6CB9-41CB-8E9D-06187E293F05">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>BFD750EA-4420-4CA9-8D16-1D0782DF9D07</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.85</JobFTE>
+  <Homegroup>11A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="93AC6DBA-EBBB-4F02-95BE-3C3999919BB6">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>B75FDC7B-6ED2-405A-B8D6-D050A9C824EE</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.88</JobFTE>
+  <Homegroup>2E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="187B83B1-600E-4CB1-ABA5-8EE11E040B2D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>D3A65E1E-3997-40EF-AA0D-DCCD6069DD61</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.28</JobFTE>
+  <Homegroup>3F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="3EA26C4E-8247-4802-9D27-F83C5E3918E4">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>22626624-3A03-49AC-A856-A4725EED3E21</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.58</JobFTE>
+  <Homegroup>6A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D5AC8383-FE91-43A2-B7F6-16F63B74D469">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>2FE791E1-20DD-4CE8-8ED5-BE69A01196E4</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.60</JobFTE>
+  <Homegroup>4B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="6CC9F530-4AD6-481A-B77E-EE31D1C8EB9E">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>84799805-32F2-47B8-9DF4-07E699D31F4B</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.56</JobFTE>
+  <Homegroup>5A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A0FDCB2F-7F46-4A7E-82EC-962F6B687CCC">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>F285D28E-F189-4A73-9517-28645D12878E</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.14</JobFTE>
+  <Homegroup>7F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D8C8B294-0ACB-4DF7-9DA5-0A859A522B50">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>BF0AD2D1-9A5F-4060-B782-FC980C7C8620</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.56</JobFTE>
+  <Homegroup>1A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="F6BF49B1-6B7A-4FB3-A3EF-CA329EDE142D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>9122D3CD-8FD1-42F2-98A2-378523D83D15</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.69</JobFTE>
+  <Homegroup>11A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D47252BD-37AD-4BEA-99BC-058705E8D638">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>788D9BD6-6E73-4BAF-B076-1FC191C1B744</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.47</JobFTE>
+  <Homegroup>6B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="2283F8EC-4321-4C81-8761-BFEBECC50D62">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>64E16740-DAEE-4740-A6B2-6DE9240E6DC7</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.26</JobFTE>
+  <Homegroup>7B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="72DD35C7-604D-4811-85B0-F25E74CBFA1F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>9CDEDFB8-F1E4-4308-A533-E278555CDDED</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.25</JobFTE>
+  <Homegroup>1D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="BD4CE969-6A84-4F19-B8D0-D74375ECE694">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>7EB02234-7666-4478-A6CC-FC6C50F99DAF</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.27</JobFTE>
+  <Homegroup>1D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="76441125-3E98-48F2-9169-41CD72A7A68F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>55B3342E-9D44-4B49-9CF9-CF0CB37C6F7F</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.71</JobFTE>
+  <Homegroup>1D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="708EA1D0-98AA-403F-9005-9B8DC859E545">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>E46FF7E6-13AD-4C7C-9478-D03A77A255A7</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.77</JobFTE>
+  <Homegroup>4C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="439C4391-E3AD-454B-92FB-240428624240">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>873D71BE-624F-4B18-BEAB-5AF510CCE136</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.32</JobFTE>
+  <Homegroup>11B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="C6E487F8-5130-45F2-B2C6-A2D9238822A4">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>AA4F2BE9-CCC6-481A-959E-BFDA096047BC</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.96</JobFTE>
+  <Homegroup>12B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="3BEA2ADA-D747-4F09-982E-CAF590A46F8D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>166241BB-5687-489F-9C82-C507DA6FCBE3</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.41</JobFTE>
+  <Homegroup>9A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="DC21D7EC-3C62-4F78-A924-622DA6CDCB5A">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>C3A26D6A-6E53-4C1B-BD17-0948DE6F25AA</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.52</JobFTE>
+  <Homegroup>2F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="70828A07-A129-4CE0-A140-156ACA8E030D">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>F92BCED4-9C4D-4547-BF1E-1BD4A70B076E</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.67</JobFTE>
+  <Homegroup>10C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="3A3754C3-AB62-4E24-AD5A-7073DDE81E7C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>869FEA9A-6D63-4C6A-91AE-01226BF321A5</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.78</JobFTE>
+  <Homegroup>6A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="FA52AA28-57E5-4157-A026-B3BF765F0130">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>9F481DAB-CDF3-4B71-BC00-ACD397532D93</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.25</JobFTE>
+  <Homegroup>10C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="6B1BF35D-C98A-430E-BBDF-7C450656CEC7">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>BA5E757F-D7F2-4AAD-99E2-E89D8B01A5C7</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.24</JobFTE>
+  <Homegroup>1A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="40649A46-77E9-4ED9-8DCA-A42D1363E833">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>F6F6710A-A541-4417-8023-D843384DCBCA</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.77</JobFTE>
+  <Homegroup>3C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="305594DC-E2B5-4246-8719-19118CDEF228">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>5D19E834-63AE-4D25-8DF5-00CD894AF6F9</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
   <JobFTE>0.96</JobFTE>
   <Homegroup>7E</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="4B519CDC-456A-4DA0-AEB4-E8CC66500E14">
+<StaffAssignment RefId="0AEBCC4F-40FE-4B11-9622-98768401638D">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>3BCAD7E0-5AF2-4E15-9925-53D99F4C4613</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.54</JobFTE>
-  <Homegroup>11B</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="D6422F6D-29C3-4095-863B-C5DFD7C76DC5">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>8F945508-5F70-45F2-AF42-6572E5F4A205</StaffPersonalRefId>
+  <StaffPersonalRefId>28B1B3E4-F7B7-42F8-A3A6-F87D2C49A5AA</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
   <JobFTE>0.28</JobFTE>
-  <Homegroup>3C</Homegroup>
+  <Homegroup>10F</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="D08B26F9-8471-4877-8B7F-4128E0E63DC2">
+<StaffAssignment RefId="D8BC9845-4111-4F0A-BBCE-5A982C5F3D6E">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>22A68064-0199-4342-AA2D-92C1A8C1568D</StaffPersonalRefId>
+  <StaffPersonalRefId>97B66FEA-794C-4ABC-AE02-58C286AC5F86</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.42</JobFTE>
-  <Homegroup>5F</Homegroup>
+  <JobFTE>0.32</JobFTE>
+  <Homegroup>9F</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="8367ED3C-031D-4F9C-A3DB-05E5A9D8DDC2">
+<StaffAssignment RefId="628DEFE5-6907-4F10-81A4-D07C8783208E">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>5CE47D9E-6691-448F-B79D-60C1288B9A1E</StaffPersonalRefId>
+  <StaffPersonalRefId>507C6E3E-7B2B-4566-923B-337781C99CF2</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
   <JobFTE>0.04</JobFTE>
-  <Homegroup>5F</Homegroup>
+  <Homegroup>8C</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="6457C62F-0338-43E5-829C-BB62ADB4D64C">
+<StaffAssignment RefId="8C374934-7499-46B3-99B0-A498D35F4DB1">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>541C4002-0180-49AC-9935-B0B9054AA49E</StaffPersonalRefId>
+  <StaffPersonalRefId>84389D7E-54FB-4542-A245-1A3CA593775E</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.43</JobFTE>
-  <Homegroup>10D</Homegroup>
+  <JobFTE>0.30</JobFTE>
+  <Homegroup>2C</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="A11C4A5B-11A7-46B9-AED0-148A8B855F0F">
+<StaffAssignment RefId="ED6F75B8-8DDB-4649-803E-7188B07AEB2D">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>A8C3A23F-FFC1-4603-985D-0A61F57C0521</StaffPersonalRefId>
+  <StaffPersonalRefId>B32CCA7B-17BE-430D-86B8-C43B5B808969</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.76</JobFTE>
-  <Homegroup>11D</Homegroup>
+  <JobFTE>0.19</JobFTE>
+  <Homegroup>2A</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="113C681F-341A-47A7-A741-4524940D5CD6">
+<StaffAssignment RefId="9C8AD309-BEF1-4167-B466-A1F0A2B7F507">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>E352CE7F-6A98-438E-978B-E10A9E80A76D</StaffPersonalRefId>
+  <StaffPersonalRefId>BA62F518-A303-48CC-8A7D-05991DFF1DBA</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.73</JobFTE>
+  <Homegroup>8C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="6BB6D1D8-0172-4640-B415-E97F8A90718C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>6D1C1BB9-C808-4244-90FC-995D48BC2539</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
   <JobFTE>0.64</JobFTE>
-  <Homegroup>11A</Homegroup>
+  <Homegroup>7C</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="1E3BF8AF-B361-4109-A2A4-9C88FC333738">
+<StaffAssignment RefId="ABABF1A5-801F-4954-B475-A94D2D11A677">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>D5C6227C-305F-41F5-BFCF-1F8D71BE89F3</StaffPersonalRefId>
+  <StaffPersonalRefId>A73C05D8-D579-422B-8AF1-DE141A5841A4</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.34</JobFTE>
-  <Homegroup>4C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="21D22F8A-7B9A-48D9-8698-130B4235DCC7">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>24A946A7-E06D-4D69-9AC4-1D0E30BBDB12</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.84</JobFTE>
-  <Homegroup>12C</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="F876C3DE-49D2-4F19-AE27-482C604CF9D5">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>1C102EF2-9690-4BD1-9D8A-4DE0C01BFE4D</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.13</JobFTE>
+  <JobFTE>0.28</JobFTE>
   <Homegroup>5C</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="14EAFA13-28F5-4B57-A279-768CD409CEAA">
+<StaffAssignment RefId="3F615745-4B28-4CB1-A387-CD4388B73BC7">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>303758FB-7B4B-4A34-A730-1611752E4781</StaffPersonalRefId>
+  <StaffPersonalRefId>89E2E891-AAB7-40F0-9EEE-9040156AB515</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.08</JobFTE>
-  <Homegroup>4A</Homegroup>
+  <JobFTE>0.16</JobFTE>
+  <Homegroup>11C</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="B4DA26F3-84F3-4F94-B67F-8B91AD604935">
+<StaffAssignment RefId="F0F0088A-24B4-407F-A650-9FC1B854E978">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>7FA2FBC2-D356-4FDE-8D45-B306C98087C6</StaffPersonalRefId>
+  <StaffPersonalRefId>12B23E1A-E9B9-43AF-B661-2BCAF13724C0</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.99</JobFTE>
-  <Homegroup>12D</Homegroup>
+  <JobFTE>0.90</JobFTE>
+  <Homegroup>8A</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="F2586079-D89F-465F-9BBF-B633F8E2489E">
+<StaffAssignment RefId="F5124162-9111-4293-9B06-632BC6B184C1">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>7ADFE96C-A6E6-4E4A-A87D-61B3896A77D4</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.13</JobFTE>
-  <Homegroup>8F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="EFC5F2D1-5367-44C0-BEA4-518FE265C588">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>32A49828-1BC5-470E-99B1-FAC8A9030C17</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.36</JobFTE>
-  <Homegroup>7F</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="A157C47B-DD4E-4DF6-AA2D-8CB6090F5785">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>434556B2-7E75-42CE-B02C-55BED0ABAF5F</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.85</JobFTE>
-  <Homegroup>2A</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="8A84F98D-7368-4510-B78C-D56E76526537">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B8F6E6F3-383F-4625-8BB7-5E96CA53A330</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.85</JobFTE>
-  <Homegroup>12E</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="13BA82AF-68EA-4DB0-B362-D55F71A2DC69">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>8AECFA27-32FC-4905-80D8-6C649148E755</StaffPersonalRefId>
-  <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.19</JobFTE>
-  <Homegroup>8D</Homegroup>
-</StaffAssignment>
-
-<StaffAssignment RefId="F0518DFB-FC11-42DC-A7E8-99FB6E5EC1BC">
-  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
-  <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>6D29C3A8-2D33-4545-BE71-DA2DCFAEB594</StaffPersonalRefId>
+  <StaffPersonalRefId>2D2A1D50-0CB3-4A92-B26D-5B45EF20A50C</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
   <JobFTE>0.05</JobFTE>
-  <Homegroup>2A</Homegroup>
+  <Homegroup>6B</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="BABD7A83-B145-4D8E-80C2-C778AC4F55E3">
+<StaffAssignment RefId="7FD596BF-07BC-46D4-8568-C1BE4B0A227C">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>8FF62964-A00F-4979-93B8-BEE0E93AD602</StaffPersonalRefId>
+  <StaffPersonalRefId>D0F195E7-E2A6-4124-8F48-E138E8E73F12</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.48</JobFTE>
-  <Homegroup>12E</Homegroup>
+  <JobFTE>0.99</JobFTE>
+  <Homegroup>9F</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="3401D12A-3AF1-4D35-B91F-D80A76F61070">
+<StaffAssignment RefId="5F47D5E7-4524-4777-B84A-ADF6A62D6988">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>B22A0A88-A6D2-4570-84BE-BCDB7426DE35</StaffPersonalRefId>
+  <StaffPersonalRefId>4337290B-1380-41BB-A6BD-D4F3199893D4</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.80</JobFTE>
-  <Homegroup>1C</Homegroup>
+  <JobFTE>0.90</JobFTE>
+  <Homegroup>7A</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="CDC0EAB4-9980-4013-91FF-732589FCFD3D">
+<StaffAssignment RefId="42B76505-16B1-4574-9AE1-4F525493B397">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>147F7FAB-6C09-475B-9F70-51AD187FCA71</StaffPersonalRefId>
+  <StaffPersonalRefId>1C59B668-C0C5-472F-B3BF-6AAEBE13222B</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.10</JobFTE>
-  <Homegroup>11E</Homegroup>
+  <JobFTE>0.70</JobFTE>
+  <Homegroup>11F</Homegroup>
 </StaffAssignment>
 
-<StaffAssignment RefId="AC4AF897-AE46-4A16-A593-ADE34830977B">
+<StaffAssignment RefId="F01EAA6D-7DAD-4ACA-85CF-90C5ADEA801A">
   <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
   <SchoolYear>2015</SchoolYear>
-  <StaffPersonalRefId>9520B0F0-97E2-43B1-8458-12C0DA8F5FC8</StaffPersonalRefId>
+  <StaffPersonalRefId>1059C15A-44B7-4B5A-92D3-33034E0A1D50</StaffPersonalRefId>
   <PrimaryAssignment>Y</PrimaryAssignment>
-  <JobFTE>0.25</JobFTE>
-  <Homegroup>4A</Homegroup>
+  <JobFTE>0.46</JobFTE>
+  <Homegroup>4D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="3CD37EEF-02AB-4E97-8EE2-795FD428C614">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>2E8E8608-24BE-4F05-80C2-C67E33259654</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.34</JobFTE>
+  <Homegroup>6A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="1F2E53F9-2253-432F-A2EF-AD9780D87A12">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>36BDCC30-9A2C-4015-8C41-906F0FAEB453</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.02</JobFTE>
+  <Homegroup>2C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="0865FF75-5095-45F3-94A7-3994B51C894C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>1ADE0E09-5324-4F6E-A8B0-684657CD7D7D</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.28</JobFTE>
+  <Homegroup>12A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A43BE3FA-9F0E-4AE4-8A07-31E12780A9BB">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>CF38977B-3141-4EEF-B9CD-47D168369574</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.61</JobFTE>
+  <Homegroup>2F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="71D83F61-1023-438C-8B31-5532BED9CD66">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>6CE42360-4957-43F5-BF04-E25935E93DEB</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.24</JobFTE>
+  <Homegroup>7D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="607A462A-2674-42A5-A6F9-20EFE90E9BF1">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>A1571247-CF2C-4CA5-A41F-13EC2BFF445A</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.79</JobFTE>
+  <Homegroup>12C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="636974EB-7675-4D3B-96B0-CF74C108BBB3">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>4109148E-93F2-4388-A23C-4139076FAFEA</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.41</JobFTE>
+  <Homegroup>11A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="F5BA04DC-05E3-412E-81E2-E44700642C0A">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>154B5533-E059-4AD0-BD37-E69F07FF9952</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.47</JobFTE>
+  <Homegroup>7D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="321FC613-DC58-4828-B6AA-A0032F25AF39">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>8FB43C74-8310-4E9B-863C-FB73D4BD193C</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.39</JobFTE>
+  <Homegroup>5B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="4AE74A10-E644-4AEE-8071-30FC428529F6">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>A9CEB410-BB6B-4720-8200-3AEF2688DDB9</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.37</JobFTE>
+  <Homegroup>3B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="92A8EBEE-79F5-4792-B930-2139D6A36B8F">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>43301E0D-3168-4E0C-9261-A733EBA592B6</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.64</JobFTE>
+  <Homegroup>3D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="9ED3D00B-FF85-4408-AC5F-513214361B9C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>E74839E7-AC0E-4279-A29D-199898A4EEE1</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.30</JobFTE>
+  <Homegroup>10A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D46C6E39-CF5C-42F2-A0CC-4B8B551E054B">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>A8263373-C539-4877-B55C-06C4BB361655</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.04</JobFTE>
+  <Homegroup>10B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="98169EDE-09B2-4823-A45D-2F7915C4A729">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>CCDF499A-9AA6-4FBA-9069-5C4C441A79D9</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.57</JobFTE>
+  <Homegroup>6D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="47410390-03FC-402F-865A-9A8F50553373">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>B3E0D868-594A-462B-BCEB-53950078715B</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.33</JobFTE>
+  <Homegroup>2F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A068B41D-4991-470C-9856-D8C28CF0E176">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>478C0BF7-CFCD-4F70-AED1-EAECCDB6EAC1</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.78</JobFTE>
+  <Homegroup>6A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="2DA75FAF-B848-4FB2-B6FB-B593AF5C3D0C">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>8EE9430D-9318-4DB6-B6F2-2FBE3826E42E</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.54</JobFTE>
+  <Homegroup>6A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="35A3F8FF-1DFD-42B0-B4F7-36541EF8A8C7">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>0FE3435B-F45F-4764-A03C-151D51D69754</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.95</JobFTE>
+  <Homegroup>11C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="2CC0998A-B9CD-4975-8AAB-058843972843">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>7E16FAC0-D089-4AF5-8FED-EB851C93B7BB</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.89</JobFTE>
+  <Homegroup>2D</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="A4BB9684-41E5-4D71-BE9C-6C149B4250DC">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>FE38A7BB-481A-4A36-BF0A-0C40B47A5403</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.73</JobFTE>
+  <Homegroup>9E</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="87ADCBEB-A04C-4FAB-8687-1C402506E614">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>F9CBFCA1-74DC-4849-9D6C-D62041A95AEB</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.54</JobFTE>
+  <Homegroup>9B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="4C3C9644-42BD-4CC3-A876-513A542F77D9">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>DF884D59-BE4E-4784-9E24-4395BA12C0A7</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.83</JobFTE>
+  <Homegroup>3C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="DBEF2033-11A4-4BCC-BA80-6532B2F04656">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>B4128164-3DE0-403E-894C-85CD6A46E3EA</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.53</JobFTE>
+  <Homegroup>12C</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="E51313F1-36E9-452F-A20C-B9173B03EC51">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>C527B874-4088-427A-A35D-0B3E9942BFC1</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.75</JobFTE>
+  <Homegroup>5B</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="D5231E50-DE0C-439D-AA57-025C2243BAF9">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>2207AD24-6605-4AA2-9F91-877D0C29E0D5</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.55</JobFTE>
+  <Homegroup>7A</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="26D00B95-5202-4623-8B92-7D23328ADB24">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>D4A5DF39-9F42-48B4-8902-F99514380915</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.75</JobFTE>
+  <Homegroup>11F</Homegroup>
+</StaffAssignment>
+
+<StaffAssignment RefId="5ABAFE62-2A1B-4F29-96F4-85DF08169BE4">
+  <SchoolInfoRefId>1E5AA150-CA94-45A0-A893-9EC427EE2160</SchoolInfoRefId>
+  <SchoolYear>2015</SchoolYear>
+  <StaffPersonalRefId>7C8AB0AE-6CDA-4ED4-95EA-E2595166D3C1</StaffPersonalRefId>
+  <PrimaryAssignment>Y</PrimaryAssignment>
+  <JobFTE>0.27</JobFTE>
+  <Homegroup>1D</Homegroup>
 </StaffAssignment>
 </StaffAssignments>

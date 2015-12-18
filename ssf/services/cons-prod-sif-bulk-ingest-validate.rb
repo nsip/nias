@@ -24,7 +24,7 @@ require 'nokogiri' # xml support
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
-                                           @inbound, 0, :latest_offset)
+                                           @inbound, 0, :latest_offset )
 
 
 # set up producer pool - busier the broker the better for speed
@@ -37,6 +37,7 @@ pool = producers.cycle
 
 payload = ""
 header = ""
+concatcount = 0
 
 loop do
   begin
@@ -49,15 +50,22 @@ loop do
 	    if(payload.empty?) then
 	        # Payload from sifxml.bulkingest contains as its first line a header line with the original topic
 	        header = m.value.lines[0]	
+puts header
 	        payload = m.value.lines[1..-1].join
+		start = Time.now
+puts "Started message at #{start}"
 	    else
-	    	payload = payload + m.value
+	    	payload << m.value
 	    end
+	    concatcount = concatcount + 1
 	    if payload.match( /===snip===/ ) then
 	    	payload = payload.gsub(/\n===snip===\n/, "")
+		puts "Concatenating #{concatcount} messages..."
 	    	next
 	    end
-
+#puts "Concatenating #{concatcount} messages..."
+#next
+		puts "Concatenation done at #{Time.now}"
   	    puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
 
 		# each ingest message is a group of objects of the same class, e.g. 
@@ -66,17 +74,21 @@ loop do
 		# If message is well-formed, break it up into its constituent objects, and parse each separately
 		# This allows us to bypass the SIF constraint that all objects must be of the same type
 
+		start = Time.now
 		doc = Nokogiri::XML(payload) do |config|
         		config.nonet.noblanks
 		end
+		puts "Parsing took #{Time.now - start}"
 
 		if(doc.errors.empty?) 
-			puts "Payload well-formed. Payload size: #{payload.size}";
+			puts "Payload well-formed. Payload size: #{payload.size}. Validating...";
 #			xsd_errors = @xsd.validate(parent.document)
 			doc.root.add_namespace nil, @namespace
+			start = Time.now
 			xsd_errors = @xsd.validate(doc)
+			puts "XSD validation took #{Time.now - start}"
 			if(xsd_errors.empty?) 
-				#puts "Validated! "
+				puts "Validated! "
 				doc.xpath("/*/node()").each_with_index do |x, i|
 					if (i%10000 == 0 and i > 0) then 
 						puts "#{i} records queued..." 
@@ -91,10 +103,8 @@ loop do
 				end
 			else
 				puts "Invalid!"
-				msg = header + "Message #{m.offset} validity error:\n" + 	
-					xsd_errors.map{|e| e.message + "\n...\n" + 
-					payload.lines[e.line - 3 .. e.line + 1].join("") +
-					"...\n"}.join("\n") + "\n" 
+				msg = header + "Message #{m.offset} validity error:\n" 
+				msg << xsd_errors.map{|e| e.message + "\n...\n" + payload.lines[e.line - 3 .. e.line + 1].join("") + "...\n"}.join("\n") + "\n" 
 					# puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"
 				puts msg
 				outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg , "invalid" )
@@ -111,6 +121,7 @@ loop do
 			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg, "invalid" )
 		end
 		payload = "" # clear payload for next iteration
+		concatcount = 0
 		
 		puts "Finished processing payload."
 		end
@@ -143,7 +154,7 @@ loop do
     exit 130 
   } 
 
-  sleep 1
+  #sleep 1
 end
 
 

@@ -1,11 +1,73 @@
 <StaffPersonals xmlns="http://www.sifassociation.org/au/datamodel/3.4">
-<StaffPersonal RefId="02EA4BE8-35EF-44A6-965D-EEEE62617FC8">
-  <LocalId>ycqfk502</LocalId>
-  <StateProvinceId>20636</StateProvinceId>
+<StaffPersonal RefId="186F9E56-A38A-4B32-B646-B7D081F4EFAA">
+  <LocalId>rwtyx233</LocalId>
+  <StateProvinceId>297</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Swanson</FamilyName>
-      <GivenName>Raquel</GivenName>
+      <FamilyName>Holford</FamilyName>
+      <GivenName>Noel</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>10 Baker Ave.</Line1>
+        </Street>
+        <City>Whitefish</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>419-978-6654</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">noel.j.holford@trashymail.com</Email>
+      <Email Type="02">noel0@trashymail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Principal</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>tecfh502</ClassCode>
+      <ClassCode>ldwel331</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>zibzy390</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="6D9EB312-6B56-4B32-8CA3-EC43C3680124">
+  <LocalId>ffjxc189</LocalId>
+  <StateProvinceId>48544</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Bassett</FamilyName>
+      <GivenName>Lucie</GivenName>
     </Name>
     <Demographics>
       <Sex>2</Sex>
@@ -28,9 +90,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>140 W Valley Blvd</Line1>
+          <Line1>23 Union Square</Line1>
         </Street>
-        <City>San Gabriel</City>
+        <City>Cambridge</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -38,36 +100,222 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>917-383-0266</Number>
+        <Number>954-542-0373</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">raquel..swanson@trashymail.com</Email>
-      <Email Type="02">raquel0@trashymail.com</Email>
+      <Email Type="01">lucie.angel.bassett@pookmail.com</Email>
+      <Email Type="02">lucie1@mailinator.com</Email>
     </EmailList>
   </PersonInfo>
-  <Title>Principal</Title>
+  <Title>Deputy Principal</Title>
   <EmploymentStatus>A</EmploymentStatus>
   <MostRecent>
     <SchoolLocalId>72868</SchoolLocalId>
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>gggto325</ClassCode>
-      <ClassCode>yfzgn771</ClassCode>
+      <ClassCode>bbgdz799</ClassCode>
+      <ClassCode>icudw793</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>imczc735</HomeGroup>
+    <HomeGroup>qkqbu520</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="8D3A63B3-FE80-4317-B5A1-A7F6090377D1">
-  <LocalId>ubrzm924</LocalId>
-  <StateProvinceId>90949</StateProvinceId>
+<StaffPersonal RefId="7379FFB4-FC1D-4A8F-84ED-49399EBAEF15">
+  <LocalId>sxmec958</LocalId>
+  <StateProvinceId>41399</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Wright</FamilyName>
-      <GivenName>Antony</GivenName>
+      <FamilyName>Mahone</FamilyName>
+      <GivenName>Lynn</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>1905 N. Neil St.</Line1>
+        </Street>
+        <City>Champaign</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>740-836-5930</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">lynn.e.mahone@spambob.com</Email>
+      <Email Type="02">lynn2@mailinator.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>dnewu265</ClassCode>
+      <ClassCode>hxtyq624</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>dkeyl438</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="AF931197-F22B-4DC3-8232-281B41605AB2">
+  <LocalId>fispy321</LocalId>
+  <StateProvinceId>22455</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Graham</FamilyName>
+      <GivenName>Vicky</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>120 E. Beaver Avenue</Line1>
+        </Street>
+        <City>State College</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>910-201-8433</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">vicky.n.graham@trashymail.com</Email>
+      <Email Type="02">vicky3@mailinator.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>zyrsq708</ClassCode>
+      <ClassCode>ezmhh058</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>qokjh611</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="94F4C263-EEB3-4F2A-B1DD-E6E5D3AE3362">
+  <LocalId>jyvpz617</LocalId>
+  <StateProvinceId>9869</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Norton</FamilyName>
+      <GivenName>Bobby</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>5140 Biscayne Blvd</Line1>
+        </Street>
+        <City>Miami</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>510-551-3000</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">bobby..norton@trashymail.com</Email>
+      <Email Type="02">bobby4@trashymail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>tbcpt742</ClassCode>
+      <ClassCode>ktvae873</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>axbhl333</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="BECD8DE0-0F2B-4999-88DA-21BDDE5B7393">
+  <LocalId>czvsu357</LocalId>
+  <StateProvinceId>93877</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Jones</FamilyName>
+      <GivenName>Barry</GivenName>
     </Name>
     <Demographics>
       <Sex>1</Sex>
@@ -90,9 +338,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>82 Hutton St.</Line1>
+          <Line1>4901 San Mateo Blvd. NE</Line1>
         </Street>
-        <City>Jersey City</City>
+        <City>Albuquerque</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -100,36 +348,160 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>310-274-0210</Number>
+        <Number>440-758-4868</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">antony.w.wright@mailinator.com</Email>
-      <Email Type="02">antony1@trashymail.com</Email>
+      <Email Type="01">barry.t.jones@dodgit.com</Email>
+      <Email Type="02">barry5@pookmail.com</Email>
     </EmailList>
   </PersonInfo>
-  <Title>Deputy Principal</Title>
+  <Title>Teacher</Title>
   <EmploymentStatus>A</EmploymentStatus>
   <MostRecent>
     <SchoolLocalId>72868</SchoolLocalId>
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>mfrbn130</ClassCode>
-      <ClassCode>lnfkj989</ClassCode>
+      <ClassCode>yqjvp228</ClassCode>
+      <ClassCode>stcqm617</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>btzza090</HomeGroup>
+    <HomeGroup>ebazm113</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="85CDBB40-BADA-427E-833D-7667277E110F">
-  <LocalId>fxjsp816</LocalId>
-  <StateProvinceId>43526</StateProvinceId>
+<StaffPersonal RefId="B4FF22AF-0042-4D81-87F4-FDE6F4F9C9B3">
+  <LocalId>nlfcc036</LocalId>
+  <StateProvinceId>62044</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Kidd</FamilyName>
-      <GivenName>Darlene</GivenName>
+      <FamilyName>Hamer</FamilyName>
+      <GivenName>Emil</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>384 Main Street</Line1>
+        </Street>
+        <City>Beacon</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>352-384-0260</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">emil.maurice.hamer@mailinator.com</Email>
+      <Email Type="02">emil6@pookmail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>cjuxu390</ClassCode>
+      <ClassCode>ynmgq393</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>hipxa633</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="97EC3426-6D49-4D71-92D6-D10F794AFE7B">
+  <LocalId>vlhzs785</LocalId>
+  <StateProvinceId>808</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Peterson</FamilyName>
+      <GivenName>Cleo</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>1000 Arch Street</Line1>
+        </Street>
+        <City>Philadelphia</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>403-878-4824</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">cleo.j.peterson@trashymail.com</Email>
+      <Email Type="02">cleo7@mailinator.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>mtlzp006</ClassCode>
+      <ClassCode>mvmqt035</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>ltnbq853</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="107DF0D7-DF8F-4CB2-82D4-2530434B2626">
+  <LocalId>efohb667</LocalId>
+  <StateProvinceId>5212</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Bassett</FamilyName>
+      <GivenName>Shari</GivenName>
     </Name>
     <Demographics>
       <Sex>2</Sex>
@@ -152,9 +524,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>252 E. Army Trail Road</Line1>
+          <Line1>7003 W. Cermak Plz.</Line1>
         </Street>
-        <City>Glendale Heights</City>
+        <City>Berwyn</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -162,13 +534,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>484-426-9485</Number>
+        <Number>708-273-9518</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">darlene..kidd@spambob.com</Email>
-      <Email Type="02">darlene2@dodgit.com</Email>
+      <Email Type="01">shari.i.bassett@spambob.com</Email>
+      <Email Type="02">shari8@dodgit.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -178,23 +550,23 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>cfggi372</ClassCode>
-      <ClassCode>lhnel486</ClassCode>
+      <ClassCode>mhtfe635</ClassCode>
+      <ClassCode>fmtxd440</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>dwbxe595</HomeGroup>
+    <HomeGroup>schow057</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="80D53D2B-3CDA-48B2-98DE-E7B2E3CB8A8A">
-  <LocalId>ccnen619</LocalId>
-  <StateProvinceId>82603</StateProvinceId>
+<StaffPersonal RefId="A5B02AB8-7DFC-48CA-8E74-FE630D02D17C">
+  <LocalId>scgcl256</LocalId>
+  <StateProvinceId>71992</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Ambrose</FamilyName>
-      <GivenName>Gladys</GivenName>
+      <FamilyName>Wilde</FamilyName>
+      <GivenName>Clarence</GivenName>
     </Name>
     <Demographics>
-      <Sex>2</Sex>
+      <Sex>1</Sex>
       <CountryOfBirth>1101</CountryOfBirth>
       <CountriesOfCitizenship>
         <CountryOfCitizenship>1101</CountryOfCitizenship>
@@ -205,7 +577,7 @@
       <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
       <LanguageList>
         <Language>
-          <Code>2201</Code>
+          <Code>5203</Code>
           <LanguageType>1</LanguageType>
         </Language>
       </LanguageList>
@@ -214,7 +586,193 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>88 S 9th St</Line1>
+          <Line1>407 Newbury St.</Line1>
+        </Street>
+        <City>Boston</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>901-999-3957</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">clarence.w.wilde@trashymail.com</Email>
+      <Email Type="02">clarence9@trashymail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>ggkgt644</ClassCode>
+      <ClassCode>uyhdu174</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>rjroq162</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="BC4D510B-EF10-42B1-9486-0032A5938379">
+  <LocalId>zasco895</LocalId>
+  <StateProvinceId>35490</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Hopper</FamilyName>
+      <GivenName>Leslie</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>17 Broad Street</Line1>
+        </Street>
+        <City>Charleston</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>940-454-6459</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">leslie.s.hopper@trashymail.com</Email>
+      <Email Type="02">leslie10@pookmail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>fusqf397</ClassCode>
+      <ClassCode>crfqy064</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>szbsu438</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="7DDE3458-1F90-45FB-90CD-6370B3C6B45B">
+  <LocalId>jtzpw705</LocalId>
+  <StateProvinceId>68958</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Rogers</FamilyName>
+      <GivenName>Quincy</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>7100</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>835 N. Michigan Ave.</Line1>
+        </Street>
+        <City>Chicago</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>816-536-0839</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">quincy.c.rogers@mailinator.com</Email>
+      <Email Type="02">quincy11@mailinator.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>exhan377</ClassCode>
+      <ClassCode>ptcmj422</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>jzuvt259</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="A655B18E-18A1-4D47-90AA-A15674AD2FD5">
+  <LocalId>xpwnd516</LocalId>
+  <StateProvinceId>34122</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Johnson</FamilyName>
+      <GivenName>Joe</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>2719 Nicollet Avenue</Line1>
         </Street>
         <City>Minneapolis</City>
         <StateProvince>VIC</StateProvince>
@@ -224,13 +782,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>205-866-0017</Number>
+        <Number>361-907-6832</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">gladys.karla.ambrose@trashymail.com</Email>
-      <Email Type="02">gladys3@spambob.com</Email>
+      <Email Type="01">joe.garrett.johnson@trashymail.com</Email>
+      <Email Type="02">joe12@pookmail.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -240,23 +798,23 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>mwwsp719</ClassCode>
-      <ClassCode>fvcet958</ClassCode>
+      <ClassCode>mdvmn139</ClassCode>
+      <ClassCode>taueo671</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>htrnw809</HomeGroup>
+    <HomeGroup>avrnx968</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="9587C47D-E12F-40D9-9F3C-891546DDC33C">
-  <LocalId>ujjaa042</LocalId>
-  <StateProvinceId>11526</StateProvinceId>
+<StaffPersonal RefId="1A28D0AC-E07B-463D-8D5F-2CAC203B0CCF">
+  <LocalId>dzgsd156</LocalId>
+  <StateProvinceId>36502</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Wright</FamilyName>
-      <GivenName>Palmer</GivenName>
+      <FamilyName>Hallock</FamilyName>
+      <GivenName>Dominique</GivenName>
     </Name>
     <Demographics>
-      <Sex>1</Sex>
+      <Sex>2</Sex>
       <CountryOfBirth>1101</CountryOfBirth>
       <CountriesOfCitizenship>
         <CountryOfCitizenship>1101</CountryOfCitizenship>
@@ -267,7 +825,7 @@
       <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
       <LanguageList>
         <Language>
-          <Code>1201</Code>
+          <Code>5203</Code>
           <LanguageType>1</LanguageType>
         </Language>
       </LanguageList>
@@ -276,9 +834,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>1332 East 4th St</Line1>
+          <Line1>25 Divison St.</Line1>
         </Street>
-        <City>Duluth</City>
+        <City>Somerville</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -286,13 +844,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>304-560-4237</Number>
+        <Number>600-311-5577</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">palmer.y.wright@pookmail.com</Email>
-      <Email Type="02">palmer4@dodgit.com</Email>
+      <Email Type="01">dominique.n.hallock@trashymail.com</Email>
+      <Email Type="02">dominique13@mailinator.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -302,20 +860,20 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>ufmwx902</ClassCode>
-      <ClassCode>aloql970</ClassCode>
+      <ClassCode>sqkka837</ClassCode>
+      <ClassCode>jfzew122</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>kyibv385</HomeGroup>
+    <HomeGroup>hzlja010</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="1DC83BA4-BE4B-4BCE-85F3-E8EFAEC57CD3">
-  <LocalId>irnvx524</LocalId>
-  <StateProvinceId>17582</StateProvinceId>
+<StaffPersonal RefId="BB05646B-DAE1-4997-B8CB-54B082D7BFB9">
+  <LocalId>rbtvk740</LocalId>
+  <StateProvinceId>29572</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Pharr</FamilyName>
-      <GivenName>Kay</GivenName>
+      <FamilyName>Morningstar</FamilyName>
+      <GivenName>Johanne</GivenName>
     </Name>
     <Demographics>
       <Sex>2</Sex>
@@ -338,9 +896,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>1605 E. Plaza Drive</Line1>
+          <Line1>1121 Broad Street</Line1>
         </Street>
-        <City>Tallahassee</City>
+        <City>San Luis Obispo</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -348,13 +906,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>506-667-5945</Number>
+        <Number>519-767-4225</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">kay.l.pharr@dodgit.com</Email>
-      <Email Type="02">kay5@mailinator.com</Email>
+      <Email Type="01">johanne.brandy.morningstar@pookmail.com</Email>
+      <Email Type="02">johanne14@spambob.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -364,20 +922,82 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>nkkok547</ClassCode>
-      <ClassCode>yfony117</ClassCode>
+      <ClassCode>inqmh223</ClassCode>
+      <ClassCode>miuod177</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>umfjf572</HomeGroup>
+    <HomeGroup>jrswj077</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="4DDFDF32-D4F2-42AD-99B6-B45ABC0FB54A">
-  <LocalId>rshyu526</LocalId>
-  <StateProvinceId>53579</StateProvinceId>
+<StaffPersonal RefId="63C4C9B2-96EA-40B7-9E2C-39D794DBD885">
+  <LocalId>ehyxj358</LocalId>
+  <StateProvinceId>76040</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Walker</FamilyName>
-      <GivenName>Fern</GivenName>
+      <FamilyName>Fernandez</FamilyName>
+      <GivenName>Jeanine</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>9601</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>1698 South 500 East</Line1>
+        </Street>
+        <City>Salt Lake City</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>504-753-3911</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">jeanine.rita.fernandez@spambob.com</Email>
+      <Email Type="02">jeanine15@pookmail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>nvfbf249</ClassCode>
+      <ClassCode>qprbh625</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>wogdo956</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="918C0138-23CC-4C8F-AE84-7F8F48370656">
+  <LocalId>vocti342</LocalId>
+  <StateProvinceId>26542</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Clemmer</FamilyName>
+      <GivenName>Charleen</GivenName>
     </Name>
     <Demographics>
       <Sex>2</Sex>
@@ -400,9 +1020,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>1353 Stelton Rd.</Line1>
+          <Line1>132 W. Grand River Avenue</Line1>
         </Street>
-        <City>Piscataway</City>
+        <City>Williamston</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -410,13 +1030,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>473-305-7502</Number>
+        <Number>650-988-6514</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">fern.manuela.walker@pookmail.com</Email>
-      <Email Type="02">fern6@spambob.com</Email>
+      <Email Type="01">charleen.c.clemmer@mailinator.com</Email>
+      <Email Type="02">charleen16@dodgit.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -426,81 +1046,19 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>zprcn918</ClassCode>
-      <ClassCode>cvfqp384</ClassCode>
+      <ClassCode>izzsl659</ClassCode>
+      <ClassCode>jjqkk420</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>zcxaj590</HomeGroup>
+    <HomeGroup>dcjcj528</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="ABEA91F8-8BBA-4663-9E35-62FEFC911E62">
-  <LocalId>yasku063</LocalId>
-  <StateProvinceId>32949</StateProvinceId>
+<StaffPersonal RefId="5BDEF874-4544-4EF3-9FDB-AD41490EF2BA">
+  <LocalId>ncsjs444</LocalId>
+  <StateProvinceId>35489</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Mckenny</FamilyName>
-      <GivenName>Olen</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>1</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>6546 E Central Avenue</Line1>
-        </Street>
-        <City>Wichita</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>760-976-2467</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">olen..mckenny@pookmail.com</Email>
-      <Email Type="02">olen7@trashymail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>vzzcv651</ClassCode>
-      <ClassCode>vyesy415</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>nofzj023</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="939D0E0B-81FC-40E3-A0BF-513A8C29B816">
-  <LocalId>qcsoi320</LocalId>
-  <StateProvinceId>12056</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Cheng</FamilyName>
+      <FamilyName>Myers</FamilyName>
       <GivenName>Maritza</GivenName>
     </Name>
     <Demographics>
@@ -524,9 +1082,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>12910 Chester RD</Line1>
+          <Line1>5221A West Broward Blvd.</Line1>
         </Street>
-        <City>Chester</City>
+        <City>Plantation</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -534,13 +1092,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>902-502-5519</Number>
+        <Number>231-967-0093</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">maritza..cheng@pookmail.com</Email>
-      <Email Type="02">maritza8@trashymail.com</Email>
+      <Email Type="01">maritza.britney.myers@mailinator.com</Email>
+      <Email Type="02">maritza17@mailinator.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -550,82 +1108,20 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>seiuf009</ClassCode>
-      <ClassCode>cpkwr347</ClassCode>
+      <ClassCode>uqkyl372</ClassCode>
+      <ClassCode>cdmsk500</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>bdedy224</HomeGroup>
+    <HomeGroup>inqae699</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="10FED0B9-B5BD-450F-A735-50FE187F960A">
-  <LocalId>kyxtt564</LocalId>
-  <StateProvinceId>72608</StateProvinceId>
+<StaffPersonal RefId="C1A7AA41-AFD0-4362-BB12-70E3CB1603CF">
+  <LocalId>frems901</LocalId>
+  <StateProvinceId>6976</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Vega</FamilyName>
-      <GivenName>Tracey</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>1901 University Ave</Line1>
-        </Street>
-        <City>Berkeley</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>607-814-4917</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">tracey.s.vega@pookmail.com</Email>
-      <Email Type="02">tracey9@trashymail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>qugfe669</ClassCode>
-      <ClassCode>vshkj212</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>spaei714</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="D5DE4E24-09D7-47E2-AAC0-9171ED33948D">
-  <LocalId>xwcta858</LocalId>
-  <StateProvinceId>25503</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Rimmer</FamilyName>
-      <GivenName>Ricky</GivenName>
+      <FamilyName>Books</FamilyName>
+      <GivenName>Francis</GivenName>
     </Name>
     <Demographics>
       <Sex>1</Sex>
@@ -648,9 +1144,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>2921 NE Alberta St,</Line1>
+          <Line1>584 Woodward Avenue</Line1>
         </Street>
-        <City>Portland</City>
+        <City>Atlanta</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -658,13 +1154,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>902-382-6454</Number>
+        <Number>763-760-2888</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">ricky.dante.rimmer@trashymail.com</Email>
-      <Email Type="02">ricky10@spambob.com</Email>
+      <Email Type="01">francis.a.books@trashymail.com</Email>
+      <Email Type="02">francis18@mailinator.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -674,330 +1170,20 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>jlffk120</ClassCode>
-      <ClassCode>jtlew550</ClassCode>
+      <ClassCode>htnbq563</ClassCode>
+      <ClassCode>jvdgl038</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>lltmo310</HomeGroup>
+    <HomeGroup>rvaik771</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="2CBAC89B-3B3C-44A5-958A-2436BDBC24DF">
-  <LocalId>bmnnw256</LocalId>
-  <StateProvinceId>8630</StateProvinceId>
+<StaffPersonal RefId="2AACD861-CFD4-47D8-82DE-7B37E1713EBF">
+  <LocalId>gghki304</LocalId>
+  <StateProvinceId>23196</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Dejohn</FamilyName>
-      <GivenName>Leora</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>888 Main Street</Line1>
-        </Street>
-        <City>Buffalo</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>646-409-6655</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">leora.h.dejohn@dodgit.com</Email>
-      <Email Type="02">leora11@dodgit.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>dgkyp055</ClassCode>
-      <ClassCode>tupoz520</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>sawrc497</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="5B592077-CD2F-40B5-8D31-DCF1BDDD438B">
-  <LocalId>nylio291</LocalId>
-  <StateProvinceId>31033</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Evers</FamilyName>
-      <GivenName>Andrea</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>1010 Cedar St. S</Line1>
-        </Street>
-        <City>Santa Cruz</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>937-892-0343</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">andrea..evers@spambob.com</Email>
-      <Email Type="02">andrea12@mailinator.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>mgjbc111</ClassCode>
-      <ClassCode>qphkp056</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>jfahy799</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="E0EC47B3-943B-499A-AB51-587EFDCCCD67">
-  <LocalId>yzoyl823</LocalId>
-  <StateProvinceId>66773</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Williams</FamilyName>
-      <GivenName>Betsy</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>2nd St</Line1>
-        </Street>
-        <City>West Palm Beach</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>900-399-8909</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">betsy.opal.williams@spambob.com</Email>
-      <Email Type="02">betsy13@mailinator.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>mccsr195</ClassCode>
-      <ClassCode>ggqkq240</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>vvbwq632</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="3A81C602-9D4A-4B46-9859-08CEDC3D1E9B">
-  <LocalId>jtkjc438</LocalId>
-  <StateProvinceId>47746</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Tillman</FamilyName>
-      <GivenName>Kathy</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>5203</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>8759 Santa Monica Blvd</Line1>
-        </Street>
-        <City>West Hollywood</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>818-459-7188</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">kathy.s.tillman@dodgit.com</Email>
-      <Email Type="02">kathy14@pookmail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>qifvt517</ClassCode>
-      <ClassCode>qcrtl563</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>vlnkv982</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="99B82D81-C053-40AE-B59B-2263BE647F53">
-  <LocalId>pjfyv516</LocalId>
-  <StateProvinceId>80442</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Bushway</FamilyName>
-      <GivenName>Lance</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>1</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>1227 N. High St.</Line1>
-        </Street>
-        <City>Columbus</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>209-372-2670</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">lance.mathew.bushway@dodgit.com</Email>
-      <Email Type="02">lance15@mailinator.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>xabqo848</ClassCode>
-      <ClassCode>fzlbq726</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>mrhas080</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="428A38FE-31E4-40E4-A613-A8E1ED560E14">
-  <LocalId>cciqt517</LocalId>
-  <StateProvinceId>76222</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Funchess</FamilyName>
-      <GivenName>Sherry</GivenName>
+      <FamilyName>Brown</FamilyName>
+      <GivenName>Angela</GivenName>
     </Name>
     <Demographics>
       <Sex>2</Sex>
@@ -1020,1371 +1206,7 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>1317 6th Ave.</Line1>
-        </Street>
-        <City>Moline</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>907-265-4581</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">sherry.pauline.funchess@mailinator.com</Email>
-      <Email Type="02">sherry16@mailinator.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>zlqrt522</ClassCode>
-      <ClassCode>rdrjh629</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>yeker694</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="3D53BF10-2774-4728-926D-34C5C9E66E4A">
-  <LocalId>tzvdh491</LocalId>
-  <StateProvinceId>20759</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Mikel</FamilyName>
-      <GivenName>Tashia</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>721 Haywood St.</Line1>
-        </Street>
-        <City>Asheville</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>636-275-4763</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">tashia..mikel@trashymail.com</Email>
-      <Email Type="02">tashia17@mailinator.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>smokl208</ClassCode>
-      <ClassCode>bgrtk671</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>auhah356</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="BF4CB416-6BD5-46B6-9ACC-2E43408E0F7E">
-  <LocalId>sxlrq335</LocalId>
-  <StateProvinceId>93273</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Green</FamilyName>
-      <GivenName>Kasey</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>870 S Colorado Blvd</Line1>
-        </Street>
-        <City>Glendale</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>908-579-8105</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">kasey..green@trashymail.com</Email>
-      <Email Type="02">kasey18@mailinator.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>cudhd118</ClassCode>
-      <ClassCode>yclpf983</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>tvwjc051</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="99463347-CEB3-45DF-AB26-954380632E65">
-  <LocalId>lbwok092</LocalId>
-  <StateProvinceId>92157</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Walker</FamilyName>
-      <GivenName>Kym</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>8649 Melrose Ave.</Line1>
-        </Street>
-        <City>Los Angeles</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>330-841-8509</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">kym.s.walker@trashymail.com</Email>
-      <Email Type="02">kym19@pookmail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>iwaek381</ClassCode>
-      <ClassCode>kaixk313</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>kbbyr591</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="BF2D5318-74EF-4C59-A940-06DB81A22EFA">
-  <LocalId>yfvoy320</LocalId>
-  <StateProvinceId>50575</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Miller</FamilyName>
-      <GivenName>Santos</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>1</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>14475 W. Hwy 160</Line1>
-        </Street>
-        <City>Del Norte</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>949-736-3772</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">santos.j.miller@spambob.com</Email>
-      <Email Type="02">santos20@pookmail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>sqlht535</ClassCode>
-      <ClassCode>ixfjk381</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>wxjdz543</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="81E46583-475A-4840-A3C5-B6C5491FE281">
-  <LocalId>freyt025</LocalId>
-  <StateProvinceId>3554</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Cooper</FamilyName>
-      <GivenName>Susan</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>110 4th St</Line1>
-        </Street>
-        <City>Santa Rosa</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>864-861-2334</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">susan.e.cooper@mailinator.com</Email>
-      <Email Type="02">susan21@pookmail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>jossj320</ClassCode>
-      <ClassCode>tuljx887</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>vrcsa387</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="5E99F1CC-1A08-4C9F-832F-C11E5052A11C">
-  <LocalId>bxijq494</LocalId>
-  <StateProvinceId>95755</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Jones</FamilyName>
-      <GivenName>Virginia</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>34th &amp; Walnut Street</Line1>
-        </Street>
-        <City>Philadelphia</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>867-755-8431</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">virginia.t.jones@dodgit.com</Email>
-      <Email Type="02">virginia22@trashymail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>zkilp296</ClassCode>
-      <ClassCode>clitj183</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>yxtjk418</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="AA96069C-10C2-452B-B86F-F5A8A7F444D9">
-  <LocalId>rbgys221</LocalId>
-  <StateProvinceId>29241</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Thompson</FamilyName>
-      <GivenName>Alison</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>2111 30th</Line1>
-        </Street>
-        <City>Boulder</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>616-942-2477</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">alison.g.thompson@spambob.com</Email>
-      <Email Type="02">alison23@mailinator.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>nblge824</ClassCode>
-      <ClassCode>rrtnd419</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>ohtwp542</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="95007EE3-20E8-49F9-BA94-9F781BD91348">
-  <LocalId>dekxv785</LocalId>
-  <StateProvinceId>658</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Kowalski</FamilyName>
-      <GivenName>Felicita</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>520 Fremont Street</Line1>
-        </Street>
-        <City>Las Vegas</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>423-654-1449</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">felicita.j.kowalski@spambob.com</Email>
-      <Email Type="02">felicita24@spambob.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>eyyly345</ClassCode>
-      <ClassCode>yazpr823</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>nhvue262</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="C408E6FC-1D2E-4558-B023-5265AD5BFFA3">
-  <LocalId>fqpbm080</LocalId>
-  <StateProvinceId>2100</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Kessler</FamilyName>
-      <GivenName>Velma</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>127 Valley Road</Line1>
-        </Street>
-        <City>Montclair</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>765-810-8660</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">velma.fay.kessler@mailinator.com</Email>
-      <Email Type="02">velma25@mailinator.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>csbuo913</ClassCode>
-      <ClassCode>kjvmb539</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>nfddo351</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="101566C8-9BDF-4AC8-B945-261E6490F7B1">
-  <LocalId>uggju018</LocalId>
-  <StateProvinceId>91341</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Peterson</FamilyName>
-      <GivenName>Jackie</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>1</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>10899 Olson Drive</Line1>
-        </Street>
-        <City>Rancho Cordova</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>602-603-2006</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">jackie.wilburn.peterson@trashymail.com</Email>
-      <Email Type="02">jackie26@dodgit.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>ujmjs021</ClassCode>
-      <ClassCode>xubuf149</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>zadwe966</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="6E20B3D8-B2FF-40B7-BD72-C139EE7BDDF1">
-  <LocalId>mijlw220</LocalId>
-  <StateProvinceId>40793</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Dansby</FamilyName>
-      <GivenName>Nellie</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>1180 Forest Ave.</Line1>
-        </Street>
-        <City>Pacific Grove</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>506-714-7064</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">nellie.f.dansby@mailinator.com</Email>
-      <Email Type="02">nellie27@trashymail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>ohbuy444</ClassCode>
-      <ClassCode>jrmtc375</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>cahdh535</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="10627565-5DA8-4FE5-9D40-CFF850771376">
-  <LocalId>jfppw684</LocalId>
-  <StateProvinceId>90664</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Story</FamilyName>
-      <GivenName>Bobby</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>1</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>5203</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>531 Divisadero St</Line1>
-        </Street>
-        <City>San Francisco</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>315-869-5699</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">bobby.c.story@spambob.com</Email>
-      <Email Type="02">bobby28@pookmail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>awqyq957</ClassCode>
-      <ClassCode>qowai321</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>hvtth498</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="9631824A-96BC-4FD1-BAD6-02C2BBF7B88E">
-  <LocalId>nchzk200</LocalId>
-  <StateProvinceId>29108</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Huggins</FamilyName>
-      <GivenName>Melody</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>5203</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>2 Professional Park Dr.</Line1>
-        </Street>
-        <City>Maryville</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>662-234-5589</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">melody..huggins@spambob.com</Email>
-      <Email Type="02">melody29@trashymail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>tlwxt895</ClassCode>
-      <ClassCode>hsiij921</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>kqnkj675</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="87E8ED26-B379-4A2D-84E5-3080D2A3F349">
-  <LocalId>ozykr988</LocalId>
-  <StateProvinceId>19589</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Youngman</FamilyName>
-      <GivenName>Marjorie</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>1773 Columbia Rd. NW</Line1>
-        </Street>
-        <City>Washington</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>860-943-9871</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">marjorie.wanda.youngman@dodgit.com</Email>
-      <Email Type="02">marjorie30@pookmail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>aunzv855</ClassCode>
-      <ClassCode>kqxmw158</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>utmtd012</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="7306BF1D-420E-48EC-A67B-47F70075399F">
-  <LocalId>eitio464</LocalId>
-  <StateProvinceId>69203</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Wilde</FamilyName>
-      <GivenName>Marc</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>1</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>po box 82284</Line1>
-        </Street>
-        <City>athens</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>775-823-3041</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">marc.billie.wilde@pookmail.com</Email>
-      <Email Type="02">marc31@dodgit.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>oslxw005</ClassCode>
-      <ClassCode>xyxhh804</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>asurv116</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="2D0CD1E4-4521-4DA5-880A-EF8D194E7263">
-  <LocalId>glwrz271</LocalId>
-  <StateProvinceId>1862</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Armstrong</FamilyName>
-      <GivenName>Jewell</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>33 Aulike St.</Line1>
-        </Street>
-        <City>Kailua</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>813-795-4403</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">jewell.j.armstrong@trashymail.com</Email>
-      <Email Type="02">jewell32@dodgit.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>wbicp552</ClassCode>
-      <ClassCode>gijdb543</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>aevfk236</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="11690567-4277-44ED-8F52-51391A0DD2AC">
-  <LocalId>rmxaf345</LocalId>
-  <StateProvinceId>2526</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Higa</FamilyName>
-      <GivenName>Morris</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>1</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>5511 N. Figueroa St.</Line1>
-        </Street>
-        <City>Los Angeles</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>231-504-9730</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">morris..higa@spambob.com</Email>
-      <Email Type="02">morris33@dodgit.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>qnsog315</ClassCode>
-      <ClassCode>qkqud435</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>dxwhj683</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="91C4385E-0BDB-4E14-8C64-B8C19AAE1DC4">
-  <LocalId>xdxfz114</LocalId>
-  <StateProvinceId>11559</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Wroblewski</FamilyName>
-      <GivenName>Eduardo</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>1</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>2777 S. 6th St.</Line1>
-        </Street>
-        <City>Springfield</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>205-400-8569</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">eduardo.l.wroblewski@mailinator.com</Email>
-      <Email Type="02">eduardo34@dodgit.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>iynik975</ClassCode>
-      <ClassCode>ianwv980</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>oyhnp151</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="9828072B-268E-41B2-95B6-BE663F2F9516">
-  <LocalId>vayig960</LocalId>
-  <StateProvinceId>47302</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Bryant</FamilyName>
-      <GivenName>Nicholle</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>1812 S. Seneca St</Line1>
-        </Street>
-        <City>Wichita</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>313-277-3061</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">nicholle.j.bryant@dodgit.com</Email>
-      <Email Type="02">nicholle35@dodgit.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>knbkl648</ClassCode>
-      <ClassCode>ofovh211</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>lldwz142</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="53929305-6728-4335-B0EA-7422A555F4DA">
-  <LocalId>hafvx332</LocalId>
-  <StateProvinceId>92092</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Stanley</FamilyName>
-      <GivenName>Mickie</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>2201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>106 S. 20th St.</Line1>
-        </Street>
-        <City>Philadelphia</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>908-786-9664</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">mickie.angelica.stanley@trashymail.com</Email>
-      <Email Type="02">mickie36@dodgit.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>axipy572</ClassCode>
-      <ClassCode>xrtbr789</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>msmei423</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="4F4CE5AD-9426-477A-80E9-E6713E084DAD">
-  <LocalId>dluzg190</LocalId>
-  <StateProvinceId>21848</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Burch</FamilyName>
-      <GivenName>Lincoln</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>1</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>20th Street and Church Street</Line1>
-        </Street>
-        <City>San Francisco</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>859-358-2508</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">lincoln..burch@pookmail.com</Email>
-      <Email Type="02">lincoln37@dodgit.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>fflbw499</ClassCode>
-      <ClassCode>yhqyl276</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>zplkd584</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="6EBE8A50-FC63-4EFD-B093-E1536AD652C7">
-  <LocalId>ccrwx621</LocalId>
-  <StateProvinceId>79727</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Smith</FamilyName>
-      <GivenName>Tammie</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>2</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>1201</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>3728 Spring Garden St.</Line1>
+          <Line1>2965 Battleground Ave.</Line1>
         </Street>
         <City>Greensboro</City>
         <StateProvince>VIC</StateProvince>
@@ -2394,13 +1216,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>502-239-1650</Number>
+        <Number>720-430-7120</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">tammie.l.smith@pookmail.com</Email>
-      <Email Type="02">tammie38@dodgit.com</Email>
+      <Email Type="01">angela.z.brown@mailinator.com</Email>
+      <Email Type="02">angela19@pookmail.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -2410,20 +1232,20 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>dmren464</ClassCode>
-      <ClassCode>ohchm707</ClassCode>
+      <ClassCode>tuzye018</ClassCode>
+      <ClassCode>gwfgq421</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>wgefx779</HomeGroup>
+    <HomeGroup>qldct682</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="7978AF75-EAC5-48B3-8E7A-044AAFCD78B0">
-  <LocalId>zspry753</LocalId>
-  <StateProvinceId>12267</StateProvinceId>
+<StaffPersonal RefId="7881E018-9117-4108-940D-716C157F6F59">
+  <LocalId>wmdlm663</LocalId>
+  <StateProvinceId>28358</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Graham</FamilyName>
-      <GivenName>Cory</GivenName>
+      <FamilyName>Ross</FamilyName>
+      <GivenName>Allan</GivenName>
     </Name>
     <Demographics>
       <Sex>1</Sex>
@@ -2446,9 +1268,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>390 East 1700 South</Line1>
+          <Line1>2905 Pearl Street</Line1>
         </Street>
-        <City>Salt Lake City</City>
+        <City>Boulder</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -2456,13 +1278,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>610-399-4763</Number>
+        <Number>705-672-6580</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">cory.d.graham@trashymail.com</Email>
-      <Email Type="02">cory39@mailinator.com</Email>
+      <Email Type="01">allan.n.ross@pookmail.com</Email>
+      <Email Type="02">allan20@spambob.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -2472,20 +1294,82 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>ehdnc614</ClassCode>
-      <ClassCode>nrwfi095</ClassCode>
+      <ClassCode>lsowa884</ClassCode>
+      <ClassCode>dhohq045</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>pzfpi285</HomeGroup>
+    <HomeGroup>jghit982</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="958148F3-9937-4ED1-AA46-EE1F4331EC33">
-  <LocalId>dadpr919</LocalId>
-  <StateProvinceId>9809</StateProvinceId>
+<StaffPersonal RefId="B850816A-04B1-482C-ABA3-BF82A53D8F23">
+  <LocalId>efkjf744</LocalId>
+  <StateProvinceId>56415</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Daniel</FamilyName>
-      <GivenName>Kimberly</GivenName>
+      <FamilyName>Brown</FamilyName>
+      <GivenName>Ken</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>310-330 N. 8th St. (Rt. 31)</Line1>
+        </Street>
+        <City>West Dundee</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>915-878-9015</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">ken.h.brown@trashymail.com</Email>
+      <Email Type="02">ken21@trashymail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>qnpcm143</ClassCode>
+      <ClassCode>wecdk310</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>dujpg431</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="6657F52C-960A-4634-A76C-5431C6CC2619">
+  <LocalId>wascf061</LocalId>
+  <StateProvinceId>8085</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Darrow</FamilyName>
+      <GivenName>Lakendra</GivenName>
     </Name>
     <Demographics>
       <Sex>2</Sex>
@@ -2508,9 +1392,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>311 West 48th Street</Line1>
+          <Line1>402 SE M L King Blvd</Line1>
         </Street>
-        <City>New York</City>
+        <City>Portland</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -2518,13 +1402,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>443-339-3734</Number>
+        <Number>775-689-8782</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">kimberly.c.daniel@dodgit.com</Email>
-      <Email Type="02">kimberly40@trashymail.com</Email>
+      <Email Type="01">lakendra.c.darrow@dodgit.com</Email>
+      <Email Type="02">lakendra22@pookmail.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -2534,20 +1418,20 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>bifxt749</ClassCode>
-      <ClassCode>ojbhy025</ClassCode>
+      <ClassCode>kjecp773</ClassCode>
+      <ClassCode>rolqy021</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>gmcyz182</HomeGroup>
+    <HomeGroup>arybc285</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="72400D9A-8F24-4BEB-A57C-26129705469D">
-  <LocalId>aymqq009</LocalId>
-  <StateProvinceId>59718</StateProvinceId>
+<StaffPersonal RefId="89157043-8095-4567-A9D3-270F13FE04E7">
+  <LocalId>hdxbq361</LocalId>
+  <StateProvinceId>18297</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Bankston</FamilyName>
-      <GivenName>Althea</GivenName>
+      <FamilyName>Coward</FamilyName>
+      <GivenName>Guillermina</GivenName>
     </Name>
     <Demographics>
       <Sex>2</Sex>
@@ -2570,9 +1454,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>2201 Stemmons Freeway</Line1>
+          <Line1>1133 Bardstown Rd.</Line1>
         </Street>
-        <City>Dallas</City>
+        <City>Louisville</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -2580,13 +1464,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>804-745-6208</Number>
+        <Number>661-849-4863</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">althea.reta.bankston@mailinator.com</Email>
-      <Email Type="02">althea41@dodgit.com</Email>
+      <Email Type="01">guillermina.m.coward@mailinator.com</Email>
+      <Email Type="02">guillermina23@spambob.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -2596,23 +1480,23 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>qvzof153</ClassCode>
-      <ClassCode>typlm492</ClassCode>
+      <ClassCode>bebus668</ClassCode>
+      <ClassCode>wsitg807</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>srzlm520</HomeGroup>
+    <HomeGroup>dvgjr650</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="A051EBB8-BCB8-4B5B-B74E-CC483EBFD205">
-  <LocalId>mlhnm252</LocalId>
-  <StateProvinceId>69852</StateProvinceId>
+<StaffPersonal RefId="32194C93-DA73-4503-8AAB-20505BF26370">
+  <LocalId>rafbn986</LocalId>
+  <StateProvinceId>29897</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Perez</FamilyName>
-      <GivenName>Brant</GivenName>
+      <FamilyName>Bailey</FamilyName>
+      <GivenName>Jacquelin</GivenName>
     </Name>
     <Demographics>
-      <Sex>1</Sex>
+      <Sex>2</Sex>
       <CountryOfBirth>1101</CountryOfBirth>
       <CountriesOfCitizenship>
         <CountryOfCitizenship>1101</CountryOfCitizenship>
@@ -2632,9 +1516,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>1330 Central Avenue</Line1>
+          <Line1>111 Central Avenue</Line1>
         </Street>
-        <City>Sarasota</City>
+        <City>Pacific Grove</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -2642,13 +1526,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>505-350-5498</Number>
+        <Number>406-605-8693</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">brant.r.perez@trashymail.com</Email>
-      <Email Type="02">brant42@pookmail.com</Email>
+      <Email Type="01">jacquelin.e.bailey@pookmail.com</Email>
+      <Email Type="02">jacquelin24@spambob.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -2658,23 +1542,271 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>cjape739</ClassCode>
-      <ClassCode>onxtf779</ClassCode>
+      <ClassCode>uyfrw308</ClassCode>
+      <ClassCode>xzhul628</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>glhww016</HomeGroup>
+    <HomeGroup>kvrfq456</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="C1CE46DF-918A-49A2-8FB2-BC7C4622E299">
-  <LocalId>anzoa626</LocalId>
-  <StateProvinceId>17906</StateProvinceId>
+<StaffPersonal RefId="3200C1D2-5D71-4657-A7CA-7DA5043804BC">
+  <LocalId>kdsrs683</LocalId>
+  <StateProvinceId>98343</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Suggs</FamilyName>
-      <GivenName>Glenn</GivenName>
+      <FamilyName>Minnis</FamilyName>
+      <GivenName>Eleanor</GivenName>
     </Name>
     <Demographics>
-      <Sex>1</Sex>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>318 Grand St # 1</Line1>
+        </Street>
+        <City>Brooklyn</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>859-877-5157</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">eleanor..minnis@trashymail.com</Email>
+      <Email Type="02">eleanor25@dodgit.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>xjoha202</ClassCode>
+      <ClassCode>ibydp744</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>wjkal931</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="DC145915-0184-4FD9-9707-E471B6CA16C0">
+  <LocalId>ooxcn660</LocalId>
+  <StateProvinceId>88624</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Simon</FamilyName>
+      <GivenName>Chloe</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>161 Main Street</Line1>
+        </Street>
+        <City>Vergennes</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>510-384-8632</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">chloe..simon@trashymail.com</Email>
+      <Email Type="02">chloe26@trashymail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>vilgp810</ClassCode>
+      <ClassCode>uylck339</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>ohpbi296</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="1D69CE5E-4A83-4486-A5A0-2B74B345E782">
+  <LocalId>zehws117</LocalId>
+  <StateProvinceId>64374</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Sadler</FamilyName>
+      <GivenName>Mamie</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1></Line1>
+        </Street>
+        <City>Maui</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>804-948-1062</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">mamie.edith.sadler@spambob.com</Email>
+      <Email Type="02">mamie27@dodgit.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>yfznt735</ClassCode>
+      <ClassCode>upzuj714</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>wofhe317</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="31BB61F5-54FB-49FD-A5A7-7D5F9889E731">
+  <LocalId>kodpr857</LocalId>
+  <StateProvinceId>92852</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Shaw</FamilyName>
+      <GivenName>Becky</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>1300 El Paseo Rd</Line1>
+        </Street>
+        <City>Las Cruces</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>760-538-9000</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">becky..shaw@pookmail.com</Email>
+      <Email Type="02">becky28@trashymail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>worqz215</ClassCode>
+      <ClassCode>uvytm013</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>mmxpf911</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="78F81FBD-1C6A-4AE8-A870-5497DF2CA512">
+  <LocalId>rzvcq260</LocalId>
+  <StateProvinceId>6843</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Eastland</FamilyName>
+      <GivenName>Alison</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
       <CountryOfBirth>1101</CountryOfBirth>
       <CountriesOfCitizenship>
         <CountryOfCitizenship>1101</CountryOfCitizenship>
@@ -2694,9 +1826,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>2100 Santa Rosa Ave</Line1>
+          <Line1>2708 Lyndale Avenue S</Line1>
         </Street>
-        <City>Santa Rosa</City>
+        <City>Minneapolis</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -2704,13 +1836,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>809-836-0624</Number>
+        <Number>520-597-4543</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">glenn.lazaro.suggs@spambob.com</Email>
-      <Email Type="02">glenn43@spambob.com</Email>
+      <Email Type="01">alison.b.eastland@mailinator.com</Email>
+      <Email Type="02">alison29@pookmail.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -2720,20 +1852,206 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>htxdb604</ClassCode>
-      <ClassCode>uaodc103</ClassCode>
+      <ClassCode>uqwep375</ClassCode>
+      <ClassCode>mxbcr287</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>cuygi662</HomeGroup>
+    <HomeGroup>kumgj201</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="445107F5-F232-40E5-AA46-1AD484152A63">
-  <LocalId>ontwx429</LocalId>
-  <StateProvinceId>45710</StateProvinceId>
+<StaffPersonal RefId="5B8674C7-7CD6-456D-858C-564124E94F40">
+  <LocalId>qnrcs511</LocalId>
+  <StateProvinceId>83051</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Davis</FamilyName>
-      <GivenName>Joanne</GivenName>
+      <FamilyName>Odum</FamilyName>
+      <GivenName>Odell</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>906 2nd St</Line1>
+        </Street>
+        <City>Corallville</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>516-216-6203</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">odell..odum@pookmail.com</Email>
+      <Email Type="02">odell30@mailinator.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>hecat055</ClassCode>
+      <ClassCode>czegs723</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>tfide213</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="41915A6A-AF32-4AD0-927C-0B4602B003BC">
+  <LocalId>jwtes484</LocalId>
+  <StateProvinceId>81345</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Oneil</FamilyName>
+      <GivenName>Eugene</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>710 W. Girard Ave.</Line1>
+        </Street>
+        <City>Philadelphia</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>484-794-0877</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">eugene.omar.oneil@trashymail.com</Email>
+      <Email Type="02">eugene31@mailinator.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>nqgxx146</ClassCode>
+      <ClassCode>tnkiu399</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>bmidu726</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="343B8284-F7AB-41FF-8CF1-C57B2DDB8317">
+  <LocalId>hjusl346</LocalId>
+  <StateProvinceId>68398</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Guzman</FamilyName>
+      <GivenName>Gertrude</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>5203</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>1111 N. State Street</Line1>
+        </Street>
+        <City>Bellingham</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>767-911-6291</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">gertrude..guzman@mailinator.com</Email>
+      <Email Type="02">gertrude32@dodgit.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>ahmvw509</ClassCode>
+      <ClassCode>cdlzj183</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>dowme523</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="3E6C2D01-435A-4762-97A3-CFBDCC90E82B">
+  <LocalId>ncfsc316</LocalId>
+  <StateProvinceId>9956</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Harper</FamilyName>
+      <GivenName>Mattie</GivenName>
     </Name>
     <Demographics>
       <Sex>2</Sex>
@@ -2756,9 +2074,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>10899 Olson Drive</Line1>
+          <Line1>181 North Main St</Line1>
         </Street>
-        <City>Rancho Cordova</City>
+        <City>Harrisonburg</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -2766,13 +2084,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>863-344-1183</Number>
+        <Number>920-318-9700</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">joanne..davis@spambob.com</Email>
-      <Email Type="02">joanne44@trashymail.com</Email>
+      <Email Type="01">mattie.elaine.harper@spambob.com</Email>
+      <Email Type="02">mattie33@trashymail.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -2782,20 +2100,20 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>xpgty999</ClassCode>
-      <ClassCode>yfnpg667</ClassCode>
+      <ClassCode>hhswo217</ClassCode>
+      <ClassCode>zysqd487</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>chwwn770</HomeGroup>
+    <HomeGroup>rovud348</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="ECD7AB92-87E7-4D74-9863-FED5E11AD698">
-  <LocalId>oukqa425</LocalId>
-  <StateProvinceId>33519</StateProvinceId>
+<StaffPersonal RefId="2554F6B1-8307-4D86-8F51-D4E5DBCA9A59">
+  <LocalId>dotrb603</LocalId>
+  <StateProvinceId>81454</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Horn</FamilyName>
-      <GivenName>Denny</GivenName>
+      <FamilyName>Mund</FamilyName>
+      <GivenName>Eileen</GivenName>
     </Name>
     <Demographics>
       <Sex>2</Sex>
@@ -2818,9 +2136,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>916 Massachusetts Avenue</Line1>
+          <Line1>452 E. Third Street</Line1>
         </Street>
-        <City>Arlington</City>
+        <City>Dayton</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -2828,13 +2146,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>671-791-9923</Number>
+        <Number>972-665-9142</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">denny.jody.horn@pookmail.com</Email>
-      <Email Type="02">denny45@dodgit.com</Email>
+      <Email Type="01">eileen..mund@dodgit.com</Email>
+      <Email Type="02">eileen34@spambob.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -2844,20 +2162,206 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>bslzh162</ClassCode>
-      <ClassCode>ylqlg385</ClassCode>
+      <ClassCode>wtqha040</ClassCode>
+      <ClassCode>bcldi566</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>qviwf445</HomeGroup>
+    <HomeGroup>sghls260</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="2A4014A5-B98E-4140-AB7B-FC17183EE40F">
-  <LocalId>bxifj810</LocalId>
-  <StateProvinceId>42554</StateProvinceId>
+<StaffPersonal RefId="77E190D6-A868-4706-9484-0AA80F6DB7FA">
+  <LocalId>lgzkf031</LocalId>
+  <StateProvinceId>30941</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Cope</FamilyName>
-      <GivenName>Marcie</GivenName>
+      <FamilyName>Light</FamilyName>
+      <GivenName>Crystal</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>477 Melwood Avenue</Line1>
+        </Street>
+        <City>Pittsburgh</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>715-289-2226</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">crystal..light@pookmail.com</Email>
+      <Email Type="02">crystal35@dodgit.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>jgbuj920</ClassCode>
+      <ClassCode>warfr797</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>jkvot445</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="EE4A34C7-B2D7-4E1C-A681-B69F0A15A61F">
+  <LocalId>xoemk944</LocalId>
+  <StateProvinceId>89224</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Treadwell</FamilyName>
+      <GivenName>Salvador</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>813 Purchase St # 805</Line1>
+        </Street>
+        <City>New Bedford</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>800-391-3431</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">salvador..treadwell@pookmail.com</Email>
+      <Email Type="02">salvador36@mailinator.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>nupqb600</ClassCode>
+      <ClassCode>jcwdd161</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>pwgmc227</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="05A29FF9-C8BD-4B7D-8434-96BF1AD68BA3">
+  <LocalId>zbazy522</LocalId>
+  <StateProvinceId>94826</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Elie</FamilyName>
+      <GivenName>Johnathan</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>5203</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>5554 34th Avenue South</Line1>
+        </Street>
+        <City>Minneapolis</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>706-509-3410</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">johnathan..elie@pookmail.com</Email>
+      <Email Type="02">johnathan37@trashymail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>muwps263</ClassCode>
+      <ClassCode>tcyke620</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>kvejk296</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="EC283511-9A8F-4903-AD6B-32D1CC818AF5">
+  <LocalId>zchom796</LocalId>
+  <StateProvinceId>30416</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Gross</FamilyName>
+      <GivenName>Pattie</GivenName>
     </Name>
     <Demographics>
       <Sex>2</Sex>
@@ -2880,9 +2384,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>695 E Green St</Line1>
+          <Line1> 627 South Broadway</Line1>
         </Street>
-        <City>Pasadena</City>
+        <City>Boulder</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -2890,13 +2394,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>757-439-9910</Number>
+        <Number>880-817-7088</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">marcie.s.cope@dodgit.com</Email>
-      <Email Type="02">marcie46@pookmail.com</Email>
+      <Email Type="01">pattie..gross@mailinator.com</Email>
+      <Email Type="02">pattie38@dodgit.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -2906,82 +2410,20 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>mimst017</ClassCode>
-      <ClassCode>lskdd427</ClassCode>
+      <ClassCode>cremh694</ClassCode>
+      <ClassCode>kkhsq644</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>lnfnb697</HomeGroup>
+    <HomeGroup>exyrc755</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="DC8DD82B-7936-4864-BE07-4329A5AEE79C">
-  <LocalId>htmap596</LocalId>
-  <StateProvinceId>79529</StateProvinceId>
+<StaffPersonal RefId="165D596C-DAD6-44FC-AF90-B929C96E681D">
+  <LocalId>tzpbl623</LocalId>
+  <StateProvinceId>56107</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Wallace</FamilyName>
-      <GivenName>Derek</GivenName>
-    </Name>
-    <Demographics>
-      <Sex>1</Sex>
-      <CountryOfBirth>1101</CountryOfBirth>
-      <CountriesOfCitizenship>
-        <CountryOfCitizenship>1101</CountryOfCitizenship>
-      </CountriesOfCitizenship>
-      <CountriesOfResidency>
-        <CountryOfResidency>1101</CountryOfResidency>
-      </CountriesOfResidency>
-      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
-      <LanguageList>
-        <Language>
-          <Code>7100</Code>
-          <LanguageType>1</LanguageType>
-        </Language>
-      </LanguageList>
-      <PermanentResident>P</PermanentResident>
-    </Demographics>
-    <AddressList>
-      <Address Type="0123" Role="012B">
-        <Street>
-          <Line1>2 John R Street</Line1>
-        </Street>
-        <City>Detroit</City>
-        <StateProvince>VIC</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>9999</PostalCode>
-      </Address>
-    </AddressList>
-    <PhoneNumberList>
-      <PhoneNumber Type="0096">
-        <Number>256-633-1700</Number>
-        <ListedStatus>Y</ListedStatus>
-      </PhoneNumber>
-    </PhoneNumberList>
-    <EmailList>
-      <Email Type="01">derek..wallace@mailinator.com</Email>
-      <Email Type="02">derek47@pookmail.com</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>Teacher</Title>
-  <EmploymentStatus>A</EmploymentStatus>
-  <MostRecent>
-    <SchoolLocalId>72868</SchoolLocalId>
-    <SchoolACARAId>XYZZY123</SchoolACARAId>
-    <LocalCampusId>01</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>rhkdc613</ClassCode>
-      <ClassCode>dvgvz412</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>dgnpf721</HomeGroup>
-  </MostRecent>
-</StaffPersonal>
-
-<StaffPersonal RefId="4A773F4E-5410-404E-992A-C5E309BAC374">
-  <LocalId>apncz577</LocalId>
-  <StateProvinceId>84308</StateProvinceId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>Jones</FamilyName>
-      <GivenName>Murray</GivenName>
+      <FamilyName>Craig</FamilyName>
+      <GivenName>Nick</GivenName>
     </Name>
     <Demographics>
       <Sex>1</Sex>
@@ -3004,9 +2446,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>1075 Easton Ave</Line1>
+          <Line1>119 North 4th Street</Line1>
         </Street>
-        <City>Somerset</City>
+        <City>Minneapolis</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -3014,13 +2456,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>670-414-7501</Number>
+        <Number>787-621-1007</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">murray.l.jones@pookmail.com</Email>
-      <Email Type="02">murray48@mailinator.com</Email>
+      <Email Type="01">nick.albert.craig@spambob.com</Email>
+      <Email Type="02">nick39@dodgit.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -3030,20 +2472,20 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>tpekp117</ClassCode>
-      <ClassCode>drvmv277</ClassCode>
+      <ClassCode>cvhfi750</ClassCode>
+      <ClassCode>ltknp731</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>aemnr825</HomeGroup>
+    <HomeGroup>tkadk763</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 
-<StaffPersonal RefId="69048195-F5BC-4553-9355-0432A99FBD18">
-  <LocalId>dxriw247</LocalId>
-  <StateProvinceId>42357</StateProvinceId>
+<StaffPersonal RefId="FC8E18FF-2DD3-4A1C-9FFE-A49D4EA5AEAA">
+  <LocalId>gaifa756</LocalId>
+  <StateProvinceId>31570</StateProvinceId>
   <PersonInfo>
     <Name Type="LGL">
-      <FamilyName>Simpson</FamilyName>
-      <GivenName>Kerry</GivenName>
+      <FamilyName>Pride</FamilyName>
+      <GivenName>Leroy</GivenName>
     </Name>
     <Demographics>
       <Sex>1</Sex>
@@ -3066,9 +2508,9 @@
     <AddressList>
       <Address Type="0123" Role="012B">
         <Street>
-          <Line1>1603 North Aurora Rd.</Line1>
+          <Line1>1298 Hertel ave</Line1>
         </Street>
-        <City>Naperville</City>
+        <City>Buffalo</City>
         <StateProvince>VIC</StateProvince>
         <Country>1101</Country>
         <PostalCode>9999</PostalCode>
@@ -3076,13 +2518,13 @@
     </AddressList>
     <PhoneNumberList>
       <PhoneNumber Type="0096">
-        <Number>217-365-3690</Number>
+        <Number>514-604-4369</Number>
         <ListedStatus>Y</ListedStatus>
       </PhoneNumber>
     </PhoneNumberList>
     <EmailList>
-      <Email Type="01">kerry.j.simpson@pookmail.com</Email>
-      <Email Type="02">kerry49@pookmail.com</Email>
+      <Email Type="01">leroy.j.pride@trashymail.com</Email>
+      <Email Type="02">leroy40@trashymail.com</Email>
     </EmailList>
   </PersonInfo>
   <Title>Teacher</Title>
@@ -3092,10 +2534,568 @@
     <SchoolACARAId>XYZZY123</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
-      <ClassCode>aqili121</ClassCode>
-      <ClassCode>teixt216</ClassCode>
+      <ClassCode>jzddv365</ClassCode>
+      <ClassCode>jwqnr351</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>fjaxz129</HomeGroup>
+    <HomeGroup>dksdw135</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="82B60573-88E9-4751-8982-4806DE734BED">
+  <LocalId>sodcc382</LocalId>
+  <StateProvinceId>31262</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Reis</FamilyName>
+      <GivenName>Tina</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>2130 Jefferson Street</Line1>
+        </Street>
+        <City>Houston</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>845-766-0036</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">tina.tamela.reis@dodgit.com</Email>
+      <Email Type="02">tina41@trashymail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>rpgyz639</ClassCode>
+      <ClassCode>tfhnr152</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>llnph954</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="952FE4F2-7D27-4C05-BB57-7F5BB21D3B20">
+  <LocalId>jpljm203</LocalId>
+  <StateProvinceId>18998</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Elie</FamilyName>
+      <GivenName>Soledad</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>5203</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>21520 W. Field Pkwy.</Line1>
+        </Street>
+        <City>Deer Park</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>225-719-7640</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">soledad.kim.elie@mailinator.com</Email>
+      <Email Type="02">soledad42@dodgit.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>giupy273</ClassCode>
+      <ClassCode>pctmv008</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>jobgn743</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="B6D7B1BF-D13C-4743-AEA0-0ED83753ECF2">
+  <LocalId>btfhz229</LocalId>
+  <StateProvinceId>78173</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Vansant</FamilyName>
+      <GivenName>Lynn</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>607 kaliste saloom</Line1>
+        </Street>
+        <City>Lafayette</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>902-872-6736</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">lynn.m.vansant@pookmail.com</Email>
+      <Email Type="02">lynn43@spambob.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>oflrp253</ClassCode>
+      <ClassCode>dilgo583</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>cotmo176</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="468346F1-1630-451B-8F5A-95A05A0E7D60">
+  <LocalId>rruve885</LocalId>
+  <StateProvinceId>54011</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Wilkes</FamilyName>
+      <GivenName>Bessie</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>1394 Main St.</Line1>
+        </Street>
+        <City>Worcester</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>925-631-6563</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">bessie.g.wilkes@pookmail.com</Email>
+      <Email Type="02">bessie44@trashymail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>pjpmf738</ClassCode>
+      <ClassCode>bootq116</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>njowl855</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="624485B9-264A-446F-ACF3-A7064CD38686">
+  <LocalId>teztp740</LocalId>
+  <StateProvinceId>60441</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Harvey</FamilyName>
+      <GivenName>Kristopher</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>13 E. Park Avenue</Line1>
+        </Street>
+        <City>Savannah</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>918-238-5202</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">kristopher.a.harvey@trashymail.com</Email>
+      <Email Type="02">kristopher45@dodgit.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>voxin609</ClassCode>
+      <ClassCode>yaytm083</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>projh904</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="7E9303C0-419C-4882-92BE-9D940A7BFA21">
+  <LocalId>wqgxx482</LocalId>
+  <StateProvinceId>85435</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Bushway</FamilyName>
+      <GivenName>Duane</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>4290 Perkiomen Ave.</Line1>
+        </Street>
+        <City>Reading</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>253-654-2942</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">duane.b.bushway@pookmail.com</Email>
+      <Email Type="02">duane46@pookmail.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>yuqys160</ClassCode>
+      <ClassCode>zrqjl626</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>lenat402</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="DE39AABA-D9C9-4017-A0C8-5759821151A8">
+  <LocalId>fwvuv877</LocalId>
+  <StateProvinceId>67213</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Flores</FamilyName>
+      <GivenName>Jonathon</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>1</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1></Line1>
+        </Street>
+        <City>San Francisco</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>419-361-2234</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">jonathon..flores@mailinator.com</Email>
+      <Email Type="02">jonathon47@dodgit.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>qlner282</ClassCode>
+      <ClassCode>tdfcd227</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>ktgtg229</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="AE29B93F-0DAD-48DD-A312-17FB98E35E0C">
+  <LocalId>ilnqp585</LocalId>
+  <StateProvinceId>7869</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Anderson</FamilyName>
+      <GivenName>Christie</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>12113 Santa Monica Blvd</Line1>
+        </Street>
+        <City>West Los Angeles</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>809-747-5552</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">christie.r.anderson@trashymail.com</Email>
+      <Email Type="02">christie48@spambob.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>utdkd125</ClassCode>
+      <ClassCode>boypj965</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>fouur347</HomeGroup>
+  </MostRecent>
+</StaffPersonal>
+
+<StaffPersonal RefId="299D1516-8936-4C66-A62D-4C4223E47477">
+  <LocalId>vmffh315</LocalId>
+  <StateProvinceId>28351</StateProvinceId>
+  <PersonInfo>
+    <Name Type="LGL">
+      <FamilyName>Hedstrom</FamilyName>
+      <GivenName>Tanya</GivenName>
+    </Name>
+    <Demographics>
+      <Sex>2</Sex>
+      <CountryOfBirth>1101</CountryOfBirth>
+      <CountriesOfCitizenship>
+        <CountryOfCitizenship>1101</CountryOfCitizenship>
+      </CountriesOfCitizenship>
+      <CountriesOfResidency>
+        <CountryOfResidency>1101</CountryOfResidency>
+      </CountriesOfResidency>
+      <AustralianCitizenshipStatus>1</AustralianCitizenshipStatus>
+      <LanguageList>
+        <Language>
+          <Code>1201</Code>
+          <LanguageType>1</LanguageType>
+        </Language>
+      </LanguageList>
+      <PermanentResident>P</PermanentResident>
+    </Demographics>
+    <AddressList>
+      <Address Type="0123" Role="012B">
+        <Street>
+          <Line1>618 Kensington Rd.</Line1>
+        </Street>
+        <City>Syracuse</City>
+        <StateProvince>VIC</StateProvince>
+        <Country>1101</Country>
+        <PostalCode>9999</PostalCode>
+      </Address>
+    </AddressList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>201-875-0889</Number>
+        <ListedStatus>Y</ListedStatus>
+      </PhoneNumber>
+    </PhoneNumberList>
+    <EmailList>
+      <Email Type="01">tanya.sadie.hedstrom@mailinator.com</Email>
+      <Email Type="02">tanya49@dodgit.com</Email>
+    </EmailList>
+  </PersonInfo>
+  <Title>Teacher</Title>
+  <EmploymentStatus>A</EmploymentStatus>
+  <MostRecent>
+    <SchoolLocalId>72868</SchoolLocalId>
+    <SchoolACARAId>XYZZY123</SchoolACARAId>
+    <LocalCampusId>01</LocalCampusId>
+    <NAPLANClassList>
+      <ClassCode>ltfnc205</ClassCode>
+      <ClassCode>mbxkm725</ClassCode>
+    </NAPLANClassList>
+    <HomeGroup>fxdah440</HomeGroup>
   </MostRecent>
 </StaffPersonal>
 </StaffPersonals>
