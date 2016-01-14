@@ -73,6 +73,12 @@ def launch
 
   banner 'Creating known topics'
 
+    # slight wait to ensure kafka is initialised
+  # otherwise topics may fail to create - will be created dynamically when called, but with  
+  # startup overhead that is better dealt with here.
+  sleep 5
+
+
   topics = [
               'sifxml.validated',
               'sms.indexer',
