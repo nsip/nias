@@ -60,12 +60,13 @@ puts "Started message at #{start}"
 	    concatcount = concatcount + 1
 	    if payload.match( /===snip===/ ) then
 	    	payload = payload.gsub(/\n===snip===\n/, "")
-		puts "Concatenating #{concatcount} messages..."
+		puts "Concatenating #{concatcount} messages. Payload size: #{payload.size / 1000}..."
 	    	next
 	    end
 #puts "Concatenating #{concatcount} messages..."
 #next
 		puts "Concatenation done at #{Time.now}"
+		puts "Payload size: #{payload.size}"
   	    puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
 
 		# each ingest message is a group of objects of the same class, e.g. 

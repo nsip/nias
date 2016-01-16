@@ -114,10 +114,10 @@ class SSFServer < Sinatra::Base
 				puts "\ntime taken to send: #{(finish - sending).to_s} seconds\n\n"
 			end
 
-  # https://www.ruby-forum.com/topic/1057851
-  def to_2d_array(str, value)
-    str.unpack("a#{value}"*((str.size/value)+((str.size%value>0)?1:0)))
-  end
+  			# https://www.ruby-forum.com/topic/1057851
+  			def to_2d_array(str, value)
+    				str.unpack("a#{value}"*((str.size/value)+((str.size%value>0)?1:0)))
+  			end
 
 	end
 
@@ -205,11 +205,6 @@ class SSFServer < Sinatra::Base
 
 		messages = []
 
-		# https://www.ruby-forum.com/topic/1057851
-  def to_2d_array(str, value)
-    str.unpack("a#{value}"*((str.size/value)+((str.size%value>0)?1:0)))
-  end
-
 		fetch_raw_messages().each do | msg |
 
 			topic = "#{topic_name}"
@@ -228,8 +223,6 @@ class SSFServer < Sinatra::Base
 
 			# Kafka has default message size of 1 MB. We chop message up into 950 KB chunks, with all but last terminating in "\n===snip==="
 			msgsplit = to_2d_array(msg, 972800)
-			#msgsplit = to_2d_array(msg, 51380224)
-			#msgsplit = to_2d_array(msg, 100000)
 			msgtail = msgsplit.pop
 			
 			msgsplit.each do |msg1|

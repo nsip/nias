@@ -38,9 +38,8 @@ pool = producers.cycle
 	post "/hookup" do
                 @sourceid = params['sourceid']
                 @targetid = params['targetid']
-
-		
-
+		halt 400 if @sourceid.nil?
+		halt 400 if @targetid.nil?
 	    	outbound_messages = []
 	    
 	    	@sourceid.split(',').each do |m|

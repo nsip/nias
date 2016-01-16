@@ -12,6 +12,46 @@ require 'csv'
 require 'securerandom'
 require_relative 'cvsheaders-naplan'
 
+def Postcode2State( postcodestr ) 
+	postcode = postcodestr.to_i
+	if(postcode < 200) 
+		ret = ""
+	elsif(postcode < 300) 
+		ret = "ACT" 
+	elsif(postcode < 800) 
+		ret = "" 
+	elsif(postcode < 1000) 
+		ret = "NT" 
+	elsif(postcode < 2600) 
+		ret = "NSW" 
+	elsif(postcode < 2620) 
+		ret = "ACT" 
+	elsif(postcode < 2900) 
+		ret = "NSW" 
+	elsif(postcode < 2921) 
+		ret = "ACT" 
+	elsif(postcode < 3000) 
+		ret = "NSW" 
+	elsif(postcode < 4000) 
+		ret = "VIC" 
+	elsif(postcode < 5000) 
+		ret = "QLD" 
+	elsif(postcode < 6000) 
+		ret = "SA" 
+	elsif(postcode < 7000) 
+		ret = "WA" 
+	elsif(postcode < 8000) 
+		ret = "TAS" 
+	elsif(postcode < 9000) 
+		ret = "VIC" 
+	elsif(postcode < 10000) 
+		ret = "QLD" 
+	else 
+		ret = ""
+	end
+	return ret
+end
+
 @inbound = 'naplan.csv'
 @outbound = 'naplan.sifxmlout'
 
@@ -36,11 +76,12 @@ loop do
 
   begin
   	    messages = []
-	    messages = consumer.fetch
 	    outbound_messages = []
+	    messages = consumer.fetch
 	    
 	    messages.each do |m|
 		row = JSON.parse(m.value) 
+puts row
 			xml = <<XML
 <StudentPersonal RefId="#{SecureRandom.uuid}">
   <LocalId>#{row['Local School Student ID']}</LocalId>
@@ -57,7 +98,7 @@ loop do
     <OtherId Type="PreviousDiocesanStudentId">#{row['Previous Diocesan Student ID']}</OtherId>
     <OtherId Type="PreviousOtherStudentId">#{row['Previous Other Student ID']}</OtherId>
     <OtherId Type="PreviousTAAStudentId">#{row['Previous TAA Student ID']}</OtherId>
-    <OtherId Type="PreviousJurisdictionStudentId">#{row['Previous Jurisdiction Student ID']}</OtherId>
+    <OtherId Type="PreviousStateProvinceId">#{row['Previous Jurisdiction Student ID']}</OtherId>
     <OtherId Type="PreviousNationalStudentId">#{row['Previous National Student ID']}</OtherId>
     <OtherId Type="PreviousNAPPlatformStudentId">#{row['Previous Platform Student ID']}</OtherId>
   </OtherIdList>
@@ -66,7 +107,7 @@ loop do
       <FamilyName>#{row['Family Name']}</FamilyName>
       <GivenName>#{row['Given Name']}</GivenName>
       <MiddleName>#{row['Middle Name']}</MiddleName>
-      <PreferredGivenName>#{row['Middle Name']}</PreferredGivenName>
+      <PreferredGivenName>#{row['Preferred Given Name']}</PreferredGivenName>
     </Name>
     <Demographics>
       <IndigenousStatus>#{row['Indigenous Status']}</IndigenousStatus>
@@ -76,7 +117,7 @@ loop do
       <LanguageList>
         <Language>
           <Code>#{row['Student Main Language Other than English Spoken at Home']}</Code>
-          <LanguageType>2</LanguageType>
+          <LanguageType>4</LanguageType>
         </Language>
       </LanguageList>
       <VisaSubClass>#{row['Visa Code']}</VisaSubClass>
@@ -89,6 +130,7 @@ loop do
           <Line2>#{row['Address Line 2']}</Line2>
         </Street>
         <City>#{row['Locality']}</City>
+        <StateProvince>#{Postcode2State ( row['Postcode'] )}</StateProvince>
         <Country>1101</Country>
         <PostalCode>#{row['Postcode']}</PostalCode>
       </Address>
@@ -110,10 +152,10 @@ loop do
     <Parent2NonSchoolEducation>#{row['Parent 2 Non-School Education']}</Parent2NonSchoolEducation>
     <LocalCampusId>#{row['Local Campus ID']}</LocalCampusId>
     <SchoolACARAId>#{row['ASL School ID']}</SchoolACARAId>
-    <TestLevel>#{row['Test Level']}</TestLevel>
+    <TestLevel><Code>#{row['Test Level']}</Code></TestLevel>
     <Homegroup>#{row['Home Group']}</Homegroup>
     <ClassCode>#{row['Class Code']}</ClassCode>
-    <MembershipType>#{row['Main School Flag']}</MembershipType>
+    <MembershipType>#{row['Main School Flag'] == 'Y' ? '01' : '02'}</MembershipType>
     <FFPOS>#{row['Full Fee Paying Student']}</FFPOS>
     <ReportingSchoolId>#{row['Reporting School ID']}</ReportingSchoolId>
     <OtherEnrollmentSchoolACARAId>#{row['Reporting School ID']}</OtherEnrollmentSchoolACARAId>
@@ -134,7 +176,6 @@ XML
 			end
 			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", nodes.root.to_s, "indexed" )
 		end
-
 
   		# send results to indexer to create sms data graph
   		outbound_messages.each_slice(20) do | batch |

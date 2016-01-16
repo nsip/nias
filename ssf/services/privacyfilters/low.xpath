@@ -67,7 +67,7 @@
 //StudentPersonal/GraduationDate:2000
 //StudentPersonal/MostRecent/SchoolLocalId
 //StudentPersonal/MostRecent/HomeroomLocalId
-//StudentPersonal/MostRecent/YearLevel
+//StudentPersonal/MostRecent/YearLevel/Code
 //StudentPersonal/AcceptableUsePolicy
 //StudentPersonal/FirstAUSchoolEnrollment:1582-10-15
 //StudentSchoolEnrollment/@RefId:00000000-0000-0000-0000-000000000000
@@ -79,7 +79,7 @@
 //StudentSchoolEnrollment/EntryDate:1582-10-15
 //StudentSchoolEnrollment/EntryType
 //StudentSchoolEnrollment/EntryType/Code:9999
-//StudentSchoolEnrollment/YearLevel
+//StudentSchoolEnrollment/YearLevel/Code
 //StudentSchoolEnrollment/HomeRoom
 //StudentSchoolEnrollment/Advisor:00000000-0000-0000-0000-000000000000
 //StudentSchoolEnrollment/Counselor:00000000-0000-0000-0000-000000000000

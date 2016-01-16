@@ -77,11 +77,14 @@ def launch
               'sifxml.validated',
               'sms.indexer',
               'sifxml.ingest',
+              'sifxml.bulkingest',
               'sifxml.errors',
               'oneroster.validated',
               'nsip.test',
               'naplan.sifxml',
+              'naplan.sifxmlout',
               'naplan.csv',
+              'naplan.csvstudents',
               'test.test1',
               'json.test'
             ]

@@ -37,6 +37,7 @@ def read_filter(filepath, level)
 		next if line =~ /^#/
 		next unless line =~ /\S/
 		a = line.chomp.split(/:/)
+		a[0].gsub!(%r#(/+)(?!@)#, "\\1xmlns:") # namespaces are in XML fragments, xpaths need to allude to root default namespace
 		a[1] = "ZZREDACTED" if(a.size == 1)
 		@filter[level] << {:path => a[0], :redaction => a[1]}
 	end
@@ -117,13 +118,8 @@ loop do
 					# puts "\n\nOut\n = #{out.to_s}\n\n"
 
 					[:none, :low, :medium, :high, :extreme].each {|x|
-						if x == :none
-							# puts "\n\nSending: to #{topic}.unfiltered\n\n#{out[x].to_s}\n\nkey: #{item_key}"
-							outbound_messages << Poseidon::MessageToSend.new( "#{topic}", out[x].to_s, item_key ) 	
-						else
 							# puts "\n\nSending: to #{topic}.#{x}\n\n#{out[x].to_s}\n\nkey: #{item_key}"
 							outbound_messages << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
-						end
 					}
 				end
 	

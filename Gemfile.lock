@@ -15,6 +15,7 @@ GEM
   specs:
     backports (3.6.7)
     daemons (1.2.3)
+    diff-lcs (1.2.5)
     eventmachine (1.0.8)
     hashids (1.0.2)
     hiredis (0.6.0)
@@ -25,6 +26,9 @@ GEM
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     poseidon (0.0.5)
+    poseidon_cluster (0.3.3)
+      poseidon (>= 0.0.5, < 0.1.0)
+      zk
     rack (1.6.4)
     rack-matrix_params (0.0.7)
       rack
@@ -33,6 +37,19 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     redis (3.2.1)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.1)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -56,8 +73,11 @@ DEPENDENCIES
   moneta
   nokogiri
   poseidon
+  poseidon_cluster
   rack-matrix_params
+  rack-test
   redis
+  rspec (~> 3.0)
   sinatra
   sinatra-contrib!
   thin

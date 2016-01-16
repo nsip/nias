@@ -1,4 +1,4 @@
-# hookup_ids_server.rb
+# equiv_ids_server.rb
 require 'sinatra' 
 require 'sinatra/reloader' if development?
 require 'sinatra/base'
@@ -24,10 +24,13 @@ class EquivalenceServer < Sinatra::Base
 # Equivalence is bidirectional, so the order of y1 and y2 does not matter
 # 
 
-outbound = 'sms.indexer'
+configure do
+                set :outbound, 'sms.indexer'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
+end
 
+producer_id = @idgen.encode(Random.new.rand(999))
 # set up producer pool - busier the broker the better for speed
 producers = []
 (1..10).each do | i |
@@ -38,13 +41,12 @@ pool = producers.cycle
 
 
 	post "/equiv" do
+		halt 400 if params['ids'].nil?
                 @ids = params['ids'].split(',')
 		halt 400 if @ids.length < 2
 		
-
 	    	outbound_messages = []
 	    
-	    	@sourceid.split(',').each do |m|
 
 	    	# create 'empty' index tuple
 			idx = { :type => nil, :id => @ids[0], :otherids => {}, :links => [], :equivalentids => []}      	
@@ -53,9 +55,8 @@ pool = producers.cycle
 
 			puts "\nParser Index = #{idx.to_json}\n\n"
 
-			outbound_messages << Poseidon::MessageToSend.new( "#{outbound}", idx.to_json, "indexed" )
+			outbound_messages << Poseidon::MessageToSend.new( "#{settings.outbound}", idx.to_json, "indexed" )
   		
-  		end
 
   		# send results to indexer to create sms data graph
   		outbound_messages.each_slice(20) do | batch |

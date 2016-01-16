@@ -41,7 +41,7 @@ loop do
   	    messages = []
 	    messages = consumer.fetch
 	    messages.each do |m|
-  	    # puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
+  	    puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
 
         # Payload from sifxml.ingest contains as its first line a header line with the original topic
         header = m.value.lines[0]	
@@ -56,14 +56,25 @@ loop do
 		doc = Nokogiri::XML(payload) do |config|
         		config.nonet.noblanks
 		end
-
 		if(doc.errors.empty?) 
+			doc.remove_namespaces!
 			doc.xpath("/*/node()").each do |x|
-				root = x.xpath("local-name(/)")
-				parent = Nokogiri::XML::Node.new root+"s", doc
-				parent.default_namespace = @namespace
-				x.parent = parent
-				xsd_errors = @xsd.validate(parent.document)
+				#root = x.xpath("local-name(/)")
+				root = x.name()
+				parent = Nokogiri::XML::Node.new root+"s", Nokogiri::XML::Document.new()
+				#parent.default_namespace = @namespace
+				#x.parent = parent
+				#parent << x
+				doc2 = Nokogiri::XML::Builder.new do |xml|
+					xml.method_missing(root+"s") {
+						@fs_parent = parent
+					}
+				end
+				x.add_namespace_definition(nil, @namespace)
+				doc2.parent().children[0].add_child(x)
+				doc2.parent().children[0].default_namespace = @namespace
+				doc3 = Nokogiri::XML(doc2.parent().canonicalize(nil, nil, 1))
+				xsd_errors = @xsd.validate(doc3.document)
 				if(xsd_errors.empty?) 
 #puts "Validated!"
 	      			item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
@@ -75,7 +86,7 @@ puts "Invalid!"
 					msg = header + "Message #{m.offset} validity error:\n" + 	
 									xsd_errors.map{|e| e.message}.join("\n") + "\n" + 
 									parent.document.to_s
-					# puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"					
+					puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"					
 					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
 						header + "Message #{m.offset} validity error:\n" + 	
 						xsd_errors.map{|e| e.message}.join("\n") + "\n" + 

@@ -10,7 +10,7 @@ gem 'redis'
 gem 'hiredis', '>= 0.6.0' 
 
 # web tools
-gem 'sinatra'
+gem 'sinatra', require: 'sinatra/base'
 gem 'sinatra-contrib', github: 'sinatra/sinatra-contrib'
 
 # evented server for sinatra
@@ -21,6 +21,7 @@ gem 'hashids'
 
 # kafka client
 gem 'poseidon'
+gem 'poseidon_cluster'
 
 # zookeeper client
 gem 'zk'
@@ -36,3 +37,7 @@ gem 'lmdb'
 # process matrix parameters in URLs
 gem 'rack-matrix_params'
 
+group :test do
+	gem 'rspec', '~> 3.0'
+	gem "rack-test"
+end

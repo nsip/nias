@@ -37,7 +37,7 @@
 //PersonInfo/Demographics/VisaStatisticalCode
 //PersonInfo/Demographics/ImmunizationCertificateStatus
 //PersonInfo/Demographics/CulturalBackground
-//PersonInfo/Demographics/AddressList
-//PersonInfo/Demographics/AddressList/Address/Country
-//PersonInfo/Demographics/PhoneNumberList
-//PersonInfo/Demographics/PhoneNumberList/PhoneNumber/ListedStatus
+//PersonInfo/AddressList
+//PersonInfo/AddressList/Address/Country
+//PersonInfo/PhoneNumberList
+//PersonInfo/PhoneNumberList/PhoneNumber/ListedStatus

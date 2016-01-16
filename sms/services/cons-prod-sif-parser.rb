@@ -31,107 +31,107 @@ def extract_label(id, nodes)
 	ret = nil
 	case type
 	when "Activity"
-		ret = nodes.at_xpath("//Title").child
+		ret = nodes.at_xpath("//xmlns:Title").child
 	when "AggregateStatisticInfo"
-		ret = nodes.at_xpath("//StatisticName").child
+		ret = nodes.at_xpath("//xmlns:StatisticName").child
 	when "Assessment", "Sif3Assessment"
-		ret = nodes.at_xpath("//Name").child
+		ret = nodes.at_xpath("//xmlns:Name").child
 	when "AssessmentAdministration", "Sif3AssessmentAdministration"
-		ret = nodes.at_xpath("//AdministrationName").child
+		ret = nodes.at_xpath("//xmlns:AdministrationName").child
 	when "Sif3AssessmentAsset"
-		ret = nodes.at_xpath("//AssetName").child
+		ret = nodes.at_xpath("//xmlns:AssetName").child
 	when "AssessmentForm", "Sif3AssessmentForm"
-		ret = nodes.at_xpath("//FormName").child
+		ret = nodes.at_xpath("//xmlns:FormName").child
 	when "AssessmentItem", "Sif3AssessmentItem"
-		ret = nodes.at_xpath("//ItemLabel").child
+		ret = nodes.at_xpath("//xmlns:ItemLabel").child
 	when "Sif3AssessmentRubric"
-		ret = nodes.at_xpath("//RubricName").child
+		ret = nodes.at_xpath("//xmlns:RubricName").child
 	when "Sif3AssessmentScoreTable"
-		ret = nodes.at_xpath("//ScoreTableName").child
+		ret = nodes.at_xpath("//xmlns:ScoreTableName").child
 	when "Sif3AssessmentSection"
-		ret = nodes.at_xpath("//SectionName").child
+		ret = nodes.at_xpath("//xmlns:SectionName").child
 	when "Sif3AssessmentSession"
-		ret = nodes.at_xpath("//SessionName").child
+		ret = nodes.at_xpath("//xmlns:SessionName").child
 	when "AssessmentSubTest"
-		ret = nodes.at_xpath("//Name").child
+		ret = nodes.at_xpath("//xmlns:Name").child
 	when "Sif3AssessmentSubTest"
-		ret = nodes.at_xpath("//SubTestName").child
+		ret = nodes.at_xpath("//xmlns:SubTestName").child
 	when "CalendarDate"
-		ret = nodes.at_xpath("//@Date").content
+		ret = nodes.at_xpath("//xmlns:@Date").content
 	when "CalendarSummary"
-		ret = nodes.at_xpath("//LocalId").child
+		ret = nodes.at_xpath("//xmlns:LocalId").child
 	when "ChargedLocationInfo"
-		ret = nodes.at_xpath("//Name").child
+		ret = nodes.at_xpath("//xmlns:Name").child
 	when "Debtor"
-		bname = nodes.at_xpath("//BillingName")
+		bname = nodes.at_xpath("//xmlns:BillingName")
 		unless(bname.nil?)
 			ret = bname.child
 		end
 	when "EquipmentInfo"
-		ret = nodes.at_xpath("//Name").child
+		ret = nodes.at_xpath("//xmlns:Name").child
 	when "FinancialAccount"
-		ret = nodes.at_xpath("//AccountNumber").child
+		ret = nodes.at_xpath("//xmlns:AccountNumber").child
 	when "GradingAssignment"
-		ret = nodes.at_xpath("//Description").child
+		ret = nodes.at_xpath("//xmlns:Description").child
 	when "Invoice"
-		fnumber = nodes.at_xpath("//FormNumber")
+		fnumber = nodes.at_xpath("//xmlns:FormNumber")
 		unless(fnumber.nil?)
 			ret = fnumber.child
 		end
 	when "LEAInfo"
-		ret = nodes.at_xpath("//LEAName").child
+		ret = nodes.at_xpath("//xmlns:LEAName").child
 	when "LearningResource"
-		ret = nodes.at_xpath("//Name").child
+		ret = nodes.at_xpath("//xmlns:Name").child
 	when "LearningStandardDocument"
-		ret = nodes.at_xpath("//Title").child
+		ret = nodes.at_xpath("//xmlns:Title").child
 	when "LearningStandardItem"
-		ret = nodes.at_xpath("//StatementCodes/StatementCode[1]").child
+		ret = nodes.at_xpath("//xmlns:StatementCodes/StatementCode[1]").child
 	when "PaymentReceipt"
-		ret = nodes.at_xpath("//ReceivedTransactionId").child
+		ret = nodes.at_xpath("//xmlns:ReceivedTransactionId").child
 	when "PurchaseOrder"
-		ret = nodes.at_xpath("//FormNumber").child
+		ret = nodes.at_xpath("//xmlns:FormNumber").child
 	when "ReportAuthorityInfo"
-		ret = nodes.at_xpath("//AuthorityName").child
+		ret = nodes.at_xpath("//xmlns:AuthorityName").child
 	when "ResourceBooking"
-		ret1 = nodes.at_xpath("//ResourceLocalId").child 
-		ret2 = nodes.at_xpath("//ResourceLocalId").child 
+		ret1 = nodes.at_xpath("//xmlns:ResourceLocalId").child 
+		ret2 = nodes.at_xpath("//xmlns:ResourceLocalId").child 
 		ret = ret1.to_s + " " + ret2.to_s
 	when "RoomInfo"
-		ret = nodes.at_xpath("//RoomNumber").child
+		ret = nodes.at_xpath("//xmlns:RoomNumber").child
 	when "ScheduledActivity"
-		ret = nodes.at_xpath("//ActivityName").child
+		ret = nodes.at_xpath("//xmlns:ActivityName").child
 	when "SchoolCourse"
-		ret = nodes.at_xpath("//CourseCode").child
+		ret = nodes.at_xpath("//xmlns:CourseCode").child
 	when "SchoolInfo"
-		ret = nodes.at_xpath("//SchoolName").child
+		ret = nodes.at_xpath("//xmlns:SchoolName").child
 	when "SectionInfo"
-		ret = nodes.at_xpath("//LocalId").child
+		ret = nodes.at_xpath("//xmlns:LocalId").child
 	when "StaffPersonal", "StudentContactPersonal", "StudentPersonal"
-		fname = nodes.at_xpath("//PersonInfo/Name/FullName")
+		fname = nodes.at_xpath("//xmlns:PersonInfo/Name/FullName")
 		if(fname.nil?)
-			ret1 = nodes.at_xpath("//PersonInfo/Name/GivenName").child 
-			ret2 = nodes.at_xpath("//PersonInfo/Name/FamilyName").child 
+			ret1 = nodes.at_xpath("//xmlns:PersonInfo/Name/GivenName").child 
+			ret2 = nodes.at_xpath("//xmlns:PersonInfo/Name/FamilyName").child 
 			ret = ret1.to_s + " " + ret2.to_s
 		else
 			ret = fname.child
 		end
 	when "StudentActivityInfo"
-		ret = nodes.at_xpath("//Title").child
+		ret = nodes.at_xpath("//xmlns:Title").child
 	when "TeachingGroup"
-		ret = nodes.at_xpath("//ShortName").child
+		ret = nodes.at_xpath("//xmlns:ShortName").child
 	when "TermInfo"
-		ret = nodes.at_xpath("//TermCode").child
+		ret = nodes.at_xpath("//xmlns:TermCode").child
 	when "TimeTable"
-		ret = nodes.at_xpath("//Title").child
+		ret = nodes.at_xpath("//xmlns:Title").child
 	when "TimeTableCell"
-		ret = nodes.at_xpath("//DayId").child.to_s + ":" + nodes.at_xpath("//PeriodId").child.to_s
+		ret = nodes.at_xpath("//xmlns:DayId").child.to_s + ":" + nodes.at_xpath("//PeriodId").child.to_s
 	when "TimeTableSubject"
-		ret = nodes.at_xpath("//SubjectLocalId").child
+		ret = nodes.at_xpath("//xmlns:SubjectLocalId").child
 	when "VendorInfo"
-		fname = nodes.at_xpath("//Name/FullName").child
+		fname = nodes.at_xpath("//xmlns:Name/FullName").child
 		if(fname.nil?)
-			ret1 = nodes.at_xpath("//Name/GivenName").child 
-			ret2 = nodes.at_xpath("//Name/FamilyName").child 
+			ret1 = nodes.at_xpath("//xmlns:Name/GivenName").child 
+			ret2 = nodes.at_xpath("//xmlns:Name/FamilyName").child 
 			ret = ret1.to_s + " " + ret2.to_s
 		else
 			ret = fname.child
@@ -155,9 +155,7 @@ end
 @idgen = Hashids.new( 'nsip random temp uid' )
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
-                                           @inbound, 0, :latest_offset)
-
+consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
 
 # set up producer pool - busier the broker the better for speed
 producers = []
@@ -186,6 +184,8 @@ loop do
       		nodes = Nokogiri::XML( payload ) do |config|
         		config.nonet.noblanks
 			end      		
+
+puts nodes
 
 			# for rare nodes like StudentContactRelationship can be no mandatory refid
 			# optional refid will already be captured in [links] as child node
@@ -219,7 +219,7 @@ loop do
 			end
 
 			# any nodes that have refid suffix
-			references = nodes.xpath( "//*[substring(name(), string-length(name()) - 4) = 'RefId']" )
+			references = nodes.xpath( "//xmlns:*[substring(name(), string-length(name()) - 4) = 'RefId']" )
 			references.each do | node |
 				# puts node.name
 				# puts node.content
@@ -235,38 +235,38 @@ loop do
 			end
 
 			# any LocalIds
-			localids = nodes.xpath("//LocalId")
+			localids = nodes.xpath("//xmlns:LocalId")
 			localids.each do |node|
 				idx[:otherids][:localid] = node.child
 			end
 
 			# any StateProvinceIds
-			stateprovinceids = nodes.xpath("//StateProvinceId")
+			stateprovinceids = nodes.xpath("//xmlns:StateProvinceId")
 			stateprovinceids.each do |node|
 				idx[:otherids][:stateprovinceids] = node.child
 			end
 
 			# any ACARAIds
-			acaraids = nodes.xpath("//ACARAId")
+			acaraids = nodes.xpath("//xmlns:ACARAId")
 			acaraids.each do |node|
 				idx[:otherids][:acaraids] = node.child
 			end
 
 			# any Electronic IDs
-			electronicids = nodes.xpath("//ElectronicIdList/ElectronicId")
+			electronicids = nodes.xpath("//xmlns:ElectronicIdList/xmlns:ElectronicId")
 			electronicids.each do |node|
 				idx[:otherids]["electronicid"+node.attribute("Type")] = node.child
 			end
 
 			# any Other IDs
-			otherids = nodes.xpath("//OtherIdList/OtherId")
+			otherids = nodes.xpath("//xmlns:OtherIdList/xmlns:OtherId")
 			otherids.each do |node|
 				idx[:otherids][node.attribute("Type")] = node.child
 			end
 
 			idx[:label] = extract_label(idx[:id], nodes)
 
-			# puts "\nParser Index = #{idx.to_json}\n\n"
+			puts "\nParser Index = #{idx.to_json}\n\n"
 
 			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
   		
