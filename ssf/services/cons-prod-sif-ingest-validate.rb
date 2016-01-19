@@ -41,11 +41,12 @@ loop do
   	    messages = []
 	    messages = consumer.fetch
 	    messages.each do |m|
-  	    puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
+  	    #puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
 
         # Payload from sifxml.ingest contains as its first line a header line with the original topic
         header = m.value.lines[0]	
         payload = m.value.lines[1..-1].join
+#puts "Received: #{payload}\n"
 
 		# each ingest message is a group of objects of the same class, e.g. 
 		# <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
@@ -77,8 +78,8 @@ loop do
 				xsd_errors = @xsd.validate(doc3.document)
 				if(xsd_errors.empty?) 
 #puts "Validated!"
-	      			item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
-	      			msg = header + x.to_s
+	      				item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
+	      				msg = header + x.to_s
 #puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"
 					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 				else

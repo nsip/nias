@@ -22,20 +22,20 @@ xml_malformed = xml.gsub(%r{</BillingDate>}, "")
 xml_invalid = xml.gsub(%r{Ledger}, "Leleledger")
 
 @service_name = 'ssf_services_cons_prod_sif_ingest_validate_spec'
-#@http = Net::HTTP.new("localhost", "9292")
-
-def post_xml(xml) 
-	request = Net::HTTP::Post.new("/rspec/test")
-	request.body = xml
-	request["Content-Type"] = "application/xml"
-	@http.request(request)
-end
+puts @service_name
 
 
 describe "SIF Ingest/Produce" do
 
+def post_xml(xml) 
+	Net::HTTP.start("localhost", "9292") do |http|
+		request = Net::HTTP::Post.new("/rspec/test")
+		request.body = xml
+		request["Content-Type"] = "application/xml"
+		http.request(request)
+	end
+end
 		before(:all) do
-			@http = Net::HTTP.new("localhost", "9292")
 			@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
 			@xmlvalidconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.validated", 0, :latest_offset)
 		end

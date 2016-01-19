@@ -23,8 +23,7 @@ require 'nokogiri' # xml support
 @namespace = 'http://www.sifassociation.org/au/datamodel/3.4'
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
-                                           @inbound, 0, :latest_offset )
+consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset )
 
 
 # set up producer pool - busier the broker the better for speed
@@ -47,6 +46,7 @@ loop do
 	    messages = consumer.fetch
 	    messages.each do |m|
 
+puts "Message: #{concatcount}"
 	    if(payload.empty?) then
 	        # Payload from sifxml.bulkingest contains as its first line a header line with the original topic
 	        header = m.value.lines[0]	
@@ -63,7 +63,7 @@ puts "Started message at #{start}"
 		puts "Concatenating #{concatcount} messages. Payload size: #{payload.size / 1000}..."
 	    	next
 	    end
-#puts "Concatenating #{concatcount} messages..."
+puts "Concatenating #{concatcount} messages..."
 #next
 		puts "Concatenation done at #{Time.now}"
 		puts "Payload size: #{payload.size}"
@@ -84,6 +84,7 @@ puts "Started message at #{start}"
 		if(doc.errors.empty?) 
 			puts "Payload well-formed. Payload size: #{payload.size}. Validating...";
 #			xsd_errors = @xsd.validate(parent.document)
+
 			doc.root.add_namespace nil, @namespace
 			start = Time.now
 			xsd_errors = @xsd.validate(doc)
@@ -99,9 +100,13 @@ puts "Started message at #{start}"
 					#parent.default_namespace = @namespace
 					#x.parent = parent
 	      				item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
+					#x.default_namespace = @namespace
+					#x = x.canonicalize(nil, nil, 1)
+					x["xmlns"] = @namespace
 	      				msg = header + x.to_s
 					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 				end
+				puts "Pushed messages"
 			else
 				puts "Invalid!"
 				msg = header + "Message #{m.offset} validity error:\n" 

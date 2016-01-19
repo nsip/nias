@@ -49,7 +49,7 @@ pool = producers.cycle
 
 			idx[:links] = @targetid.split(',')
 
-			puts "\nParser Index = #{idx.to_json}\n\n"
+			#puts "\nParser Index = #{idx.to_json}\n\n"
 
 			outbound_messages << Poseidon::MessageToSend.new( "#{outbound}", idx.to_json, "indexed" )
   		
@@ -62,7 +62,7 @@ pool = producers.cycle
 
 			idx[:links] = @sourceid.split(',')
 
-			puts "\nParser Index = #{idx.to_json}\n\n"
+			#puts "\nParser Index = #{idx.to_json}\n\n"
 
 			outbound_messages << Poseidon::MessageToSend.new( "#{outbound}", idx.to_json, "indexed" )
   		

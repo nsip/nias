@@ -48,29 +48,26 @@ out = "{\"type\":\"TeachingGroup\",\"id\":\"f94278d5-b1b4-4936-ae95-f6d78d0887e2
 
 @service_name = 'sms_services_cons_prod_sif_parser_spec'
 
-def post_xml(xml) 
-	request = Net::HTTP::Post.new("/rspec/test")
-	request.body = xml
-	request["Content-Type"] = "application/xml"
-	@http.request(request)
-end
-
 
 describe "SIF Ingest/Produce" do
 
+def post_xml(xml, path) 
+        Net::HTTP.start("localhost", "9292") do |http|
+		request = Net::HTTP::Post.new(path)
+		request.body = xml
+		request["Content-Type"] = "application/xml"
+		http.request(request)
+	end
+end
 	before(:all) do
-		@http = Net::HTTP.new("localhost", "9292")
 		@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sms.indexer", 0, :latest_offset)
 		puts "Next offset    = #{@xmlconsumer.next_offset}"
-		sleep 1
-		post_xml(xml)
+		sleep 2
+		post_xml(xml, "/rspec/test")
 	end
 
 	context "Valid XML" do
-		before(:example) do
-		end
-		it "pushes validated XML to sifxml.validated" do
-			sleep 1
+		it "pushes interpreted XML to sms.indexer" do
                        begin
                                 a = @xmlconsumer.fetch
                                 expect(a).to_not be_nil

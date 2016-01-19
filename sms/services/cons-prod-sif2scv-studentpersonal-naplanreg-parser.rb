@@ -129,6 +129,7 @@ loop do
 			csv['Address Line 2'] = lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:AddressList/xmlns:Address/xmlns:Street/xmlns:Line2")
 			csv['Locality'] = lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:AddressList/xmlns:Address/xmlns:City")
 			csv['Postcode'] = lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:AddressList/xmlns:Address/xmlns:PostalCode")
+			csv['State or Territory'] = lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:AddressList/xmlns:Address/xmlns:StateProvince")
 
 			# puts "\nParser Index = #{idx.to_json}\n\n"
 

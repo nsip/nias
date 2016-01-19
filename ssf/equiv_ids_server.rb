@@ -53,7 +53,7 @@ pool = producers.cycle
 
 			idx[:equivalentids] = @ids[1..-1]
 
-			puts "\nParser Index = #{idx.to_json}\n\n"
+			#puts "\nParser Index = #{idx.to_json}\n\n"
 
 			outbound_messages << Poseidon::MessageToSend.new( "#{settings.outbound}", idx.to_json, "indexed" )
   		

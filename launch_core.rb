@@ -31,7 +31,12 @@ end
 def launch
 
   # just in case an old one gets left behind, delete on startup
-  File.delete( @pid_file ) if File.exist?( @pid_file )
+  #File.delete( @pid_file ) if File.exist?( @pid_file )
+  # if an old pid file exists, abort, should be running -K instead
+  if ( File.exist?( @pid_file) ) then
+    puts "The file #{@pid_file} exists: run ./launch_core.rb -K to terminate any existing processes"
+    exit
+  end
   
   # daemonise launched processes
   Process.daemon( true, true )
@@ -86,11 +91,14 @@ def launch
               'naplan.csv',
               'naplan.csvstudents',
               'test.test1',
-              'json.test'
+              'json.test',
+              'rspec.test'
             ]
 
+  sleep 5 # creating too early truncates topics
   topics.each do | topic |
 
+    puts "Creating #{topic}"
     pid = Process.spawn( './kafka/bin/kafka-topics.sh', 
                                                       '--zookeeper localhost:2181', 
                                                       '--create',

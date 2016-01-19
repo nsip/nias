@@ -54,6 +54,7 @@
         'Address Line 2',
         'Locality',
         'Postcode',
+        'State or Territory',
 ]
 
 

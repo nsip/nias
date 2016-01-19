@@ -98,7 +98,7 @@ loop do
                 payload = m.value.lines[1..-1].join
 				topic = header[/TOPIC: (.+)/, 1]
 
-      	    	# puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}... #{m.value.lines[1]}\n\n"
+      	    	#puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}... #{m.value.lines[1]}\n\n"
 
 				input = Nokogiri::XML(payload) do |config|
         			config.nonet.noblanks
@@ -118,7 +118,7 @@ loop do
 					# puts "\n\nOut\n = #{out.to_s}\n\n"
 
 					[:none, :low, :medium, :high, :extreme].each {|x|
-							# puts "\n\nSending: to #{topic}.#{x}\n\n#{out[x].to_s}\n\nkey: #{item_key}"
+							 #puts "\n\nSending: to #{topic}.#{x}\n\n#{out[x].to_s.lines[1]}\n\nkey: #{item_key}"
 							outbound_messages << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
 					}
 				end

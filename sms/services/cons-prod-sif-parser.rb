@@ -85,7 +85,7 @@ def extract_label(id, nodes)
 	when "LearningStandardDocument"
 		ret = nodes.at_xpath("//xmlns:Title").child
 	when "LearningStandardItem"
-		ret = nodes.at_xpath("//xmlns:StatementCodes/StatementCode[1]").child
+		ret = nodes.at_xpath("//xmlns:StatementCodes/xmlns:StatementCode[1]").child
 	when "PaymentReceipt"
 		ret = nodes.at_xpath("//xmlns:ReceivedTransactionId").child
 	when "PurchaseOrder"
@@ -107,10 +107,10 @@ def extract_label(id, nodes)
 	when "SectionInfo"
 		ret = nodes.at_xpath("//xmlns:LocalId").child
 	when "StaffPersonal", "StudentContactPersonal", "StudentPersonal"
-		fname = nodes.at_xpath("//xmlns:PersonInfo/Name/FullName")
+		fname = nodes.at_xpath("//xmlns:PersonInfo/xmlns:Name/xmlns:FullName")
 		if(fname.nil?)
-			ret1 = nodes.at_xpath("//xmlns:PersonInfo/Name/GivenName").child 
-			ret2 = nodes.at_xpath("//xmlns:PersonInfo/Name/FamilyName").child 
+			ret1 = nodes.at_xpath("//xmlns:PersonInfo/xmlns:Name/xmlns:GivenName").child 
+			ret2 = nodes.at_xpath("//xmlns:PersonInfo/xmlns:Name/xmlns:FamilyName").child 
 			ret = ret1.to_s + " " + ret2.to_s
 		else
 			ret = fname.child
@@ -124,14 +124,14 @@ def extract_label(id, nodes)
 	when "TimeTable"
 		ret = nodes.at_xpath("//xmlns:Title").child
 	when "TimeTableCell"
-		ret = nodes.at_xpath("//xmlns:DayId").child.to_s + ":" + nodes.at_xpath("//PeriodId").child.to_s
+		ret = nodes.at_xpath("//xmlns:DayId").child.to_s + ":" + nodes.at_xpath("//xmlns:PeriodId").child.to_s
 	when "TimeTableSubject"
 		ret = nodes.at_xpath("//xmlns:SubjectLocalId").child
 	when "VendorInfo"
 		fname = nodes.at_xpath("//xmlns:Name/FullName").child
 		if(fname.nil?)
-			ret1 = nodes.at_xpath("//xmlns:Name/GivenName").child 
-			ret2 = nodes.at_xpath("//xmlns:Name/FamilyName").child 
+			ret1 = nodes.at_xpath("//xmlns:Name/xmlns:GivenName").child 
+			ret2 = nodes.at_xpath("//xmlns:Name/xmlns:FamilyName").child 
 			ret = ret1.to_s + " " + ret2.to_s
 		else
 			ret = fname.child
@@ -185,8 +185,6 @@ loop do
         		config.nonet.noblanks
 			end      		
 
-puts nodes
-
 			# for rare nodes like StudentContactRelationship can be no mandatory refid
 			# optional refid will already be captured in [links] as child node
 			# but need to parse for the object type and assign the optional refid back to the object
@@ -219,7 +217,7 @@ puts nodes
 			end
 
 			# any nodes that have refid suffix
-			references = nodes.xpath( "//xmlns:*[substring(name(), string-length(name()) - 4) = 'RefId']" )
+			references = nodes.xpath( "//*[substring(name(), string-length(name()) - 4) = 'RefId']" )
 			references.each do | node |
 				# puts node.name
 				# puts node.content
@@ -266,7 +264,7 @@ puts nodes
 
 			idx[:label] = extract_label(idx[:id], nodes)
 
-			puts "\nParser Index = #{idx.to_json}\n\n"
+			#puts "\nParser Index = #{idx.to_json}\n\n"
 
 			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
   		

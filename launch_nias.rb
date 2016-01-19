@@ -30,7 +30,11 @@ end
 def launch
 
   # just in case an old one gets left behind, delete on startup
-  File.delete( @pid_file ) if File.exist?( @pid_file )
+  #File.delete( @pid_file ) if File.exist?( @pid_file )
+  if ( File.exist?( @pid_file) ) then
+    puts "The file #{@pid_file} exists: run ./launch_nias.rb -K to terminate any existing processes"
+    exit
+  end
 
 
   banner 'Starting NIAS SSF services'

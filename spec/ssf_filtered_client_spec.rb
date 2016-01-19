@@ -24,17 +24,19 @@ xml = <<XML
 XML
 
 @service_name = 'spec-ssf-filtered-client'
+puts @service_name
 
 
 describe "FilteredClient" do
 
 	describe "GET /filtered/rspec/test/low" do
 		before(:example) do
-			http = Net::HTTP.new("localhost", "9292")
-			request = Net::HTTP::Post.new("/rspec/test")
-			request.body = xml
-			request["Content-Type"] = "application/xml"
-			http.request(request)
+			Net::HTTP.start("localhost", "9292") do |http|
+				request = Net::HTTP::Post.new("/rspec/test")
+				request.body = xml
+				request["Content-Type"] = "application/xml"
+				http.request(request)
+			end
 			sleep 5
 			@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.ingest", 0, :latest_offset)
 		end

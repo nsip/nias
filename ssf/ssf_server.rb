@@ -169,6 +169,7 @@ class SSFServer < Sinatra::Base
 			when 'text/csv' then msg = msg.to_hash.to_json
 			end
 
+			puts "\n\ntopic is: #{topic} : key is #{key}\n"
 			#puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
 			messages << Poseidon::MessageToSend.new( "#{topic}", msg, "#{key}" )
 			

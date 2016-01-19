@@ -130,7 +130,7 @@ puts row
           <Line2>#{row['Address Line 2']}</Line2>
         </Street>
         <City>#{row['Locality']}</City>
-        <StateProvince>#{Postcode2State ( row['Postcode'] )}</StateProvince>
+        <StateProvince>#{row['StateProvince']}</StateProvince>
         <Country>1101</Country>
         <PostalCode>#{row['Postcode']}</PostalCode>
       </Address>

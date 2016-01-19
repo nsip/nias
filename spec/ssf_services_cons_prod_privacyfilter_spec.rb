@@ -82,16 +82,18 @@ xml_high.gsub!(%r{ RefId="[^"]+"}, ' RefId="00000000-0000-0000-0000-000000000000
 xml_extreme = xml_high.gsub(%r{<YearLevel><Code>6</Code></YearLevel>}, "<YearLevel><Code>ZZREDACTED</Code></YearLevel>")
 
 @service_name = 'ssf_services_cons_prod_privacyfilter_spec'
-
-def post_xml(xml) 
-	request = Net::HTTP::Post.new("/rspec/test")
-	request.body = xml
-	request["Content-Type"] = "application/xml"
-	@http.request(request)
-end
+puts @service_name
 
 describe "SIF Privacy Filter" do
 
+def post_xml(xml) 
+	Net::HTTP.start("localhost", "9292") do |http|
+		request = Net::HTTP::Post.new("/rspec/test")
+		request.body = xml
+		request["Content-Type"] = "application/xml"
+		http.request(request)
+	end
+end
 		before(:context) do
 			@xmlconsumernone = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.none", 0, :latest_offset)
 			@xmlconsumerlow = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.low", 0, :latest_offset)
@@ -103,7 +105,6 @@ describe "SIF Privacy Filter" do
 			puts "Next offset    = #{@xmlconsumermedium.next_offset}"
 			puts "Next offset    = #{@xmlconsumerhigh.next_offset}"
 			puts "Next offset    = #{@xmlconsumerextreme.next_offset}"
-			@http = Net::HTTP.new("localhost", "9292")
 			post_xml(xml)
 			sleep 10
 		end
@@ -186,7 +187,9 @@ describe "SIF Privacy Filter" do
                             retry
                         end
 		end
-
+		after (:all) do
+			sleep 10
+		end
 
 
 

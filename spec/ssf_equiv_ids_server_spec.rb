@@ -10,6 +10,7 @@ require 'json'
 
 
 @service_name = 'spec-ssf-equiv-ids-server'
+puts @service_name
 
 
 describe "EquivalenceServer" do

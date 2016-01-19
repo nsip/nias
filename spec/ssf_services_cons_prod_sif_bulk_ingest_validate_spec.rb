@@ -9,7 +9,7 @@ xml = <<XML
   <InvoicedEntity SIF_RefObject="Debtor">e1759047-09c4-4ba0-a69e-eec215de3d80</InvoicedEntity>
   <BillingDate>2014-02-01</BillingDate>
   <TransactionDescription>Activity Fees</TransactionDescription>
-  <BilledAmount Type="Debit" Currency="AUD">24.93</BilledAmount>
+  <BilledAmount Currency="AUD" Type="Debit">24.93</BilledAmount>
   <Ledger>Family</Ledger>
   <TaxRate>10.0</TaxRate>
   <TaxAmount Currency="AUD">2.49</TaxAmount>
@@ -23,28 +23,32 @@ xml_malformed = xml.gsub(%r{</BillingDate>}, "")
 xml_invalid = xml.gsub(%r{Ledger}, "Leleledger")
 
 @service_name = 'ssf_services_cons_prod_sif_bulk_ingest_validate_spec'
-#@http = Net::HTTP.new("localhost", "9292")
 
-def post_xml(xml) 
-	request = Net::HTTP::Post.new("/rspec/test/bulk")
-	request.body = xml
-	request["Content-Type"] = "application/xml"
-	@http.request(request)
-end
+recordcount = 3000
+#recordcount = 10
+
+xmlbody = xml * recordcount
 
 
 describe "Bulk SIF Ingest/Produce" do
 
+def post_xml(xml) 
+	Net::HTTP.start("localhost", "9292") do |http|
+		request = Net::HTTP::Post.new("/rspec/test/bulk")
+		request.body = xml
+		request["Content-Type"] = "application/xml"
+		http.request(request)
+	end
+end
 		before(:all) do
-			@http = Net::HTTP.new("localhost", "9292")
 			@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
 			@xmlvalidconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.validated", 0, :latest_offset)
 		end
 	context "Malformed XML" do
 		it "pushes error to sifxml.errors" do
 			puts "Next offset    = #{@xmlconsumer.next_offset}"
-			post_xml(header + xml_malformed + xml * 3000 + footer)
-			sleep 10
+			post_xml(header + xml_malformed + xmlbody + footer)
+			sleep 20
                        begin
                                 a = @xmlconsumer.fetch
                                 expect(a).to_not be_nil
@@ -68,8 +72,8 @@ describe "Bulk SIF Ingest/Produce" do
 		end
 		it "pushes error to sifxml.errors" do
 			puts "Next offset    = #{@xmlconsumer.next_offset}"
-			post_xml(header + xml_invalid + xml * 3000 + footer)
-			sleep 10
+			post_xml(header + xml_invalid + xmlbody + footer)
+			sleep 20
                        begin
                                 a = @xmlconsumer.fetch
                                 expect(a).to_not be_nil
@@ -93,15 +97,16 @@ describe "Bulk SIF Ingest/Produce" do
 		end
 		it "pushes validated XML to sifxml.validated" do
 			puts "Next offset    = #{@xmlvalidconsumer.next_offset}"
-			post_xml(header + xml * 3000 + footer)
-			sleep 10
+			post_xml(header + xmlbody + footer)
+			sleep 20
                        begin
-                                a = @xmlvalidconsumer.fetch
+                                a = @xmlvalidconsumer.fetch(:max_bytes => 10000000)
                                 expect(a).to_not be_nil
                                 expect(a.empty?).to be false
 				expected = "TOPIC: rspec.test\n" + xml
 				expected.gsub!(/ xmlns="[^"]+"/, "")
-				a[0].value.gsub!(/ xmlns="[^"]+"/, "")
+				expected.gsub!(/\n[ ]*/, "")
+				a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/\n[ ]*/, "")
                                 expect(a[0].value.chomp).to eq expected.chomp
                         rescue Poseidon::Errors::OffsetOutOfRange
                             puts "[warning] - bad offset supplied, resetting..."
