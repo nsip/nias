@@ -46,21 +46,18 @@ loop do
 	    messages = consumer.fetch
 	    messages.each do |m|
 
-puts "Message: #{concatcount}"
 	    if(payload.empty?) then
 	        # Payload from sifxml.bulkingest contains as its first line a header line with the original topic
 	        header = m.value.lines[0]	
 puts header
 	        payload = m.value.lines[1..-1].join
 		start = Time.now
-puts "Started message at #{start}"
 	    else
 	    	payload << m.value
 	    end
 	    concatcount = concatcount + 1
 	    if payload.match( /===snip===/ ) then
 	    	payload = payload.gsub(/\n===snip===\n/, "")
-		puts "Concatenating #{concatcount} messages. Payload size: #{payload.size / 1000}..."
 	    	next
 	    end
 puts "Concatenating #{concatcount} messages..."
