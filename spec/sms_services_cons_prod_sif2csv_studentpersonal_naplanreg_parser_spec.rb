@@ -4,7 +4,7 @@ require "spec_helper"
 require 'poseidon' 
 
 out = <<CSV
-fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,N,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,"",Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,"",Pepper Pike,9999,QLD
 CSV
 
 xml = <<XML
@@ -50,7 +50,7 @@ xml = <<XML
       <LBOTE>Y</LBOTE>
     </Demographics>
     <AddressList>
-      <Address Type="0123" Role="012A">
+      <Address Type="0765" Role="012B">
         <Street>
           <Line1>30769 PineTree Rd.</Line1>
         </Street>

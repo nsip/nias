@@ -12,11 +12,14 @@ require 'redis'
 describe "SMS Indexer" do
 
 guid = SecureRandom.uuid
+guid2 = SecureRandom.uuid
+linkid = SecureRandom.uuid
 localid = SecureRandom.uuid
 xml = <<XML
     <SchoolInfo RefId="#{guid}">
         <LocalId>#{localid}</LocalId>
         <SchoolName>Stivers College</SchoolName>
+        <LEAInfoRefId>#{linkid}</LEAInfoRefId>
         <SchoolType>Sec</SchoolType>
         <ARIA>1.0</ARIA>
         <OperationalStatus>O</OperationalStatus>
@@ -37,47 +40,91 @@ footer = '</SchoolInfos>'
 @service_name = 'sms_cons_sms_indexer_spec'
 
 
-	def remove_redis(key,type) 
+	def remove_redis(key, localid, guid2, linkid, type) 
 		@redis.hdel 'labels', key
 		@redis.srem type, key
 		@redis.hdel "oid:#{localid}", "localid"
 		@redis.srem "other:ids", "oid:#{localid}"
+		@redis.srem "equivalent:id:#{guid2}", key
+		@redis.srem "#{linkid}", key
+	end
+
+	def post_xml(xml, path)
+			Net::HTTP.start("localhost", "9292") do |http|
+				request = Net::HTTP::Post.new(path)
+				request.body = xml unless xml.nil?
+				request["Content-Type"] = "application/xml" unless xml.nil?
+				http.request(request)
+			end
+			sleep 5
+	end
+
+	before(:all) do
+		@store = Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
+		@redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
 	end
 
 	context "Post SchoolInfo record with RefID #{guid}" do
 		before(:context) do
-			@store = Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
-			@redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
-			Net::HTTP.start("localhost", "9292") do |http|
-				request = Net::HTTP::Post.new("/rspec/test")
-				request.body = header + xml + footer
-				request["Content-Type"] = "application/xml"
-				http.request(request)
-			end
-			sleep 5
+			post_xml(header + xml + footer, "/rspec/test")
 		end
 
-		it "add labels { #{guid} } = name of school" do
+		it "add labels {RefID} = name of school" do
 			key = @redis.hget 'labels', guid
                         expect(key).to eq "Stivers College"
 		end
-		it "add #{guid} to SchoolInfo set" do
+		it "add RefID to SchoolInfo set" do
 			key = @redis.sismember 'SchoolInfo', guid
                         expect(key).to be true
 		end
-		it "add oid:(Local Id) {\"localid\"} = #{guid}" do
+		it "add oid:(Local Id) {\"localid\"} = RefID" do
 			key = @redis.hget "oid:#{localid}", "localid"
                         expect(key).to eq guid
 		end
-		it "add #(Local Id) to other:ids set" do
+		it "add oid:(Local Id) to other:ids set" do
 			key = @redis.sismember "other:ids", "oid:#{localid}"
                         expect(key).to be true
 		end
-
+		it "add RefID to set LEAInfoRefId" do
+			key = @redis.sismember "#{linkid}", "#{guid}"
+                        expect(key).to be true
+		end
 		after(:context) do
 			@store.delete(guid)
-			@store.close
-			remove_redis(guid, "SchoolInfo")
+			remove_redis(guid, localid, guid2, linkid, "SchoolInfo")
 		end
 	end
+
+
+	context "Post SchoolInfo record then post /equiv?ids=#{guid},#{guid2}" do
+		before(:context) do
+			post_xml(header + xml + footer, "/rspec/test")
+			post "/equiv", {:ids => "#{guid},#{guid2}"}
+			#post_xml(nil, "/equiv?ids=#{guid},#{guid2}")
+			#Net::HTTP.start("localhost", "9292") do |http|
+			#	request = Net::HTTP::Post.new("/equiv?ids=#{guid},#{guid2}")
+			#	http.request(request)
+			#end
+			sleep 2
+		end
+
+		it "adds #{guid} to set equivalent:ids:#{guid2}" do
+puts "guid2 set" + (@redis.smembers "equivalent:ids:#{guid2}").join(" ")
+			key = @redis.sismember "equivalent:ids:#{guid2}", guid
+                        expect(key).to be true
+		end
+		it "adds links from #{guid} set to #{guid2} set" do
+			key = @redis.sismember "#{guid2}", linkid
+                        expect(key).to be true
+		end
+		after(:context) do
+			@store.delete(guid)
+			remove_redis(guid, localid, guid2, linkid, "SchoolInfo")
+		end
+	end
+
+	after(:all) do
+		@store.close
+	end
+
 end

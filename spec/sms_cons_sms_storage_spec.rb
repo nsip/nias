@@ -39,7 +39,7 @@ footer = '</SchoolInfos>'
 
 
 
-	def remove_redis(key,type) 
+	def remove_redis(key,localid,type) 
 		@redis.hdel 'labels', key
 		@redis.srem type, key
 		@redis.hdel "oid:#{localid}", 'localid'
@@ -72,7 +72,7 @@ footer = '</SchoolInfos>'
 		after(:context) do
 			@store.delete(guid)
 			@store.close
-			remove_redis(guid, "SchoolInfo")
+			remove_redis(guid, localid, "SchoolInfo")
 		end
 	end
 end
