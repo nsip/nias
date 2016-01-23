@@ -81,6 +81,7 @@ loop do
 	    
 	    messages.each do |m|
 		row = JSON.parse(m.value) 
+
 			xml = <<XML
 <StudentPersonal RefId="#{SecureRandom.uuid}">
   <LocalId>#{row['LocalId']}</LocalId>
@@ -193,7 +194,7 @@ XML
 
   # trap to allow console interrupt
   trap("INT") { 
-    puts "\ncons-prod-oneroster-parser service shutting down...\n\n"
+    puts "\n#{@servicename} service shutting down...\n\n"
     exit 130 
   } 
 

@@ -1,4 +1,4 @@
-@csvheaders = [
+@csvheaders_students = [
 'LocalId',
 'SectorId',
 'DiocesanId',
@@ -55,4 +55,18 @@
 'Locality',
 'Postcode',
 'StateTerritory',
+]
+
+@csvheaders_staff = [
+'LocalId',
+'GivenName',
+'FamilyName',
+'Homegroup',
+'ClassCode',
+'ASLSchoolId',
+'SchoolLocalId',
+'LocalCampusId',
+'EmailAddress',
+'ReceiveAdditionalInformation',
+'StaffSchoolRole',
 ]

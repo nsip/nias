@@ -41,8 +41,8 @@ def lookup_xpath(nodes, xpath)
 end
 
 def csv_object2array(csv)
-	@ret = Array.new(@csvheaders.length)
-	@csvheaders.each_with_index do |key, i|
+	@ret = Array.new(@csvheaders_students.length)
+	@csvheaders_students.each_with_index do |key, i|
 		@ret[i] = csv[key]
 	end
 	return @ret
@@ -130,8 +130,9 @@ loop do
 			csv['StateTerritory'] = lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:AddressList/xmlns:Address[@Role = '012B']/xmlns:StateProvince")
 
 			# puts "\nParser Index = #{idx.to_json}\n\n"
+			
 
-			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", csv_object2array(csv).to_csv, "indexed" )
+			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", csv_object2array(csv).to_csv.chomp.gsub(/\s+/, " ") + "\n", "indexed" )
   		
   		end
   		# send results to indexer to create sms data graph

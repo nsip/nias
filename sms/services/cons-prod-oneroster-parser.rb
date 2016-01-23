@@ -157,7 +157,7 @@ loop do
 
   # trap to allow console interrupt
   trap("INT") { 
-    puts "\ncons-prod-oneroster-parser service shutting down...\n\n"
+    puts "\n#{@servicename} service shutting down...\n\n"
     exit 130 
   } 
 
