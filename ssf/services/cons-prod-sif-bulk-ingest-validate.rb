@@ -45,27 +45,28 @@ loop do
   	    messages = []
 	    messages = consumer.fetch
 	    messages.each do |m|
-
+		cont = m.value.match( /===snip[^=\n]*===/ )
+		m.value.gsub!(/\n===snip[^=\n]*===\n/, "")
 	    if(payload.empty?) then
 	        # Payload from sifxml.bulkingest contains as its first line a header line with the original topic
 	        header = m.value.lines[0]	
-puts header
+##puts header
 	        payload = m.value.lines[1..-1].join
 		start = Time.now
 	    else
 	    	payload << m.value
 	    end
 	    concatcount = concatcount + 1
-	    if payload.match( /===snip===/ ) then
-	    	payload = payload.gsub(/\n===snip===\n/, "")
+	    if (cont) then
+	    	#payload = payload.gsub(/\n===snip===\n/, "")
 	    	next
 	    end
-puts "Concatenating #{concatcount} messages..."
-#next
 		puts "Concatenation done at #{Time.now}"
 		puts "Payload size: #{payload.size}"
-  	    puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
+  	    #puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
 
+
+#File.open('log.txt', 'w') {|f| f.puts payload }
 		# each ingest message is a group of objects of the same class, e.g. 
 		# <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
 		# If message is not well-formed, pass it to sifxml.errors as a unit
@@ -103,7 +104,7 @@ puts "Concatenating #{concatcount} messages..."
 	      				msg = header + x.to_s
 					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 				end
-				puts "Pushed messages"
+				#puts "Pushed messages"
 			else
 				puts "Invalid!"
 				msg = header + "Message #{m.offset} validity error:\n" 

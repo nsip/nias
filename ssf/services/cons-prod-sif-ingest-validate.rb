@@ -83,7 +83,7 @@ loop do
 #puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"
 					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 				else
-puts "Invalid!"
+					puts "Invalid!"
 					msg = header + "Message #{m.offset} validity error:\n" + 	
 									xsd_errors.map{|e| e.message}.join("\n") + "\n" + 
 									parent.document.to_s
@@ -95,7 +95,7 @@ puts "Invalid!"
 				end
 			end
 		else
-puts "Not Well-Formed!"
+			puts "Not Well-Formed!"
 			msg = header + "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value	
 			# puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"
 			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg, "invalid" )

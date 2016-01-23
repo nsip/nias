@@ -8,10 +8,25 @@ require 'poseidon'
 
 
 xml = <<XML
-<xmldocument>
-  <test>hello</test>
-</xmldocument>
+<Invoice RefId="82c725ac-1ea4-4395-a9be-c35e5657d1cc">
+  <InvoicedEntity SIF_RefObject="Debtor">e1759047-09c4-4ba0-a69e-eec215de3d80</InvoicedEntity>
+  <BillingDate>2014-02-01</BillingDate>
+  <TransactionDescription>Activity Fees</TransactionDescription>
+  <BilledAmount Type="Debit" Currency="AUD">24.93</BilledAmount>
+  <Ledger>Family</Ledger>
+  <TaxRate>10.0</TaxRate>
+  <TaxAmount Currency="AUD">2.49</TaxAmount>
+</Invoice>
 XML
+
+xmlheader = <<XML
+<Invoices xmlns="http://www.sifassociation.org/au/datamodel/3.4">
+XML
+
+xmlfooter = <<XML
+</Invoices>
+XML
+
 
 json = <<JSON
 {
@@ -43,14 +58,14 @@ describe "GET ssf" do
 
     describe "POST /" do
         it "rejects request as not specifying a topic" do
-            post "/", xml, "CONTENT_TYPE" => "application/xml"
+            post "/", xmlheader + xml + xmlfooter, "CONTENT_TYPE" => "application/xml"
             expect(last_response.status).to eq 404
         end
     end
 
     describe "POST rspec" do
         it "rejects request as not specifying a stream" do
-            post "/rspec", xml, "CONTENT_TYPE" => "application/xml"
+            post "/rspec", xmlheader + xml + xmlfooter, "CONTENT_TYPE" => "application/xml"
             expect(last_response.status).to eq 404
         end
     end
@@ -63,14 +78,14 @@ describe "GET ssf" do
 		context "SIF/XML non-sif small" do
 			it "posts SIF/XML to Kafka topic SSFServer.settings.xmltopic with header rspec.test" do
 				puts "Next offset    = #{@xmlconsumer.next_offset}"
-				post "/rspec/test", xml, "CONTENT_TYPE" => "application/xml"
+				post "/rspec/test", xmlheader + xml + xmlfooter, "CONTENT_TYPE" => "application/xml"
 				expect(last_response.status).to eq 202
 				sleep 1
 				begin
                     a = @xmlconsumer.fetch
 					expect(a).to_not be_nil
 					expect(a.empty?).to be false
-					expect(a[0].value).to eq "TOPIC: rspec.test\n#{xml}" 
+					expect(a[0].value).to eq "TOPIC: rspec.test\n#{xmlheader + xml + xmlfooter}" 
 					expect(a[0].key).to eq "rspec.test"
                     rescue Poseidon::Errors::OffsetOutOfRange
                             puts "[warning] - bad offset supplied, resetting..."
@@ -144,11 +159,11 @@ describe "GET ssf" do
         before(:example) do
             @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.bulkingest", 0, :latest_offset)
         end
-=begin
         context "SIF/XML non-sif 3 MB" do
             it "posts SIF/XML to Kafka topic SSFServer.settings.bulkxmltopic in two 1 MB-sized pieces, with header rspec.test" do
                 puts "Next offset    = #{@xmlconsumer.next_offset}"
-                post "/rspec/test/bulk", xml * 50000, "CONTENT_TYPE" => "application/xml"
+		inputxml = xmlheader + xml * 5000 + xmlfooter
+                post "/rspec/test/bulk", inputxml, "CONTENT_TYPE" => "application/xml"
                 expect(last_response.status).to eq 202
                 sleep 1
                 begin
@@ -159,8 +174,8 @@ describe "GET ssf" do
                     a.each do |m|
                             payload << m.value
                     end
-                    payload = payload.gsub(/\n===snip===\n/, "")
-                    expect(payload).to eq "TOPIC: rspec.test\n#{xml * 50000}"
+                    payload = payload.gsub(/\n===snip [0-9]*===\n/, "")
+                    expect(payload).to eq "TOPIC: rspec.test\n#{inputxml}"
                     expect(a[0].key).to eq "rspec.test"
                 rescue Poseidon::Errors::OffsetOutOfRange
                     puts "[warning] - bad offset supplied, resetting..."
@@ -169,7 +184,6 @@ describe "GET ssf" do
                 end
             end
         end
-=end
         
         before(:example) do
             @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.bulkingest", 0, :latest_offset)
@@ -177,14 +191,14 @@ describe "GET ssf" do
         context "SIF/XML non-sif small" do
                 it "posts SIF/XML to Kafka topic SSFServer.settings.xmltopic with header rspec.test" do
                 puts "Next offset    = #{@xmlconsumer.next_offset}"
-                post "/rspec/test/bulk", xml , "CONTENT_TYPE" => "application/xml"
+                post "/rspec/test/bulk", xmlheader + xml + xmlfooter , "CONTENT_TYPE" => "application/xml"
                 expect(last_response.status).to eq 202
                 sleep 1
                 begin
                     a = @xmlconsumer.fetch
                     expect(a).to_not be_nil
                     expect(a.empty?).to be false
-                    expect(a[0].value).to eq "TOPIC: rspec.test\n#{xml}"
+                    expect(a[0].value).to eq "TOPIC: rspec.test\n#{xmlheader + xml + xmlfooter}"
                     expect(a[0].key).to eq "rspec.test"
                 rescue Poseidon::Errors::OffsetOutOfRange
                     puts "[warning] - bad offset supplied, resetting..."
@@ -239,14 +253,6 @@ describe "GET ssf" do
                 end
             end
         end
-=begin
-        context "payload more than 500 MB" do
-            it "rejects payload" do
-                post "/rspec/test/bulk", xml * 5000000, "CONTENT_TYPE" => "application/xml"
-                expect(last_response.status).to eq 202
-            end
-        end
-=end
         context "message other than CSV, JSON, XML" do
             it "rejects payload" do
                 post "/rspec/test/bulk", csv, "CONTENT_TYPE" => "text/plain"

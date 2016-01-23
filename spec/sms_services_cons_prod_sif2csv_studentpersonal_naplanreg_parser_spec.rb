@@ -113,7 +113,6 @@ end
 		@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.csvstudents", 0, :latest_offset)
 		puts "Next offset    = #{@xmlconsumer.next_offset}"
 		post_xml(xml)
-		puts "POSTED"
 		sleep 10
 	end
 

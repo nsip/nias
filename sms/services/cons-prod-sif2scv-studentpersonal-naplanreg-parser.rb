@@ -57,13 +57,11 @@ loop do
 	    #consumer.fetch do |n, messages|
 
 #puts "#{@servicename} fetching offset #{ consumer.offset(n) } "
-	    
+#puts messages[0].value.lines[0..10].join("\n") + "\n\n" unless messages.empty?
 	    messages.each do |m|
 
 	    	# create csv object
 		csv = { }
-		#header = m.value.lines[0]
-            	#payload = m.value.lines[1..-1].join
             	payload = m.value
 
       		# read xml message
@@ -136,9 +134,9 @@ loop do
 			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", csv_object2array(csv).to_csv, "indexed" )
   		
   		end
-
   		# send results to indexer to create sms data graph
   		outbound_messages.each_slice(20) do | batch |
+#puts batch[0].value.lines[0..10].join("\n") + "\n\n" unless batch.empty?
 			@pool.next.send_messages( batch )
 	   	end
 		#end

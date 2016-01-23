@@ -24,7 +24,7 @@ xml_invalid = xml.gsub(%r{Ledger}, "Leleledger")
 
 @service_name = 'ssf_services_cons_prod_sif_bulk_ingest_validate_spec'
 
-recordcount = 3000
+recordcount = 30000
 #recordcount = 10
 
 xmlbody = xml * recordcount
@@ -54,22 +54,15 @@ end
                                 expect(a).to_not be_nil
                                 expect(a.empty?).to be false
                                 expect(a[0].value).to match(/well-formedness error/)
-                                expect(a[0].value).to match(/rspec\.test/)
                         rescue Poseidon::Errors::OffsetOutOfRange
                             puts "[warning] - bad offset supplied, resetting..."
                             offset = :latest_offset
                             retry
                         end
 		end
-		after(:example) do
-			#@xmlconsumer.close
-		end
 	end
 
 	context "Invalid XML" do
-		before(:example) do
-			#@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
-		end
 		it "pushes error to sifxml.errors" do
 			puts "Next offset    = #{@xmlconsumer.next_offset}"
 			post_xml(header + xml_invalid + xmlbody + footer)
@@ -86,15 +79,9 @@ end
                             retry
                         end
 		end
-		after(:example) do
-			#@xmlconsumer.close
-		end
 	end
 
 	context "Valid XML" do
-		before(:example) do
-			#@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
-		end
 		it "pushes validated XML to sifxml.validated" do
 			puts "Next offset    = #{@xmlvalidconsumer.next_offset}"
 			post_xml(header + xmlbody + footer)
@@ -113,9 +100,6 @@ end
                             offset = :latest_offset
                             retry
                         end
-		end
-		after(:example) do
-			#@xmlconsumer.close
 		end
 	end
 

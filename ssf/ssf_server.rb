@@ -35,7 +35,6 @@ class SSFServer < Sinatra::Base
 		# are reasssembled into the original payload and then broken down into 
 		# individual objects
 		set :xmlbulktopic, 'sifxml.bulkingest'
-
 	end
 
 
@@ -91,10 +90,12 @@ class SSFServer < Sinatra::Base
 				end
 			end
 			
-			def post_messages( messages , compression_codec )
+			def post_messages( messages , compression_codec, bulk )
 				# set up producer pool - busier the broker the better for speed
+				# but no multiple producers if doing bulk ingest: splitting the message among producers risks its being reassembled out of sequence
 				producers = []
-				(1..10).each do | i |
+				producercount = bulk ? 1 : 10
+				(1..producercount).each do | i |
 					p = Poseidon::Producer.new(["localhost:9092"], session['producer_id'], {:compression_codec => compression_codec , :partitioner => Proc.new { |key, partition_count| 0 } })
 					producers << p
 				end
@@ -104,9 +105,10 @@ class SSFServer < Sinatra::Base
 				sending = Time.now
 				puts "sending messages ( #{messages.count} )...."
 				puts "started at: #{sending.to_s}"
-		
+
 				messages.each_slice(20) do | batch |
 						pool.next.send_messages( batch )
+						#p.send_messages( batch )
 				end
 		
 				finish = Time.now
@@ -169,7 +171,6 @@ class SSFServer < Sinatra::Base
 			when 'text/csv' then msg = msg.to_hash.to_json
 			end
 
-			puts "\n\ntopic is: #{topic} : key is #{key}\n"
 			#puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
 			messages << Poseidon::MessageToSend.new( "#{topic}", msg, "#{key}" )
 			
@@ -178,7 +179,7 @@ class SSFServer < Sinatra::Base
 			
 		end
 
-		post_messages(messages, :none)		
+		post_messages(messages, :none, false)		
 		return 202
 	end
 	
@@ -225,18 +226,25 @@ class SSFServer < Sinatra::Base
 			# Kafka has default message size of 1 MB. We chop message up into 950 KB chunks, with all but last terminating in "\n===snip==="
 			msgsplit = to_2d_array(msg, 972800)
 			msgtail = msgsplit.pop
+			msgsplit.map!.with_index  { |x, idx| x + "\n===snip #{idx}===\n" }
 			
 			msgsplit.each do |msg1|
-				messages << Poseidon::MessageToSend.new( "#{topic}", msg1 + "\n===snip===\n", "#{key}" )
+				messages << Poseidon::MessageToSend.new( "#{topic}", msg1, "#{key}" )
 			end
-			messages << Poseidon::MessageToSend.new( "#{topic}", msgtail, "#{key}" )
+			messages << Poseidon::MessageToSend.new( "#{topic}", msgtail , "#{key}" )
+
+
+			#msgsplit.each_with_index do |msg1, idx|
+			#	messages << Poseidon::MessageToSend.new( "#{topic}", msg1 + "\n===snip #{idx}===\n", "#{key}" )
+			#end
+			#messages << Poseidon::MessageToSend.new( "#{topic}", msgtail + "\n", "#{key}" )
 			
 			# write to default for audit if required
 			# messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )
 			
 		end
 
-		post_messages(messages, :none)		
+		post_messages(messages, :none, true)		
 		return 202
 	end
 
