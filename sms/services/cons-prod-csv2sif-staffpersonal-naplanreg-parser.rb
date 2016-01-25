@@ -1,7 +1,9 @@
-# cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb
+# cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb
  
-# consumer that reads in studentpersonal records from naplan/csv stream,
-# and generates csv equivalent records in naplan/sifxmlout stream
+# Consumer that reads in StaffPersonal CSV records conforming to the NAPLAN Registration specification from naplan/csv_staff stream,
+# and generates SIF/XML equivalent records in naplan/sifxmlout_staff stream.
+
+# Deals with multiple class codes in CSV, assumes they are represented in CSV as "classcode1,classcode2,classcode3"
 
 
 require 'nokogiri'

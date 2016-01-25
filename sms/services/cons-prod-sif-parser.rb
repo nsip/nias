@@ -1,9 +1,9 @@
 # cons-prod-sif-parser.rb
 
-# simple consumer that reads sif xml messages from an input stream
-# assumes that sif messages have already been validated for xml
+# Simple consumer that reads SIF/XML messages from sifxml/validated.
+# Assumes that sif messages have already been validated for xml
 # 
-# parses message to find refid & type of message and to build index of
+# Parses message to find refid & type of message and to build index of
 # all other references contained in the xml message
 # 
 # Extracts GUID id (RefID), other ids, type and [links] from each message 
@@ -12,7 +12,7 @@
 # 
 # this  [ 'tuple' id - [equivalentids] - {otherids} - type - [links] ]
 # 
-# is then passed on to the sms indexing service
+# is then passed on to the sms indexing service, through stream sms/indexer.
 # 
 # this is done so that indexer only deals with abstract tuples of this type, which can therefore come
 # from ANY parsed input; doesn't have to be SIF messages, cna be IMS, CSV etc. etc.
@@ -24,7 +24,7 @@ require 'poseidon'
 require 'hashids'
 
 
-# extract human readable label based on object
+# extract human readable label based on SIF object
 # id is GUID, nodes is Nokogiri-parsed XML
 def extract_label(id, nodes)
 	type = nodes.root.name
@@ -137,7 +137,7 @@ def extract_label(id, nodes)
 			ret = fname.child
 		end
 	end
-	ret = id if ret.nil?  
+	ret = id if ret.nil?  # fallback to RefId as label
 	return ret
 end
 

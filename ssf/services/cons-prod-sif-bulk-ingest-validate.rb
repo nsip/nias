@@ -3,15 +3,13 @@
 require 'poseidon'
 require 'nokogiri' # xml support
 
-# consumer of bulk ingest SIF/XML messages. 
-# Input stream consists of XML payload broken up into 1 MB chunks. Payload
-# is reassembled and then validated.
+# Consumer of bulk ingest SIF/XML messages. 
+# Input stream sifxml/bulkingest consists of XML payload broken up into 1 MB chunks. Payload
+# is reassembled and then validated, following the SIF-AU 3.4 schema.
 # Two streams of SIF created:
-# * error stream, with malformed objects and associated error messages
-# * validated stream of parsed SIF objects
-# Messages are received from the single stream sifxml.bulkingest. The key of the received message is "topic"."stream". 
-# Messages are output to "topic"."stream".validated and "topic"."stream".errors
-
+# * error stream sifxml/errors, with malformed objects and associated error messages
+# * validated stream sifxml/validated of parsed SIF objects
+# The key of the received message is "topic"."stream", reflecting the original topic and stream of the message. 
 
 @inbound = 'sifxml.bulkingest'
 @outbound1 = 'sifxml.validated'
@@ -45,12 +43,11 @@ loop do
   	    messages = []
 	    messages = consumer.fetch
 	    messages.each do |m|
-		cont = m.value.match( /===snip[^=\n]*===/ )
+		cont = m.value.match( /===snip[^=\n]*===/ ) #this is not the last in the suite of split up messages
 		m.value.gsub!(/\n===snip[^=\n]*===\n/, "")
 	    if(payload.empty?) then
 	        # Payload from sifxml.bulkingest contains as its first line a header line with the original topic
 	        header = m.value.lines[0]	
-##puts header
 	        payload = m.value.lines[1..-1].join
 		start = Time.now
 	    else
@@ -58,7 +55,6 @@ loop do
 	    end
 	    concatcount = concatcount + 1
 	    if (cont) then
-	    	#payload = payload.gsub(/\n===snip===\n/, "")
 	    	next
 	    end
 		puts "Concatenation done at #{Time.now}"
@@ -67,6 +63,7 @@ loop do
 
 
 #File.open('log.txt', 'w') {|f| f.puts payload }
+
 		# each ingest message is a group of objects of the same class, e.g. 
 		# <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
 		# If message is not well-formed, pass it to sifxml.errors as a unit
@@ -93,18 +90,11 @@ loop do
 					if (i%10000 == 0 and i > 0) then 
 						puts "#{i} records queued..." 
 					end
-					#root = x.xpath("local-name(/)")
-					#parent = Nokogiri::XML::Node.new root+"s", doc
-					#parent.default_namespace = @namespace
-					#x.parent = parent
 	      				item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
-					#x.default_namespace = @namespace
-					#x = x.canonicalize(nil, nil, 1)
 					x["xmlns"] = @namespace
 	      				msg = header + x.to_s
 					outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 				end
-				#puts "Pushed messages"
 			else
 				puts "Invalid!"
 				msg = header + "Message #{m.offset} validity error:\n" 

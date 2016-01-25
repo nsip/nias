@@ -65,11 +65,8 @@ class SMSQuery
 			q_indirect_start = Time.now
 
 			q = []
-			#q = @redis.smembers q_item
 			q = @redis.sdiff q_item, "SchoolInfo"
 			
-			#return result unless !q.empty? # return empty results if item not in db
-
 			# puts "\n\nindirect sinter - #{q.inspect}\n\n"
 			unless q.empty? then
 				@redis.pipelined do

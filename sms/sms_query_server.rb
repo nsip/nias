@@ -10,7 +10,7 @@
 # find [collection name] [item id] optional parameter defer=true/false
 # 
 # collection name is a string representing a collection of objects in the memory store, these are based on the data
-# that has been provided to the store in the form of sif (and other e.g. ims) messages
+# that has been provided to the store in the form of SIF (and other e.g. IMS) messages
 # 
 # calling find with just a collection name will return the members of that collection, collections would be
 # such objects as SchoolInfo, StudentPersonal etc. etc.
@@ -74,26 +74,20 @@ class SMSQueryServer < Sinatra::Base
 	helpers Sinatra::ContentFor
 
 	configure do
-
 		 set :store, Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
-
 	end
 
 	get "/sms" do
-
 		smsq = SMSQuery.new
 		@coll_result = smsq.known_collections
 		erb :collections
-
 	end
 
 
 	get "/sms/collections" do
-
 		@result = []
 		smsq = SMSQuery.new
 		@result = smsq.known_collections
-
 		return @result.to_json
 	end
 
@@ -152,7 +146,6 @@ class SMSQueryServer < Sinatra::Base
 			include_messages = false
 		end
 
-
 		if params['defer'] == 'true'
 			defer = true
 		else
@@ -161,7 +154,6 @@ class SMSQueryServer < Sinatra::Base
 
 
 		puts "\n\nCollection : #{collection}\n\nId : #{id}\n\n"
-
 		halt( 400, "Must have at least one query parameter 'id' or 'collection'." ) unless ( collection || id )
 
 		results = []
@@ -198,6 +190,7 @@ class SMSQueryServer < Sinatra::Base
 
 	end
 
+	# Requests to merge OneRoster and SIF records that share the same local ID
 
 	get "/sms/merge_ids" do
 	

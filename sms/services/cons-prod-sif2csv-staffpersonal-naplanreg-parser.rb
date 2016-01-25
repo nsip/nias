@@ -1,7 +1,9 @@
 # cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb
 
-# consumer that reads in studentpersonal records from naplan/sifxml stream, 
-# and generates csv equivalent records in naplan/csvstudents stream
+# Consumer that reads in StaffPersonal XML records conforming to the NAPLAN Registration specification from naplan/sifxml_staff stream,
+# and generates SIF/XML equivalent records in naplan/csvstaff_out stream.
+
+# Deals with multiple class codes in CSV, assumes they are represented in CSV as "classcode1,classcode2,classcode3"
  
 
 require 'json'
@@ -33,26 +35,6 @@ producers = []
 end
 @pool = producers.cycle
 
-def lookup_xpath(nodes, xpath)
-	@ret = nodes.at_xpath(xpath)
-	return "" if @ret.nil?
-	return @ret.child
-end
-
-def lookup_xpath_multi(nodes, xpath)
-	@ret = nodes.xpath(xpath)
-	return "" if @ret.nil?
-	return @ret.map { |x| x.child.to_s }.join(",")
-	# we don't want the native ruby csv encoding of nested arrays, which is "[""x", ""y""]", but just "x,y"
-end
-
-def csv_object2array(csv)
-	@ret = Array.new(@csvheaders_staff.length)
-	@csvheaders_staff.each_with_index do |key, i|
-		@ret[i] = csv[key]
-	end
-	return @ret
-end
 
 loop do
 
@@ -77,18 +59,19 @@ loop do
 		        type = nodes.root.name
 			next unless type == 'StaffPersonal'
 
-			csv['LocalId'] = lookup_xpath(nodes, "//xmlns:LocalId")
-			csv['FamilyName'] = lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:FamilyName")
-			csv['GivenName'] = lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:GivenName")
-			csv['Homegroup'] = lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:HomeGroup")
-			csv['ClassCode'] = lookup_xpath_multi(nodes, "//xmlns:MostRecent/xmlns:NAPLANClassList/xmlns:ClassCode")
-			csv['ASLSchoolId'] = lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolACARAId")
-			csv['SchoolLocalId'] = lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolLocalId")
-			csv['LocalCampusId'] = lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:LocalCampusId")
-			csv['EmailAddress'] = lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:EmailList/xmlns:Email")
+			csv['LocalId'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:LocalId")
+			csv['FamilyName'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:FamilyName")
+			csv['GivenName'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:GivenName")
+			csv['Homegroup'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:HomeGroup")
+			csv['ClassCode'] = CSVHeaders.lookup_xpath_multi(nodes, "//xmlns:MostRecent/xmlns:NAPLANClassList/xmlns:ClassCode")
+			csv['ASLSchoolId'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolACARAId")
+			csv['SchoolLocalId'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolLocalId")
+			csv['LocalCampusId'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:LocalCampusId")
+			csv['EmailAddress'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:EmailList/xmlns:Email")
 
+puts csv
 			# puts "\nParser Index = #{idx.to_json}\n\n"
-			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", csv_object2array(csv).to_csv.chomp.gsub(/\s+/, " ") + "\n", "indexed" )
+			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", CSVHeaders.csv_object2array(csv, CSVHeaders.get_csvheaders_staff()).to_csv.chomp.gsub(/\s+/, " ") + "\n", "indexed" )
   		
   		end
   		# send results to indexer to create sms data graph

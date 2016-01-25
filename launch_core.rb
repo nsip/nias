@@ -1,6 +1,30 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 
+=begin
+Launcher of NIAS infrastructure. Must be run before ./launcher_nias.rb
+
+Options: 
+* ./launcher_core.rb launches NIAS infrastructure
+* ./launcher_core.rb -K shuts down NIAS infrastructure
+
+Dependencies
+Script creates a ./core.pid file storing the process ids of NIAS infrastructure services. 
+Launch presupposes the file does not exist, and creates it.
+Shutdown presupposes the file does exist, and deletes it, after shutting down each process it references.
+
+Functionality:
+1. Creates /tmp/nias, with subdirectories redis, moneta. Subdirectory kafka-logs is created through Kafka config
+
+2. Launches the following infrastructure service processes:
+* Zookeeper
+* Kafka
+* Redis
+* Rackup
+
+3. Creates all the Kafka topics that are known in advance to be required. There is latency in auto-creating Kafka topics, which can lead to messages being dropped.
+=end
+
 puts "\n\nStarting in: #{__dir__}\n\n"
 
 # create root node for data files in /tmp
@@ -30,8 +54,6 @@ end
 
 def launch
 
-  # just in case an old one gets left behind, delete on startup
-  #File.delete( @pid_file ) if File.exist?( @pid_file )
   # if an old pid file exists, abort, should be running -K instead
   if ( File.exist?( @pid_file) ) then
     puts "The file #{@pid_file} exists: run ./launch_core.rb -K to terminate any existing processes"
@@ -56,7 +78,6 @@ def launch
   @pids['sms-redis'] = Process.spawn( 'redis-server', './sms/sms-redis.conf' )
 
   banner 'Starting Web Services'
-  # @pids['ssf'] = Process.spawn( 'ruby', './ssf/ssf_server.rb', '-e', 'production', '-p', '4567' )
   @pids['web'] = Process.spawn( 'rackup' )
 
   banner 'Web services running on localhost:9292/'  
@@ -104,13 +125,13 @@ def launch
               'naplan.sifxml_staff.high',
               'naplan.sifxml_staff.extreme',
               'naplan.sifxmlout_staff',
-	      'naplan.csvstaff_out',
+	     	  'naplan.csvstaff_out',
               'test.test1',
               'json.test',
               'rspec.test'
             ]
 
-  sleep 5 # creating too early truncates topics
+  sleep 5 # creating too early can lead to some topics being skipped
   topics.each do | topic |
 
     puts "Creating #{topic}"

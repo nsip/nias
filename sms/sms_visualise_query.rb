@@ -7,6 +7,9 @@ require 'json'
 require 'moneta'
 require 'nokogiri'
 
+# Queries specific to NIAS visualisation. These are example queries, and production systems should use their own queries.
+
+
 class SMSVizQuery
 
 	@languagecodes = {}
@@ -75,15 +78,16 @@ class SMSVizQuery
 							idx+=1
 							nodes[x] = idx
 						end
-						label = @redis.hget 'labels', x
+						label = @redis.hget 'labels', x # retrieve human-readable label
 						# if label is GUID, fallback on collection name
 						label = "[#{collection}]" if label[/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/]
 						results << { :collection => collection, :link => 'indirect', :id => x, :label => label , :origin => nodes[q1], :target => nodes[x] } unless (nodes[q1] == 0 and nodes[x] == 0)
 					end
 				end
 			else
+				# direct links
 				datapoints.each do |x|
-					label = @redis.hget 'labels', x
+					label = @redis.hget 'labels', x  # retrieve human-readable label
 					unless nodes.has_key?(x)
 						idx+=1
 						nodes[x] = idx
@@ -98,7 +102,7 @@ class SMSVizQuery
 	end
 
 
-	# produce a count of attendances for all students
+	# produce a count of attendances records for all students. Assumes that attendance is only recorded if the student was present. If that is not the case, recode the method.
 	def attendance_counts
 		results = {}
 		students = @redis.smembers('StudentPersonal')
@@ -111,9 +115,9 @@ class SMSVizQuery
 
 	# average counts of attendance for each class
 	def attendance_counts_per_class
-		absences_per_class = {}
+		absences_per_class = {} # hash of class label against array of attendance counts for each student in the class
 		results = []
-		attendances = attendance_counts()
+		attendances = attendance_counts() # get attendance counts for all students
 		students = attendances.keys
 		classes = @redis.smembers('TeachingGroup')
 		students.each do |student|
@@ -125,14 +129,14 @@ class SMSVizQuery
 			end
 		end
 		absences_per_class.each do |key, value|
-			results << {:class => key, "average absences" => value.inject(0.0) { |sum, el| sum + el } / value.size }
+			results << {:class => key, "average absences" => value.inject(0.0) { |sum, el| sum + el } / value.size } # calculate average
 		end
 		return results
 	end
 
 	# 20 most absent students
 	def most_absent_students
-		attendances = attendance_counts()
+		attendances = attendance_counts() 
 		absentees = attendances.keys.sort { |x, y| attendances[y] <=> attendances[x] }
 		results = []
 		absentees[0..20].each do |x|
@@ -173,8 +177,7 @@ class SMSVizQuery
 			studentcontact = @redis.sinter d, 'StudentContactPersonal'
 			label = @redis.hget 'labels', studentcontact[0]
 			studentcontact.each do |sc|
-				xml = Nokogiri::XML(@store[sc])
-				xml.xpath("//xmlns:LanguageList/xmlns:Language[xmlns:LanguageType='1']/xmlns:Code").each { |x| results << {:debtor => label, :language => @languagecodes[x.child.to_s] } }
+				xml = Nokogiri::XML(@store[sc])				xml.xpath("//xmlns:LanguageList/xmlns:Language[xmlns:LanguageType='1']/xmlns:Code").each { |x| results << {:debtor => label, :language => @languagecodes[x.child.to_s] } }
 			end
 		end
 		return results

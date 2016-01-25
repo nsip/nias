@@ -7,6 +7,16 @@ require 'json'
 
 require_relative 'sms_visualise_query'
 
+=begin
+Web client to return results of visualisation queries in JSON. Supported queries are:
+* /graph_data/linked_collections?id=xxx : counts ids in all collections that an id is connected to
+* /graph_data/attendance_per_class : give list of attendance numbers per class
+* /graph_data/most_absent_students : give list of students with the most absences
+* /graph_data/payment_delinquency : give list of invoices vs paymentreceipts for each debtor
+* /graph_data/debtor_languages : give proportions of home languages for all debtors (used to illustrate combination of Redis and Xpath querying)
+* /graph_data/local_network : get all direct and indirect ids  that an id is connected to, and identify their collections
+=end
+
 
 class GraphServer < Sinatra::Base
 

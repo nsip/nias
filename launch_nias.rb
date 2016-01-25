@@ -1,6 +1,26 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 
+=begin
+Launcher of NIAS microservices. Must be run after ./launcher_core.rb
+
+Options: 
+* ./launcher_nias.rb launches NIAS microservices
+* ./launcher_nias.rb -K shuts down NIAS microservices
+
+Dependencies
+1. Script expects that ./core.pid file already exists, confirming that NIAS infrastructure services have been launched.
+
+2. Script creates a ./nias.pid file storing the process ids of NIAS microservices. 
+Launch presupposes the file does not exist, and creates it.
+Shutdown presupposes the file does exist, and deletes it, after shutting down each process it references.
+
+Functionality:
+1. Starts SSF microservices
+
+2. Starts SMS microservices
+=end
+
 puts "\n\nStarting in: #{__dir__}\n\n"
 
 def banner( text )
@@ -28,9 +48,6 @@ end
 
 
 def launch
-
-  # just in case an old one gets left behind, delete on startup
-  #File.delete( @pid_file ) if File.exist?( @pid_file )
   if ( File.exist?( @pid_file) ) then
     puts "The file #{@pid_file} exists: run ./launch_nias.rb -K to terminate any existing processes"
     exit
@@ -43,7 +60,6 @@ def launch
                 {:name => 'cons-prod-privacyfilter.rb', :options  => ''},
                 {:name =>'cons-prod-sif-ingest-validate.rb', :options => ''},
                 {:name =>'cons-prod-sif-bulk-ingest-validate.rb', :options => ''}
-
               ]
 
 
@@ -63,10 +79,10 @@ def launch
                   'cons-sms-storage.rb',
                   'cons-oneroster-sms-storage.rb', 
                   'cons-prod-oneroster-parser.rb',
-		  'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb',
-		  'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb',
-		  'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb',
-		  'cons-prod-sif2csv-staffpersonal-naplanreg-parser.rb',
+		  		  'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb',
+		  		  'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb',
+		  		  'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb',
+		  		  'cons-prod-sif2csv-staffpersonal-naplanreg-parser.rb',
                 ]
 
   sms_services.each_with_index do | service, i |

@@ -1,8 +1,8 @@
 # oneroster_sif_merge.rb
 
 
-# Class which reviews the local IDs in SIF records and OneRosters in Redis that constitute a match,
-# and then constructs tuples requesting that the corresponding GUIDs  be  merged as equivalent
+# Class which reviews the local IDs in SIF records and OneRoster records in Redis that constitute a match,
+# and then constructs tuples requesting that the corresponding GUIDs be  merged as equivalent
 # 
 # the result is always a tuple structure of the form:
 #
@@ -54,7 +54,8 @@ class OneRosterSifMerge
 
 				
 				match = @redis.hmget x, 'oneroster_identifier', 'oneroster_userId', 'oneroster_courseCode', 'oneroster_classCode', 'localid'
-				#puts x + ': ' + match.join(',')
+
+				# we attempt a match on the SIF local Id with each of the oneroster_identifier, oneroster_userId, oneroster_courseCode, and oneroster_classCode
 				unless(match[0].nil? or match[4].nil?) 
 					idx[:id] = match[0]				
 					idx[:equivalentids] = [match[4]]

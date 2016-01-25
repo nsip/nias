@@ -1,10 +1,10 @@
 # cons-prod-sif-parser.rb
 
-# simple consumer that reads one roster messages from an input stream
-# one roster messages are assumed to have been converted from CSV
+# Simple consumer that reads OneRoster messages from an input stream.
+# OneRoster messages are assumed to have been converted from CSV into serialised JSON.
 # 
-# parses message to find refid & type of message and to build index of
-# all other references contained in the xml message
+# Parses message to find refid & type of message, and to build index of
+# all other references contained in the xml message.
 # 
 # Extracts GUID id (RefID), other ids, equivalent ids, type, label and [links] from each message 
 #
@@ -14,7 +14,7 @@
 # 
 # is then passed on to the sms indexing service
 # 
-# this is done so that indexer only deals with abstract tuples of this type, which can therefore come
+# This is done so that indexer only deals with abstract tuples of this type, which can therefore come
 # from ANY parsed input; doesn't have to be SIF messages, can be IMS, CSV etc. etc.
 # 
 

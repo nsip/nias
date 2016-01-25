@@ -18,13 +18,14 @@ The header of the received message is "topic"."stream". Each message is passed t
 Privacy filters are expressed as XPaths over SIF/XML. Would have loved to have used CSS, but we need to specify on occasion
 XML attributes for filtering, as well as elements, and CSS cannot select attributes.
 
-The effects of filters is cumulative: High filters out the content identified in # filters low, medium, and high. 
+The effects of filters is cumulative: e.g. the High filter filters out the content identified in filters Low, Medium, and High. 
 
-In order to keep the SIF/XML syntactically valid, all text within the sensitive areas are not deleted, in case they are mandatory
-elements, but replaced with "REDACTED", or an equivalent string appropriate to the type of string edited.
+In order to keep the SIF/XML syntactically valid, text within the sensitive areas are not deleted, in case they are mandatory elements, but are instead replaced with "REDACTED", or an equivalent string appropriate to the type of string edited.
 
-The privacy filters consist of lines with two elements: the XPath and the redaction text. Where no redaction text is specified,
+The privacy filters consist of lines with two elements: the XPath and the redaction text, delimited by colon. Where no redaction text is specified,
 "REDACTED" is assumed.
+
+The script is currently inefficient: each xpath in each filter is applied independently of all others, using the Nokogiri xpath() method. If it proves expedient, a more efficient filter will need to be devised.
 =end
 
 @inbound = 'sifxml.validated'
@@ -32,21 +33,20 @@ The privacy filters consist of lines with two elements: the XPath and the redact
 @filter = {}
 @sensitivities = [:none, :low, :medium, :high, :extreme]
 
+# Read the xpaths for filtering at a given privacy level from the nominated file
 def read_filter(filepath, level)
 	File.open(filepath).each do |line| 
-		next if line =~ /^#/
-		next unless line =~ /\S/
-		a = line.chomp.split(/:/)
+		next if line =~ /^#/  # ignore comments
+		next unless line =~ /\S/  # ignore blanks
+		a = line.chomp.split(/:/)  # delimit Xpath from filter text
 		a[0].gsub!(%r#(/+)(?!@)#, "\\1xmlns:") # namespaces are in XML fragments, xpaths need to allude to root default namespace
-		a[1] = "ZZREDACTED" if(a.size == 1)
+		a[1] = "ZZREDACTED" if(a.size == 1)  # insert default filter text
 		@filter[level] << {:path => a[0], :redaction => a[1]}
 	end
 end
 
 @filter[:low] = []
 read_filter("#{__dir__}/privacyfilters/extreme.xpath", :low)
-
-
 # cumulative filters: the fields to filter in the next highest sensitivity are added on to the previous sensitivity's
 @filter[:medium] = Array.new(@filter[:low])
 read_filter("#{__dir__}/privacyfilters/high.xpath", :medium)
@@ -55,7 +55,7 @@ read_filter("#{__dir__}/privacyfilters/medium.xpath", :high)
 @filter[:extreme] = Array.new(@filter[:high])
 read_filter("#{__dir__}/privacyfilters/low.xpath", :extreme)
 
-# redact all textual content of xml (a Node)
+# redact all textual content of xml (a Node). Is recursive.
 def redact(xml, redaction)
 	if(xml.cdata? or xml.text?) then 
 		xml.content = redaction
@@ -64,15 +64,14 @@ def redact(xml, redaction)
 	return xml
 end
 
-# apply filtering rules in xpaths (array of XPath lines) to xml. Do not change original xml parameter. Returned filtered XML
+# Apply filtering rules in xpaths (array of XPath lines) to xml_orig. Do not change original xml_orig parameter. Returns filtered XML
 def apply_filter(xml_orig, xpaths)
 	xml = xml_orig.dup
-	xpaths.each {|c| 
+	xpaths.each { |c| 
 		xml.xpath(c[:path]).each {|x| redact(x, c[:redaction]) } 
 	}
 	return xml
 end
-
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new("cons-prod-privacyfilter", "localhost", 9092, @inbound, 0, :latest_offset)
@@ -88,7 +87,9 @@ end
 pool[x] = producers.cycle
 end
 
+# Hash of outbound messages, mapping privacy level to array of outbound messages
 outbound_messages = {}
+# Hash of filtered records, mapping privacy level to filtered record
 out = {}
 loop do
   begin

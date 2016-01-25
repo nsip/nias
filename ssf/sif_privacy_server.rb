@@ -17,6 +17,7 @@ class SPSServer < Sinatra::Base
 
 	get "/sps" do
 
+		# Expose the contents of each privacy profile for editing
 		@profiles = {}
 		['low','medium','high','extreme'].each do | prf_name |
 

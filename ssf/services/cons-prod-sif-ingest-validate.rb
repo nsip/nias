@@ -3,11 +3,13 @@
 require 'poseidon'
 require 'nokogiri' # xml support
 
-# consumer of ingest SIF/XML messages. Each object in the stream is validated. Two streams of SIF created:
-# * error stream, with malformed objects and associated error messages
-# * validated stream of parsed SIF objects
-# Messages are received from the single stream sifxml.ingest. The key of the received message is "topic"."stream". 
-# Messages are output to "topic"."stream".validated and "topic"."stream".errors
+# Consumer of bulk ingest SIF/XML messages. 
+# Input stream sifxml/ingest consists of XML payload. Payload
+# is reassembled and then validated, following the SIF-AU 3.4 schema.
+# Two streams of SIF created:
+# * error stream sifxml/errors, with malformed objects and associated error messages
+# * validated stream sifxml/validated of parsed SIF objects
+# The key of the received message is "topic"."stream", reflecting the original topic and stream of the message. 
 
 
 @inbound = 'sifxml.ingest'
@@ -46,7 +48,6 @@ loop do
         # Payload from sifxml.ingest contains as its first line a header line with the original topic
         header = m.value.lines[0]	
         payload = m.value.lines[1..-1].join
-#puts "Received: #{payload}\n"
 
 		# each ingest message is a group of objects of the same class, e.g. 
 		# <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
@@ -77,7 +78,6 @@ loop do
 				doc3 = Nokogiri::XML(doc2.parent().canonicalize(nil, nil, 1))
 				xsd_errors = @xsd.validate(doc3.document)
 				if(xsd_errors.empty?) 
-#puts "Validated!"
 	      				item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
 	      				msg = header + x.to_s
 #puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"

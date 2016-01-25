@@ -12,7 +12,9 @@ require 'zk' # zookeeper interface
 require 'hashids' # temp non-colliding client & producer id generator
 require 'nokogiri' # xml support
 
-
+=begin
+Class to handle ingesting of messages into NIAS. Deals with ingest and bulk ingest of topic/stream, and requests for topic/stream and particular privacy profiles of topic/stream. Parses JSON and CSV messages into JSON objects.
+=end
 
 class SSFServer < Sinatra::Base
 
@@ -39,10 +41,12 @@ class SSFServer < Sinatra::Base
 
 
 	helpers do
+			# is this a valid route for a Kafka topic
 			def valid_route?( url )
 				return settings.zk.children("/brokers/topics").include?( url )
 			end
 
+			# return all available Kafka topics
 			def get_topics_list
 				topics = []
 				topics = settings.zk.children("/brokers/topics")
@@ -52,6 +56,7 @@ class SSFServer < Sinatra::Base
 				return url_topics.sort!
 			end
 
+			# workout whether to set offset to earliest or latest
 			def resolve_offset( offset_param = "latest" )
 				if offset_param == nil
 					offset = :earliest_offset
@@ -65,12 +70,13 @@ class SSFServer < Sinatra::Base
 				return offset
 			end
 			
+			# fetch messages from the body of the HTTP request, and parse the messages if they are in CSV or JSON
 			def fetch_raw_messages()
+				# set producer ID for the session
 				if session['producer_id'] == nil 
 					session['producer_id'] = settings.hashid.encode(Random.new.rand(999))
 				end
-				producer_id = session['producer_id']
-				puts "\nProducer ID  is #{producer_id}\n\n"
+				puts "\nProducer ID  is #{session['producer_id']}\n\n"
 		
 				# extract messages
 				puts "\nData sent is #{request.media_type}\n\n"
@@ -90,9 +96,10 @@ class SSFServer < Sinatra::Base
 				end
 			end
 			
+			# post messages to the appropriate stream. bulk identifies whether these are intended for the simple endpoint (limit 1 MB) or the bulk endpoint
 			def post_messages( messages , compression_codec, bulk )
 				# set up producer pool - busier the broker the better for speed
-				# but no multiple producers if doing bulk ingest: splitting the message among producers risks its being reassembled out of sequence
+				# but *no* multiple producers if doing bulk ingest: splitting the message among producers risks its being reassembled out of sequence
 				producers = []
 				producercount = bulk ? 1 : 10
 				(1..producercount).each do | i |
@@ -117,6 +124,7 @@ class SSFServer < Sinatra::Base
 			end
 
   			# https://www.ruby-forum.com/topic/1057851
+  			# Split up str into an array of strings with string length = value
   			def to_2d_array(str, value)
     				str.unpack("a#{value}"*((str.size/value)+((str.size%value>0)?1:0)))
   			end
@@ -146,7 +154,7 @@ class SSFServer < Sinatra::Base
 		topic_name = "#{tpc}.#{strm}"
 
 		if request.content_length.to_i > 1000000 then
-		 	halt 400, "SSF does not accept messages over 1 MB in size. Try the bulk uploader: #{tpc}/#{strm}/bulk (limit: 50 MB)" 
+		 	halt 400, "SSF does not accept messages over 1 MB in size. Try the bulk uploader: #{tpc}/#{strm}/bulk (limit: 500 MB)" 
 		end
 
 		# uncomment this block if you want to prevent dynamic creation
@@ -183,7 +191,7 @@ class SSFServer < Sinatra::Base
 		return 202
 	end
 	
-	# bulk uploader: relaxes message limit from 1 MB to 50 MB, but splits up files into 1 MB segments, for reassembly 
+	# bulk uploader: relaxes message limit from 1 MB to 500 MB, but splits up files into 1 MB segments, for reassembly 
 	# 
 	# 
 	post "/:topic/:stream/bulk" do
@@ -223,7 +231,7 @@ class SSFServer < Sinatra::Base
 
 			#puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
 
-			# Kafka has default message size of 1 MB. We chop message up into 950 KB chunks, with all but last terminating in "\n===snip==="
+			# Kafka has default message size of 1 MB. We chop message up into 950 KB chunks, with all but last terminating in "\n===snip n===", where n is the ordinal number of the chunk
 			msgsplit = to_2d_array(msg, 972800)
 			msgtail = msgsplit.pop
 			msgsplit.map!.with_index  { |x, idx| x + "\n===snip #{idx}===\n" }
@@ -233,15 +241,8 @@ class SSFServer < Sinatra::Base
 			end
 			messages << Poseidon::MessageToSend.new( "#{topic}", msgtail , "#{key}" )
 
-
-			#msgsplit.each_with_index do |msg1, idx|
-			#	messages << Poseidon::MessageToSend.new( "#{topic}", msg1 + "\n===snip #{idx}===\n", "#{key}" )
-			#end
-			#messages << Poseidon::MessageToSend.new( "#{topic}", msgtail + "\n", "#{key}" )
-			
 			# write to default for audit if required
-			# messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )
-			
+			# messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )			
 		end
 
 		post_messages(messages, :none, true)		
@@ -256,7 +257,6 @@ class SSFServer < Sinatra::Base
 		topic = params['topic']
 		stream = "#{params['stream']}.#{params['profile']}"
 		path = "/#{topic}/#{stream}"
-		# puts "\n\nNew Path is #{path}\n\n"
 		status, headers, body = call env.merge("PATH_INFO" => "#{path}")
   		[status, headers, body]		
 
@@ -292,11 +292,7 @@ class SSFServer < Sinatra::Base
 		client_id = session['client_id']
 		puts "\nClient ID  is #{client_id}\n\n"
 		
-
-
 		offset = resolve_offset( params['offset'] )
-
-
 
 		# get batch of messages from broker
 		messages = []

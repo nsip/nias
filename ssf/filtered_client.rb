@@ -9,15 +9,20 @@ require 'zk' # zookeeper interface
 require 'hashids' # temp non-colliding client & producer id generator
 require 'nokogiri' # xml support
 require 'cgi'
-#require 'rack-matrix_params' # matrix params support
-
-#use Rack::MatrixParams
 
 class FilteredClient < Sinatra::Base
 
+# Client to SSF: given request for /filtered/:topic/:stream/:profile,
+# display contents of Kafka stream topic.stream.profile 
 
-# Client to SSF: given request for localhost:1234/topic/stream;contextId=filter,
-# display contents of Kafka stream topic.stream.filter
+# profile is one of "none", "low", "medium", "high", "extreme"
+
+# pass parameter 'offset' to manage position
+# 
+# call route with no params to get current offset to begin reading from
+# 
+# call with offset=earliest to get oldest available message for topic/stream
+# call with offset=latest to get most recent available message for topic/stream
 
 configure do
 	# create an interface to the zookeeper node
@@ -28,8 +33,6 @@ configure do
 	# cookies enabled will mean automatic correct setting of message offset in session
 	# enable :sessions
 
-	# All received XML messages are also sent from /:topic:/stream to a global sifxml.ingest topic, for validation by microservice
-	set :xmltopic, 'sifxml.ingest'
 end
 
 
@@ -54,16 +57,7 @@ end
 
 
 
-# if matrix context specified, pick up the filtered content
 # read messages from a stream
-# 
-# pass parameter 'offset' to manage position
-# 
-# call route with no params to get current offset to begin reading from
-# 
-# call with offset=earliest to get oldest available message for topic/stream
-# call with offset=latest to get most recent available message for topic/stream
-# 
 get "/filtered/:topic/:stream/:profile" do
 
 	# check validity of route
@@ -87,12 +81,8 @@ get "/filtered/:topic/:stream/:profile" do
 	end
 	client_id = session['client_id']
 	puts "\nClient ID  is #{client_id}\n\n"
-	
-
 
 	offset = resolve_offset( params['offset'] )
-
-
 
 	# get batch of messages from broker
 	messages = []
@@ -119,7 +109,8 @@ get "/filtered/:topic/:stream/:profile" do
 	    		# puts msg.value
 	    		record = { 
 	    			:data => "<div class='record'>" + 
-					CGI.escapeHTML(msg.value).gsub("\n","<br/>").gsub("ZZREDACTED","<span class='redacted'>REDACTED</span>").
+					
+					# for visualisation, replace all redaction texts as REDACTED in CSS class redacted					CGI.escapeHTML(msg.value).gsub("\n","<br/>").gsub("ZZREDACTED","<span class='redacted'>REDACTED</span>").
 					gsub("REDACTED","<span class='redacted'>REDACTED</span>").
 					gsub("1582-10-15","<span class='redacted'>REDACTED</span>").gsub("00000000-0000-0000-0000-000000000000","<span class='redacted'>REDACTED</span>") + 
 

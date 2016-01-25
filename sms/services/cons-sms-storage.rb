@@ -7,10 +7,10 @@
 
 # Uses the Moneta abstraction driver which allows for unified simple put/get interface over any number of 
 # key value stores. Default implementation for NIAS will use LMDB, but users are free to use any of the list supported 
-# by hte moneta driver, which should alow for cross-platform support.
+# by the moneta driver, which should alow for cross-platform support.
 # 
 
-# Note most embedded databases and k/v stores are binary distriutions so need to be installed on the target platform independently.
+# Note most embedded databases and key/value stores are binary distriutions so need to be installed on the target platform independently.
 
 require 'json'
 require 'nokogiri'

@@ -12,14 +12,14 @@ class HookupServer < Sinatra::Base
 
 	helpers Sinatra::ContentFor
 
-# Given the request ?sourceid=x,x,x,x&targetid=y,y,y,y
+# Given the request /hookup?sourceid=x,x,x,x&targetid=y,y,y,y
 # generates biridirectonal links to the sms.indexer topic, of the form
 # 
 # this  [ 'tuple' id - [links] ]
 #
 # which is then passed on to the sms indexing service
 #
-# the ids are presumed to be appended to what is already there
+# The ids are presumed to be appended to what is already there
 # 
 
 outbound = 'sms.indexer'
