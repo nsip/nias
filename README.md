@@ -4,42 +4,47 @@ NSIP Integration As A Service - NIAS
 
 **Important Note - This project is under heavy development, do not expect installation instructions to produce anything that actually runs at this point.**
 
-Installation Notes
+# Overview
 
-If you're running on mac you will need homebrew to install packages, and homebrew will need a suitable toolchain to build native code. If you have a mac developer account, homebrew will offer to fetch the command-line tools as part of its installation. The easiest alternative is just to install XCode which includes the tools.
+
+
+# Installation Notes
+
+If you're running on Mac you will need `homebrew` to install packages, and `homebrew` will need a suitable toolchain to build native code. If you have a Mac developer account, `homebrew` will offer to fetch the command-line tools as part of its installation. The easiest alternative is just to install XCode which includes the tools.
 
 Ensure Ruby is at 2.2.3 as a minimum.
 
-rvm install ruby-2.2.3
+    rvm install ruby-2.2.3
 
-You will also need to install the 'bundler' gem to help with ruby code module dependencies. After rvm is installed just do
+You will also need to install the 'bundler' gem to help with ruby code module dependencies. After `rvm` is installed just do
 
-> gem install bundler
+    gem install bundler
 
-NIAS (& timesheet) use Redis. This is distributed from Redis.io as source and can be compiled for any platform, but most likely route to installation is to use package manager for the platform
+NIAS uses Redis. This is distributed from Redis.io as source and can be compiled for any platform, but the most likely route to installation is to use the package manager for the platform.
 
-On mac 'brew install redis' is the easiest and quickest
+On Mac `brew install redis` is the easiest and quickest. 
 
-apt-get, yum etc. for linux
+Use `apt-get`, `yum` etc. for linux
 
-check Redis has been added to your binary path by running the command 'redis-server' from the commandline - you should get a redis instance, Ctrl+C to close again. 
+Check Redis has been added to your binary path by running the command `redis-server` from the command line. You should get a redis instance. Ctrl+C to close again. 
 
-Java resources are cross-platform & so zookeeper and kafka are included in the distribution.
+Java resources are cross-platform, so Zookeeper and Kafka are included in the distribution.
 
-LMDB/GDBM may be used for the key-value store component of SMS as data volumes increase - 
-like redis these are  C source distribution which can be built on the platform or installed i.e.
+LMDB/GDBM may be used for the key-value store component of SMS as data volumes increase. 
+Like Redis these are  C source distribution which can be built on the platform or installed, i.e.
 
-'brew install lmdb'
-'brew install gdbm'
-'gem install gdbm'
+    brew install lmdb
+    brew install gdbm
+    gem install gdbm 
 
 
-when services are running all kafka logs, redis dump files etc. will be created under /tmp/nias e.g. /tmp/nias/kafka-logs /tmp/nias/redis tmp/zookeeper
+When services are running all Kafka logs, Redis dump files etc. will be created under `/tmp/nias` e.g. `/tmp/nias/kafka-logs`, `/tmp/nias/redis`, `tmp/nias/zookeeper`
 
-this is a reliable location on mac/linux but check it's writeable from current user account.
+This is a reliable location on Mac/Linux, but check it's writeable from current user account.
 
-There is a Gemfile in the root nias directory - 
-cd into /nias and then run 'bundle install' to pull in all gems required by the projects. 
+There is a Gemfile in the root nias directory: 
+* cd into /nias 
+* then run `bundle install` to pull in all gems required by the projects. 
 
 the layout of the code is as follows
 
