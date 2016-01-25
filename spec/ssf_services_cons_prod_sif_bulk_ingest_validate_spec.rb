@@ -16,6 +16,7 @@ xml = <<XML
 </Invoice>
 XML
 
+
 header = '<Invoices xmlns="http://www.sifassociation.org/au/datamodel/3.4">'
 footer = '</Invoices>'
 
@@ -32,75 +33,75 @@ xmlbody = xml * recordcount
 
 describe "Bulk SIF Ingest/Produce" do
 
-def post_xml(xml) 
-	Net::HTTP.start("localhost", "9292") do |http|
-		request = Net::HTTP::Post.new("/rspec/test/bulk")
-		request.body = xml
-		request["Content-Type"] = "application/xml"
-		http.request(request)
-	end
-end
-		before(:all) do
-			@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
-			@xmlvalidconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.validated", 0, :latest_offset)
-		end
-	context "Malformed XML" do
-		it "pushes error to sifxml.errors" do
-			puts "Next offset    = #{@xmlconsumer.next_offset}"
-			post_xml(header + xml_malformed + xmlbody + footer)
-			sleep 20
-                       begin
-                                a = @xmlconsumer.fetch
-                                expect(a).to_not be_nil
-                                expect(a.empty?).to be false
-                                expect(a[0].value).to match(/well-formedness error/)
-                        rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                        end
-		end
-	end
+    def post_xml(xml) 
+        Net::HTTP.start("localhost", "9292") do |http|
+            request = Net::HTTP::Post.new("/rspec/test/bulk")
+            request.body = xml
+            request["Content-Type"] = "application/xml"
+            http.request(request)
+        end
+    end
+    before(:all) do
+        @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
+        @xmlvalidconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.validated", 0, :latest_offset)
+    end
+    context "Malformed XML" do
+        it "pushes error to sifxml.errors" do
+            puts "Next offset    = #{@xmlconsumer.next_offset}"
+            post_xml(header + xml_malformed + xmlbody + footer)
+            sleep 20
+            begin
+                a = @xmlconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expect(a[0].value).to match(/well-formedness error/)
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+    end
 
-	context "Invalid XML" do
-		it "pushes error to sifxml.errors" do
-			puts "Next offset    = #{@xmlconsumer.next_offset}"
-			post_xml(header + xml_invalid + xmlbody + footer)
-			sleep 20
-                       begin
-                                a = @xmlconsumer.fetch
-                                expect(a).to_not be_nil
-                                expect(a.empty?).to be false
-                                expect(a[0].value).to match(/validity error/)
-                                expect(a[0].value).to match(/rspec\.test/)
-                        rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                        end
-		end
-	end
+    context "Invalid XML" do
+        it "pushes error to sifxml.errors" do
+            puts "Next offset    = #{@xmlconsumer.next_offset}"
+            post_xml(header + xml_invalid + xmlbody + footer)
+            sleep 20
+            begin
+                a = @xmlconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expect(a[0].value).to match(/validity error/)
+                expect(a[0].value).to match(/rspec\.test/)
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+    end
 
-	context "Valid XML" do
-		it "pushes validated XML to sifxml.validated" do
-			puts "Next offset    = #{@xmlvalidconsumer.next_offset}"
-			post_xml(header + xmlbody + footer)
-			sleep 20
-                       begin
-                                a = @xmlvalidconsumer.fetch(:max_bytes => 10000000)
-                                expect(a).to_not be_nil
-                                expect(a.empty?).to be false
-				expected = "TOPIC: rspec.test\n" + xml
-				expected.gsub!(/ xmlns="[^"]+"/, "")
-				expected.gsub!(/\n[ ]*/, "")
-				a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/\n[ ]*/, "")
-                                expect(a[0].value.chomp).to eq expected.chomp
-                        rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                        end
-		end
-	end
+    context "Valid XML" do
+        it "pushes validated XML to sifxml.validated" do
+            puts "Next offset    = #{@xmlvalidconsumer.next_offset}"
+            post_xml(header + xmlbody + footer)
+            sleep 20
+            begin
+                a = @xmlvalidconsumer.fetch(:max_bytes => 10000000)
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expected = "TOPIC: rspec.test\n" + xml
+                expected.gsub!(/ xmlns="[^"]+"/, "")
+                expected.gsub!(/\n[ ]*/, "")
+                a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/\n[ ]*/, "")
+                expect(a[0].value.chomp).to eq expected.chomp
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+    end
 
 end

@@ -71,140 +71,136 @@ require_relative 'oneroster_sif_merge'
 
 class SMSQueryServer < Sinatra::Base
 
-	helpers Sinatra::ContentFor
+    helpers Sinatra::ContentFor
 
-	configure do
-		 set :store, Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
-	end
+    configure do
+        set :store, Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
+    end
 
-	get "/sms" do
-		smsq = SMSQuery.new
-		@coll_result = smsq.known_collections
-		erb :collections
-	end
-
-
-	get "/sms/collections" do
-		@result = []
-		smsq = SMSQuery.new
-		@result = smsq.known_collections
-		return @result.to_json
-	end
-
-	# Local id search method
-	# takes 2 parameters
-	# id: an object's local id
-	# collection: name of an object collection
-	# resolves local id to GUID, and redirects query to main search
-
-	get "/sms/localfind" do
-		collection = params['collection'] || nil
-		id = params['id'] || nil
-		smsq = SMSQuery.new
-		guid = smsq.local_id_resolver(id) || nil
-		new_url = request.fullpath.gsub(/id=[^&]+/, 'id='+guid ).gsub(/\/localfind/, '/find')
-		redirect new_url
-	end
-
-	# Main search method...
-	# 
-	# takes 2 paramters:
-	# 
-	# id: an object's unique id
-	# collection: name of an object collection
-	# 
-	# if neither is provided will throw an error
-	# 
-	# optional parameters:
-	# 
-	# include_messages: boolean (false by default) - if set to true query will return all xml mesasges associated
-	# with the query; by default will just return all object references.
-	# 
-	# defer: boolean (false by default) - if set to true results will not be returned directly but will be written
-	# to a temporary ssf queue - the url of the queue will be returned as the query result
-	# 
-	get "/sms/find" do
+    get "/sms" do
+        smsq = SMSQuery.new
+        @coll_result = smsq.known_collections
+        erb :collections
+    end
 
 
-		collection = params['collection'] || nil
-		id = params['id'] || nil
+    get "/sms/collections" do
+        @result = []
+        smsq = SMSQuery.new
+        @result = smsq.known_collections
+        return @result.to_json
+    end
 
-		# handle the fact that empty but non-nil params can be passed via url
-		if collection != nil && collection.length == 0
-			collection = nil
-		end
-		if id != nil && id.length == 0
-			id = nil
-		end
- 
-		# puts "\n\ncollection: #{collection.inspect}"
-		# puts "id: #{id.inspect}\n\n"
+    # Local id search method
+    # takes 2 parameters
+    # id: an object's local id
+    # collection: name of an object collection
+    # resolves local id to GUID, and redirects query to main search
 
-		if params['include_messages'] == 'true'
-			include_messages = true
-		else
-			include_messages = false
-		end
+    get "/sms/localfind" do
+        collection = params['collection'] || nil
+        id = params['id'] || nil
+        smsq = SMSQuery.new
+        guid = smsq.local_id_resolver(id) || nil
+        new_url = request.fullpath.gsub(/id=[^&]+/, 'id='+guid ).gsub(/\/localfind/, '/find')
+        redirect new_url
+    end
 
-		if params['defer'] == 'true'
-			defer = true
-		else
-			defer = false
-		end
-
-
-		puts "\n\nCollection : #{collection}\n\nId : #{id}\n\n"
-		halt( 400, "Must have at least one query parameter 'id' or 'collection'." ) unless ( collection || id )
-
-		results = []
-		smsq = SMSQuery.new
-
-		if collection && id
-			results = smsq.find( id, collection )
-		elsif collection
-			results = smsq.collection_only( collection )
-		else
-			# assume if only single item requested the whole message is wanted
-			include_messages = true
-			results << id
-		end
-
-		return [{id: 0, data: 'No results found'}].to_json unless !results.empty?
-
-		response = []
-    	results.each do | result |
-    		
-    		record = {}
-    		
-    		record[:id] = result
-    		if include_messages
-    			record[:data] = settings.store[result]
-    		end
-			record[:label] = smsq.get_label(result)
-
-    		response << record
-
-    	end
-		return response.to_json
+    # Main search method...
+    # 
+    # takes 2 paramters:
+    # 
+    # id: an object's unique id
+    # collection: name of an object collection
+    # 
+    # if neither is provided will throw an error
+    # 
+    # optional parameters:
+    # 
+    # include_messages: boolean (false by default) - if set to true query will return all xml mesasges associated
+    # with the query; by default will just return all object references.
+    # 
+    # defer: boolean (false by default) - if set to true results will not be returned directly but will be written
+    # to a temporary ssf queue - the url of the queue will be returned as the query result
+    # 
+    get "/sms/find" do
 
 
-	end
+        collection = params['collection'] || nil
+        id = params['id'] || nil
 
-	# Requests to merge OneRoster and SIF records that share the same local ID
+        # handle the fact that empty but non-nil params can be passed via url
+        if collection != nil && collection.length == 0
+            collection = nil
+        end
+        if id != nil && id.length == 0
+            id = nil
+        end
+        # puts "\n\ncollection: #{collection.inspect}"
+        # puts "id: #{id.inspect}\n\n"
 
-	get "/sms/merge_ids" do
-	
-		orsm = OneRosterSifMerge.new
+        if params['include_messages'] == 'true'
+            include_messages = true
+        else
+            include_messages = false
+        end
 
-		begin
-			orsm.merge_ids
-		rescue 
-			return 500, 'Error executing SIF OneRoster id merge.'
-		end
+        if params['defer'] == 'true'
+            defer = true
+        else
+            defer = false
+        end
 
-		return 200, 'SIF - OneRoster id merge complete'
 
-	end
+        puts "\n\nCollection : #{collection}\n\nId : #{id}\n\n"
+        halt( 400, "Must have at least one query parameter 'id' or 'collection'." ) unless ( collection || id )
+
+        results = []
+        smsq = SMSQuery.new
+
+        if collection && id
+            results = smsq.find( id, collection )
+        elsif collection
+            results = smsq.collection_only( collection )
+        else
+            # assume if only single item requested the whole message is wanted
+            include_messages = true
+            results << id
+        end
+
+        return [{id: 0, data: 'No results found'}].to_json unless !results.empty?
+
+        response = []
+        results.each do | result |
+            record = {}
+            record[:id] = result
+            if include_messages
+                record[:data] = settings.store[result]
+            end
+            record[:label] = smsq.get_label(result)
+
+            response << record
+
+        end
+        return response.to_json
+
+
+    end
+
+    # Requests to merge OneRoster and SIF records that share the same local ID
+
+    get "/sms/merge_ids" do
+        orsm = OneRosterSifMerge.new
+
+        begin
+            orsm.merge_ids
+        rescue 
+            return 500, 'Error executing SIF OneRoster id merge.'
+        end
+
+        return 200, 'SIF - OneRoster id merge complete'
+
+    end
 
 
 

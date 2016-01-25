@@ -25,12 +25,12 @@ puts "\n\nStarting in: #{__dir__}\n\n"
 
 def banner( text )
 
-  puts "\n\n********************************************************"
-  puts "**"
-  puts "**                #{text}"
-  puts "**"
-  puts "**"
-  puts "********************************************************\n\n"
+    puts "\n\n********************************************************"
+    puts "**"
+    puts "**                #{text}"
+    puts "**"
+    puts "**"
+    puts "********************************************************\n\n"
 
 end
 
@@ -42,64 +42,63 @@ end
 
 # check core pid file exists, if not core probably not running
 if !File.exist?( @core_pid_file )
-  banner 'No core.pid file found, likely core not running, run lauch_core.rb before launch.nias'
-  exit 130
+    banner 'No core.pid file found, likely core not running, run lauch_core.rb before launch.nias'
+    exit 130
 end
 
 
 def launch
-  if ( File.exist?( @pid_file) ) then
-    puts "The file #{@pid_file} exists: run ./launch_nias.rb -K to terminate any existing processes"
-    exit
-  end
-
-
-  banner 'Starting NIAS SSF services'
-
-  ssf_services = [
-                {:name => 'cons-prod-privacyfilter.rb', :options  => ''},
-                {:name =>'cons-prod-sif-ingest-validate.rb', :options => ''},
-                {:name =>'cons-prod-sif-bulk-ingest-validate.rb', :options => ''}
-              ]
-
-
-  ssf_services.each_with_index do | service, i |
-
-      @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/ssf/services/#{service[:name]}", service[:options] )
-
-  end
-  
-
-
-  banner 'Starting NIAS SMS services'
-
-  sms_services = [
-                  'cons-prod-sif-parser.rb',
-                  'cons-sms-indexer.rb',
-                  'cons-sms-storage.rb',
-                  'cons-oneroster-sms-storage.rb', 
-                  'cons-prod-oneroster-parser.rb',
-		  		  'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb',
-		  		  'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb',
-		  		  'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb',
-		  		  'cons-prod-sif2csv-staffpersonal-naplanreg-parser.rb',
-                ]
-
-  sms_services.each_with_index do | service, i |
-
-      @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/sms/services/#{service}" )
-
-  end
-
-  # write pids to file for shutdown
-  File.open(@pid_file, 'w') {|f|
-    @pids.each do | _, pid |
-      f.puts pid
+    if ( File.exist?( @pid_file) ) then
+        puts "The file #{@pid_file} exists: run ./launch_nias.rb -K to terminate any existing processes"
+        exit
     end
-  }
 
 
-  banner "pid file written to #{@pid_file}"
+    banner 'Starting NIAS SSF services'
+
+    ssf_services = [
+        {:name => 'cons-prod-privacyfilter.rb', :options  => ''},
+        {:name =>'cons-prod-sif-ingest-validate.rb', :options => ''},
+        {:name =>'cons-prod-sif-bulk-ingest-validate.rb', :options => ''}
+    ]
+
+
+    ssf_services.each_with_index do | service, i |
+
+        @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/ssf/services/#{service[:name]}", service[:options] )
+
+    end
+    
+
+    banner 'Starting NIAS SMS services'
+
+    sms_services = [
+        'cons-prod-sif-parser.rb',
+        'cons-sms-indexer.rb',
+        'cons-sms-storage.rb',
+        'cons-oneroster-sms-storage.rb', 
+        'cons-prod-oneroster-parser.rb',
+        'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb',
+        'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb',
+        'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb',
+        'cons-prod-sif2csv-staffpersonal-naplanreg-parser.rb',
+    ]
+
+    sms_services.each_with_index do | service, i |
+
+        @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/sms/services/#{service}" )
+
+    end
+
+    # write pids to file for shutdown
+    File.open(@pid_file, 'w') {|f|
+        @pids.each do | _, pid |
+            f.puts pid
+        end
+    }
+
+
+    banner "pid file written to #{@pid_file}"
 
 
 
@@ -111,13 +110,13 @@ def shut_down
     banner "\n NIAS Services shutting down...\n\n"
 
     File.readlines( @pid_file ).each do |line|
-      begin
-              Process.kill :INT, line.chomp.to_i
-              sleep 2
-      rescue Exception => e  
-          puts e.message  
-          puts e.backtrace.inspect  
-      end
+        begin
+            Process.kill :INT, line.chomp.to_i
+            sleep 2
+        rescue Exception => e  
+            puts e.message  
+            puts e.backtrace.inspect  
+        end
 
     end
 
@@ -129,11 +128,11 @@ end
 
 
 if ARGV[0] == '-K' then
-  shut_down
-  exit 130
+    shut_down
+    exit 130
 else
-  launch
-  exit 130
+    launch
+    exit 130
 end
 
 

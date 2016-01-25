@@ -44,6 +44,7 @@ xml = <<XML
 </TeachingGroups>
 XML
 
+
 out = "{\"type\":\"TeachingGroup\",\"id\":\"f94278d5-b1b4-4936-ae95-f6d78d0887e2\",\"otherids\":{\"localid\":\"982b604a-00ac-487c-ae5a-bd62aae4b3a6\"},\"links\":[\"f94278d5-b1b4-4936-ae95-f6d78d0887e2\",\"1e5aa150-ca94-45a0-a893-9ec427ee2160\",\"9570f36c-9c4d-4a0a-912d-25f26d5264b4\",\"cef8aa68-554e-4771-82f5-d54568a7e909\"],\"equivalentids\":[],\"label\":\"1A\"}"
 
 @service_name = 'sms_services_cons_prod_sif_parser_spec'
@@ -51,37 +52,34 @@ out = "{\"type\":\"TeachingGroup\",\"id\":\"f94278d5-b1b4-4936-ae95-f6d78d0887e2
 
 describe "SIF Ingest/Produce" do
 
-def post_xml(xml, path) 
+    def post_xml(xml, path) 
         Net::HTTP.start("localhost", "9292") do |http|
-		request = Net::HTTP::Post.new(path)
-		request.body = xml
-		request["Content-Type"] = "application/xml"
-		http.request(request)
-	end
-end
-	before(:all) do
-		@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sms.indexer", 0, :latest_offset)
-		puts "Next offset    = #{@xmlconsumer.next_offset}"
-		sleep 2
-		post_xml(xml, "/rspec/test")
-	end
+            request = Net::HTTP::Post.new(path)
+            request.body = xml
+            request["Content-Type"] = "application/xml"
+            http.request(request)
+        end
+    end
+    before(:all) do
+        @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sms.indexer", 0, :latest_offset)
+        puts "Next offset    = #{@xmlconsumer.next_offset}"
+        sleep 2
+        post_xml(xml, "/rspec/test")
+    end
 
-	context "Valid XML" do
-		it "pushes interpreted XML to sms.indexer" do
-                       begin
-                                a = @xmlconsumer.fetch
-                                expect(a).to_not be_nil
-                                expect(a.empty?).to be false
-                                expect(a[0].value).to eq out.to_s
-                        rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                        end
-		end
-		after(:example) do
-			#@xmlconsumer.close
-		end
-	end
+    context "Valid XML" do
+        it "pushes interpreted XML to sms.indexer" do
+            begin
+                a = @xmlconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expect(a[0].value).to eq out.to_s
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+    end
 
 end

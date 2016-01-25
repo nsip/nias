@@ -28,79 +28,74 @@ require 'moneta'
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092,
-                                           @inbound, 0, :latest_offset)
+@inbound, 0, :latest_offset)
 
 
 loop do
 
-  begin
-  		messages = []
-	    messages = consumer.fetch
-	    outbound_messages = []
-	    
-	    messages.each do |m|
+    begin
+        messages = []
+        messages = consumer.fetch
+        outbound_messages = []
+        messages.each do |m|
 
-	    	# create 'empty' index tuple, otherids and links will be unused here but keeps all parsing code consistent
-		idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil}   
+            # create 'empty' index tuple, otherids and links will be unused here but keeps all parsing code consistent
+            idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil}   
 
-                header = m.value.lines[0]
-                payload = m.value.lines[1..-1].join
+            header = m.value.lines[0]
+            payload = m.value.lines[1..-1].join
 
-      		# read xml message
-      		nodes = Nokogiri::XML( payload ) do |config|
-        		config.nonet.noblanks
-			end      		
+            # read xml message
+            nodes = Nokogiri::XML( payload ) do |config|
+                config.nonet.noblanks
+            end      		
 
-			# for rare nodes like StudentContactRelationship can be no mandatory refid
-			# optional refid will already be captured in [links] as child node
-			# but need to parse for the object type and assign the optional refid back to the object
-			
-			# type is always first node
-			idx[:type] = nodes.root.name
+            # for rare nodes like StudentContactRelationship can be no mandatory refid
+            # optional refid will already be captured in [links] as child node
+            # but need to parse for the object type and assign the optional refid back to the object
+            # type is always first node
+            idx[:type] = nodes.root.name
 
-			# concatenate name and see id refid exists, if not create a random one
-			refs = nodes.css( "#{nodes.root.name}RefId" )
-			idx[:id] = refs.children.first unless refs.empty?
+            # concatenate name and see id refid exists, if not create a random one
+            refs = nodes.css( "#{nodes.root.name}RefId" )
+            idx[:id] = refs.children.first unless refs.empty?
 
-			# ...now deal with vast majority of normal sif xml types
+            # ...now deal with vast majority of normal sif xml types
 
-			# get any pure refids
-			root_types = nodes.xpath("//@RefId")  
-			root_types.each do | node |
-				# puts node.parent.name
-				# puts node.child
-				# puts "\n\nType: #{node.parent.name} - ID: #{node.child}\n\n"
-				idx[:type] = node.parent.name
-				idx[:id] = node.child
-			end
+            # get any pure refids
+            root_types = nodes.xpath("//@RefId")  
+            root_types.each do | node |
+                # puts node.parent.name
+                # puts node.child
+                # puts "\n\nType: #{node.parent.name} - ID: #{node.child}\n\n"
+                idx[:type] = node.parent.name
+                idx[:id] = node.child
+            end
 
-			#puts "\nStorage Index = #{idx.to_json}\n\n"
+            #puts "\nStorage Index = #{idx.to_json}\n\n"
 
-			# write the message to storage with its own refid as the key
-			# puts "\n\nkey value pair will be:\n\nKEY: #{idx[:id]}\n\nVALUE:\n\n#{nodes.to_s}"
+            # write the message to storage with its own refid as the key
+            # puts "\n\nkey value pair will be:\n\nKEY: #{idx[:id]}\n\nVALUE:\n\n#{nodes.to_s}"
 
-			@store["#{idx[:id]}"] = nodes.to_xml
-  		
-  		end
+            @store["#{idx[:id]}"] = nodes.to_xml
+        end
 
 
-      # puts "#{@service_name}: Resuming message consumption from: #{consumer.next_offset}"
+        # puts "#{@service_name}: Resuming message consumption from: #{consumer.next_offset}"
 
-  rescue Poseidon::Errors::UnknownTopicOrPartition
-    puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-    sleep 30
-  end
-  
-  # puts "Resuming message consumption from: #{consumer.next_offset}"
+    rescue Poseidon::Errors::UnknownTopicOrPartition
+        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
+        sleep 30
+    end
+    # puts "Resuming message consumption from: #{consumer.next_offset}"
 
-  # trap to allow console interrupt
-  trap("INT") { 
-    puts "\n#{@service_name} service shutting down...\n\n"
-    exit 130 
-  } 
+    # trap to allow console interrupt
+    trap("INT") { 
+        puts "\n#{@service_name} service shutting down...\n\n"
+        exit 130 
+    } 
 
-  sleep 1
-  
+    sleep 1
 end
 
 

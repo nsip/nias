@@ -35,14 +35,14 @@ The script is currently inefficient: each xpath in each filter is applied indepe
 
 # Read the xpaths for filtering at a given privacy level from the nominated file
 def read_filter(filepath, level)
-	File.open(filepath).each do |line| 
-		next if line =~ /^#/  # ignore comments
-		next unless line =~ /\S/  # ignore blanks
-		a = line.chomp.split(/:/)  # delimit Xpath from filter text
-		a[0].gsub!(%r#(/+)(?!@)#, "\\1xmlns:") # namespaces are in XML fragments, xpaths need to allude to root default namespace
-		a[1] = "ZZREDACTED" if(a.size == 1)  # insert default filter text
-		@filter[level] << {:path => a[0], :redaction => a[1]}
-	end
+    File.open(filepath).each do |line| 
+        next if line =~ /^#/  # ignore comments
+        next unless line =~ /\S/  # ignore blanks
+        a = line.chomp.split(/:/)  # delimit Xpath from filter text
+        a[0].gsub!(%r#(/+)(?!@)#, "\\1xmlns:") # namespaces are in XML fragments, xpaths need to allude to root default namespace
+        a[1] = "ZZREDACTED" if(a.size == 1)  # insert default filter text
+        @filter[level] << {:path => a[0], :redaction => a[1]}
+    end
 end
 
 @filter[:low] = []
@@ -57,20 +57,20 @@ read_filter("#{__dir__}/privacyfilters/low.xpath", :extreme)
 
 # redact all textual content of xml (a Node). Is recursive.
 def redact(xml, redaction)
-	if(xml.cdata? or xml.text?) then 
-		xml.content = redaction
-	end
-	xml.children.each {|x| redact(x, redaction)}
-	return xml
+    if(xml.cdata? or xml.text?) then 
+        xml.content = redaction
+    end
+    xml.children.each {|x| redact(x, redaction)}
+    return xml
 end
 
 # Apply filtering rules in xpaths (array of XPath lines) to xml_orig. Do not change original xml_orig parameter. Returns filtered XML
 def apply_filter(xml_orig, xpaths)
-	xml = xml_orig.dup
-	xpaths.each { |c| 
-		xml.xpath(c[:path]).each {|x| redact(x, c[:redaction]) } 
-	}
-	return xml
+    xml = xml_orig.dup
+    xpaths.each { |c| 
+        xml.xpath(c[:path]).each {|x| redact(x, c[:redaction]) } 
+    }
+    return xml
 end
 
 # create consumer
@@ -79,12 +79,12 @@ consumer = Poseidon::PartitionConsumer.new("cons-prod-privacyfilter", "localhost
 # set up producer pool - busier the broker the better for speed
 pool = {}
 @sensitivities.each do |x|
-producers = []
-(1..10).each do | i |
-	p = Poseidon::Producer.new(["localhost:9092"], "cons-prod-privacyfilter", {:partitioner => Proc.new { |key, partition_count| 0 } })
-	producers << p
-end
-pool[x] = producers.cycle
+    producers = []
+    (1..10).each do | i |
+        p = Poseidon::Producer.new(["localhost:9092"], "cons-prod-privacyfilter", {:partitioner => Proc.new { |key, partition_count| 0 } })
+        producers << p
+    end
+    pool[x] = producers.cycle
 end
 
 # Hash of outbound messages, mapping privacy level to array of outbound messages
@@ -92,78 +92,71 @@ outbound_messages = {}
 # Hash of filtered records, mapping privacy level to filtered record
 out = {}
 loop do
-  begin
-  	    @sensitivities.each { |x| outbound_messages[x] = [] }
-  	    messages = []
-	    messages = consumer.fetch
-	    messages.each do |m|
+    begin
+        @sensitivities.each { |x| outbound_messages[x] = [] }
+        messages = []
+        messages = consumer.fetch
+        messages.each do |m|
 
-               # Payload from sifxml.ingest contains as its first line a header line with the original topic
-                header = m.value.lines[0]
-                payload = m.value.lines[1..-1].join
-		topic = header[/TOPIC: (.+)/, 1]
+            # Payload from sifxml.ingest contains as its first line a header line with the original topic
+            header = m.value.lines[0]
+            payload = m.value.lines[1..-1].join
+            topic = header[/TOPIC: (.+)/, 1]
 
-      	    	#puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}... #{m.value.lines[1]}\n\n"
+            #puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}... #{m.value.lines[1]}\n\n"
 
-		input = Nokogiri::XML(payload) do |config|
-        		config.nonet.noblanks
-		end
+            input = Nokogiri::XML(payload) do |config|
+                config.nonet.noblanks
+            end
 
-		#puts "\n\nInput:\n\n#{input.to_xml}\n\n"
-	
-		if(input.errors.empty?) 
-      			item_key = "prv_filter:#{ sprintf('%09d', m.offset) }"
-			
-			out[:none] = input
-			out[:low] = apply_filter(input, @filter[:low])
-			out[:medium] = apply_filter(out[:low], @filter[:medium])
-			out[:high] = apply_filter(out[:medium], @filter[:high])
-			out[:extreme] = apply_filter(out[:high], @filter[:extreme])
+            #puts "\n\nInput:\n\n#{input.to_xml}\n\n"
+                        if(input.errors.empty?) 
+                item_key = "prv_filter:#{ sprintf('%09d', m.offset) }"
+                                out[:none] = input
+                out[:low] = apply_filter(input, @filter[:low])
+                out[:medium] = apply_filter(out[:low], @filter[:medium])
+                out[:high] = apply_filter(out[:medium], @filter[:high])
+                out[:extreme] = apply_filter(out[:high], @filter[:extreme])
 
-			# puts "\n\nOut\n = #{out.to_s}\n\n"
+                # puts "\n\nOut\n = #{out.to_s}\n\n"
 
-			@sensitivities.each {|x|
-			 #puts "\n\nSending: to #{topic}.#{x}\n\n#{out[x].to_s.lines[1]}\n\nkey: #{item_key}"
-				outbound_messages[x] << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
-			}
-		end
-		if(outbound_messages[:none].length > 20)
-			@sensitivities.each do |x|
-				outbound_messages[x].each_slice(20) do | batch |
-					pool[x].next.send_messages( batch )
-   				end
-			end
-  	    		@sensitivities.each { |x| outbound_messages[x] = [] }
-		end
-				
-	
-	      end
+                @sensitivities.each {|x|
+                    #puts "\n\nSending: to #{topic}.#{x}\n\n#{out[x].to_s.lines[1]}\n\nkey: #{item_key}"
+                    outbound_messages[x] << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
+                }
+            end
+            if(outbound_messages[:none].length > 20)
+                @sensitivities.each do |x|
+                    outbound_messages[x].each_slice(20) do | batch |
+                        pool[x].next.send_messages( batch )
+                    end
+                end
+                @sensitivities.each { |x| outbound_messages[x] = [] }
+            end
+                                end
 
-		unless(outbound_messages.empty?)
-			@sensitivities.each do |x|
-				outbound_messages[x].each_slice(20) do | batch |
-					pool[x].next.send_messages( batch )
-   				end
-			end
-		end
-		
-		# puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
-  
-  rescue Poseidon::Errors::UnknownTopicOrPartition
-    puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-    sleep 30
-  end
-  
-  # puts "Resuming message consumption from: #{consumer.next_offset}"
+        unless(outbound_messages.empty?)
+            @sensitivities.each do |x|
+                outbound_messages[x].each_slice(20) do | batch |
+                    pool[x].next.send_messages( batch )
+                end
+            end
+        end
+                # puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
+            rescue Poseidon::Errors::UnknownTopicOrPartition
+        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
+        sleep 30
+    end
+        # puts "Resuming message consumption from: #{consumer.next_offset}"
 
-  # trap to allow console interrupt
-  trap("INT") { 
-    puts "\ncons-prod-privacyfilter service shutting down...\n\n"
-    consumer.close
-    exit 130 
-  } 
+    # trap to allow console interrupt
+    trap("INT") { 
+        puts "\ncons-prod-privacyfilter service shutting down...\n\n"
+        consumer.close
+        exit 130 
+    } 
 
-  sleep 1
+    sleep 1
 end
 
 

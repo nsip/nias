@@ -34,44 +34,45 @@ xml = <<XML
 </StaffPersonals>
 XML
 
+
 @service_name = 'sms_services_cons_prod_sif2csv_staffpersonal_naplanreg_parser_spec'
 
 
 describe "NAPLAN convert SIF to CSV" do
 
-def post_xml(xml) 
-	Net::HTTP.start("localhost", "9292") do |http|
-		request = Net::HTTP::Post.new("/naplan/sifxml_staff")
-		request.body = xml
-		request["Content-Type"] = "application/xml"
-		response = http.request(request)
-	end
-end
-	before(:all) do
-		puts @service_name 
-		@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.csvstaff_out", 0, :latest_offset)
-		puts "Next offset    = #{@xmlconsumer.next_offset}"
-		post_xml(xml)
-		sleep 10
-	end
+    def post_xml(xml) 
+        Net::HTTP.start("localhost", "9292") do |http|
+            request = Net::HTTP::Post.new("/naplan/sifxml_staff")
+            request.body = xml
+            request["Content-Type"] = "application/xml"
+            response = http.request(request)
+        end
+    end
 
-	context "Valid XML to naplan/sifxml_staff" do
-		it "pushes templated CSV to naplan.csvstaff_out" do
-                       begin
-                                a = @xmlconsumer.fetch
-                                expect(a).to_not be_nil
-                                expect(a.empty?).to be false
-                                expect(a[0].value).to eq out
-                        rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                        end
-		end
-	end
-	
-	after(:all) do
-		sleep 10
-	end
+    before(:all) do
+        puts @service_name 
+        @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.csvstaff_out", 0, :latest_offset)
+        puts "Next offset    = #{@xmlconsumer.next_offset}"
+        post_xml(xml)
+        sleep 10
+    end
+
+    context "Valid XML to naplan/sifxml_staff" do
+        it "pushes templated CSV to naplan.csvstaff_out" do
+            begin
+                a = @xmlconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expect(a[0].value).to eq out
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+    end
+        after(:all) do
+        sleep 10
+    end
 
 end

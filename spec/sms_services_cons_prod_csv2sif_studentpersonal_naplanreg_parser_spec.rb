@@ -99,44 +99,44 @@ out.gsub!(/\n[ ]+/,"\n").chomp!
 
 describe "NAPLAN convert CSV to SIF" do
 
-def post_csv(csv) 
-	request = Net::HTTP::Post.new("/naplan/csv")
-	request.body = csv
-	request["Content-Type"] = "text/csv"
-	@http.request(request)
-end
+    def post_csv(csv) 
+        request = Net::HTTP::Post.new("/naplan/csv")
+        request.body = csv
+        request["Content-Type"] = "text/csv"
+        @http.request(request)
+    end
 
-	before(:all) do
-		@http = Net::HTTP.new("localhost", "9292")
-		@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout", 0, :latest_offset)
-		puts "Next offset    = #{@xmlconsumer.next_offset}"
-		sleep 1
-		post_csv(csv)
-	end
+    before(:all) do
+        @http = Net::HTTP.new("localhost", "9292")
+        @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout", 0, :latest_offset)
+        puts "Next offset    = #{@xmlconsumer.next_offset}"
+        sleep 1
+        post_csv(csv)
+    end
 
-	context "Valid CSV to naplan.csv" do
-		before(:example) do
-		end
-		it "pushes templated XML to naplan.sifxmlout" do
-			sleep 1
-                       begin
-                                a = @xmlconsumer.fetch
-                                expect(a).to_not be_nil
-                                expect(a.empty?).to be false
-				a[0].value.gsub!(%r{<StudentPersonal RefId="[^"]+">}, '<StudentPersonal RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">').gsub!(/\n[ ]+/,"\n")
-                                expect(a[0].value).to eq out
-                        rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                        end
-		end
-		after(:example) do
-		end
-	end
+    context "Valid CSV to naplan.csv" do
+        before(:example) do
+        end
+        it "pushes templated XML to naplan.sifxmlout" do
+            sleep 1
+            begin
+                a = @xmlconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                a[0].value.gsub!(%r{<StudentPersonal RefId="[^"]+">}, '<StudentPersonal RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">').gsub!(/\n[ ]+/,"\n")
+                expect(a[0].value).to eq out
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
 
-	after(:all) do
-		sleep 5
-	end
+    after(:all) do
+        sleep 5
+    end
 
 end

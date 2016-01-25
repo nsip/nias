@@ -52,6 +52,7 @@ xml = <<XML
 </StudentPersonals>
 XML
 
+
 xml_low = xml.gsub(%r{<StateProvinceId>[^<]+</StateProvinceId>}, "<StateProvinceId>ZZREDACTED</StateProvinceId>")
 
 xml_medium = xml_low.gsub(%r{<BirthDate>[^<]+</BirthDate>}, "<BirthDate>1582-10-15</BirthDate>")
@@ -86,113 +87,112 @@ puts @service_name
 
 describe "SIF Privacy Filter" do
 
-def post_xml(xml) 
-	Net::HTTP.start("localhost", "9292") do |http|
-		request = Net::HTTP::Post.new("/rspec/test")
-		request.body = xml
-		request["Content-Type"] = "application/xml"
-		http.request(request)
-	end
-end
-		before(:context) do
-			@xmlconsumernone = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.none", 0, :latest_offset)
-			@xmlconsumerlow = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.low", 0, :latest_offset)
-			@xmlconsumermedium = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.medium", 0, :latest_offset)
-			@xmlconsumerhigh = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.high", 0, :latest_offset)
-			@xmlconsumerextreme = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.extreme", 0, :latest_offset)
-			puts "Next offset    = #{@xmlconsumernone.next_offset}"
-			puts "Next offset    = #{@xmlconsumerlow.next_offset}"
-			puts "Next offset    = #{@xmlconsumermedium.next_offset}"
-			puts "Next offset    = #{@xmlconsumerhigh.next_offset}"
-			puts "Next offset    = #{@xmlconsumerextreme.next_offset}"
-			post_xml(xml)
-			sleep 10
-		end
+    def post_xml(xml) 
+        Net::HTTP.start("localhost", "9292") do |http|
+            request = Net::HTTP::Post.new("/rspec/test")
+            request.body = xml
+            request["Content-Type"] = "application/xml"
+            http.request(request)
+        end
+    end
+    before(:context) do
+        @xmlconsumernone = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.none", 0, :latest_offset)
+        @xmlconsumerlow = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.low", 0, :latest_offset)
+        @xmlconsumermedium = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.medium", 0, :latest_offset)
+        @xmlconsumerhigh = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.high", 0, :latest_offset)
+        @xmlconsumerextreme = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.extreme", 0, :latest_offset)
+        puts "Next offset    = #{@xmlconsumernone.next_offset}"
+        puts "Next offset    = #{@xmlconsumerlow.next_offset}"
+        puts "Next offset    = #{@xmlconsumermedium.next_offset}"
+        puts "Next offset    = #{@xmlconsumerhigh.next_offset}"
+        puts "Next offset    = #{@xmlconsumerextreme.next_offset}"
+        post_xml(xml)
+        sleep 10
+    end
 
-		context "Valid XML into topic/stream" do
-		
-		it "pushes XML as is to topic/stream/none" do
-			#puts "Next offset 1    = #{@xmlconsumernone.next_offset}"
-			sleep 1
-                       begin
-                                a = @xmlconsumernone.fetch
-                                expect(a).to_not be_nil
-                                expect(a.empty?).to be false
-				expected = xml.lines[1..-2].join.gsub(/\n[ ]+/,"")
-				a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
-                                expect(a[0].value.chomp).to eq expected.chomp
-                        rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                        end
-		end
+    context "Valid XML into topic/stream" do
+                it "pushes XML as is to topic/stream/none" do
+            #puts "Next offset 1    = #{@xmlconsumernone.next_offset}"
+            sleep 1
+            begin
+                a = @xmlconsumernone.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expected = xml.lines[1..-2].join.gsub(/\n[ ]+/,"")
+                a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
+                expect(a[0].value.chomp).to eq expected.chomp
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
 
-		it "pushes redacted XML to topic/stream/low" do
-                       begin
-                                a = @xmlconsumerlow.fetch
-                                expect(a).to_not be_nil
-                                expect(a.empty?).to be false
-				expected = xml_low.lines[1..-2].join.gsub(/\n[ ]+/,"")
-				a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
-                                expect(a[0].value.chomp).to eq expected.chomp
-                        rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                        end
-		end
+        it "pushes redacted XML to topic/stream/low" do
+            begin
+                a = @xmlconsumerlow.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expected = xml_low.lines[1..-2].join.gsub(/\n[ ]+/,"")
+                a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
+                expect(a[0].value.chomp).to eq expected.chomp
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
 
-		it "pushes redacted XML to topic/stream/medium" do
-                       begin
-                                a = @xmlconsumermedium.fetch
-                                expect(a).to_not be_nil
-                                expect(a.empty?).to be false
-				expected = xml_medium.lines[1..-2].join.gsub(/\n[ ]+/,"")
-				a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
-                                expect(a[0].value.chomp).to eq expected.chomp
-                        rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                        end
-		end
+        it "pushes redacted XML to topic/stream/medium" do
+            begin
+                a = @xmlconsumermedium.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expected = xml_medium.lines[1..-2].join.gsub(/\n[ ]+/,"")
+                a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
+                expect(a[0].value.chomp).to eq expected.chomp
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
 
-		it "pushes redacted XML to topic/stream/high" do
-                       begin
-                                a = @xmlconsumerhigh.fetch
-                                expect(a).to_not be_nil
-                                expect(a.empty?).to be false
-				expected = xml_high.lines[1..-2].join.gsub(/\n[ ]+/,"")
-				a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
-                                expect(a[0].value.chomp).to eq expected.chomp
-                        rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                        end
-		end
+        it "pushes redacted XML to topic/stream/high" do
+            begin
+                a = @xmlconsumerhigh.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expected = xml_high.lines[1..-2].join.gsub(/\n[ ]+/,"")
+                a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
+                expect(a[0].value.chomp).to eq expected.chomp
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
 
-		it "pushes redacted XML to topic/stream/extreme" do
-                       begin
-                                a = @xmlconsumerextreme.fetch
-                                expect(a).to_not be_nil
-                                expect(a.empty?).to be false
-				expected = xml_extreme.lines[1..-2].join.gsub(/\n[ ]+/,"")
-				a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
-                                expect(a[0].value.chomp).to eq expected.chomp
-                        rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                        end
-		end
-		after (:all) do
-			sleep 10
-		end
-
+        it "pushes redacted XML to topic/stream/extreme" do
+            begin
+                a = @xmlconsumerextreme.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expected = xml_extreme.lines[1..-2].join.gsub(/\n[ ]+/,"")
+                a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
+                expect(a[0].value.chomp).to eq expected.chomp
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after (:all) do
+            sleep 10
+        end
 
 
-	end
+
+    end
 
 end

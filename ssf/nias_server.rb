@@ -8,20 +8,20 @@ require 'sinatra/contrib'
 # tiny web service to act as frontpage to nias web services
 class NIASServer < Sinatra::Base
 
-	helpers Sinatra::ContentFor
+    helpers Sinatra::ContentFor
 
-	get "/" do
+    get "/" do
 
-		erb :nias
+        erb :nias
 
-	end
+    end
 
 
-	get "/nias" do
+    get "/nias" do
 
-		erb :nias
+        erb :nias
 
-	end
+    end
 
 
 end # end of sinatra wrapper class

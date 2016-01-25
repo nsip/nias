@@ -21,79 +21,76 @@ require 'redis'
 class OneRosterSifMerge
 
 
-	def initialize
-		@outbound = 'sms.indexer'
-		@idgen = Hashids.new( 'nsip random temp uid' )
-		@redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
-		@servicename = 'prod-oneroster-sif-merge-ids'
+    def initialize
+        @outbound = 'sms.indexer'
+        @idgen = Hashids.new( 'nsip random temp uid' )
+        @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
+        @servicename = 'prod-oneroster-sif-merge-ids'
 
-		# set up producer pool - busier the broker the better for speed
-		producers = []
-		(1..10).each do | i |
-		        p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
-		        producers << p
-		end
-		@pool = producers.cycle
-	end
+        # set up producer pool - busier the broker the better for speed
+        producers = []
+        (1..10).each do | i |
+            p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
+            producers << p
+        end
+        @pool = producers.cycle
+    end
 
-	def merge_ids
+    def merge_ids
 
-		begin
+        begin
 
-			outbound_messages = []
+            outbound_messages = []
 
-			otherids = @redis.smembers 'other:ids'
+            otherids = @redis.smembers 'other:ids'
 
-			otherids.each do | x |
-               	
-               	# create 'empty' index tuple
+            otherids.each do | x |
+                # create 'empty' index tuple
                 idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil}    
 
-				# if they have a SIF local id value and a OneRoster id value that are the same, then we have identified
-				# a match between their corresponding guids
+                # if they have a SIF local id value and a OneRoster id value that are the same, then we have identified
+                # a match between their corresponding guids
 
-				
-				match = @redis.hmget x, 'oneroster_identifier', 'oneroster_userId', 'oneroster_courseCode', 'oneroster_classCode', 'localid'
+                match = @redis.hmget x, 'oneroster_identifier', 'oneroster_userId', 'oneroster_courseCode', 'oneroster_classCode', 'localid'
 
-				# we attempt a match on the SIF local Id with each of the oneroster_identifier, oneroster_userId, oneroster_courseCode, and oneroster_classCode
-				unless(match[0].nil? or match[4].nil?) 
-					idx[:id] = match[0]				
-					idx[:equivalentids] = [match[4]]
-					puts "\nParser Index = #{idx.to_json}\n\n"
-                        		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
-				end
-				unless(match[1].nil? or match[4].nil?) 
-					idx[:id] = match[1]				
-					idx[:equivalentids] = [match[4]]				
-					puts "\nParser Index = #{idx.to_json}\n\n"
-                        		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
-				end
-				unless(match[2].nil? or match[4].nil?) 
-					idx[:id] = match[2]				
-					idx[:equivalentids] = [match[4]]				
-					puts "\nParser Index = #{idx.to_json}\n\n"
-                        		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
-				end
-				unless(match[3].nil? or match[4].nil?) 
-					idx[:id] = match[3]				
-					idx[:equivalentids] = [match[4]]				
-					puts "\nParser Index = #{idx.to_json}\n\n"
-                        		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
-				end
+                # we attempt a match on the SIF local Id with each of the oneroster_identifier, oneroster_userId, oneroster_courseCode, and oneroster_classCode
+                unless(match[0].nil? or match[4].nil?) 
+                    idx[:id] = match[0]				
+                    idx[:equivalentids] = [match[4]]
+                    puts "\nParser Index = #{idx.to_json}\n\n"
+                    outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
+                end
+                unless(match[1].nil? or match[4].nil?) 
+                    idx[:id] = match[1]				
+                    idx[:equivalentids] = [match[4]]				
+                    puts "\nParser Index = #{idx.to_json}\n\n"
+                    outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
+                end
+                unless(match[2].nil? or match[4].nil?) 
+                    idx[:id] = match[2]				
+                    idx[:equivalentids] = [match[4]]				
+                    puts "\nParser Index = #{idx.to_json}\n\n"
+                    outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
+                end
+                unless(match[3].nil? or match[4].nil?) 
+                    idx[:id] = match[3]				
+                    idx[:equivalentids] = [match[4]]				
+                    puts "\nParser Index = #{idx.to_json}\n\n"
+                    outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
+                end
 
-			end
+            end
 
 
-			# send results to indexer to create sms data graph
-	        outbound_messages.each_slice(20) do | batch |
-	                @pool.next.send_messages( batch )
-	        end
+            # send results to indexer to create sms data graph
+            outbound_messages.each_slice(20) do | batch |
+                @pool.next.send_messages( batch )
+            end
 
-		rescue Poseidon::Errors::UnknownTopicOrPartition
-			puts "Topic #{@outbound} does not exist yet."
-		end
-  	
-  	end
+        rescue Poseidon::Errors::UnknownTopicOrPartition
+            puts "Topic #{@outbound} does not exist yet."
+        end
+    end
 
 end
 

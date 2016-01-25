@@ -1,5 +1,4 @@
 # cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb
- 
 # Consumer that reads in StudentPersonal CSV records conforming to the NAPLAN Registration specification from naplan/csv stream,
 # and generates SIF/XML equivalent records in naplan/sifxmlout stream
 
@@ -13,43 +12,43 @@ require 'securerandom'
 require_relative 'cvsheaders-naplan'
 
 def Postcode2State( postcodestr ) 
-	postcode = postcodestr.to_i
-	if(postcode < 200) 
-		ret = ""
-	elsif(postcode < 300) 
-		ret = "ACT" 
-	elsif(postcode < 800) 
-		ret = "" 
-	elsif(postcode < 1000) 
-		ret = "NT" 
-	elsif(postcode < 2600) 
-		ret = "NSW" 
-	elsif(postcode < 2620) 
-		ret = "ACT" 
-	elsif(postcode < 2900) 
-		ret = "NSW" 
-	elsif(postcode < 2921) 
-		ret = "ACT" 
-	elsif(postcode < 3000) 
-		ret = "NSW" 
-	elsif(postcode < 4000) 
-		ret = "VIC" 
-	elsif(postcode < 5000) 
-		ret = "QLD" 
-	elsif(postcode < 6000) 
-		ret = "SA" 
-	elsif(postcode < 7000) 
-		ret = "WA" 
-	elsif(postcode < 8000) 
-		ret = "TAS" 
-	elsif(postcode < 9000) 
-		ret = "VIC" 
-	elsif(postcode < 10000) 
-		ret = "QLD" 
-	else 
-		ret = ""
-	end
-	return ret
+    postcode = postcodestr.to_i
+    if(postcode < 200) 
+        ret = ""
+    elsif(postcode < 300) 
+        ret = "ACT" 
+    elsif(postcode < 800) 
+        ret = "" 
+    elsif(postcode < 1000) 
+        ret = "NT" 
+    elsif(postcode < 2600) 
+        ret = "NSW" 
+    elsif(postcode < 2620) 
+        ret = "ACT" 
+    elsif(postcode < 2900) 
+        ret = "NSW" 
+    elsif(postcode < 2921) 
+        ret = "ACT" 
+    elsif(postcode < 3000) 
+        ret = "NSW" 
+    elsif(postcode < 4000) 
+        ret = "VIC" 
+    elsif(postcode < 5000) 
+        ret = "QLD" 
+    elsif(postcode < 6000) 
+        ret = "SA" 
+    elsif(postcode < 7000) 
+        ret = "WA" 
+    elsif(postcode < 8000) 
+        ret = "TAS" 
+    elsif(postcode < 9000) 
+        ret = "VIC" 
+    elsif(postcode < 10000) 
+        ret = "QLD" 
+    else 
+        ret = ""
+    end
+    return ret
 end
 
 @inbound = 'naplan.csv'
@@ -61,28 +60,27 @@ end
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
-                                           @inbound, 0, :latest_offset)
+@inbound, 0, :latest_offset)
 
 
 # set up producer pool - busier the broker the better for speed
 producers = []
 (1..10).each do | i |
-	p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
-	producers << p
+    p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
+    producers << p
 end
 @pool = producers.cycle
 
 loop do
 
-  begin
-  	    messages = []
-	    outbound_messages = []
-	    messages = consumer.fetch
-	    
-	    messages.each do |m|
-		row = JSON.parse(m.value) 
+    begin
+        messages = []
+        outbound_messages = []
+        messages = consumer.fetch
+                messages.each do |m|
+            row = JSON.parse(m.value) 
 
-			xml = <<XML
+            xml = <<XML
 <StudentPersonal RefId="#{SecureRandom.uuid}">
   <LocalId>#{row['LocalId']}</LocalId>
   <StateProvinceId>#{row['StateProvinceId']}</StateProvinceId>
@@ -168,39 +166,38 @@ loop do
 
 XML
 
-			nodes = Nokogiri::XML( xml ) do |config|
-                        	config.nonet.noblanks
-                        end
-			nodes.xpath('//StudentPersonal//child::*[not(node())]').each do |node|
-  				node.remove
-			end
-			outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", nodes.root.to_s, "indexed" )
-		end
 
-  		# send results to indexer to create sms data graph
-  		outbound_messages.each_slice(20) do | batch |
-			@pool.next.send_messages( batch )
-	   	end
+            nodes = Nokogiri::XML( xml ) do |config|
+                config.nonet.noblanks
+            end
+            nodes.xpath('//StudentPersonal//child::*[not(node())]').each do |node|
+                node.remove
+            end
+            outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", nodes.root.to_s, "indexed" )
+        end
+
+        # send results to indexer to create sms data graph
+        outbound_messages.each_slice(20) do | batch |
+            @pool.next.send_messages( batch )
+        end
 
 
-      # puts "cons-prod-oneroster-parser: Resuming message consumption from: #{consumer.next_offset}"
+        # puts "cons-prod-oneroster-parser: Resuming message consumption from: #{consumer.next_offset}"
 
-  rescue Poseidon::Errors::UnknownTopicOrPartition
-    puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-    sleep 30
-  end
-  
-  # puts "Resuming message consumption from: #{consumer.next_offset}"
+    rescue Poseidon::Errors::UnknownTopicOrPartition
+        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
+        sleep 30
+    end
+        # puts "Resuming message consumption from: #{consumer.next_offset}"
 
-  # trap to allow console interrupt
-  trap("INT") { 
-    puts "\n#{@servicename} service shutting down...\n\n"
-    exit 130 
-  } 
+    # trap to allow console interrupt
+    trap("INT") { 
+        puts "\n#{@servicename} service shutting down...\n\n"
+        exit 130 
+    } 
 
-  sleep 1
-  
-end
+    sleep 1
+    end
 
 
 

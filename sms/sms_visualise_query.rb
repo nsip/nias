@@ -177,7 +177,10 @@ class SMSVizQuery
 			studentcontact = @redis.sinter d, 'StudentContactPersonal'
 			label = @redis.hget 'labels', studentcontact[0]
 			studentcontact.each do |sc|
-				xml = Nokogiri::XML(@store[sc])				xml.xpath("//xmlns:LanguageList/xmlns:Language[xmlns:LanguageType='1']/xmlns:Code").each { |x| results << {:debtor => label, :language => @languagecodes[x.child.to_s] } }
+				xml = Nokogiri::XML(@store[sc])				
+				xml.xpath("//xmlns:LanguageList/xmlns:Language[xmlns:LanguageType='1']/xmlns:Code").each do |x| 
+					results << {:debtor => label, :language => @languagecodes[x.child.to_s] } 
+				end
 			end
 		end
 		return results

@@ -23,9 +23,11 @@ xmlheader = <<XML
 <Invoices xmlns="http://www.sifassociation.org/au/datamodel/3.4">
 XML
 
+
 xmlfooter = <<XML
 </Invoices>
 XML
+
 
 
 json = <<JSON
@@ -34,12 +36,14 @@ json = <<JSON
 }
 JSON
 
+
 json_out = '["test","hello"]'
 
 csv = <<CSV
 label,value
 test,hello
 CSV
+
 
 csv_out = '{"label":"test","value":"hello"}'
 
@@ -48,12 +52,12 @@ puts @service_name
 
 describe "SSFServer" do
 
-describe "GET ssf" do
-		it "Gets a topic list" do
-			get "/ssf"
-			expect(last_response).to be_ok
-		end
-	end
+    describe "GET ssf" do
+        it "Gets a topic list" do
+            get "/ssf"
+            expect(last_response).to be_ok
+        end
+    end
 
 
     describe "POST /" do
@@ -71,98 +75,94 @@ describe "GET ssf" do
     end
 
 
-	describe "POST rspec/test" do
-		before(:example) do
-			@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.ingest", 0, :latest_offset)
-		end
-		context "SIF/XML non-sif small" do
-			it "posts SIF/XML to Kafka topic SSFServer.settings.xmltopic with header rspec.test" do
-				puts "Next offset    = #{@xmlconsumer.next_offset}"
-				post "/rspec/test", xmlheader + xml + xmlfooter, "CONTENT_TYPE" => "application/xml"
-				expect(last_response.status).to eq 202
-				sleep 1
-				begin
+    describe "POST rspec/test" do
+        before(:example) do
+            @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.ingest", 0, :latest_offset)
+        end
+        context "SIF/XML non-sif small" do
+            it "posts SIF/XML to Kafka topic SSFServer.settings.xmltopic with header rspec.test" do
+                puts "Next offset    = #{@xmlconsumer.next_offset}"
+                post "/rspec/test", xmlheader + xml + xmlfooter, "CONTENT_TYPE" => "application/xml"
+                expect(last_response.status).to eq 202
+                sleep 1
+                begin
                     a = @xmlconsumer.fetch
-					expect(a).to_not be_nil
-					expect(a.empty?).to be false
-					expect(a[0].value).to eq "TOPIC: rspec.test\n#{xmlheader + xml + xmlfooter}" 
-					expect(a[0].key).to eq "rspec.test"
-                    rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                    end
-			end
-		end
-        
-		before(:example) do
-			@genericconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test", 0, :latest_offset)
-		end
-		context "JSON small" do
-			it "posts parsed JSON to Kafka topic rspec.test" do
-				puts "Next offset    = #{@genericconsumer.next_offset}"
-				post "/rspec/test", json, "CONTENT_TYPE" => "application/json"
-				expect(last_response.status).to eq 202
-				sleep 1
-				begin
+                    expect(a).to_not be_nil
+                    expect(a.empty?).to be false
+                    expect(a[0].value).to eq "TOPIC: rspec.test\n#{xmlheader + xml + xmlfooter}" 
+                    expect(a[0].key).to eq "rspec.test"
+                rescue Poseidon::Errors::OffsetOutOfRange
+                    puts "[warning] - bad offset supplied, resetting..."
+                    offset = :latest_offset
+                    retry
+                end
+            end
+        end
+                before(:example) do
+            @genericconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test", 0, :latest_offset)
+        end
+        context "JSON small" do
+            it "posts parsed JSON to Kafka topic rspec.test" do
+                puts "Next offset    = #{@genericconsumer.next_offset}"
+                post "/rspec/test", json, "CONTENT_TYPE" => "application/json"
+                expect(last_response.status).to eq 202
+                sleep 1
+                begin
                     a = @genericconsumer.fetch
-					expect(a).to_not be_nil
-					expect(a.empty?).to be false
-					expect(a[0].value).to eq json_out
-					expect(a[0].key).to eq "test"
-                    rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                    end
-			end
-		end
-        
-		before(:example) do
-			@genericconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test", 0, :latest_offset)
-		end
-		context "CSV small" do
-			it "posts JSON to Kafka topic rspec.test" do
-				puts "Next offset    = #{@genericconsumer.next_offset}"
-				post "/rspec/test", csv, "CONTENT_TYPE" => "text/csv"
-				expect(last_response.status).to eq 202
-				sleep 1
-				begin
+                    expect(a).to_not be_nil
+                    expect(a.empty?).to be false
+                    expect(a[0].value).to eq json_out
+                    expect(a[0].key).to eq "test"
+                rescue Poseidon::Errors::OffsetOutOfRange
+                    puts "[warning] - bad offset supplied, resetting..."
+                    offset = :latest_offset
+                    retry
+                end
+            end
+        end
+                before(:example) do
+            @genericconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test", 0, :latest_offset)
+        end
+        context "CSV small" do
+            it "posts JSON to Kafka topic rspec.test" do
+                puts "Next offset    = #{@genericconsumer.next_offset}"
+                post "/rspec/test", csv, "CONTENT_TYPE" => "text/csv"
+                expect(last_response.status).to eq 202
+                sleep 1
+                begin
                     a = @genericconsumer.fetch
-					expect(a).to_not be_nil
-					expect(a.empty?).to be false
-					expect(a[0].value).to eq csv_out
-					expect(a[0].key).to eq "test"
-                    rescue Poseidon::Errors::OffsetOutOfRange
-                            puts "[warning] - bad offset supplied, resetting..."
-                            offset = :latest_offset
-                            retry
-                    end
-			end
-		end
-        
-		context "payload more than 1 MB" do
-			it "rejects payload" do
-				post "/rspec/test", xml * 100000, "CONTENT_TYPE" => "application/xml"
-				expect(last_response.status).to eq 400
-			end
-		end
-		context "message other than CSV, JSON, XML" do
-			it "rejects payload" do
-				post "/rspec/test", csv, "CONTENT_TYPE" => "text/plain"
-				expect(last_response.status).to eq 415
-			end
-		end
-	end
-    
-    describe "POST rspec/test/bulk" do
+                    expect(a).to_not be_nil
+                    expect(a.empty?).to be false
+                    expect(a[0].value).to eq csv_out
+                    expect(a[0].key).to eq "test"
+                rescue Poseidon::Errors::OffsetOutOfRange
+                    puts "[warning] - bad offset supplied, resetting..."
+                    offset = :latest_offset
+                    retry
+                end
+            end
+        end
+                context "payload more than 1 MB" do
+            it "rejects payload" do
+                post "/rspec/test", xml * 100000, "CONTENT_TYPE" => "application/xml"
+                expect(last_response.status).to eq 400
+            end
+        end
+        context "message other than CSV, JSON, XML" do
+            it "rejects payload" do
+                post "/rspec/test", csv, "CONTENT_TYPE" => "text/plain"
+                expect(last_response.status).to eq 415
+            end
+        end
+    end
+        describe "POST rspec/test/bulk" do
         before(:example) do
             @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.bulkingest", 0, :latest_offset)
         end
         context "SIF/XML non-sif 3 MB" do
             it "posts SIF/XML to Kafka topic SSFServer.settings.bulkxmltopic in two 1 MB-sized pieces, with header rspec.test" do
                 puts "Next offset    = #{@xmlconsumer.next_offset}"
-		inputxml = xmlheader + xml * 5000 + xmlfooter
+                inputxml = xmlheader + xml * 5000 + xmlfooter
                 post "/rspec/test/bulk", inputxml, "CONTENT_TYPE" => "application/xml"
                 expect(last_response.status).to eq 202
                 sleep 1
@@ -172,7 +172,7 @@ describe "GET ssf" do
                     expect(a.empty?).to be false
                     payload = ""
                     a.each do |m|
-                            payload << m.value
+                        payload << m.value
                     end
                     payload = payload.gsub(/\n===snip [0-9]*===\n/, "")
                     expect(payload).to eq "TOPIC: rspec.test\n#{inputxml}"
@@ -184,12 +184,11 @@ describe "GET ssf" do
                 end
             end
         end
-        
-        before(:example) do
+                before(:example) do
             @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.bulkingest", 0, :latest_offset)
         end
         context "SIF/XML non-sif small" do
-                it "posts SIF/XML to Kafka topic SSFServer.settings.xmltopic with header rspec.test" do
+            it "posts SIF/XML to Kafka topic SSFServer.settings.xmltopic with header rspec.test" do
                 puts "Next offset    = #{@xmlconsumer.next_offset}"
                 post "/rspec/test/bulk", xmlheader + xml + xmlfooter , "CONTENT_TYPE" => "application/xml"
                 expect(last_response.status).to eq 202
@@ -223,15 +222,14 @@ describe "GET ssf" do
                     expect(a.empty?).to be false
                     expect(a[0].value).to eq json_out
                     expect(a[0].key).to eq "test"
-                    rescue Poseidon::Errors::OffsetOutOfRange
+                rescue Poseidon::Errors::OffsetOutOfRange
                     puts "[warning] - bad offset supplied, resetting..."
                     offset = :latest_offset
                     retry
                 end
             end
         end
-        
-        before(:example) do
+                before(:example) do
             @genericconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test", 0, :latest_offset)
         end
         context "CSV small" do
@@ -246,7 +244,7 @@ describe "GET ssf" do
                     expect(a.empty?).to be false
                     expect(a[0].value).to eq csv_out
                     expect(a[0].key).to eq "test"
-                    rescue Poseidon::Errors::OffsetOutOfRange
+                rescue Poseidon::Errors::OffsetOutOfRange
                     puts "[warning] - bad offset supplied, resetting..."
                     offset = :latest_offset
                     retry
@@ -260,6 +258,4 @@ describe "GET ssf" do
             end
         end
     end
-    
-    
-end
+        end

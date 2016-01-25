@@ -26,53 +26,49 @@ require 'moneta'
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092,
-                                           @inbound, 0, :latest_offset)
+@inbound, 0, :latest_offset)
 
 
 loop do
 
-  begin
-  		messages = []
-	    messages = consumer.fetch
-	    outbound_messages = []
-	    
-	    messages.each do |m|
+    begin
+        messages = []
+        messages = consumer.fetch
+        outbound_messages = []
+        messages.each do |m|
 
-	    	# create 'empty' index tuple, otherids and links will be unused here but keeps all parsing code consistent
-			idx = { :type => nil, :id => @idgen.encode( rand(1...999) ) }
+            # create 'empty' index tuple, otherids and links will be unused here but keeps all parsing code consistent
+            idx = { :type => nil, :id => @idgen.encode( rand(1...999) ) }
 
-      		# read JSON message
+            # read JSON message
             idx_hash = JSON.parse( m.value )
 
-			idx[:id] = idx[:type] == 'oneroster_demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
+            idx[:id] = idx[:type] == 'oneroster_demographics' ? idx_hash["userSourcedId"] :  idx_hash["sourcedId"]
 
-			#puts "\nStorage Index = #{idx.to_json}\n\n"
+            #puts "\nStorage Index = #{idx.to_json}\n\n"
 
-			# write the message to storage with its own refid as the key
-			# puts "\n\nkey value pair will be:\n\nKEY: #{idx[:id]}\n\nVALUE:\n\n#{nodes.to_s}"
+            # write the message to storage with its own refid as the key
+            # puts "\n\nkey value pair will be:\n\nKEY: #{idx[:id]}\n\nVALUE:\n\n#{nodes.to_s}"
 
-			@store["#{idx[:id]}"] = m.value
-  		
-  		end
+            @store["#{idx[:id]}"] = m.value
+        end
 
 
-      # puts "#{@service_name}: Resuming message consumption from: #{consumer.next_offset}"
+        # puts "#{@service_name}: Resuming message consumption from: #{consumer.next_offset}"
 
-  rescue Poseidon::Errors::UnknownTopicOrPartition
-    puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-    sleep 30
-  end
-  
-  # puts "Resuming message consumption from: #{consumer.next_offset}"
+    rescue Poseidon::Errors::UnknownTopicOrPartition
+        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
+        sleep 30
+    end
+    # puts "Resuming message consumption from: #{consumer.next_offset}"
 
-  # trap to allow console interrupt
-  trap("INT") { 
-    puts "\n#{@service_name} service shutting down...\n\n"
-    exit 130 
-  } 
+    # trap to allow console interrupt
+    trap("INT") { 
+        puts "\n#{@service_name} service shutting down...\n\n"
+        exit 130 
+    } 
 
-  sleep 1
-  
+    sleep 1
 end
 
 

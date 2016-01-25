@@ -61,101 +61,94 @@ require 'redis'
 
 # create consumer
 @consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
-                                           @inbound, 0, :latest_offset)
+@inbound, 0, :latest_offset)
 
 
 
 
 loop do
 
-  begin
-  		messages = []
-	    messages = @consumer.fetch
-	    
-	    messages.each do |m|
+    begin
+        messages = []
+        messages = @consumer.fetch
+        messages.each do |m|
 
-      		idx_hash = JSON.parse( m.value )
+            idx_hash = JSON.parse( m.value )
 
-      		#puts "\n\nIndexer Message : - #{idx_hash.inspect}\n\n"
+            #puts "\n\nIndexer Message : - #{idx_hash.inspect}\n\n"
 
-		# get the nodes equivalent to the current node
-		prev_equivalents = @redis.smembers "equivalent:ids:#{idx_hash['id']}"
-		equivalents = prev_equivalents + idx_hash['equivalentids']
-		equivalents = equivalents.uniq
+            # get the nodes equivalent to the current node
+            prev_equivalents = @redis.smembers "equivalent:ids:#{idx_hash['id']}"
+            equivalents = prev_equivalents + idx_hash['equivalentids']
+            equivalents = equivalents.uniq
 
-		# are there any new equivalences because of this tuple? If so, duplicate the existing links among all equivalences
-		new_equivalents = idx_hash['equivalentids'].reject{|x| prev_equivalents.include? x}
-		unless (new_equivalents.empty?)
-			new_equivalents << idx_hash['id']
-			new_equivalents.each do |x|
-				new_equivalents.each do |y|
-					next if x == y
-					@redis.sunionstore x, x, y
-				end
-			end
-		end
-		
+            # are there any new equivalences because of this tuple? If so, duplicate the existing links among all equivalences
+            new_equivalents = idx_hash['equivalentids'].reject{|x| prev_equivalents.include? x}
+            unless (new_equivalents.empty?)
+                new_equivalents << idx_hash['id']
+                new_equivalents.each do |x|
+                    new_equivalents.each do |y|
+                        next if x == y
+                        @redis.sunionstore x, x, y
+                    end
+                end
+            end
+            # no responses needed from redis so pipeline for speed
+            @redis.pipelined do
 
-        	# no responses needed from redis so pipeline for speed
-    		  @redis.pipelined do
+                @redis.hset 'labels', idx_hash['id'], idx_hash['label'] unless (idx_hash['label'].nil?)
 
-				@redis.hset 'labels', idx_hash['id'], idx_hash['label'] unless (idx_hash['label'].nil?)
+                @redis.sadd 'known:collections', idx_hash['type'] unless (idx_hash['type'].nil? or idx_hash['type'].empty?)
 
-      				@redis.sadd 'known:collections', idx_hash['type'] unless (idx_hash['type'].nil? or idx_hash['type'].empty?)
+                @redis.sadd idx_hash['type'], idx_hash['id'] unless (idx_hash['type'].nil? or idx_hash['type'].empty?)
+                @redis.sadd idx_hash['id'], idx_hash['links'] unless idx_hash['links'].empty?
 
-      				@redis.sadd idx_hash['type'], idx_hash['id'] unless (idx_hash['type'].nil? or idx_hash['type'].empty?)
-      				
-      				@redis.sadd idx_hash['id'], idx_hash['links'] unless idx_hash['links'].empty?
+                equivalents.each do |id|
+                    @redis.sadd id, idx_hash['links'] unless idx_hash['links'].empty?
+                end
 
-				equivalents.each do |id|
-      					@redis.sadd id, idx_hash['links'] unless idx_hash['links'].empty?
-				end
+                idx_hash['otherids'].each do |key, value|
+                    @redis.hset "oid:#{value}", key, idx_hash['id']
+                    @redis.sadd 'other:ids', "oid:#{value}"
+                end
 
-				idx_hash['otherids'].each do |key, value|
-					@redis.hset "oid:#{value}", key, idx_hash['id']
-					@redis.sadd 'other:ids', "oid:#{value}"
-				end
+                # extract equivalent ids
+                idx_hash['equivalentids'].each do |equiv|
+                    refs = []
+                    refs = idx_hash['equivalentids'].reject { |n| n == equiv } # can ignore self-links
+                    refs << idx_hash['id']
+                    @redis.sadd "equivalent:ids:#{equiv}", refs unless refs.empty?
 
-				# extract equivalent ids
-				idx_hash['equivalentids'].each do |equiv|
-                  			refs = []
-                  			refs = idx_hash['equivalentids'].reject { |n| n == equiv } # can ignore self-links
-                  			refs << idx_hash['id']
-					@redis.sadd "equivalent:ids:#{equiv}", refs unless refs.empty?
+                end
 
-				end
+                # then add id to sets for links
+                idx_hash['links'].each do | link |
+                    refs = []
+                    refs = idx_hash['links'].reject { |n| n == link } # can ignore self-links
+                    refs << idx_hash['id']
+                    refs = refs + equivalents
 
-      				# then add id to sets for links
-      				idx_hash['links'].each do | link |
-                  			refs = []
-                  			refs = idx_hash['links'].reject { |n| n == link } # can ignore self-links
-                  			refs << idx_hash['id']
-                  			refs = refs + equivalents
+                    @redis.sadd link, refs unless refs.empty?
+                end
 
-                  			@redis.sadd link, refs unless refs.empty?
-      				end
+            end
+        end
 
-    			end
-  		
-  		end
+        # puts "cons-sms-indexer:: Resuming message consumption from: #{consumer.next_offset}"
 
-      # puts "cons-sms-indexer:: Resuming message consumption from: #{consumer.next_offset}"
+    rescue Poseidon::Errors::UnknownTopicOrPartition
+        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
+        sleep 30
+    end
+    # puts "Resuming message consumption from: #{consumer.next_offset}"
 
-  rescue Poseidon::Errors::UnknownTopicOrPartition
-    puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-    sleep 30
-  end
-  
-  # puts "Resuming message consumption from: #{consumer.next_offset}"
+    # trap to allow console interrupt
+    trap("INT") { 
+        puts "\n#{@servicename} service shutting down...\n\n"
+        exit 130 
+    } 
 
-  # trap to allow console interrupt
-  trap("INT") { 
-    puts "\n#{@servicename} service shutting down...\n\n"
-    exit 130 
-  } 
-
-  sleep 1
-  
+    sleep 1
 end
 
 
