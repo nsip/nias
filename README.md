@@ -7,6 +7,55 @@ NSIP Integration As A Service - NIAS
 # Overview
 
 
+# Code structure
+
+nias
+-- launch_xxx.rb - launchers for each block of services, run launchers with -K
+on the command-line to shut services down
+
+
+
+/kafka
+    contains the latest kafka/zookeeper distro, the config files in /kafka/config are the ones used to configure the tools
+
+/sms
+    contains the Sif Memory Store, currently a stub redis config only, will grow as the indexer and web ui are built out
+
+/ssf
+    The Sif Store & Forward adapter - rest interface in sinatra that sits in front of kafka for our purposes and handles xml/json/csv
+
+
+# Running NIAS
+
+Once you have installed NIAS, launch the NIAS infrastructure services (`launch_core.rb`) and micoservices (`launch_nias.rb`).
+* `launch_core.rb` should always be run first: this brings up kafka/zookeeper and then the SSF (sif store & forward) and the SMS (sif memory store)
+* `launch_nias.rb` will bring up all of the integration related services.
+
+So:
+    bash --login
+    ./launch_core.rb
+    ./launch_nias.rb
+    
+To shut NIAS down, shutdown `./launch_nias.rb` before `./launch_core.rb`:
+
+    ./launch_nias.rb -K
+    ./launch_core.rb -K
+
+Kafka is by design quite robust in persisting its logs; Zookeeper is even more so. If you have crashed out of Kafka/Zookeeper, and need to delete all Kafka topics:
+
+    rm -fr  /tmp/nias/kafka-logs
+    rm -fr  /tmp/nias/zookeeper
+
+Or to get rid of everything (does no harm, but will not work if core/nias are still running)
+
+    rm -fr /tmp/nias
+
+All services available through NIAS are exposed through the NIAS UI:
+
+    http://localhost:9292/nias
+
+which has links to all the other services.
+
 
 # Installation Notes
 
@@ -43,76 +92,16 @@ When services are running all Kafka logs, Redis dump files etc. will be created 
 This is a reliable location on Mac/Linux, but check it's writeable from current user account.
 
 There is a Gemfile in the root nias directory: 
-* cd into /nias 
-* then run `bundle install` to pull in all gems required by the projects. 
-
-the layout of the code is as follows
-
-nias
--- launch_xxx.rb - launchers for each block of services, run launchers with -K
-on the command-line to shut services down
-
-launch_core.rb should always be run first, this brings up kafka/zookeeper and then the SSF (sif store & forward) and the SMS (sif memory store)
-
-launch_nias.rb will bring up all of the integration related services - under development!
-
-launch_timesheet.rb will bring up the ingest and query/ui services for the timesheet reporting solution.
-
-So:
-
-bash --login
-./launch_core.rb
-./launch_nias.rb
-./launch_nias.rb -K
-./launch_core.rb -K
-
-If crashed out of Kafka/Zookeeper and need to delete them:
-
-rm -fr  /tmp/nias/kafka-logs
-rm -fr  /tmp/nias/zookeeper
-
-or to get rid of everything (does no harm, but will not work if core/nias are still running)
-
-rm -fr /tmp/nias
-
-/kafka
-    contains the latest kafka/zookeeper distro, the config files in /kafka/config are the ones used to configure the tools
-
-/sms
-    contains the Sif Memory Store, currently a stub redis config only, will grow as the indexer and web ui are built out
-
-/ssf
-    The Sif Store & Forward adapter - rest interface in sinatra that sits in front of kafka for our purposes and handles xml/json/csv
-
-/test_data
-    bunch of handy files to send to ssf 
-
-We also recommend the installation of the 'httpie' package as a user-friendly curl replacement that we use in many of the testing scripts:
-
-> brew install httpie
-
-This will allow you to run ingestion test scripts in the /test_data area.
-
-Example:
-
-Using httpie
-
-
-http post :9292/test/test1 Content-Type:application/xml < test_data/timetable.xml
-
-http post :9292/oneroster/validated Content-Type:text/csv < test_data/users.csv
-
-http post :9292/test/json < 1k_student_personals.json
-(note json is the default content type so doesn't need to be expliclty stated, for xml and csv it does)
-
-All services can be found for ui at:
-
-localhost:9292/nias
-
-which has links to all the other services.
+* `cd .../nias` 
+* run `bundle install` to pull in all gems required by the projects. 
 
 
 
 
+
+# Testing
+Rspec Unit tests for the methods are in place in the expected `/spec` directory.
+
+See also the [NIAS Test Data](https://github.com/nsip/nias_testdata) repository for much larger test data.
 
 
