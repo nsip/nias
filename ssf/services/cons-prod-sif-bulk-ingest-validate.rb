@@ -4,6 +4,8 @@ require 'poseidon'
 require 'nokogiri' # xml support
 
 # Consumer of bulk ingest SIF/XML messages. 
+# The XSD to be used for parsing SIF/XML is passed in as the first command line parameter of the script.
+
 # Input stream sifxml/bulkingest consists of XML payload broken up into 1 MB chunks. Payload
 # is reassembled and then validated, following the SIF-AU 3.4 schema.
 # Two streams of SIF created:
@@ -17,7 +19,8 @@ require 'nokogiri' # xml support
 
 @servicename = 'cons-prod-sif-bulk-ingest-validate'
 
-@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif3.4/SIF_Message3.4.xsd"))
+#@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif3.4/SIF_Message3.4.xsd"))
+@xsd = Nokogiri::XML::Schema(File.open(ARGF.argv[0]))
 @namespace = 'http://www.sifassociation.org/au/datamodel/3.4'
 
 # create consumer
@@ -66,6 +69,7 @@ loop do
 
             # each ingest message is a group of objects of the same class, e.g. 
             # <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
+	    # HOWEVER: <BulkIngest> element has been added ad hoc, and allows an arbitrary sequence of all objects
             # If message is not well-formed, pass it to sifxml.errors as a unit
             # If message is well-formed, break it up into its constituent objects, and parse each separately
             # This allows us to bypass the SIF constraint that all objects must be of the same type

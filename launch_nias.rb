@@ -58,8 +58,8 @@ def launch
 
     ssf_services = [
         {:name => 'cons-prod-privacyfilter.rb', :options  => ''},
-        {:name =>'cons-prod-sif-ingest-validate.rb', :options => ''},
-        {:name =>'cons-prod-sif-bulk-ingest-validate.rb', :options => ''}
+        {:name =>'cons-prod-sif-ingest-validate.rb', :options => './ssf/services/xsd/sif3.4/SIF_Message3.4.xsd'},
+        {:name =>'cons-prod-sif-bulk-ingest-validate.rb', :options => './ssf/services/xsd/sif3.4/SIF_Message3.4.xsd'}
     ]
 
 

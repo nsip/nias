@@ -48,7 +48,6 @@ CSV
 csv_out = '{"label":"test","value":"hello"}'
 
 @service_name = 'spec-ssf-ssf-server'
-puts @service_name
 
 describe "SSFServer" do
 

@@ -2610,6 +2610,12 @@
 	<!--GradingAssignment-->
 	<!--GradingAssignmentScore-->
 	<!-- Adding Collections Here -->
+	<xs:complexType name="StaffPersonalCollectionType">
+		<xs:sequence>
+			<xs:element name="StaffPersonal" type="sif:StaffPersonalType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="StaffPersonals" type="sif:StaffPersonalCollectionType"/>
 	<xs:complexType name="StaffAssignmentCollectionType">
 		<xs:sequence>
 			<xs:element name="StaffAssignment" type="sif:StaffAssignmentType" minOccurs="0" maxOccurs="unbounded"/>

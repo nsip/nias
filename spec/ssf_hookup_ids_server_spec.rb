@@ -9,7 +9,6 @@ require 'json'
 
 
 @service_name = 'spec-ssf-hookup-ids-server'
-puts @service_name
 
 describe "HookupServer" do
 

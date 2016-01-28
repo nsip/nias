@@ -68,7 +68,6 @@ loop do
             csv['LocalCampusId'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:LocalCampusId")
             csv['EmailAddress'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:EmailList/xmlns:Email")
 
-            puts csv
             # puts "\nParser Index = #{idx.to_json}\n\n"
             outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", CSVHeaders.csv_object2array(csv, CSVHeaders.get_csvheaders_staff()).to_csv.chomp.gsub(/\s+/, " ") + "\n", "indexed" )
         end

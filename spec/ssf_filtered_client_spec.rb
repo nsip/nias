@@ -23,7 +23,6 @@ xml = <<XML
 XML
 
 @service_name = 'spec-ssf-filtered-client'
-puts @service_name
 
 
 describe "FilteredClient" do

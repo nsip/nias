@@ -4,6 +4,8 @@ require 'poseidon'
 require 'nokogiri' # xml support
 
 # Consumer of bulk ingest SIF/XML messages. 
+# The XSD to be used for parsing SIF/XML is passed in as the first command line parameter of the script.
+
 # Input stream sifxml/ingest consists of XML payload. Payload
 # is reassembled and then validated, following the SIF-AU 3.4 schema.
 # Two streams of SIF created:
@@ -18,7 +20,8 @@ require 'nokogiri' # xml support
 
 @servicename = 'cons-prod-sif-ingest-validate'
 
-@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif3.4/SIF_Message3.4.xsd"))
+#@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif3.4/SIF_Message3.4.xsd"))
+@xsd = Nokogiri::XML::Schema(File.open(ARGF.argv[0]))
 @namespace = 'http://www.sifassociation.org/au/datamodel/3.4'
 
 # create consumer

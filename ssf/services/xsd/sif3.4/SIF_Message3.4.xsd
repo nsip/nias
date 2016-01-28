@@ -37791,4 +37791,96 @@
 			</xs:simpleType>
 		</xs:union>
 	</xs:simpleType>
+
+
+<!-- NN 20160125 injected for NIAS -->
+
+<xs:complexType name="BulkIngestType">
+<xs:choice maxOccurs="unbounded">
+			<xs:element name="Activity" type="sif:ActivityType"/>
+			<xs:element name="AggregateCharacteristicInfo" type="sif:AggregateCharacteristicInfoType"/>
+			<xs:element name="AggregateStatisticFact" type="sif:AggregateStatisticFactType"/>
+			<xs:element name="AggregateStatisticInfo" type="sif:AggregateStatisticInfoType"/>
+			<xs:element name="Assessment" type="sif:AssessmentType"/>
+			<xs:element name="AssessmentAdministration" type="sif:AssessmentAdministrationType"/>
+			<xs:element name="AssessmentForm" type="sif:AssessmentFormType"/>
+			<xs:element name="AssessmentItem" type="sif:AssessmentItemType"/>
+			<xs:element name="AssessmentPackage" type="sif:AssessmentPackageType"/>
+			<xs:element name="AssessmentRegistration" type="sif:AssessmentRegistrationType"/>
+			<xs:element name="AssessmentSubTest" type="sif:AssessmentSubTestType"/>
+			<xs:element name="CalendarDate" type="sif:CalendarDateType"/>
+			<xs:element name="CalendarSummary" type="sif:CalendarSummaryType"/>
+			<xs:element name="Identity" type="sif:IdentityType"/>
+			<xs:element name="LEAInfo" type="sif:LEAInfoType"/>
+			<xs:element name="LearningResource" type="sif:LearningResourceType"/>
+			<xs:element name="LearningResourcePackage" type="sif:LearningResourcePackageType"/>
+			<xs:element name="LearningStandardDocument" type="sif:LearningStandardDocumentType"/>
+			<xs:element name="LearningStandardItem" type="sif:LearningStandardItemType"/>
+			<xs:element name="PersonPicture" type="sif:PersonPictureType"/>
+			<xs:element name="ReportAuthorityInfo" type="sif:ReportAuthorityInfoType"/>
+			<xs:element name="ReportManifest" type="sif:ReportManifestType"/>
+			<xs:element name="ResourceUsage" type="sif:ResourceUsageType"/>
+			<xs:element name="RoomInfo" type="sif:RoomInfoType"/>
+			<xs:element name="SchoolCourseInfo" type="sif:SchoolCourseInfoType"/>
+			<xs:element name="SchoolPrograms" type="sif:SchoolProgramsType"/>
+			<xs:element name="SectionInfo" type="sif:SectionInfoType"/>
+			<xs:element name="SessionInfo" type="sif:SessionInfoType"/>
+			<xs:element name="SIF_ReportObject" type="sif:SIF_ReportObjectType"/>
+			<xs:element name="Sif3Assessment" type="sif:Sif3AssessmentType"/>
+			<xs:element name="Sif3AssessmentAdministration" type="sif:Sif3AssessmentAdministrationType"/>
+			<xs:element name="Sif3AssessmentAsset" type="sif:Sif3AssessmentAssetType"/>
+			<xs:element name="Sif3AssessmentForm" type="sif:Sif3AssessmentFormType"/>
+			<xs:element name="Sif3AssessmentItem" type="sif:Sif3AssessmentItemType"/>
+			<xs:element name="Sif3AssessmentItemAssociation" type="sif:Sif3AssessmentItemAssociationType"/>
+			<xs:element name="Sif3AssessmentRegistration" type="sif:Sif3AssessmentRegistrationType"/>
+			<xs:element name="Sif3AssessmentRubric" type="sif:Sif3AssessmentRubricType"/>
+			<xs:element name="Sif3AssessmentScoreTable" type="sif:Sif3AssessmentScoreTableType"/>
+			<xs:element name="Sif3AssessmentSection" type="sif:Sif3AssessmentSectionType"/>
+			<xs:element name="Sif3AssessmentSession" type="sif:Sif3AssessmentSessionType"/>
+			<xs:element name="Sif3AssessmentSubTest" type="sif:Sif3AssessmentSubTestType"/>
+			<xs:element name="Sif3StudentResponseSet" type="sif:Sif3StudentResponseSetType"/>
+			<xs:element name="StaffAssignment" type="sif:StaffAssignmentType"/>
+			<xs:element name="StudentActivityInfo" type="sif:StudentActivityInfoType"/>
+			<xs:element name="StudentActivityParticipation" type="sif:StudentActivityParticipationType"/>
+			<xs:element name="StudentAttendanceSummary" type="sif:StudentAttendanceSummaryType"/>
+			<xs:element name="StudentAttendanceTimeList" type="sif:StudentAttendanceTimeListType"/>
+			<xs:element name="StudentContactRelationship" type="sif:StudentContactRelationshipType"/>
+			<xs:element name="StudentDailyAttendance" type="sif:StudentDailyAttendanceType"/>
+			<xs:element name="StudentParticipation" type="sif:StudentParticipationType"/>
+			<xs:element name="StudentPeriodAttendance" type="sif:StudentPeriodAttendanceType"/>
+			<xs:element name="StudentSchoolEnrollment" type="sif:StudentSchoolEnrollmentType"/>
+			<xs:element name="StudentScoreSet" type="sif:StudentScoreSetType"/>
+			<xs:element name="StudentSDTN" type="sif:StudentSDTNType"/>
+			<xs:element name="StudentSectionEnrollment" type="sif:StudentSectionEnrollmentType"/>
+			<xs:element name="StudentSnapshot" type="sif:StudentSnapshotType"/>
+			<xs:element name="SummaryEnrollmentInfo" type="sif:SummaryEnrollmentInfoType"/>
+			<xs:element name="StudentPersonal" type="sif:StudentPersonalType"/>
+			<xs:element name="SchoolInfo" type="sif:SchoolInfoType"/>
+			<xs:element name="SystemRole" type="sif:SystemRoleType"/>
+			<xs:element name="TermInfo" type="sif:TermInfoType"/>
+			<xs:element name="TimeTable" type="sif:TimeTableType"/>
+			<xs:element name="TimeTableCell" type="sif:TimeTableCellType"/>
+			<xs:element name="TimeTableSubject" type="sif:TimeTableSubjectType"/>
+			<xs:element name="StaffPersonal" type="sif:StaffPersonalType"/>
+			<xs:element name="StudentContactPersonal" type="sif:StudentContactPersonalType"/>
+			<xs:element name="TeachingGroup" type="sif:TeachingGroupType"/>
+			<xs:element name="ResourceBooking" type="sif:ResourceBookingType"/>
+			<xs:element name="ScheduledActivity" type="sif:ScheduledActivityType"/>
+			<xs:element name="EquipmentInfo" type="sif:EquipmentInfoType"/>
+			<xs:element name="GradingAssignment" type="sif:GradingAssignmentType"/>
+			<xs:element name="GradingAssignmentScore" type="sif:GradingAssignmentScoreType"/>
+			<xs:element name="Invoice" type="sif:InvoiceType"/>
+			<xs:element name="FinancialAccount" type="sif:FinancialAccountType"/>
+			<xs:element name="ChargedLocationInfo" type="sif:ChargedLocationInfoType"/>
+			<xs:element name="PaymentReceipt" type="sif:PaymentReceiptType"/>
+			<xs:element name="PurchaseOrder" type="sif:PurchaseOrderType"/>
+			<xs:element name="VendorInfo" type="sif:VendorInfoType"/>
+			<xs:element name="Journal" type="sif:JournalType"/>
+			<xs:element name="Debtor" type="sif:DebtorType"/>
+</xs:choice>
+</xs:complexType>
+<xs:element name="BulkIngest" type="sif:BulkIngestType"/>
+
+
+
 </xs:schema>

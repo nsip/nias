@@ -83,7 +83,6 @@ xml_high.gsub!(%r{ RefId="[^"]+"}, ' RefId="00000000-0000-0000-0000-000000000000
 xml_extreme = xml_high.gsub(%r{<YearLevel><Code>6</Code></YearLevel>}, "<YearLevel><Code>ZZREDACTED</Code></YearLevel>")
 
 @service_name = 'ssf_services_cons_prod_privacyfilter_spec'
-puts @service_name
 
 describe "SIF Privacy Filter" do
 

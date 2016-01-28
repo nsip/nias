@@ -50,7 +50,6 @@ describe "NAPLAN convert SIF to CSV" do
     end
 
     before(:all) do
-        puts @service_name 
         @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.csvstaff_out", 0, :latest_offset)
         puts "Next offset    = #{@xmlconsumer.next_offset}"
         post_xml(xml)
