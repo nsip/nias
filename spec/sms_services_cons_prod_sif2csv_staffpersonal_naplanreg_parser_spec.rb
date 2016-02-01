@@ -4,7 +4,7 @@ require "spec_helper"
 require 'poseidon' 
 
 out = <<CSV
-fjghh371,Treva,Seefeldt,7E,"7D,7E",knptb460,046129,01,tseefeldt@example.com,,
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,N,principal
 CSV
 
 xml = <<XML
@@ -20,6 +20,7 @@ xml = <<XML
       <Email Type="01">tseefeldt@example.com</Email>
     </EmailList>
   </PersonInfo>
+  <Title>principal</Title>
   <MostRecent>
     <SchoolLocalId>046129</SchoolLocalId>
     <SchoolACARAId>knptb460</SchoolACARAId>
@@ -30,6 +31,9 @@ xml = <<XML
     </NAPLANClassList>
     <HomeGroup>7E</HomeGroup>
   </MostRecent>
+  <SIF_ExtendedElements>
+    <SIF_ExtendedElement Name="AdditionalInfo">N</SIF_ExtendedElement>
+  </SIF_ExtendedElements>
 </StaffPersonal>
 </StaffPersonals>
 XML

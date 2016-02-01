@@ -1,7 +1,5 @@
 #ENV['RACK_ENV'] = 'test'
 
-#require "rspec"
-#require "rack/test"
 require "spec_helper"
 require_relative '../ssf/ssf_server.rb'
 require 'poseidon' 
@@ -39,8 +37,19 @@ JSON
 
 json_out = '["test","hello"]'
 
+csvheader = "label,value\n"
+
 csv = <<CSV
-label,value
+test,hello
+CSV
+
+bad_csv = <<CSV
+test,"hello
+CSV
+
+# need CSV to count columns
+unbalanced_csv = <<CSV
+label,value,value2
 test,hello
 CSV
 
@@ -123,9 +132,9 @@ describe "SSFServer" do
             @genericconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test", 0, :latest_offset)
         end
         context "CSV small" do
-            it "posts JSON to Kafka topic rspec.test" do
+            it "posts CSV converted to JSON to Kafka topic rspec.test" do
                 puts "Next offset    = #{@genericconsumer.next_offset}"
-                post "/rspec/test", csv, "CONTENT_TYPE" => "text/csv"
+                post "/rspec/test", csvheader + csv, "CONTENT_TYPE" => "text/csv"
                 expect(last_response.status).to eq 202
                 sleep 1
                 begin
@@ -134,6 +143,46 @@ describe "SSFServer" do
                     expect(a.empty?).to be false
                     expect(a[0].value).to eq csv_out
                     expect(a[0].key).to eq "test"
+                rescue Poseidon::Errors::OffsetOutOfRange
+                    puts "[warning] - bad offset supplied, resetting..."
+                    offset = :latest_offset
+                    retry
+                end
+            end
+        end
+                before(:example) do
+            @csvconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        end
+        context "CSV small malformed" do
+            it "posts error to Kafka topic csv.error" do
+                puts "Next offset    = #{@csvconsumer.next_offset}"
+                post "/rspec/test", csvheader + bad_csv, "CONTENT_TYPE" => "text/csv"
+                expect(last_response.status).to eq 202
+                sleep 1
+                begin
+                    a = @csvconsumer.fetch
+                    expect(a).to_not be_nil
+                    expect(a.empty?).to be false
+                rescue Poseidon::Errors::OffsetOutOfRange
+                    puts "[warning] - bad offset supplied, resetting..."
+                    offset = :latest_offset
+                    retry
+                end
+            end
+        end
+                before(:example) do
+            @csvconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        end
+        context "CSV small inconsistent number of columns" do
+            it "posts error to Kafka topic csv.error" do
+                puts "Next offset    = #{@csvconsumer.next_offset}"
+                post "/rspec/test", csvheader + unbalanced_csv, "CONTENT_TYPE" => "text/csv"
+                expect(last_response.status).to eq 202
+                sleep 1
+                begin
+                    a = @csvconsumer.fetch
+                    expect(a).to_not be_nil
+                    expect(a.empty?).to be false
                 rescue Poseidon::Errors::OffsetOutOfRange
                     puts "[warning] - bad offset supplied, resetting..."
                     offset = :latest_offset
@@ -154,7 +203,8 @@ describe "SSFServer" do
             end
         end
     end
-        describe "POST rspec/test/bulk" do
+
+describe "POST rspec/test/bulk" do
         before(:example) do
             @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.bulkingest", 0, :latest_offset)
         end
@@ -183,7 +233,7 @@ describe "SSFServer" do
                 end
             end
         end
-                before(:example) do
+        before(:example) do
             @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.bulkingest", 0, :latest_offset)
         end
         context "SIF/XML non-sif small" do
@@ -228,13 +278,14 @@ describe "SSFServer" do
                 end
             end
         end
-                before(:example) do
+
+        before(:example) do
             @genericconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test", 0, :latest_offset)
         end
-        context "CSV small" do
+        context "CSV 3 MB" do
             it "posts JSON to Kafka topic rspec.test" do
                 puts "Next offset    = #{@genericconsumer.next_offset}"
-                post "/rspec/test/bulk", csv, "CONTENT_TYPE" => "text/csv"
+                post "/rspec/test/bulk", csvheader + csv * 250000, "CONTENT_TYPE" => "text/csv"
                 expect(last_response.status).to eq 202
                 sleep 1
                 begin
@@ -250,11 +301,35 @@ describe "SSFServer" do
                 end
             end
         end
+
+        before(:example) do
+            @genericconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test", 0, :latest_offset)
+        end
+        context "CSV small" do
+            it "posts JSON to Kafka topic rspec.test" do
+                puts "Next offset    = #{@genericconsumer.next_offset}"
+                post "/rspec/test/bulk", csvheader + csv, "CONTENT_TYPE" => "text/csv"
+                expect(last_response.status).to eq 202
+                sleep 1
+                begin
+                    a = @genericconsumer.fetch
+                    expect(a).to_not be_nil
+                    expect(a.empty?).to be false
+                    expect(a[0].value).to eq csv_out
+                    expect(a[0].key).to eq "test"
+                rescue Poseidon::Errors::OffsetOutOfRange
+                    puts "[warning] - bad offset supplied, resetting..."
+                    offset = :latest_offset
+                    retry
+                end
+            end
+        end
+
         context "message other than CSV, JSON, XML" do
             it "rejects payload" do
-                post "/rspec/test/bulk", csv, "CONTENT_TYPE" => "text/plain"
+                post "/rspec/test/bulk", csvheader + csv, "CONTENT_TYPE" => "text/plain"
                 expect(last_response.status).to eq 415
             end
         end
     end
-        end
+end

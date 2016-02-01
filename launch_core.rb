@@ -104,6 +104,7 @@ def launch
         'sifxml.ingest',
         'sifxml.bulkingest',
         'sifxml.errors',
+        'csv.errors',
         'oneroster.validated',
         'nsip.test',
         'naplan.sifxml',

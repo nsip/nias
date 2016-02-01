@@ -4,8 +4,17 @@ require "spec_helper"
 require 'poseidon' 
 
 csv = <<CSV
-LocalId,GivenName,FamilyName,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,EmailAddress,ReceiveAdditionalInformation,StaffSchoolRole
-fjghh371,Treva,Seefeldt,7E,"7D,7E",knptb460,046129,01,tseefeldt@example.com,Y,teacher
+LocalStaffId,GivenName,FamilyName,ClassCode,HomeGroup,ASLSchoolId,LocalSchoolId,LocalCampusId,EmailAddress,AdditionalInfo,StaffSchoolRole
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
+CSV
+
+# Receive Additional Information = No way!
+invalid_csv = <<CSV
+LocalStaffId,GivenName,FamilyName,ClassCode,HomeGroup,ASLSchoolId,LocalSchoolId,LocalCampusId,EmailAddress,AdditionalInfo,StaffSchoolRole
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,No way!,teacher
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
 CSV
 
 out = <<XML
@@ -20,16 +29,19 @@ out = <<XML
       <Email Type="01">tseefeldt@example.com</Email>
     </EmailList>
   </PersonInfo>
+  <Title>teacher</Title>
   <MostRecent>
     <SchoolLocalId>046129</SchoolLocalId>
     <SchoolACARAId>knptb460</SchoolACARAId>
     <LocalCampusId>01</LocalCampusId>
     <NAPLANClassList>
       <ClassCode>7D</ClassCode>
-      <ClassCode>7E</ClassCode>
     </NAPLANClassList>
     <HomeGroup>7E</HomeGroup>
   </MostRecent>
+  <SIF_ExtendedElements>
+    <SIF_ExtendedElement Name="AdditionalInfo">Y</SIF_ExtendedElement>
+  </SIF_ExtendedElements>
 </StaffPersonal>
 XML
 out.gsub!(/\n[ ]*/,"").chomp!
@@ -47,13 +59,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     before(:all) do
         @http = Net::HTTP.new("localhost", "9292")
-        @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout_staff", 0, :latest_offset)
-        puts "Next offset    = #{@xmlconsumer.next_offset}"
         sleep 1
-        post_csv(csv)
     end
 
     context "Valid CSV to naplan.csv" do
+	before(:example) do
+        	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout_staff", 0, :latest_offset)
+        	puts "Next offset    = #{@xmlconsumer.next_offset}"
+		sleep 1
+        	post_csv(csv)
+	end
         it "pushes templated XML to naplan.sifxmlout_staff" do
             sleep 1
             begin
@@ -62,6 +77,26 @@ describe "NAPLAN convert CSV to SIF" do
                 expect(a.empty?).to be false
                 a[0].value.gsub!(%r{<StaffPersonal RefId="[^"]+">}, '<StaffPersonal RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">').gsub!(/\n[ ]*/,"")
                 expect(a[0].value).to eq out
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+    end
+
+    context "Invalid CSV to naplan.csv" do
+	before(:example) do
+                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)               
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv)
+	end
+        it "pushes errors to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset

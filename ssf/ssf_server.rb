@@ -11,6 +11,9 @@ require 'poseidon' # kafka interface
 require 'zk' # zookeeper interface
 require 'hashids' # temp non-colliding client & producer id generator
 require 'nokogiri' # xml support
+require 'csvlint' # csv support
+require 'json-schema'
+require_relative '../sms/services/cvsheaders-naplan'
 
 =begin
 Class to handle ingesting of messages into NIAS. Deals with ingest and bulk ingest of topic/stream, and requests for topic/stream and particular privacy profiles of topic/stream. Parses JSON and CSV messages into JSON objects.
@@ -36,8 +39,11 @@ class SSFServer < Sinatra::Base
         # are reasssembled into the original payload and then broken down into 
         # individual objects
         set :xmlbulktopic, 'sifxml.bulkingest'
+	# CSV errors
+	set :csverrors, 'csv.errors'
     end
 
+    @validation_error = false
 
     helpers do
         # is this a valid route for a Kafka topic
@@ -69,12 +75,14 @@ class SSFServer < Sinatra::Base
             return offset
         end
 
+	@validation_error = false
         # fetch messages from the body of the HTTP request, and parse the messages if they are in CSV or JSON
-        def fetch_raw_messages()
+        def fetch_raw_messages(topic_name)
             # set producer ID for the session
             if session['producer_id'] == nil 
                 session['producer_id'] = settings.hashid.encode(Random.new.rand(999))
             end
+	    @validation_error = false
             puts "\nProducer ID  is #{session['producer_id']}\n\n"
                         # extract messages
             puts "\nData sent is #{request.media_type}\n\n"
@@ -87,10 +95,31 @@ class SSFServer < Sinatra::Base
             when 'application/xml' then 
                 # we will leave parsing the XML to the microservice cons-prod-sif-ingest.rb
                                 raw_messages << request.body.read 
-            when 'text/csv' then raw_messages = CSV.parse( request.body.read , {:headers=>true})
+            when 'text/csv' then 
+		# There are reportedly performance issues for CSV validation above 700KB. But 20 MB validates without complaint
+		csv = request.body.read
+		cvs_schema = nil
+		case topic_name
+                when 'naplan.csv_staff'
+			csv_schema = CSVHeaders.get_naplan_staff_csv_csvw
+		when 'naplan.csv'
+			csv_schema = CSVHeaders.get_naplan_student_csv_csvw
+		else
+			csv_schema = nil
+		end
+		csv_schema = Csvlint::Schema.from_csvw_metadata("http://example.com", JSON.parse(csv_schema)) unless csv_schema.nil?
+		validator = Csvlint::Validator.new( StringIO.new( csv ) , {}, csv_schema)
+		validator.validate
+		if(validator.valid? and validator.errors.empty?) then
+			raw_messages = CSV.parse( csv , {:headers=>true})
+		else
+			@validation_error = true
+			raw_messages = validator.errors.map {|e| "Row: #{e.row} Col: #{e.column}, Category #{e.category}: Type #{e.type}, Content #{e.content}, Constraints: #{e.constraints}" }
+		end
             else
                 halt 415, "Sorry content type #{request.media_type} is not supported, must be one of: application/json - application/xml - text/csv"
             end
+	    return raw_messages
         end
 
         # post messages to the appropriate stream. bulk identifies whether these are intended 
@@ -161,21 +190,37 @@ class SSFServer < Sinatra::Base
         # end
 
         messages = []
-        fetch_raw_messages().each do | msg |
+	fetched_messages = fetch_raw_messages(topic_name)
+        case request.media_type
+	    when 'application/xml' then
+                topic = "#{settings.xmltopic}"
+                key = "#{topic_name}"
+            when 'text/csv' then 
+		if(@validation_error) then
+                	topic = "#{settings.csverrors}" 
+		else
+        		topic = "#{topic_name}"
+		end
+        	key = "#{strm}"
+	    else		
+        	topic = "#{topic_name}"
+        	key = "#{strm}"
+	end
 
-            topic = "#{topic_name}"
-            key = "#{strm}"
-
+        fetched_messages.each do | msg |
             case request.media_type
             when 'application/json' then msg = msg.to_json
             when 'application/xml' then 
                 msg =  "TOPIC: #{topic_name}\n" + msg.to_s
-                topic = "#{settings.xmltopic}"
-                key = "#{topic_name}"
-            when 'text/csv' then msg = msg.to_hash.to_json
+            when 'text/csv' then 
+		if(@validation_error) then
+			msg = msg.to_s
+		else
+			msg = msg.to_hash.to_json
+		end
             end
 
-            #puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
+            puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
             messages << Poseidon::MessageToSend.new( "#{topic}", msg, "#{key}" )
                         # write to default for audit if required
             # messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )
@@ -209,7 +254,7 @@ class SSFServer < Sinatra::Base
 
         messages = []
 
-        fetch_raw_messages().each do | msg |
+        fetch_raw_messages(topic_name).each do | msg |
 
             topic = "#{topic_name}"
             key = "#{strm}"
@@ -226,6 +271,7 @@ class SSFServer < Sinatra::Base
             #puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
 
             # Kafka has default message size of 1 MB. We chop message up into 950 KB chunks, with all but last terminating in "\n===snip n===", where n is the ordinal number of the chunk
+	    # Won't be needed for CSV, each message is one line of CSV > JSON
             msgsplit = to_2d_array(msg, 972800)
             msgtail = msgsplit.pop
             msgsplit.map!.with_index  { |x, idx| x + "\n===snip #{idx}===\n" }

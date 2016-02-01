@@ -58,15 +58,17 @@ loop do
             type = nodes.root.name
             next unless type == 'StaffPersonal'
 
-            csv['LocalId'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:LocalId")
+            csv['LocalStaffId'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:LocalId")
             csv['FamilyName'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:FamilyName")
             csv['GivenName'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:GivenName")
-            csv['Homegroup'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:HomeGroup")
-            csv['ClassCode'] = CSVHeaders.lookup_xpath_multi(nodes, "//xmlns:MostRecent/xmlns:NAPLANClassList/xmlns:ClassCode")
+            csv['HomeGroup'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:HomeGroup")
+            csv['ClassCode'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:NAPLANClassList/xmlns:ClassCode")
             csv['ASLSchoolId'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolACARAId")
-            csv['SchoolLocalId'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolLocalId")
+            csv['LocalSchoolId'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolLocalId")
             csv['LocalCampusId'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:LocalCampusId")
             csv['EmailAddress'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:EmailList/xmlns:Email")
+            csv['StaffSchoolRole'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:Title")
+            csv['AdditionalInfo'] = CSVHeaders.lookup_xpath(nodes, "//xmlns:SIF_ExtendedElements/xmlns:SIF_ExtendedElement[@Name = 'AdditionalInfo']")
 
             # puts "\nParser Index = #{idx.to_json}\n\n"
             outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", CSVHeaders.csv_object2array(csv, CSVHeaders.get_csvheaders_staff()).to_csv.chomp.gsub(/\s+/, " ") + "\n", "indexed" )

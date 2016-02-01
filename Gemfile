@@ -33,9 +33,15 @@ gem 'nokogiri'
 gem 'moneta'
 gem 'lmdb'
 
+# CSV validation
+gem 'csvlint', :path => '/Users/nickn/Documents/Arbeit/csvlint.rb'
+
+# JSON-Schema validation
+gem 'json-schema'
+
 
 # process matrix parameters in URLs
-gem 'rack-matrix_params'
+# gem 'rack-matrix_params'
 
 group :test do
 	gem 'rspec', '~> 3.0'

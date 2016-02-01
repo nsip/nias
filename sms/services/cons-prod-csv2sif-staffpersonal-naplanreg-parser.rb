@@ -2,7 +2,7 @@
 # Consumer that reads in StaffPersonal CSV records conforming to the NAPLAN Registration specification from naplan/csv_staff stream,
 # and generates SIF/XML equivalent records in naplan/sifxmlout_staff stream.
 
-# Deals with multiple class codes in CSV, assumes they are represented in CSV as "classcode1,classcode2,classcode3"
+# Underlying assumption: there will only be one class code
 
 
 require 'nokogiri'
@@ -12,6 +12,7 @@ require 'hashids'
 require 'csv'
 require 'securerandom'
 require_relative 'cvsheaders-naplan'
+require 'json-schema'
 
 @inbound = 'naplan.csv_staff'
 @outbound = 'naplan.sifxmlout_staff'
@@ -40,18 +41,21 @@ loop do
         outbound_messages = []
         messages = consumer.fetch
                 messages.each do |m|
+
             row = JSON.parse(m.value) 
             # Carriage return unacceptable
             row.each_key do |key|
                 row[key].gsub!("[ ]*\n[ ]*", " ")
             end
-            classcodes = row['ClassCode'].split(/,/)
-            classcodes_xml = ''
-            classcodes.each { |x| classcodes_xml << "      <ClassCode>#{x}</ClassCode>\n" }
+
+	    #obsolete: there will only be one classcode in CSV
+            #classcodes = row['ClassCode'].split(/,/)
+            #classcodes_xml = ''
+            #classcodes.each { |x| classcodes_xml << "      <ClassCode>#{x}</ClassCode>\n" }
 
             xml = <<XML
 <StaffPersonal RefId="#{SecureRandom.uuid}">
-  <LocalId>#{row['LocalId']}</LocalId>
+  <LocalId>#{row['LocalStaffId']}</LocalId>
   <PersonInfo>
     <Name Type="LGL">
       <FamilyName>#{row['FamilyName']}</FamilyName>
@@ -61,16 +65,19 @@ loop do
       <Email Type="01">#{row['EmailAddress']}</Email>
     </EmailList>
   </PersonInfo>
+  <Title>#{row['StaffSchoolRole']}</Title>
   <MostRecent>
-    <SchoolLocalId>#{row['SchoolLocalId']}</SchoolLocalId>
+    <SchoolLocalId>#{row['LocalSchoolId']}</SchoolLocalId>
     <SchoolACARAId>#{row['ASLSchoolId']}</SchoolACARAId>
     <LocalCampusId>#{row['LocalCampusId']}</LocalCampusId>
     <NAPLANClassList>
-#{classcodes_xml}
+      <ClassCode>#{row['ClassCode']}</ClassCode>
     </NAPLANClassList>
-    <HomeGroup>#{row['Homegroup']}</HomeGroup>
+    <HomeGroup>#{row['HomeGroup']}</HomeGroup>
   </MostRecent>
-
+  <SIF_ExtendedElements>
+    <SIF_ExtendedElement Name="AdditionalInfo">#{row['AdditionalInfo']}</SIF_ExtendedElement>
+  </SIF_ExtendedElements>
 </StaffPersonal>
 XML
 

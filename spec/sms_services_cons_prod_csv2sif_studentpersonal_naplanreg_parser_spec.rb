@@ -8,6 +8,13 @@ LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,
 fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
 CSV
 
+# Sex has value 6: invalid against NAPLAN schema
+invalid_csv = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,6,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
 out = <<XML
 <StudentPersonal RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">
   <LocalId>fjghh371</LocalId>
@@ -111,11 +118,11 @@ describe "NAPLAN convert CSV to SIF" do
         @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout", 0, :latest_offset)
         puts "Next offset    = #{@xmlconsumer.next_offset}"
         sleep 1
-        post_csv(csv)
     end
 
     context "Valid CSV to naplan.csv" do
         before(:example) do
+        	post_csv(csv)
         end
         it "pushes templated XML to naplan.sifxmlout" do
             sleep 1
@@ -125,6 +132,28 @@ describe "NAPLAN convert CSV to SIF" do
                 expect(a.empty?).to be false
                 a[0].value.gsub!(%r{<StudentPersonal RefId="[^"]+">}, '<StudentPersonal RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">').gsub!(/\n[ ]+/,"\n")
                 expect(a[0].value).to eq out
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset

@@ -61,16 +61,16 @@ class CSVHeaders
     ]
 
     @@csvheaders_staff = [
-        'LocalId',
+        'LocalStaffId',
         'GivenName',
         'FamilyName',
-        'Homegroup',
         'ClassCode',
+        'HomeGroup',
         'ASLSchoolId',
-        'SchoolLocalId',
+        'LocalSchoolId',
         'LocalCampusId',
         'EmailAddress',
-        'ReceiveAdditionalInformation',
+        'AdditionalInfo',
         'StaffSchoolRole',
     ]
 
@@ -106,5 +106,193 @@ class CSVHeaders
         end
         return @ret
     end
+
+    @@naplan_student_csv_jsonschema =   
+{
+  "type": "object",
+  "properties": {
+    "LocalId": { "type": "string" },
+    "SectorId": { "type": "string" },
+    "DiocesanId": { "type": "string" },
+    "OtherId": { "type": "string" },
+    "TAAId": { "type": "string" },
+    "StateProvinceId": { "type": "string" },
+    "NationalId": { "type": "string" },
+    "PlatformId": { "type": "string" },
+    "PreviousLocalId": { "type": "string" },
+    "PreviousSectorId": { "type": "string" },
+    "PreviousDiocesanId": { "type": "string" },
+    "PreviousOtherId": { "type": "string" },
+    "PreviousTAAId": { "type": "string" },
+    "PreviousStateProvinceId": { "type": "string" },
+    "PreviousNationalId": { "type": "string" },
+    "PreviousPlatformId": { "type": "string" },
+    "FamilyName": { "type": "string" },
+    "GivenName": { "type": "string" },
+    "PreferredName": { "type": "string" },
+    "MiddleName": { "type": "string" },
+    "BirthDate": { "type": "string" },
+    "Sex": { "type": "integer", "enum": [1, 2, 3, 9] },
+    "CountryOfBirth": { "type": "string" },
+    "EducationSupport": { "type": "string" },
+    "FFPOS": { "type": "string" },
+    "VisaCode": { "type": "string" },
+    "IndigenousStatus": { "type": "string" },
+    "LBOTE": { "type": "string" },
+    "StudentLOTE": { "type": "string" },
+    "YearLevel": { "type": "string" },
+    "TestLevel": { "type": "string" },
+    "FTE": { "type": "string" },
+    "Homegroup": { "type": "string" },
+    "ClassCode": { "type": "string" },
+    "ASLSchoolId": { "type": "string" },
+    "SchoolLocalId": { "type": "string" },
+    "LocalCampusId": { "type": "string" },
+    "MainSchoolFlag": { "type": "string" },
+    "OtherSchoolId": { "type": "string" },
+    "ReportingSchoolId": { "type": "string" },
+    "HomeSchooledStudent": { "type": "string" },
+    "Sensitive": { "type": "string" },
+    "OfflineDelivery": { "type": "string" },
+    "Parent1SchoolEducation": { "type": "string" },
+    "Parent1NonSchoolEducation": { "type": "string" },
+    "Parent1Occupation": { "type": "string" },
+    "Parent1LOTE": { "type": "string" },
+    "Parent2SchoolEducation": { "type": "string" },
+    "Parent2NonSchoolEducation": { "type": "string" },
+    "Parent2Occupation": { "type": "string" },
+    "Parent2LOTE": { "type": "string" },
+    "AddressLine1": { "type": "string" },
+    "AddressLine2": { "type": "string" },
+    "Locality": { "type": "string" },
+    "Postcode": { "type": "string" },
+    "StateTerritory": { "type": "string" }
+  }
+}
+
+
+
+    @@naplan_staff_csv_jsonschema = 
+{
+  "type": "object",
+  "properties": {
+    "LocalStaffId": { "type": "string" },
+    "FamilyName": { "type": "string" },
+    "GivenName": { "type": "string" },
+    "HomeGroup": { "type": "string" },
+    "ClassCode": { "type": "string" },
+    "ASLSchoolId": { "type": "string" },
+    "LocalSchoolId": { "type": "string" },
+    "LocalCampusId": { "type": "string" },
+    "EmailAddress": { "type": "string" },
+    "AdditionalInfo": { "type": "string" ,  "enum": ["Y", "N"]},
+    "StaffSchoolRole": { "type": "string" },
+  }
+}
+
+    @@naplan_student_csv_csvw = <<JSON
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "null": true,
+  "tables": [{
+  "url": "naplan_student_csv_csvw.csv",
+  "tableSchema": {
+     "columns": [ 
+      {"name": "LocalId", "datatype": {"base": "string"}},
+      {"name": "SectorId", "datatype": {"base": "string"}},
+      {"name": "DiocesanId", "datatype": {"base": "string"}},
+      {"name": "OtherId", "datatype": {"base": "string"}},
+      {"name": "TAAId", "datatype": {"base": "string"}},
+      {"name": "StateProvinceId", "datatype": {"base": "string"}},
+      {"name": "NationalId", "datatype": {"base": "string"}},
+      {"name": "PlatformId", "datatype": {"base": "string"}},
+      {"name": "PreviousLocalId", "datatype": {"base": "string"}},
+      {"name": "PreviousSectorId", "datatype": {"base": "string"}},
+      {"name": "PreviousDiocesanId", "datatype": {"base": "string"}},
+      {"name": "PreviousOtherId", "datatype": {"base": "string"}},
+      {"name": "PreviousTAAId", "datatype": {"base": "string"}},
+      {"name": "PreviousStateProvinceId", "datatype": {"base": "string"}},
+      {"name": "PreviousNationalId", "datatype": {"base": "string"}},
+      {"name": "PreviousPlatformId", "datatype": {"base": "string"}},
+      {"name": "FamilyName", "datatype": {"base": "string"}},
+      {"name": "GivenName", "datatype": {"base": "string"}},
+      {"name": "PreferredName", "datatype": {"base": "string"}},
+      {"name": "MiddleName", "datatype": {"base": "string"}},
+      {"name": "BirthDate", "datatype": {"base": "string"}},
+      {"name": "Sex", "datatype": {"base": "string", "format": "[1239]" }},
+      {"name": "CountryOfBirth", "datatype": {"base": "string"}},
+      {"name": "EducationSupport", "datatype": {"base": "string"}},
+      {"name": "FFPOS", "datatype": {"base": "string"}},
+      {"name": "VisaCode", "datatype": {"base": "string"}},
+      {"name": "IndigenousStatus", "datatype": {"base": "string"}},
+      {"name": "LBOTE", "datatype": {"base": "string"}},
+      {"name": "StudentLOTE", "datatype": {"base": "string"}},
+      {"name": "YearLevel", "datatype": {"base": "string"}},
+      {"name": "TestLevel", "datatype": {"base": "string"}},
+      {"name": "FTE", "datatype": {"base": "string"}},
+      {"name": "Homegroup", "datatype": {"base": "string"}},
+      {"name": "ClassCode", "datatype": {"base": "string"}},
+      {"name": "ASLSchoolId", "datatype": {"base": "string"}},
+      {"name": "SchoolLocalId", "datatype": {"base": "string"}},
+      {"name": "LocalCampusId", "datatype": {"base": "string"}},
+      {"name": "MainSchoolFlag", "datatype": {"base": "string"}},
+      {"name": "OtherSchoolId", "datatype": {"base": "string"}},
+      {"name": "ReportingSchoolId", "datatype": {"base": "string"}},
+      {"name": "HomeSchooledStudent", "datatype": {"base": "string"}},
+      {"name": "Sensitive", "datatype": {"base": "string"}},
+      {"name": "OfflineDelivery", "datatype": {"base": "string"}},
+      {"name": "Parent1SchoolEducation", "datatype": {"base": "string"}},
+      {"name": "Parent1NonSchoolEducation", "datatype": {"base": "string"}},
+      {"name": "Parent1Occupation", "datatype": {"base": "string"}},
+      {"name": "Parent1LOTE", "datatype": {"base": "string"}},
+      {"name": "Parent2SchoolEducation", "datatype": {"base": "string"}},
+      {"name": "Parent2NonSchoolEducation", "datatype": {"base": "string"}},
+      {"name": "Parent2Occupation", "datatype": {"base": "string"}},
+      {"name": "Parent2LOTE", "datatype": {"base": "string"}},
+      {"name": "AddressLine1", "datatype": {"base": "string"}},
+      {"name": "AddressLine2", "datatype": {"base": "string"}},
+      {"name": "Locality", "datatype": {"base": "string"}},
+      {"name": "Postcode", "datatype": {"base": "string"}},
+      {"name": "StateTerritory", "datatype": {"base": "string"}}
+    ]}}]
+}
+JSON
+
+    @@naplan_staff_csv_csvw = <<JSON 
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "null": true,
+  "tables": [{
+  "url": "naplan_student_csv_csvw.csv",
+  "tableSchema": {
+     "columns": [ 
+      {"name": "LocalId", "datatype": {"base": "string"}},
+      {"name": "FamilyName", "datatype": {"base": "string"}},
+      {"name": "GivenName", "datatype": {"base": "string"}},
+      {"name": "Homegroup", "datatype": {"base": "string"}},
+      {"name": "ClassCode", "datatype": {"base": "string"}},
+      {"name": "ASLSchoolId", "datatype": {"base": "string"}},
+      {"name": "SchoolLocalId", "datatype": {"base": "string"}},
+      {"name": "LocalCampusId", "datatype": {"base": "string"}},
+      {"name": "EmailAddress", "datatype": {"base": "string"}},
+      {"name": "ReceiveAdditionalInformation", "datatype": {"base": "boolean", "format": "Y|N"}},
+      {"name": "StaffSchoolRole", "datatype": {"base": "string"}}
+    ]}}]
+}
+JSON
+
+    def CSVHeaders.get_naplan_staff_csv_jsonschema
+        return @@naplan_staff_csv_jsonschema
+    end
+    def CSVHeaders.get_naplan_student_csv_jsonschema
+        return @@naplan_student_csv_jsonschema
+    end
+    def CSVHeaders.get_naplan_staff_csv_csvw
+        return @@naplan_staff_csv_csvw
+    end
+    def CSVHeaders.get_naplan_student_csv_csvw
+        return @@naplan_student_csv_csvw
+    end
+
 
 end
