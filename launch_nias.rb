@@ -76,6 +76,7 @@ def launch
         'cons-prod-sif-parser.rb',
         'cons-sms-indexer.rb',
         'cons-sms-storage.rb',
+        'cons-sms-json-storage.rb',
         'cons-oneroster-sms-storage.rb', 
         'cons-prod-oneroster-parser.rb',
         'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb',

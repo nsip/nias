@@ -41,6 +41,8 @@ class SSFServer < Sinatra::Base
         set :xmlbulktopic, 'sifxml.bulkingest'
 	# CSV errors
 	set :csverrors, 'csv.errors'
+	# storage, CSV/JSON messages. XML messages are sent to storage from sifxml.validated
+	set :jsonstorage, 'json.storage'
     end
 
     @validation_error = false
@@ -192,6 +194,7 @@ class SSFServer < Sinatra::Base
 
         messages = []
 	fetched_messages = fetch_raw_messages(topic_name)
+	
         case request.media_type
 	    when 'application/xml' then
                 topic = "#{settings.xmltopic}"
@@ -223,6 +226,11 @@ class SSFServer < Sinatra::Base
 
             #puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
             messages << Poseidon::MessageToSend.new( "#{topic}", msg, "#{key}" )
+
+            unless request.media_type == 'application/xml' or @validation_error
+                messages << Poseidon::MessageToSend.new( "#{settings.jsonstorage}", "TOPIC: #{topic_name}\n" + msg, "#{key}" )
+            end
+
                         # write to default for audit if required
             # messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )
                     end

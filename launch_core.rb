@@ -128,7 +128,8 @@ def launch
         'naplan.csvstaff_out',
         'test.test1',
         'json.test',
-        'rspec.test'
+        'rspec.test',
+        'json.storage',
     ]
 
     sleep 5 # creating too early can lead to some topics being skipped
