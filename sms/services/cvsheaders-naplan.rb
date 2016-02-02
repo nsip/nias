@@ -190,6 +190,9 @@ class CSVHeaders
   }
 }
 
+
+# http://w3c.github.io/csvw/syntax/
+
     @@naplan_student_csv_csvw = <<JSON
 {
   "@context": "http://www.w3.org/ns/csvw",
@@ -218,42 +221,42 @@ class CSVHeaders
       {"name": "GivenName", "datatype": {"base": "string"}},
       {"name": "PreferredName", "datatype": {"base": "string"}},
       {"name": "MiddleName", "datatype": {"base": "string"}},
-      {"name": "BirthDate", "datatype": {"base": "string"}},
-      {"name": "Sex", "datatype": {"base": "string", "format": "[1239]" }},
-      {"name": "CountryOfBirth", "datatype": {"base": "string"}},
-      {"name": "EducationSupport", "datatype": {"base": "string"}},
-      {"name": "FFPOS", "datatype": {"base": "string"}},
-      {"name": "VisaCode", "datatype": {"base": "string"}},
-      {"name": "IndigenousStatus", "datatype": {"base": "string"}},
-      {"name": "LBOTE", "datatype": {"base": "string"}},
-      {"name": "StudentLOTE", "datatype": {"base": "string"}},
-      {"name": "YearLevel", "datatype": {"base": "string"}},
-      {"name": "TestLevel", "datatype": {"base": "string"}},
-      {"name": "FTE", "datatype": {"base": "string"}},
+      {"name": "BirthDate", "datatype": {"base": "date", "format": "yyyy-MM-dd"}},
+      {"name": "Sex", "datatype": {"base": "string", "format": "^[1239]$" }},
+      {"name": "CountryOfBirth", "datatype": {"base": "string", "format": "^[0-9][0-9][0-9][0-9]$"}},
+      {"name": "EducationSupport", "datatype": {"base": "string", "format": "^[NUYX]$"}},
+      {"name": "FFPOS", "datatype": {"base": "string", "format": "^[129]$"}},
+      {"name": "VisaCode", "datatype": {"base": "string", "format": "^[0-9][0-9][0-9]$"}},
+      {"name": "IndigenousStatus", "datatype": {"base": "string", "format": "^[12349]$"}},
+      {"name": "LBOTE", "datatype": {"base": "string", "format": "^[NUXY]$"}},
+      {"name": "StudentLOTE", "datatype": {"base": "string", "format": "^[0-9][0-9][0-9][0-9]$" }},
+      {"name": "YearLevel", "datatype": {"base": "string", "format": "^([1-9]|1[12]|11MINUS|12PLUS|CC|K|K3|K4|P|PS|UG|UGJunSec|UGPri|UGSec|UGSnrSec)$"}},
+      {"name": "TestLevel", "datatype": {"base": "string", "format": "^[3579]$"}},
+      {"name": "FTE", "datatype": {"base": "decimal", "minimum": 0, "maximum": 1}},
       {"name": "Homegroup", "datatype": {"base": "string"}},
       {"name": "ClassCode", "datatype": {"base": "string"}},
       {"name": "ASLSchoolId", "datatype": {"base": "string"}},
       {"name": "SchoolLocalId", "datatype": {"base": "string"}},
       {"name": "LocalCampusId", "datatype": {"base": "string"}},
-      {"name": "MainSchoolFlag", "datatype": {"base": "string"}},
+      {"name": "MainSchoolFlag", "datatype": {"base": "string", "format": "^0[123]$"}},
       {"name": "OtherSchoolId", "datatype": {"base": "string"}},
       {"name": "ReportingSchoolId", "datatype": {"base": "string"}},
-      {"name": "HomeSchooledStudent", "datatype": {"base": "string"}},
-      {"name": "Sensitive", "datatype": {"base": "string"}},
-      {"name": "OfflineDelivery", "datatype": {"base": "string"}},
-      {"name": "Parent1SchoolEducation", "datatype": {"base": "string"}},
-      {"name": "Parent1NonSchoolEducation", "datatype": {"base": "string"}},
-      {"name": "Parent1Occupation", "datatype": {"base": "string"}},
-      {"name": "Parent1LOTE", "datatype": {"base": "string"}},
-      {"name": "Parent2SchoolEducation", "datatype": {"base": "string"}},
-      {"name": "Parent2NonSchoolEducation", "datatype": {"base": "string"}},
-      {"name": "Parent2Occupation", "datatype": {"base": "string"}},
-      {"name": "Parent2LOTE", "datatype": {"base": "string"}},
+      {"name": "HomeSchooledStudent", "datatype": {"base": "string", "format": "^[YUXN]$"}},
+      {"name": "Sensitive", "datatype": {"base": "string", "format": "^[YUXN]$"}},
+      {"name": "OfflineDelivery", "datatype": {"base": "string", "format": "^[YUXN]$"}},
+      {"name": "Parent1SchoolEducation", "datatype": {"base": "string", "format": "^[01234]$"}},
+      {"name": "Parent1NonSchoolEducation", "datatype": {"base": "string", "format": "^[05678]$"}},
+      {"name": "Parent1Occupation", "datatype": {"base": "string", "format": "^[123489]$"}},
+      {"name": "Parent1LOTE", "datatype": {"base": "string", "format": "^[0-9][0-9][0-9][0-9]$"}},
+      {"name": "Parent2SchoolEducation", "datatype": {"base": "string", "format": "^[01234]$"}},
+      {"name": "Parent2NonSchoolEducation", "datatype": {"base": "string", "format": "^[05678]$"}},
+      {"name": "Parent2Occupation", "datatype": {"base": "string", "format": "^[123489]$"}},
+      {"name": "Parent2LOTE", "datatype": {"base": "string", "format": "^[0-9][0-9][0-9][0-9]$"}},
       {"name": "AddressLine1", "datatype": {"base": "string"}},
       {"name": "AddressLine2", "datatype": {"base": "string"}},
       {"name": "Locality", "datatype": {"base": "string"}},
-      {"name": "Postcode", "datatype": {"base": "string"}},
-      {"name": "StateTerritory", "datatype": {"base": "string"}}
+      {"name": "Postcode", "datatype": {"base": "string", "format": "^[0-9][0-9][0-9][0-9]$"}},
+      {"name": "StateTerritory", "datatype": {"base": "string", "format": "^(NSW|VIC|TAS|SA|WA|NT|QLD|ACT)$"}}
     ]}}]
 }
 JSON
@@ -274,7 +277,8 @@ JSON
       {"name": "ASLSchoolId", "datatype": {"base": "string"}},
       {"name": "SchoolLocalId", "datatype": {"base": "string"}},
       {"name": "LocalCampusId", "datatype": {"base": "string"}},
-      {"name": "EmailAddress", "datatype": {"base": "string"}},
+      /* http://www.regular-expressions.info/email.html */
+      {"name": "EmailAddress", "datatype": {"base": "string", "format": "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-zA-Z][a-zA-Z]+" }},
       {"name": "ReceiveAdditionalInformation", "datatype": {"base": "boolean", "format": "Y|N"}},
       {"name": "StaffSchoolRole", "datatype": {"base": "string"}}
     ]}}]

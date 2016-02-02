@@ -8,11 +8,164 @@ LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,
 fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
 CSV
 
+invalid_csv_stateterritory = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,Queensland
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_postcode = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,800,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_parent2occupation = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,7,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_parent1occupation = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,machinist,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_parent2nonschooleducation = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,1,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_parent1nonschooleducation = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,05,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_parent2schooleducation = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,5,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_parent1schooleducation = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,01,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_mainschoolflag = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,1,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_fte = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,1.2,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_testlevel = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,8,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_studentlote = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,12,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_parent1lote = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,12010,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_parent2lote = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,English,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_yearlevel = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201, 9,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_indigenousstatus = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,12,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_visacode = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,1010,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+# FFPOS = 6
+invalid_csv_ffpos = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,6,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_lbote = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,No way!,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_homeschooledstudent = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,No way!,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_sensitive = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,No way!,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_offlinedelivery = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,No way!,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+invalid_csv_educationsupport = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,No way!,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+# CountryOfBirth has invalid format: 1101
+invalid_csv_countryofbirth = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,110,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
 # Sex has value 6: invalid against NAPLAN schema
-invalid_csv = <<CSV
+invalid_csv_sex = <<CSV
 LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
 fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,6,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
 fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+# Birth date has wrong format: invalid against NAPLAN schema
+invalid_csv_birthdate = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,26072009,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
 CSV
 
 out = <<XML
@@ -142,11 +295,11 @@ describe "NAPLAN convert CSV to SIF" do
         end
     end
 
-    context "Invalid CSV to naplan.csv" do
+    context "Invalid CSV to naplan.csv: sex enumerable" do
         before(:example) do
         	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
         	puts "Next offset    = #{@errorconsumer.next_offset}"
-        	post_csv(invalid_csv)
+        	post_csv(invalid_csv_sex)
         end
         it "pushes error to csv.errors" do
             sleep 1
@@ -154,6 +307,8 @@ describe "NAPLAN convert CSV to SIF" do
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 6"] }
+				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset
@@ -163,6 +318,609 @@ describe "NAPLAN convert CSV to SIF" do
         after(:example) do
         end
     end
+
+    context "Invalid CSV to naplan.csv: FFPOS enumerable" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_ffpos)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 6"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: birthdate format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_birthdate)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type invalid_date, Content 26072009"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: country of birth format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_countryofbirth)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 110"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: education support format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_educationsupport)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                a.each { |e| puts e}
+				errors = a.find_all{ |e| e.value["Type format, Content No way!"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: LBOTE format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_lbote)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content No way!"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: HomeSchooledStudent format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_homeschooledstudent)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content No way!"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: Sensitive format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_sensitive)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content No way!"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: OfflineDelivery format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_offlinedelivery)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content No way!"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: VisaCode format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_visacode)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 1010"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: IndigenousStatus format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_indigenousstatus)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 12"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: StudentLOTE format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_studentlote)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 12"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: Parent1LOTE format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_parent1lote)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 12010"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: Parent2LOTE format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_parent2lote)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content English"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: YearLevel format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_yearlevel)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content  9"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: TestLevel format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_testlevel)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 8"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: FTE format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_fte)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type max_inclusive, Content 1.2"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: MainSchoolFlag format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_mainschoolflag)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 1"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: Parent1SchoolEducation format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_parent1schooleducation)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 01"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: Parent2SchoolEducation format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_parent2schooleducation)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 5"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: Parent1NonSchoolEducation format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_parent1nonschooleducation)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 05"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: Parent2NonSchoolEducation format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_parent2nonschooleducation)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 1"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+    
+    context "Invalid CSV to naplan.csv: Parent1Occupation format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_parent1occupation)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content machinist"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: Parent2Occupation format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_parent2occupation)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 7"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: Postcode format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_postcode)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content 800"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+    context "Invalid CSV to naplan.csv: StateTerritory format" do
+        before(:example) do
+        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+        	puts "Next offset    = #{@errorconsumer.next_offset}"
+        	post_csv(invalid_csv_stateterritory)
+        end
+        it "pushes error to csv.errors" do
+            sleep 1
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+				errors = a.find_all{ |e| e.value["Type format, Content Queensland"] }
+				expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+        after(:example) do
+        end
+    end
+
+
 
     after(:all) do
         sleep 5

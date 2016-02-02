@@ -115,6 +115,7 @@ class SSFServer < Sinatra::Base
 		else
 			@validation_error = true
 			raw_messages = validator.errors.map {|e| "Row: #{e.row} Col: #{e.column}, Category #{e.category}: Type #{e.type}, Content #{e.content}, Constraints: #{e.constraints}" }
+			raw_messages.each {|e| puts e}
 		end
             else
                 halt 415, "Sorry content type #{request.media_type} is not supported, must be one of: application/json - application/xml - text/csv"
@@ -220,7 +221,7 @@ class SSFServer < Sinatra::Base
 		end
             end
 
-            puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
+            #puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
             messages << Poseidon::MessageToSend.new( "#{topic}", msg, "#{key}" )
                         # write to default for audit if required
             # messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )
