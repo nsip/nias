@@ -9,6 +9,9 @@ ruby '2.2.3'
 gem 'redis'
 gem 'hiredis', '>= 0.6.0' 
 
+
+# gem 'eventmachine'
+
 # web tools
 gem 'sinatra'
 gem 'sinatra-contrib', github: 'sinatra/sinatra-contrib'
@@ -32,6 +35,7 @@ gem 'nokogiri'
 gem 'moneta'
 gem 'lmdb'
 
+gem 'kafka-consumer'
 
 # process matrix parameters in URLs
 gem 'rack-matrix_params'
