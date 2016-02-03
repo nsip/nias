@@ -65,8 +65,6 @@ loop do
             header = m.value.lines[0]
             payload = m.value.lines[1..-1].join
 
-puts "RECEIVED MESSAGE IN JSON.STORAGE #{m.value}"
-
 
             # read json message
             json = JSON.parse(payload)

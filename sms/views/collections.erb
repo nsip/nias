@@ -27,6 +27,7 @@
             <ul class="navbar-list">
                 <li class="navbar-item"><a class="navbar-link" href="#collections">Collections</a></li>
                 <li class="navbar-item"><a class="navbar-link" href="#query_ui">Query</a></li>                
+                <li class="navbar-item"><a class="navbar-link" href="#flush">Flush</a></li>                
                 <!-- <li class="navbar-item"><a class="navbar-link" href="#graph">View</a></li> -->
             </ul>
         </div>
@@ -172,6 +173,50 @@
 
             </script>
     </div>
+
+    <!-- flush -->
+    <div class="docs-section" id="flush">
+                <h6 class="docs-header">Flush SMS Collections</h6>
+
+                <div class="row">
+                <div class="seven columns" >
+                                <div><p>Pressing FLUSH will remove all collections from the SMS. Are you sure you want to do this? <br/>
+				You can recover SMS content by reingesting all messages from the Kafka logs, but only if no logs have been flushed.</p></div> 
+				<div> <button class="button-primary" id="flush">Flush</button> <span id="flush-results"></span></div>
+                </div>
+            <script>
+		$("#flush").click(function(){
+
+                    $("#results").empty();
+                    var request = {};
+
+                    request.include_messages = true;
+                    $.getJSON("/sms/flush", request, function(result){
+ 			;
+                    });
+ 		    window.location.reload(true)
+                });
+
+            </script>
+
+                <div class="five columns" id="collection_list">
+                        <h6 class="docs-header">SMS has:</h6>
+                        <%= @coll_result.count %> known collections: -
+                                <div>
+                                        <p>
+                                                <ul>
+                            <% @coll_result.sort! %>
+                                                        <% @coll_result.each do | collection | %>
+                                                                <li><%= collection %> </li>
+                                                        <% end %>
+                                                </ul>
+
+                                        </p>
+                                </div> 
+                </div>
+        </div>
+        </div>
+
 
 
 </div>

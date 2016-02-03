@@ -64,6 +64,7 @@ require 'sinatra/contrib'
 require 'json'
 require 'csv'
 require 'moneta'
+require 'redis'
 
 require_relative 'sms_query'
 require_relative 'oneroster_sif_merge'
@@ -200,6 +201,18 @@ class SMSQueryServer < Sinatra::Base
 
         return 200, 'SIF - OneRoster id merge complete'
 
+    end
+
+    # Flush REDIS
+    get "/sms/flush" do
+        begin
+            puts "Flushing REDIS!"
+	    @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
+            @redis.flushdb
+        rescue
+            return 500, 'Error executing SMS Flush.'
+        end
+        return 200
     end
 
 
