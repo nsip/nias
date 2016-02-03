@@ -24,3 +24,5 @@ naplan/data.json
 Gemfile.lock
 
 *.lock
+
+Gemfile.lock
