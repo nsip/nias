@@ -48,7 +48,7 @@ class Naplan_SSFServer < Sinatra::Base
 		# check validity of route
 		tpc = params['topic']
 		strm = params['stream']
-		topic_name = "kafka.#{tpc}.#{strm}"
+		topic_name = "naplan.#{tpc}.#{strm}"
 		
 
 		if session['producer_id'] == nil 
@@ -79,7 +79,7 @@ class Naplan_SSFServer < Sinatra::Base
 		raw_messages.each do | msg |
 
 			topic = "#{topic_name}"
-			key = "#{strm}"
+			# key = "#{strm}"
 
 			case request.media_type
 			when 'application/json' then msg = msg.to_json

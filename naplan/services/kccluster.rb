@@ -9,15 +9,16 @@ topics    = ["naplan.json.cluster"]
 
 consumer = Kafka::Consumer.new(name, topics, zookeeper: zookeeper)
 
-@xsd = Nokogiri::XML::Schema(File.open( '../ssf/services/xsd/sif3.4/SIF_Message3.4.xsd' ))
+@xsd = Nokogiri::XML::Schema(File.open( "#{__dir__}/xsd/SIF_Message3.4.xsd" ))
 
 
 Signal.trap("INT") { consumer.interrupt }
 
+
+
 consumer.each do |message|
   # process message
 			
-			counter = counter + 1
 
 			msg_hash = JSON.parse( message.value )
 		    
@@ -32,12 +33,11 @@ consumer.each do |message|
 		    end
 		    
 		    # schema validation
-		    # xsd_errors = @xsd.validate( xml_doc )
+		    xsd_errors = @xsd.validate( xml_doc )
 		    if !xsd_errors.empty?
 		    	puts xsd_errors
 		    end
 
-  
 end
 
 
