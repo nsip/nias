@@ -9,7 +9,7 @@ Messages are received from the single stream sifxml.validated. The header of the
 Each object in the stream is filtered according to privacy filters defined in ./privacyfilters/*.xpath.
 
 The header of the received message is "topic"."stream". Each message is passed to a stram for each privacy setting simultaneously:
-* "topic"."stream".unfiltered
+* "topic"."stream".none
 * "topic"."stream".low
 * "topic"."stream".medium
 * "topic"."stream".high
@@ -30,13 +30,14 @@ The privacy filters consist of lines with two elements: the XPath and the redact
 @inbound = 'sifxml.validated'
 
 @filter = {}
-@sensitivies = [:low, :medium, :high, :extreme]
+@sensitivities = [:none, :low, :medium, :high, :extreme]
 
 def read_filter(filepath, level)
 	File.open(filepath).each do |line| 
 		next if line =~ /^#/
 		next unless line =~ /\S/
 		a = line.chomp.split(/:/)
+		a[0].gsub!(%r#(/+)(?!@)#, "\\1xmlns:") # namespaces are in XML fragments, xpaths need to allude to root default namespace
 		a[1] = "ZZREDACTED" if(a.size == 1)
 		@filter[level] << {:path => a[0], :redaction => a[1]}
 	end
@@ -77,17 +78,21 @@ end
 consumer = Poseidon::PartitionConsumer.new("cons-prod-privacyfilter", "localhost", 9092, @inbound, 0, :latest_offset)
 
 # set up producer pool - busier the broker the better for speed
+pool = {}
+@sensitivities.each do |x|
 producers = []
 (1..10).each do | i |
 	p = Poseidon::Producer.new(["localhost:9092"], "cons-prod-privacyfilter", {:partitioner => Proc.new { |key, partition_count| 0 } })
 	producers << p
 end
-pool = producers.cycle
+pool[x] = producers.cycle
+end
 
+outbound_messages = {}
 out = {}
 loop do
   begin
-  	    outbound_messages = []
+  	    @sensitivities.each { |x| outbound_messages[x] = [] }
   	    messages = []
 	    messages = consumer.fetch
 	    messages.each do |m|
@@ -95,43 +100,51 @@ loop do
                # Payload from sifxml.ingest contains as its first line a header line with the original topic
                 header = m.value.lines[0]
                 payload = m.value.lines[1..-1].join
-				topic = header[/TOPIC: (.+)/, 1]
+		topic = header[/TOPIC: (.+)/, 1]
 
-      	    	# puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}... #{m.value.lines[1]}\n\n"
+      	    	#puts "Privacy: processing message no.: #{m.offset}, #{m.key}: #{topic}... #{m.value.lines[1]}\n\n"
 
-				input = Nokogiri::XML(payload) do |config|
-        			config.nonet.noblanks
-				end
-
-				# puts "\n\nInput:\n\n#{input.to_xml}\n\n"
-		
-				if(input.errors.empty?) 
-		      		item_key = "prv_filter:#{ sprintf('%09d', m.offset) }"
-					
-					out[:none] = input
-					out[:low] = apply_filter(input, @filter[:low])
-					out[:medium] = apply_filter(out[:low], @filter[:medium])
-					out[:high] = apply_filter(out[:medium], @filter[:high])
-					out[:extreme] = apply_filter(out[:high], @filter[:extreme])
-
-					# puts "\n\nOut\n = #{out.to_s}\n\n"
-
-					[:none, :low, :medium, :high, :extreme].each {|x|
-						if x == :none
-							# puts "\n\nSending: to #{topic}.unfiltered\n\n#{out[x].to_s}\n\nkey: #{item_key}"
-							outbound_messages << Poseidon::MessageToSend.new( "#{topic}", out[x].to_s, item_key ) 	
-						else
-							# puts "\n\nSending: to #{topic}.#{x}\n\n#{out[x].to_s}\n\nkey: #{item_key}"
-							outbound_messages << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
-						end
-					}
-				end
-	
+		input = Nokogiri::XML(payload) do |config|
+        		config.nonet.noblanks
 		end
 
-		outbound_messages.each_slice(20) do | batch |
-			pool.next.send_messages( batch )
-   		end
+		#puts "\n\nInput:\n\n#{input.to_xml}\n\n"
+	
+		if(input.errors.empty?) 
+      			item_key = "prv_filter:#{ sprintf('%09d', m.offset) }"
+			
+			out[:none] = input
+			out[:low] = apply_filter(input, @filter[:low])
+			out[:medium] = apply_filter(out[:low], @filter[:medium])
+			out[:high] = apply_filter(out[:medium], @filter[:high])
+			out[:extreme] = apply_filter(out[:high], @filter[:extreme])
+
+			# puts "\n\nOut\n = #{out.to_s}\n\n"
+
+			@sensitivities.each {|x|
+			 #puts "\n\nSending: to #{topic}.#{x}\n\n#{out[x].to_s.lines[1]}\n\nkey: #{item_key}"
+				outbound_messages[x] << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
+			}
+		end
+		if(outbound_messages[:none].length > 20)
+			@sensitivities.each do |x|
+				outbound_messages[x].each_slice(20) do | batch |
+					pool[x].next.send_messages( batch )
+   				end
+			end
+  	    		@sensitivities.each { |x| outbound_messages[x] = [] }
+		end
+				
+	
+	      end
+
+		unless(outbound_messages.empty?)
+			@sensitivities.each do |x|
+				outbound_messages[x].each_slice(20) do | batch |
+					pool[x].next.send_messages( batch )
+   				end
+			end
+		end
 		
 		# puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
   

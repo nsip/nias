@@ -27,10 +27,14 @@ class SSFServer < Sinatra::Base
 		# cookies enabled will mean automatic correct setting of message offset in session
 		# enable :sessions
 
-		# All received XML messages are also sent from /:topic:/stream to a global sifxml.ingest topic, for validation by microservice
+		# All received XML messages to normal endpoint are also sent from /:topic:/stream to a global sifxml.ingest topic, for validation by microservice
 		# The source topic/stream is injected into the header line TOPIC: topic/stream before the XML payload
 		set :xmltopic, 'sifxml.ingest'
-
+		# All received XML messages to bulk ingest endpoint are sent to
+		# global sifxml.bulkingest topic, broken down into 1 MB messages. They
+		# are reasssembled into the original payload and then broken down into 
+		# individual objects
+		set :xmlbulktopic, 'sifxml.bulkingest'
 	end
 
 
@@ -60,6 +64,63 @@ class SSFServer < Sinatra::Base
 				end
 				return offset
 			end
+			
+			def fetch_raw_messages()
+				if session['producer_id'] == nil 
+					session['producer_id'] = settings.hashid.encode(Random.new.rand(999))
+				end
+				producer_id = session['producer_id']
+				puts "\nProducer ID  is #{producer_id}\n\n"
+		
+				# extract messages
+				puts "\nData sent is #{request.media_type}\n\n"
+				# get the payload
+				request.body.rewind
+				# read messages based on content type
+				raw_messages = []
+				case request.media_type
+				when 'application/json' then raw_messages = JSON.parse( request.body.read )
+				when 'application/xml' then 
+					# we will leave parsing the XML to the microservice cons-prod-sif-ingest.rb
+					
+					raw_messages << request.body.read 
+				when 'text/csv' then raw_messages = CSV.parse( request.body.read , {:headers=>true})
+				else
+					halt 415, "Sorry content type #{request.media_type} is not supported, must be one of: application/json - application/xml - text/csv"
+				end
+			end
+			
+			def post_messages( messages , compression_codec, bulk )
+				# set up producer pool - busier the broker the better for speed
+				# but no multiple producers if doing bulk ingest: splitting the message among producers risks its being reassembled out of sequence
+				producers = []
+				producercount = bulk ? 1 : 10
+				(1..producercount).each do | i |
+					p = Poseidon::Producer.new(["localhost:9092"], session['producer_id'], {:compression_codec => compression_codec , :partitioner => Proc.new { |key, partition_count| 0 } })
+					producers << p
+				end
+				pool = producers.cycle
+		
+				# send the messages
+				sending = Time.now
+				puts "sending messages ( #{messages.count} )...."
+				puts "started at: #{sending.to_s}"
+
+				messages.each_slice(20) do | batch |
+						pool.next.send_messages( batch )
+						#p.send_messages( batch )
+				end
+		
+				finish = Time.now
+				puts "\nFinished: #{finish.to_s}\n\n"
+				puts "\ntime taken to send: #{(finish - sending).to_s} seconds\n\n"
+			end
+
+  			# https://www.ruby-forum.com/topic/1057851
+  			def to_2d_array(str, value)
+    				str.unpack("a#{value}"*((str.size/value)+((str.size%value>0)?1:0)))
+  			end
+
 	end
 
 
@@ -78,13 +139,16 @@ class SSFServer < Sinatra::Base
 	# 
 	post "/:topic/:stream" do
 		content_type 'application/json'
-		
+
 		# check validity of route
 		tpc = params['topic']
 		strm = params['stream']
 		topic_name = "#{tpc}.#{strm}"
-		
-		# 
+
+		if request.content_length.to_i > 1000000 then
+		 	halt 400, "SSF does not accept messages over 1 MB in size. Try the bulk uploader: #{tpc}/#{strm}/bulk (limit: 50 MB)" 
+		end
+
 		# uncomment this block if you want to prevent dynamic creation
 		# of new topics
 		# 
@@ -92,35 +156,8 @@ class SSFServer < Sinatra::Base
 		# 	halt 400, "Sorry #{topic_name} is not a supported route." 
 		# end
 
-
-
-		if session['producer_id'] == nil 
-			session['producer_id'] = settings.hashid.encode(Random.new.rand(999))
-		end
-		producer_id = session['producer_id']
-		puts "\nProducer ID  is #{producer_id}\n\n"
-
-
-
-
-		# extract messages
-		puts "\nData sent is #{request.media_type}\n\n"
-		# get the payload
-		request.body.rewind
-		# read messages based on content type
-		raw_messages = []
-		case request.media_type
-		when 'application/json' then raw_messages = JSON.parse( request.body.read )
-		when 'application/xml' then 
-			# we will leave parsing the XML to the microservice cons-prod-sif-ingest.rb
-			raw_messages << request.body.read 
-		when 'text/csv' then raw_messages = CSV.parse( request.body.read , {:headers=>true})
-		else
-			halt 415, "Sorry content type #{request.media_type} is not supported, must be one of: application/json - application/xml - text/csv"
-		end
-		
 		messages = []
-		raw_messages.each do | msg |
+		fetch_raw_messages().each do | msg |
 
 			topic = "#{topic_name}"
 			key = "#{strm}"
@@ -135,7 +172,6 @@ class SSFServer < Sinatra::Base
 			end
 
 			#puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
-			
 			messages << Poseidon::MessageToSend.new( "#{topic}", msg, "#{key}" )
 			
 			# write to default for audit if required
@@ -143,34 +179,72 @@ class SSFServer < Sinatra::Base
 			
 		end
 
+		post_messages(messages, :none, false)		
+		return 202
+	end
+	
+	# bulk uploader: relaxes message limit from 1 MB to 50 MB, but splits up files into 1 MB segments, for reassembly 
+	# 
+	# 
+	post "/:topic/:stream/bulk" do
+		content_type 'application/json'
 
+		# check validity of route
+		tpc = params['topic']
+		strm = params['stream']
+		topic_name = "#{tpc}.#{strm}"
 
-		# set up producer pool - busier the broker the better for speed
-		producers = []
-		(1..10).each do | i |
-			p = Poseidon::Producer.new(["localhost:9092"], producer_id, {:partitioner => Proc.new { |key, partition_count| 0 } })
-			producers << p
-		end
-		pool = producers.cycle
-
-
-
-
-		# send the messages
-		sending = Time.now
-		puts "sending messages ( #{messages.count} )...."
-		puts "started at: #{sending.to_s}"
-
-
-		messages.each_slice(20) do | batch |
-				pool.next.send_messages( batch )
+		if request.content_length.to_i > 500000000 then
+		 	halt 400, "SSF does not accept messages over 500 MB in size." 
 		end
 
+		# uncomment this block if you want to prevent dynamic creation
+		# of new topics
+		# 
+		# if  !valid_route?( topic_name ) then
+		# 	halt 400, "Sorry #{topic_name} is not a supported route." 
+		# end
 
-		finish = Time.now
-		puts "\nFinished: #{finish.to_s}\n\n"
-		puts "\ntime taken to send: #{(finish - sending).to_s} seconds\n\n"
-		
+		messages = []
+
+		fetch_raw_messages().each do | msg |
+
+			topic = "#{topic_name}"
+			key = "#{strm}"
+
+			case request.media_type
+			when 'application/json' then msg = msg.to_json
+			when 'application/xml' then 
+				msg =  "TOPIC: #{topic_name}\n" + msg.to_s
+				topic = "#{settings.xmlbulktopic}"
+				key = "#{topic_name}"
+			when 'text/csv' then msg = msg.to_hash.to_json
+			end
+
+			#puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
+
+			# Kafka has default message size of 1 MB. We chop message up into 950 KB chunks, with all but last terminating in "\n===snip==="
+			msgsplit = to_2d_array(msg, 972800)
+			msgtail = msgsplit.pop
+			msgsplit.map!.with_index  { |x, idx| x + "\n===snip #{idx}===\n" }
+			
+			msgsplit.each do |msg1|
+				messages << Poseidon::MessageToSend.new( "#{topic}", msg1, "#{key}" )
+			end
+			messages << Poseidon::MessageToSend.new( "#{topic}", msgtail , "#{key}" )
+
+
+			#msgsplit.each_with_index do |msg1, idx|
+			#	messages << Poseidon::MessageToSend.new( "#{topic}", msg1 + "\n===snip #{idx}===\n", "#{key}" )
+			#end
+			#messages << Poseidon::MessageToSend.new( "#{topic}", msgtail + "\n", "#{key}" )
+			
+			# write to default for audit if required
+			# messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )
+			
+		end
+
+		post_messages(messages, :none, true)		
 		return 202
 	end
 

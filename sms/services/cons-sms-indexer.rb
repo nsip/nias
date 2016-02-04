@@ -122,8 +122,10 @@ loop do
                   			refs = []
                   			refs = idx_hash['equivalentids'].reject { |n| n == equiv } # can ignore self-links
                   			refs << idx_hash['id']
-
+#puts %Q(redis.sadd "equivalent:ids:#{equiv}", #{refs} )
 					@redis.sadd "equivalent:ids:#{equiv}", refs unless refs.empty?
+#puts "guid2 set equivalent:ids:#{equiv} : " + (@redis.smembers "equivalent:ids:#{guid2}").join(" ")
+
 				end
 
       				# then add id to sets for links

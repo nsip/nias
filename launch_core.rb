@@ -31,7 +31,12 @@ end
 def launch
 
   # just in case an old one gets left behind, delete on startup
-  File.delete( @pid_file ) if File.exist?( @pid_file )
+  #File.delete( @pid_file ) if File.exist?( @pid_file )
+  # if an old pid file exists, abort, should be running -K instead
+  if ( File.exist?( @pid_file) ) then
+    puts "The file #{@pid_file} exists: run ./launch_core.rb -K to terminate any existing processes"
+    exit
+  end
   
   # daemonise launched processes
   Process.daemon( true, true )
@@ -83,17 +88,38 @@ def launch
               'sifxml.validated',
               'sms.indexer',
               'sifxml.ingest',
+              'sifxml.bulkingest',
               'sifxml.errors',
               'oneroster.validated',
               'nsip.test',
               'naplan.sifxml',
+              'naplan.sifxml.none',
+              'naplan.sifxml.low',
+              'naplan.sifxml.medium',
+              'naplan.sifxml.high',
+              'naplan.sifxml.extreme',
+              'naplan.sifxmlout',
               'naplan.csv',
+              'naplan.csvstudents',
+              'naplan.csv_staff',
+              'naplan.csvstaff',
+              'naplan.sifxml_staff',
+              'naplan.sifxml_staff.none',
+              'naplan.sifxml_staff.low',
+              'naplan.sifxml_staff.medium',
+              'naplan.sifxml_staff.high',
+              'naplan.sifxml_staff.extreme',
+              'naplan.sifxmlout_staff',
+	      'naplan.csvstaff_out',
               'test.test1',
-              'json.test'
+              'json.test',
+              'rspec.test'
             ]
 
+  sleep 5 # creating too early truncates topics
   topics.each do | topic |
 
+    puts "Creating #{topic}"
     pid = Process.spawn( './kafka/bin/kafka-topics.sh', 
                                                       '--zookeeper localhost:2181', 
                                                       '--create',

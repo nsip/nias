@@ -30,14 +30,19 @@ end
 def launch
 
   # just in case an old one gets left behind, delete on startup
-  File.delete( @pid_file ) if File.exist?( @pid_file )
+  #File.delete( @pid_file ) if File.exist?( @pid_file )
+  if ( File.exist?( @pid_file) ) then
+    puts "The file #{@pid_file} exists: run ./launch_nias.rb -K to terminate any existing processes"
+    exit
+  end
 
 
   banner 'Starting NIAS SSF services'
 
   ssf_services = [
                 {:name => 'cons-prod-privacyfilter.rb', :options  => ''},
-                {:name =>'cons-prod-sif-ingest-validate.rb', :options => ''}
+                {:name =>'cons-prod-sif-ingest-validate.rb', :options => ''},
+                {:name =>'cons-prod-sif-bulk-ingest-validate.rb', :options => ''}
 
               ]
 
@@ -58,8 +63,10 @@ def launch
                   'cons-sms-storage.rb',
                   'cons-oneroster-sms-storage.rb', 
                   'cons-prod-oneroster-parser.rb',
-		  'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb'
-		  # 'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb'
+		  'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb',
+		  'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb',
+		  'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb',
+		  'cons-prod-sif2csv-staffpersonal-naplanreg-parser.rb',
                 ]
 
   sms_services.each_with_index do | service, i |
