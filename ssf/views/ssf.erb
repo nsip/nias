@@ -20,6 +20,19 @@
         </div>
     </section>
 
+    <!-- navigation -->                 
+    <div class="navbar-spacer"></div>
+    <nav class="navbar">        
+        <div class="container">
+            <ul class="navbar-list">
+                                 
+                <li class="navbar-item"><a class="navbar-link" href="#server_info">Server Info</a></li>
+                <li class="navbar-item"><a class="navbar-link" href="#upload">Upload File</a></li>
+                                
+            </ul>
+        </div>      
+    </nav>
+
     <!-- known topics list -->
     <div class="docs-section" id="server_info"> 
 		<h6 class="docs-header">Server Details...</h6>
@@ -49,6 +62,40 @@
     	</div>
 
 	</div>
+
+	<!-- upload -->
+		 <div class="docs-section" id="upload"> 
+                <h6 class="docs-header">Upload File</h6>
+                
+                <div class="row">
+                <div class="seven columns" id="collection_text">
+                                <div>Normally NIAS expects you to send files to a REST endpoint for the given topic (see <a href="https://github.com/nsip/nias/wiki/Workflow">NIAS Workflow</A>). File upload can be used instead, particularly if you have very large files.
+
+<form action="/fileupload" method="POST" enctype="multipart/form-data">
+  <input type="file" name="file" ><br/>
+  <input type="radio" name="mimetype" value="application/xml">application/xml (SIF) 
+  <input type="radio" name="mimetype" value="application/json">application/json 
+  <input type="radio" name="mimetype" value="text/csv" checked>text/csv <br/>
+
+		<label for="topic_menu">Topic</label>
+                    <select class="u-full-width" name="topic_menu">
+                        <% @topics.sort.reject{|e| e.match( %r!.*/.*/.*! ) }.each do | collection | %>
+                            <option value="<%= collection %>"><%= collection %></option>
+                        <% end %>
+                    </select>
+		or: <input type="text" id="topic">/<input type="text" id="stream">
+
+
+  <input  class="button-primary" type="submit">
+</form>
+        
+                                </div>
+                </div>
+            
+        </div>
+
+        </div>
+
 
 
 </div>

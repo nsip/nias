@@ -99,6 +99,7 @@ def launch
     banner 'Creating known topics'
 
     topics = [
+=begin
         'sifxml.validated',
         'sms.indexer',
         'sifxml.ingest',
@@ -114,7 +115,9 @@ def launch
         'naplan.sifxml.high',
         'naplan.sifxml.extreme',
         'naplan.sifxmlout',
+=end
         'naplan.csv',
+=begin
         'naplan.csvstudents',
         'naplan.csv_staff',
         'naplan.csvstaff',
@@ -130,6 +133,7 @@ def launch
         'json.test',
         'rspec.test',
         'json.storage',
+=end
     ]
 
     sleep 5 # creating too early can lead to some topics being skipped

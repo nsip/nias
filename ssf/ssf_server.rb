@@ -77,29 +77,38 @@ class SSFServer < Sinatra::Base
             return offset
         end
 
+	def validate_fileupload(mimetype, topic_menu, topic, stream, payload)
+		return "MIME type #{mimetype} not recognised" if mimetype != 'application/xml' and mimetype != 'application/json' and mimetype != 'text/csv'
+		return "No topic provided" if topic_menu.nil? and (topic.nil? or stream.nil?)
+		return "No file provided" if payload.nil?
+		return "Topic #{topic} malformed" if !topic.nil? and topic.match(%r!/!)
+		return "Stream #{stream} malformed" if !stream.nil? and stream.match(%r!/!)
+		return "OK"
+	end
+
 	@validation_error = false
         # fetch messages from the body of the HTTP request, and parse the messages if they are in CSV or JSON
-        def fetch_raw_messages(topic_name)
+        def fetch_raw_messages(topic_name, mimetype, body)
             # set producer ID for the session
             if session['producer_id'] == nil 
                 session['producer_id'] = settings.hashid.encode(Random.new.rand(999))
             end
-	    @validation_error = false
+	    	@validation_error = false
             puts "\nProducer ID  is #{session['producer_id']}\n\n"
                         # extract messages
-            puts "\nData sent is #{request.media_type}\n\n"
+            puts "\nData sent is #{mimetype}\n\n"
             # get the payload
-            request.body.rewind
+            #request.body.rewind
             # read messages based on content type
             raw_messages = []
-            case request.media_type
-            when 'application/json' then raw_messages = JSON.parse( request.body.read )
+            case mimetype
+            when 'application/json' then raw_messages = JSON.parse( body ) # request.body.read )
             when 'application/xml' then 
                 # we will leave parsing the XML to the microservice cons-prod-sif-ingest.rb
-                                raw_messages << request.body.read 
+                                raw_messages << body # request.body.read 
             when 'text/csv' then 
 		# There are reportedly performance issues for CSV validation above 700KB. But 20 MB validates without complaint
-		csv = request.body.read
+		csv = body # request.body.read
 		cvs_schema = nil
 		case topic_name
                 when 'naplan.csv_staff'
@@ -120,7 +129,7 @@ class SSFServer < Sinatra::Base
 			raw_messages.each {|e| puts e}
 		end
             else
-                halt 415, "Sorry content type #{request.media_type} is not supported, must be one of: application/json - application/xml - text/csv"
+                halt 415, "Sorry content type #{mimetype} is not supported, must be one of: application/json - application/xml - text/csv"
             end
 	    return raw_messages
         end
@@ -193,7 +202,7 @@ class SSFServer < Sinatra::Base
         # end
 
         messages = []
-	fetched_messages = fetch_raw_messages(topic_name)
+	fetched_messages = fetch_raw_messages(topic_name, request.media_type, request.body.read )
 	
         case request.media_type
 	    when 'application/xml' then
@@ -263,7 +272,7 @@ class SSFServer < Sinatra::Base
 
         messages = []
 
-        fetch_raw_messages(topic_name).each do | msg |
+        fetch_raw_messages(topic_name, mimetype, request.body.read).each do | msg |
 
             topic = "#{topic_name}"
             key = "#{strm}"
@@ -382,6 +391,100 @@ class SSFServer < Sinatra::Base
 
 
     end
+
+
+
+    # read messages from a stream
+    post "/fileupload" do
+	mimetype = params[:mimetype]
+	topic_menu = params['topic_menu'] || nil
+	topic = params[:topic]
+	stream = params[:stream]
+	payload = params[:file]
+
+	validation = validate_fileupload(mimetype, topic_menu, topic, stream, payload[:filename])
+	unless validation == "OK"
+            	params.inspect
+		halt 400, params.inspect + validation 
+	end
+	tempfile = params[:file][:tempfile]
+	filename = params[:file][:filename]
+	body = tempfile.read
+	body.gsub!(%r!^.*\nContent-Type:[^\n]+\n\n!, '')
+	body.gsub!(%r!^.*?\n\n------WebKitFormBoundary.*$!, '\n')
+#puts body
+
+	if(topic.nil? or stream.nil?)
+		topic_out = topic_menu
+	else
+		topic_out = "#{topic}/#{stream}"
+	end
+	strm = topic_out.sub(%r!^.*/!, '')
+	topic = topic_out.sub(%r!/.*$!, '')
+	topic_name = topic_out.gsub(%r!/!, '.')
+	
+        if request.content_length.to_i > 500000000 then
+            halt 400, "SSF does not accept messages over 500 MB in size." 
+        end
+
+        # uncomment this block if you want to prevent dynamic creation
+        # of new topics
+        # 
+        # if  !valid_route?( topic_name ) then
+        # 	halt 400, "Sorry #{topic_name} is not a supported route." 
+        # end
+
+        messages = []
+        fetch_raw_messages(topic_name, mimetype, body).each do | msg |
+
+            topic = "#{topic_name}"
+            key = "#{strm}"
+
+            case mimetype
+            when 'application/json' then msg = msg.to_json
+            when 'application/xml' then 
+                msg =  "TOPIC: #{topic_name}\n" + msg.to_s
+                topic = "#{settings.xmlbulktopic}"
+                key = "#{topic_name}"
+            when 'text/csv' then msg = msg.to_hash.to_json
+            end
+
+            #puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
+
+            # Kafka has default message size of 1 MB. We chop message up into 950 KB chunks, with all but last terminating in "\n===snip n===", where n is the ordinal number of the chunk
+	    # Won't be needed for CSV, each message is one line of CSV > JSON
+            msgsplit = to_2d_array(msg, 972800)
+            msgtail = msgsplit.pop
+            msgsplit.map!.with_index  { |x, idx| x + "\n===snip #{idx}===\n" }
+                        msgsplit.each do |msg1|
+                messages << Poseidon::MessageToSend.new( "#{topic}", msg1, "#{key}" )
+            end
+            messages << Poseidon::MessageToSend.new( "#{topic}", msgtail , "#{key}" )
+
+            # write to default for audit if required
+            # messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )			
+        end
+
+        post_messages(messages, :none, true)		
+        return 202, "File read successfully"
+	
+
+	# tried to pass control to POST topic_menu; have to invoke the methods separately here
+
+
+
+    end
+
+
+
+
+
+
+
+
+
+
+
 
 end # end of sinatra app class
 
