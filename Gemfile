@@ -9,6 +9,9 @@ ruby '2.2.3'
 gem 'redis'
 gem 'hiredis', '>= 0.6.0' 
 
+
+# gem 'eventmachine'
+
 # web tools
 gem 'sinatra', require: 'sinatra/base'
 gem 'sinatra-contrib', github: 'sinatra/sinatra-contrib'
@@ -39,6 +42,7 @@ gem 'csvlint', :path => '/Users/nickn/Documents/Arbeit/csvlint.rb'
 # JSON-Schema validation
 gem 'json-schema'
 
+gem 'kafka-consumer'
 
 # process matrix parameters in URLs
 # gem 'rack-matrix_params'

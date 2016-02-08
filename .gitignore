@@ -14,3 +14,19 @@ kafka/logs/*
 *.lock
 
 *.lock
+
+*.lock
+
+naplan/80k_data.json
+
+naplan/data.json
+
+Gemfile.lock
+
+*.lock
+
+Gemfile.lock
+
+Gemfile.lock
+
+.rspec
