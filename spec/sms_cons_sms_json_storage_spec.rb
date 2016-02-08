@@ -18,7 +18,7 @@ id,something,somethingelse
 #{guid},test,hello
 CSV
 
-    json = %Q!{"id"=>"#{guid}", "something"=>"test", "somethingelse"=>"hello", "__linenumber"=>1}!
+    json = %Q!{"id"=>"#{guid}", "something"=>"test", "somethingelse"=>"hello", "__linenumber"=>1, "__linecontent"=>"#{guid},test,hello"}!
 
     @service_name = 'sms_cons_sms_json_storage_spec'
 
