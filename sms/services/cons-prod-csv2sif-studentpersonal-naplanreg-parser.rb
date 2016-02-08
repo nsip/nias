@@ -52,7 +52,8 @@ def Postcode2State( postcodestr )
 end
 
 @inbound = 'naplan.csv'
-@outbound = 'naplan.sifxmlout'
+#@outbound = 'naplan.sifxmlout'
+@outbound = 'sifxml.ingest'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 
@@ -80,8 +81,13 @@ loop do
                 messages.each do |m|
             row = JSON.parse(m.value) 
 
+# inject the source CSV line as a comment into the generated XML; errors found in the templated SIF/XML
+# will be reported back in the csv.errors stream
+
             xml = <<XML
+<StudentPersonals  xmlns="http://www.sifassociation.org/au/datamodel/3.4">
 <StudentPersonal RefId="#{SecureRandom.uuid}">
+<!-- CSV line #{row['__linenumber']} -->
   <LocalId>#{row['LocalId']}</LocalId>
   <StateProvinceId>#{row['StateProvinceId']}</StateProvinceId>
   <OtherIdList>
@@ -163,6 +169,7 @@ loop do
   <Sensitive>#{row['Sensitive']}</Sensitive>
   <OfflineDelivery>#{row['OfflineDelivery']}</OfflineDelivery>
 </StudentPersonal>
+</StudentPersonals>
 
 XML
 
@@ -170,10 +177,11 @@ XML
             nodes = Nokogiri::XML( xml ) do |config|
                 config.nonet.noblanks
             end
-            nodes.xpath('//StudentPersonal//child::*[not(node())]').each do |node|
+	    # remove empty nodes from anywhere in the document
+            nodes.xpath('//*//child::*[not(node())]').each do |node|
                 node.remove
             end
-            outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", nodes.root.to_s, "indexed" )
+            outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout\n" + nodes.root.to_s, "indexed" )
         end
 
         # send results to indexer to create sms data graph

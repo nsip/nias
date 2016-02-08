@@ -9,25 +9,8 @@ fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
 fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
 CSV
 
-# AdditionalInfo = No way!
-invalid_csv_additionalinfo = <<CSV
-LocalStaffId,GivenName,FamilyName,ClassCode,HomeGroup,ASLSchoolId,LocalSchoolId,LocalCampusId,EmailAddress,AdditionalInfo,StaffSchoolRole
-fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
-fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,No way!,teacher
-fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
-CSV
-
-# email missing @ 
-invalid_csv_email = <<CSV
-LocalStaffId,GivenName,FamilyName,ClassCode,HomeGroup,ASLSchoolId,LocalSchoolId,LocalCampusId,EmailAddress,AdditionalInfo,StaffSchoolRole
-fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldtexample.com,Y,teacher
-fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
-fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
-CSV
-
-
 out = <<XML
-<StaffPersonal RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">
+<StaffPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">
   <LocalId>fjghh371</LocalId>
   <PersonInfo>
     <Name Type="LGL">
@@ -73,19 +56,24 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Valid CSV to naplan.csv" do
 	before(:example) do
-        	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout_staff", 0, :latest_offset)
+        	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout_staff.none", 0, :latest_offset)
         	puts "Next offset    = #{@xmlconsumer.next_offset}"
-		sleep 1
         	post_csv(csv)
+		sleep 5
 	end
-        it "pushes templated XML to naplan.sifxmlout_staff" do
-            sleep 1
+        it "pushes templated XML to naplan.sifxmlout_staff.none" do
             begin
                 a = @xmlconsumer.fetch
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
-                a[0].value.gsub!(%r{<StaffPersonal RefId="[^"]+">}, '<StaffPersonal RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">').gsub!(/\n[ ]*/,"")
-                expect(a[0].value).to eq out
+                expect(a[0].nil?).to be false
+                expect(a[0].value.nil?).to be false
+		received = a[0].value
+                received.gsub!(%r{<StaffPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="[^"]+">}, '<StaffPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">')
+		received.gsub!(%r{<\?xml version="1.0"\?>},'')
+		received.gsub!(%r{<!-- CSV line[^>]+>},'')
+		received.gsub!(/\n[ ]*/,"")
+                expect(received).to eq out
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset
@@ -93,51 +81,6 @@ describe "NAPLAN convert CSV to SIF" do
             end
         end
     end
-
-    context "Invalid CSV to naplan.csv, malformed email address" do
-	before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)               
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
-        	post_csv(invalid_csv_email)
-	end
-        it "pushes errors to csv.errors" do
-            sleep 1
-            begin
-                a = @errorconsumer.fetch
-                expect(a).to_not be_nil
-                expect(a.empty?).to be false
-				email_errors = a.find_all{ |e| e.value["Type format, Content tseefeldtexample.com"] }
-				expect(email_errors.empty?).to be false
-            rescue Poseidon::Errors::OffsetOutOfRange
-                puts "[warning] - bad offset supplied, resetting..."
-                offset = :latest_offset
-                retry
-            end
-        end
-    end
-
-    context "Invalid CSV to naplan.csv, malformed additionalinfo boolean" do
-	before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)               
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
-        	post_csv(invalid_csv_additionalinfo)
-	end
-        it "pushes errors to csv.errors" do
-            sleep 1
-            begin
-                a = @errorconsumer.fetch
-                expect(a).to_not be_nil
-                expect(a.empty?).to be false
-		boolean_errors = a.find_all{ |e| e.value["Type invalid_boolean, Content No way!"] }
-		expect(boolean_errors.empty?).to be false
-            rescue Poseidon::Errors::OffsetOutOfRange
-                puts "[warning] - bad offset supplied, resetting..."
-                offset = :latest_offset
-                retry
-            end
-        end
-    end
-
 
     after(:all) do
         sleep 5

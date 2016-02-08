@@ -54,7 +54,7 @@ test,hello
 CSV
 
 
-csv_out = '{"label":"test","value":"hello"}'
+csv_out = '{"label":"test","value":"hello","__linenumber":1}'
 
 @service_name = 'spec-ssf-ssf-server'
 

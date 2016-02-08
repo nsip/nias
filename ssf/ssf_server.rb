@@ -118,11 +118,12 @@ class SSFServer < Sinatra::Base
 		else
 			csv_schema = nil
 		end
-		csv_schema = Csvlint::Schema.from_csvw_metadata("http://example.com", JSON.parse(csv_schema)) unless csv_schema.nil?
-		validator = Csvlint::Validator.new( StringIO.new( csv ) , {}, csv_schema)
+		#csv_schema = Csvlint::Schema.from_csvw_metadata("http://example.com", JSON.parse(csv_schema)) unless csv_schema.nil?
+		validator = Csvlint::Validator.new( StringIO.new( csv ) , {}, nil)
 		validator.validate
 		if(validator.valid? and validator.errors.empty?) then
 			raw_messages = CSV.parse( csv , {:headers=>true})
+			raw_messages.each_with_index {|e, i| e[:__linenumber] = i+1 }
 		else
 			@validation_error = true
 			raw_messages = validator.errors.map {|e| "Row: #{e.row} Col: #{e.column}, Category #{e.category}: Type #{e.type}, Content #{e.content}, Constraints: #{e.constraints}" }
@@ -272,7 +273,7 @@ class SSFServer < Sinatra::Base
 
         messages = []
 
-        fetch_raw_messages(topic_name, mimetype, request.body.read).each do | msg |
+        fetch_raw_messages(topic_name, request.media_type, request.body.read).each do | msg |
 
             topic = "#{topic_name}"
             key = "#{strm}"

@@ -41,7 +41,9 @@ def topic_to_id(topic, json)
 		id = nil
 	end
 	if(id.nil?)
-		if(json.key?('id'))
+		if(Array === json)
+			id = json.join('::')
+		elsif(json.key?('id'))
 			id = json["id"]
 		else
 			id = json.keys.join('::') + '--' + json.values.join('::')

@@ -12,11 +12,14 @@ require 'nokogiri' # xml support
 # * error stream sifxml/errors, with malformed objects and associated error messages
 # * validated stream sifxml/validated of parsed SIF objects
 # The key of the received message is "topic"."stream", reflecting the original topic and stream of the message. 
+# If the XML has been generated from CSV, any XML errors are also copied back to the csv.errors stream,
+# with the line number of the source CSV
 
 
 @inbound = 'sifxml.ingest'
 @outbound1 = 'sifxml.validated'
 @outbound2 = 'sifxml.errors'
+@outbound3 = 'csv.errors'
 
 @servicename = 'cons-prod-sif-ingest-validate'
 
@@ -51,6 +54,7 @@ loop do
             # Payload from sifxml.ingest contains as its first line a header line with the original topic
             header = m.value.lines[0]	
             payload = m.value.lines[1..-1].join
+	    csvline = payload[/<!-- CSV line (\d+) /, 1]
 
             # each ingest message is a group of objects of the same class, e.g. 
             # <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
@@ -88,13 +92,13 @@ loop do
                     else
                         puts "Invalid!"
                         msg = header + "Message #{m.offset} validity error:\n" + 	
-                        xsd_errors.map{|e| e.message}.join("\n") + "\n" + 
-                        parent.document.to_s
+                        	xsd_errors.map{|e| e.message}.join("\n") 
                         puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"					
-                        outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
-                            header + "Message #{m.offset} validity error:\n" + 	
-                            xsd_errors.map{|e| e.message}.join("\n") + "\n" + 
-                        parent.document.to_s, "invalid" )
+                        outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg + "\n" +
+                        	parent.document.to_s, "invalid" )
+                        outbound_messages << Poseidon::MessageToSend.new( "#{@outbound3}", 
+				"CSV line #{csvline}: " + msg, "invalid" ) if csvline
+puts "CSV line #{csvline}: " + msg if csvline
                     end
                 end
             else

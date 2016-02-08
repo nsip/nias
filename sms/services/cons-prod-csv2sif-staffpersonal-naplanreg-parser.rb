@@ -15,7 +15,8 @@ require_relative 'cvsheaders-naplan'
 require 'json-schema'
 
 @inbound = 'naplan.csv_staff'
-@outbound = 'naplan.sifxmlout_staff'
+@outbound = 'sifxml.ingest'
+#@outbound = 'naplan.sifxmlout_staff'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 
@@ -41,10 +42,10 @@ loop do
         outbound_messages = []
         messages = consumer.fetch
                 messages.each do |m|
-
             row = JSON.parse(m.value) 
             # Carriage return unacceptable
             row.each_key do |key|
+		next unless row[key].is_a? String
                 row[key].gsub!("[ ]*\n[ ]*", " ")
             end
 
@@ -53,8 +54,13 @@ loop do
             #classcodes_xml = ''
             #classcodes.each { |x| classcodes_xml << "      <ClassCode>#{x}</ClassCode>\n" }
 
+# inject the source CSV line as a comment into the generated XML; errors found in the templated SIF/XML
+# will be reported back in the csv.errors stream
+
             xml = <<XML
+<StaffPersonals xmlns="http://www.sifassociation.org/au/datamodel/3.4">
 <StaffPersonal RefId="#{SecureRandom.uuid}">
+<!-- CSV line #{row['__linenumber']} -->
   <LocalId>#{row['LocalStaffId']}</LocalId>
   <PersonInfo>
     <Name Type="LGL">
@@ -79,16 +85,17 @@ loop do
     <SIF_ExtendedElement Name="AdditionalInfo">#{row['AdditionalInfo']}</SIF_ExtendedElement>
   </SIF_ExtendedElements>
 </StaffPersonal>
+</StaffPersonals>
 XML
-
 
             nodes = Nokogiri::XML( xml ) do |config|
                 config.nonet.noblanks
             end
-            nodes.xpath('//StaffPersonal//child::*[not(node())]').each do |node|
+            # remove empty nodes from anywhere in the document
+            nodes.xpath('//*//child::*[not(node())]').each do |node|
                 node.remove
             end
-            outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", nodes.root.to_s, "indexed" )
+            outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout_staff\n" + nodes.root.to_s, "indexed" )
         end
 
         # send results to indexer to create sms data graph
