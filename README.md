@@ -129,18 +129,22 @@ Simple service to support NAPLAN Online integrations. Validating CSV files is si
 
 # 3. Running NIAS
 
-Once you have installed NIAS, launch the NIAS infrastructure services (`launch_core.rb`) and micoservices (`launch_nias.rb`).
+Once you have installed NIAS, launch the NIAS infrastructure services (`launch_core.rb`) and microservices (`launch_nias.rb`, `launch_nias.rb`).
 * `launch_core.rb` should always be run first: this brings up kafka/zookeeper and then the SSF (sif store & forward) and the SMS (sif memory store)
 * `launch_nias.rb` will bring up all of the integration related services.
+* `launch_nias.rb` will bring up integration related services specific to NAPLAN Online.
 
 So:
+
     bash --login
     ./launch_core.rb
     ./launch_nias.rb
+    (or: ./launch_naplan.rb)
     
 To shut NIAS down, shutdown `./launch_nias.rb` before `./launch_core.rb`:
 
     ./launch_nias.rb -K
+    (or: ./launch_naplan.rb -K)
     ./launch_core.rb -K
 
 Kafka is by design quite robust in persisting its logs; Zookeeper is even more so. If you have crashed out of Kafka/Zookeeper, and need to delete all Kafka topics:
