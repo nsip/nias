@@ -109,6 +109,7 @@ class SSFServer < Sinatra::Base
             when 'text/csv' then 
 		# There are reportedly performance issues for CSV validation above 700KB. But 20 MB validates without complaint
 		csv = body # request.body.read
+=begin
 		cvs_schema = nil
 		case topic_name
                 when 'naplan.csv_staff'
@@ -118,12 +119,18 @@ class SSFServer < Sinatra::Base
 		else
 			csv_schema = nil
 		end
-		#csv_schema = Csvlint::Schema.from_csvw_metadata("http://example.com", JSON.parse(csv_schema)) unless csv_schema.nil?
+		csv_schema = Csvlint::Schema.from_csvw_metadata("http://example.com", JSON.parse(csv_schema)) unless csv_schema.nil?
+=end
+
 		validator = Csvlint::Validator.new( StringIO.new( csv ) , {}, nil)
 		validator.validate
 		if(validator.valid? and validator.errors.empty?) then
 			raw_messages = CSV.parse( csv , {:headers=>true})
-			raw_messages.each_with_index {|e, i| e[:__linenumber] = i+1 }
+			csvlines = csv.lines()
+			raw_messages.each_with_index do |e, i| 
+				e[:__linenumber] = i+1 
+				e[:__linecontent] = csvlines[i+1].chomp
+			end
 		else
 			@validation_error = true
 			raw_messages = validator.errors.map {|e| "Row: #{e.row} Col: #{e.column}, Category #{e.category}: Type #{e.type}, Content #{e.content}, Constraints: #{e.constraints}" }

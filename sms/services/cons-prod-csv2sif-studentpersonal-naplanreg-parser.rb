@@ -81,13 +81,14 @@ loop do
                 messages.each do |m|
             row = JSON.parse(m.value) 
 
-# inject the source CSV line as a comment into the generated XML; errors found in the templated SIF/XML
+# inject the source CSV line number as a comment into the generated XML; errors found in the templated SIF/XML
 # will be reported back in the csv.errors stream
 
             xml = <<XML
 <StudentPersonals  xmlns="http://www.sifassociation.org/au/datamodel/3.4">
 <StudentPersonal RefId="#{SecureRandom.uuid}">
 <!-- CSV line #{row['__linenumber']} -->
+<!-- CSV content #{row['__linecontent']} -->
   <LocalId>#{row['LocalId']}</LocalId>
   <StateProvinceId>#{row['StateProvinceId']}</StateProvinceId>
   <OtherIdList>

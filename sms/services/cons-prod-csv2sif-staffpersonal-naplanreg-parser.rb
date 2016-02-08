@@ -54,13 +54,14 @@ loop do
             #classcodes_xml = ''
             #classcodes.each { |x| classcodes_xml << "      <ClassCode>#{x}</ClassCode>\n" }
 
-# inject the source CSV line as a comment into the generated XML; errors found in the templated SIF/XML
+# inject the source CSV line number as a comment into the generated XML; errors found in the templated SIF/XML
 # will be reported back in the csv.errors stream
 
             xml = <<XML
 <StaffPersonals xmlns="http://www.sifassociation.org/au/datamodel/3.4">
 <StaffPersonal RefId="#{SecureRandom.uuid}">
 <!-- CSV line #{row['__linenumber']} -->
+<!-- CSV content #{row['__linecontent']} -->
   <LocalId>#{row['LocalStaffId']}</LocalId>
   <PersonInfo>
     <Name Type="LGL">

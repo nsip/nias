@@ -71,7 +71,7 @@ describe "NAPLAN convert CSV to SIF" do
 		received = a[0].value
                 received.gsub!(%r{<StaffPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="[^"]+">}, '<StaffPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">')
 		received.gsub!(%r{<\?xml version="1.0"\?>},'')
-		received.gsub!(%r{<!-- CSV line[^>]+>},'')
+		received.gsub!(%r{<!-- CSV [^>]+>},'')
 		received.gsub!(/\n[ ]*/,"")
                 expect(received).to eq out
             rescue Poseidon::Errors::OffsetOutOfRange

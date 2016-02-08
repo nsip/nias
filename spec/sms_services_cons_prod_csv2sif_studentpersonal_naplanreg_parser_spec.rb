@@ -283,7 +283,7 @@ describe "NAPLAN convert CSV to SIF" do
                 a = @xmlconsumer.fetch
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
-                a[0].value.gsub!(%r{<StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="[^"]+">}, '<StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">').gsub!(%r{<\?xml version="1.0"\?>},'').gsub!(/<!-- CSV line[^>]+>/, "").gsub!(/\n[ ]*/,"")
+                a[0].value.gsub!(%r{<StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="[^"]+">}, '<StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">').gsub!(%r{<\?xml version="1.0"\?>},'').gsub!(/<!-- CSV [^>]+>/, "").gsub!(/\n[ ]*/,"")
                 expect(a[0].value).to eq out
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."

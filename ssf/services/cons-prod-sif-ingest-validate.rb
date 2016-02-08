@@ -55,6 +55,7 @@ loop do
             header = m.value.lines[0]	
             payload = m.value.lines[1..-1].join
 	    csvline = payload[/<!-- CSV line (\d+) /, 1]
+	    csvcontent = payload[/<!-- CSV content (.+) -->/, 1]
 
             # each ingest message is a group of objects of the same class, e.g. 
             # <StudentPersonals> <StudentPersonal>...</StudentPersonal> <StudentPersonal>...</StudentPersonal> </StudentPersonals>
@@ -97,8 +98,7 @@ loop do
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg + "\n" +
                         	parent.document.to_s, "invalid" )
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound3}", 
-				"CSV line #{csvline}: " + msg, "invalid" ) if csvline
-puts "CSV line #{csvline}: " + msg if csvline
+				"CSV line #{csvline}: " + msg + "\n" + csvcontent, "invalid" ) if csvline
                     end
                 end
             else
