@@ -125,8 +125,10 @@ class SSFServer < Sinatra::Base
 		validator = Csvlint::Validator.new( StringIO.new( csv ) , {}, nil)
 		validator.validate
 		if(validator.valid? and validator.errors.empty?) then
+puts csv
 			raw_messages = CSV.parse( csv , {:headers=>true})
 			csvlines = csv.lines()
+puts raw_messages
 			raw_messages.each_with_index do |e, i| 
 				e[:__linenumber] = i+1 
 				e[:__linecontent] = csvlines[i+1].chomp
@@ -404,13 +406,17 @@ class SSFServer < Sinatra::Base
 
     # read messages from a stream
     post "/fileupload" do
+puts "??"
+puts params.inspect
+puts "??"
 	mimetype = params[:mimetype]
 	topic_menu = params['topic_menu'] || nil
 	topic = params[:topic]
 	stream = params[:stream]
 	payload = params[:file]
+	payloadname = payload.nil? ? nil : payload[:filename] || nil
 
-	validation = validate_fileupload(mimetype, topic_menu, topic, stream, payload[:filename])
+	validation = validate_fileupload(mimetype, topic_menu, topic, stream, payloadname)
 	unless validation == "OK"
             	params.inspect
 		halt 400, params.inspect + validation 

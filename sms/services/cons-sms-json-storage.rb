@@ -66,7 +66,7 @@ loop do
 
             header = m.value.lines[0]
             payload = m.value.lines[1..-1].join
-
+puts payload
 
             # read json message
             json = JSON.parse(payload)

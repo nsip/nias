@@ -71,26 +71,94 @@
                 <div class="seven columns" id="collection_text">
                                 <div>Normally NIAS expects you to send files to a REST endpoint for the given topic (see <a href="https://github.com/nsip/nias/wiki/Workflow">NIAS Workflow</A>). File upload can be used instead, particularly if you have very large files.
 
-<form action="/fileupload" method="POST" enctype="multipart/form-data">
-  <input type="file" name="file" ><br/>
+<form action="/fileupload" method="POST" enctype="multipart/form-data" id="fileuploadform">
+  <input type="file" name="file" id="file"><br/>
   <input type="radio" name="mimetype" value="application/xml">application/xml (SIF) 
   <input type="radio" name="mimetype" value="application/json">application/json 
   <input type="radio" name="mimetype" value="text/csv" checked>text/csv <br/>
 
 		<label for="topic_menu">Topic</label>
                     <select class="u-full-width" name="topic_menu">
-                        <% @topics.sort.reject{|e| e.match( %r!.*/.*/.*! ) }.each do | collection | %>
+                        <% @topics.sort.reject{|e| e.match( %r!.*/.*/.*! ) or e.match (%r!/errors$!) }.each do | collection | %>
                             <option value="<%= collection %>"><%= collection %></option>
                         <% end %>
                     </select>
 		or: <input type="text" id="topic">/<input type="text" id="stream">
 
 
-  <input  class="button-primary" type="submit">
+  <input  class="button-primary" type="submit" id="filesubmit">
 </form>
-        
-                                </div>
-                </div>
+</div></div>
+
+	<div class="row">
+            <div class="twelve columns">
+                <br/>
+                <label for="results">Errors:</label>
+                <pre class="code-example">
+                    <code class="code-example-body prettyprint" id="results">
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <script>
+
+var iterations = 0;
+var seconds = 15;
+var startoffset = 0;
+var timer;
+$(function() {
+  $("#fileuploadform").submit(function(e){
+    e.preventDefault();
+    var formData = new FormData(this);
+    formData.append('file', $("#file").prop('files')[0]);
+    $("#results").empty();
+    iterations = 0;
+    startoffset = 0;
+    $.ajax({
+      type: "POST",
+      url: "/fileupload",
+/*      data: $(this).serialize(),*/
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(){
+        $("#results").html("Successfully submitted</br/>")
+	frame();
+ 	timer = setInterval(frame, seconds*1000);
+      },
+      error: function(){
+        $("#results").html("Form not submitted<br/>")
+      }
+    });
+    return false;
+  });
+});
+
+		function frame() { 
+                    if(iterations >= 10) {
+ 		        clearInterval(timer);
+		    } else {
+	            $.ajax( "/csv/errors?offset=" + ((startoffset == 0) ? 'latest' : startoffset) )
+           		.done(function(data) {
+				iterations++;
+				var matches = data.match(/\{"advice":"Start consuming from ([0-9]+)"\}/);
+				startoffset = matches[1];
+				data = data.replace(/\{"advice":"Start consuming from [0-9]+"\}/, "");
+				if(!data || !data.trim() ) {
+					data = "No error...";
+				}
+       		          	$("#results").append ( data + "<br/>" );
+	           	});
+			}
+		}
+	/*
+                var request = {};
+                $.get("/csv/errors", request, function(result){
+                        $("#results").append( result );
+                });
+	*/
+	</script>
             
         </div>
 

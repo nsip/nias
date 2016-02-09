@@ -3,7 +3,7 @@
 		SIF Implementation Specification (Australia) 3.4 (October 13, 2015) Infrastructure Version: 3.x
 	-->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sif="http://www.sifassociation.org/au/datamodel/3.4" targetNamespace="http://www.sifassociation.org/au/datamodel/3.4" elementFormDefault="qualified">
-	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="imports/xml/xml.xsd"/>
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
 	<!--Version 3.x created for NAPLAN Registration-->
 	<!--Infrastructure Common Elements-->
 	<!--ExtendedContentType-->
@@ -1792,7 +1792,8 @@
       </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element ref="sif:LocalId" minOccurs="0"/>
+			<!-- <xs:element ref="sif:LocalId" minOccurs="0"/> -->
+			<xs:element ref="sif:LocalId" minOccurs="1"/>
 			<xs:element name="StateProvinceId" type="sif:StateProvinceIdType" nillable="true" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The state-assigned identifier for this staff member.</xs:documentation>
