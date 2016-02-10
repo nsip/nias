@@ -83,6 +83,7 @@ def launch
         'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb',
         'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb',
         'cons-prod-sif2csv-staffpersonal-naplanreg-parser.rb',
+	'cons-prod-sif2csv-SRM-validate.rb',
     ]
 
     sms_services.each_with_index do | service, i |

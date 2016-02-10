@@ -1,3 +1,4 @@
+# also tests SRM validation
 
 require "net/http"
 require "spec_helper"
@@ -6,6 +7,18 @@ require 'poseidon'
 csv = <<CSV
 LocalStaffId,GivenName,FamilyName,ClassCode,HomeGroup,ASLSchoolId,LocalSchoolId,LocalCampusId,EmailAddress,AdditionalInfo,StaffSchoolRole
 fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
+CSV
+
+invalid_email = <<CSV
+LocalStaffId,GivenName,FamilyName,ClassCode,HomeGroup,ASLSchoolId,LocalSchoolId,LocalCampusId,EmailAddress,AdditionalInfo,StaffSchoolRole
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldtexample.com,Y,teacher
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
+CSV
+
+invalid_additionalinfo = <<CSV
+LocalStaffId,GivenName,FamilyName,ClassCode,HomeGroup,ASLSchoolId,LocalSchoolId,LocalCampusId,EmailAddress,AdditionalInfo,StaffSchoolRole
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldtexample.com,No way!,teacher
 fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
 CSV
 
@@ -81,6 +94,53 @@ describe "NAPLAN convert CSV to SIF" do
             end
         end
     end
+
+    context "Invalid email in CSV to naplan.csv" do
+        before(:example) do
+                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+                puts "Next offset    = #{@errorconsumer.next_offset}"
+                post_csv(invalid_email)
+                sleep 5
+        end
+        it "pushes error to csv.errors" do
+            sleep 5
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                                errors = a.find_all{ |e| e.value["is malformed"] }
+                                expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+   end
+
+   context "Invalid additional info in CSV to naplan.csv" do
+        before(:example) do
+                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
+                puts "Next offset    = #{@errorconsumer.next_offset}"
+                post_csv(invalid_additionalinfo)
+                sleep 5
+        end
+        it "pushes error to csv.errors" do
+            sleep 5
+            begin
+                a = @errorconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                                errors = a.find_all{ |e| e.value["is not Y or N"] }
+                                expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+    end
+
 
     after(:all) do
         sleep 5
