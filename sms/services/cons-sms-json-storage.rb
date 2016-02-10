@@ -41,7 +41,7 @@ def topic_to_id(topic, json)
 		id = nil
 	end
 	if(id.nil?)
-		if(Array === json)
+		if(json.class == Array)
 			id = json.join('::')
 		elsif(json.key?('id'))
 			id = json["id"]
@@ -66,7 +66,6 @@ loop do
 
             header = m.value.lines[0]
             payload = m.value.lines[1..-1].join
-puts payload
 
             # read json message
             json = JSON.parse(payload)

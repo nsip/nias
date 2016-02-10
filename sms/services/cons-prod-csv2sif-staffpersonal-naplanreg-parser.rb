@@ -93,7 +93,8 @@ XML
                 config.nonet.noblanks
             end
             # remove empty nodes from anywhere in the document
-            nodes.xpath('//*//child::*[not(node())]').each do |node|
+            #nodes.xpath('//*//child::*[not(node())]').each do |node|
+            nodes.xpath('*[not(*) and not(text()[normalize-space()])]').each do |node|
                 node.remove
             end
             outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout_staff\n" + nodes.root.to_s, "indexed" )

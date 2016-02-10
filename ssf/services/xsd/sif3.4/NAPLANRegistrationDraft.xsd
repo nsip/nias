@@ -22,7 +22,7 @@
 			<xs:documentation>Allows an agent to include data not yet defined within a SIF data object as name/value pairs.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="SIF_ExtendedElement" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="SIF_ExtendedElement" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:annotation>
 						<xs:documentation>A name/value pair, the name being contained in the Name attribute, the value being the element content.</xs:documentation>
@@ -89,7 +89,7 @@
 			<xs:documentation>Year or academic level.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Code" type="sif:AUCodeSetsYearLevelCodeType" minOccurs="0">
+			<xs:element name="Code" type="sif:AUCodeSetsYearLevelCodeType">
 				<xs:annotation>
 					<xs:documentation>Code representing the year level.</xs:documentation>
 				</xs:annotation>
@@ -103,7 +103,7 @@
 			<xs:documentation/>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Name" type="sif:NameOfRecordType" minOccurs="0">
+			<xs:element name="Name" type="sif:NameOfRecordType">
 				<xs:annotation>
 					<xs:documentation>The name of the person. Note: Type attribute value of LGL must be used here.</xs:documentation>
 				</xs:annotation>
@@ -144,7 +144,7 @@
       </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element ref="sif:YearLevel" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="sif:YearLevel" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="YearLevels" type="sif:YearLevelsType"/>
@@ -163,7 +163,7 @@
 			<xs:documentation>Information about the campus or school principal.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="ContactName" type="sif:NameOfRecordType" minOccurs="0">
+			<xs:element name="ContactName" type="sif:NameOfRecordType">
 				<xs:annotation>
 					<xs:documentation>The name of the principal.</xs:documentation>
 				</xs:annotation>
@@ -192,7 +192,7 @@
 			<xs:documentation>A list of contact persons associated with a school.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="SchoolContact" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="SchoolContact" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="PublishInDirectory" type="sif:PublishInDirectoryType" nillable="true" minOccurs="0">
@@ -200,7 +200,7 @@
 								<xs:documentation>Indicates whether or not this school contact's information should be published in a directory of school information.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element ref="sif:ContactInfo" minOccurs="0"/>
+						<xs:element ref="sif:ContactInfo"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -222,7 +222,7 @@
 			<xs:documentation>Common element used to supply information for a contact person at a school, LEA, or other institution.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element ref="sif:Name" minOccurs="0"/>
+			<xs:element ref="sif:Name"/>
 			<xs:element name="PositionTitle" type="xs:normalizedString" nillable="true" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The contact person's position title.</xs:documentation>
@@ -257,10 +257,10 @@
 			<xs:documentation>This element contains address data.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Street" minOccurs="0">
+			<xs:element name="Street">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Line1" type="xs:normalizedString" minOccurs="0">
+						<xs:element name="Line1" type="xs:normalizedString">
 							<xs:annotation>
 								<xs:documentation>Address line 1.</xs:documentation>
 							</xs:annotation>
@@ -328,7 +328,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="City" type="xs:normalizedString" minOccurs="0">
+			<xs:element name="City" type="xs:normalizedString">
 				<xs:annotation>
 					<xs:documentation>The city part of the address.</xs:documentation>
 				</xs:annotation>
@@ -343,7 +343,7 @@
 					<xs:documentation>The country code.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="PostalCode" type="xs:normalizedString" minOccurs="0">
+			<xs:element name="PostalCode" type="xs:normalizedString">
 				<xs:annotation>
 					<xs:documentation>The ZIP/postal code.</xs:documentation>
 				</xs:annotation>
@@ -356,12 +356,12 @@
 			<xs:element name="MapReference" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="XCoordinate" type="xs:normalizedString" minOccurs="0">
+						<xs:element name="XCoordinate" type="xs:normalizedString">
 							<xs:annotation>
 								<xs:documentation>X Co-ordinate of reference</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="YCoordinate" type="xs:normalizedString" minOccurs="0">
+						<xs:element name="YCoordinate" type="xs:normalizedString">
 							<xs:annotation>
 								<xs:documentation>Y Co-ordinate of reference</xs:documentation>
 							</xs:annotation>
@@ -458,7 +458,7 @@
 			<xs:documentation>A list of Address elements.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element ref="sif:Address" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="sif:Address" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="AddressList" type="sif:AddressListType"/>
@@ -468,7 +468,7 @@
 			<xs:documentation>A list of e-mail addresses associated with an individual or organization.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element ref="sif:Email" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="sif:Email" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="EmailList" type="sif:EmailListType"/>
@@ -497,7 +497,7 @@
 			<xs:documentation>Lists phone numbers associated with an entity.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element ref="sif:PhoneNumber" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="sif:PhoneNumber" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="PhoneNumberList" type="sif:PhoneNumberListType"/>
@@ -507,7 +507,7 @@
 			<xs:documentation>This element represents a phone number and occurs within objects such as StudentPersonal, StaffPersonal, etc.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Number" type="xs:normalizedString" minOccurs="0">
+			<xs:element name="Number" type="xs:normalizedString">
 				<xs:annotation>
 					<xs:documentation>Phone number.  Free-form, but typical Australian formats include:</xs:documentation>
 				</xs:annotation>
@@ -547,7 +547,7 @@
       </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Latitude" minOccurs="0">
+			<xs:element name="Latitude">
 				<xs:simpleType>
 					<xs:restriction base="xs:decimal">
 						<xs:annotation>
@@ -558,7 +558,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="Longitude" minOccurs="0">
+			<xs:element name="Longitude">
 				<xs:simpleType>
 					<xs:restriction base="xs:decimal">
 						<xs:annotation>
@@ -604,7 +604,7 @@
 			<xs:documentation>A list of electronic identifiers associated with an entity.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element ref="sif:ElectronicId" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="sif:ElectronicId" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="ElectronicIdList" type="sif:ElectronicIdListType"/>
@@ -632,7 +632,7 @@
 			<xs:documentation>Previous, alternate or other names or aliases associated with a person.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Name" type="sif:OtherNameType" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="Name" type="sif:OtherNameType" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>
         Name of the person.  Note: Type value of LGL may not occur here.
@@ -688,7 +688,7 @@
 			<xs:element name="CountriesOfCitizenship" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="CountryOfCitizenship" type="sif:CountryType" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="CountryOfCitizenship" type="sif:CountryType" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>A person's country of citizenship.</xs:documentation>
 							</xs:annotation>
@@ -699,7 +699,7 @@
 			<xs:element name="CountriesOfResidency" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="CountryOfResidency" type="sif:CountryType" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="CountryOfResidency" type="sif:CountryType" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>A person's country of residence.</xs:documentation>
 							</xs:annotation>
@@ -730,7 +730,7 @@
 			<xs:element name="DwellingArrangement" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Code" type="sif:AUCodeSetsDwellingArrangementType" minOccurs="0">
+						<xs:element name="Code" type="sif:AUCodeSetsDwellingArrangementType">
 							<xs:annotation>
 								<xs:documentation>Code representing the setting/environment in which the person resides</xs:documentation>
 							</xs:annotation>
@@ -742,7 +742,7 @@
 			<xs:element name="Religion" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Code" type="sif:AUCodeSetsAustralianStandardClassificationOfReligiousGroupsASCRGType" minOccurs="0">
+						<xs:element name="Code" type="sif:AUCodeSetsAustralianStandardClassificationOfReligiousGroupsASCRGType">
 							<xs:annotation>
 								<xs:documentation>Religion Code</xs:documentation>
 							</xs:annotation>
@@ -754,15 +754,15 @@
 			<xs:element name="ReligiousEventList" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="ReligiousEvent" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="ReligiousEvent" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="Type" type="xs:normalizedString" minOccurs="0">
+									<xs:element name="Type" type="xs:normalizedString">
 										<xs:annotation>
 											<xs:documentation>Religious Event - Currently Free Text</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="Date" type="xs:date" minOccurs="0">
+									<xs:element name="Date" type="xs:date">
 										<xs:annotation>
 											<xs:documentation>Date of Religious Event</xs:documentation>
 										</xs:annotation>
@@ -827,7 +827,7 @@
 	<!--EnglishProficiency-->
 	<xs:complexType name="EnglishProficiencyType">
 		<xs:sequence>
-			<xs:element name="Code" type="sif:AUCodeSetsEnglishProficiencyType" minOccurs="0">
+			<xs:element name="Code" type="sif:AUCodeSetsEnglishProficiencyType">
 				<xs:annotation>
 					<xs:documentation>Person's proficiency in English.</xs:documentation>
 				</xs:annotation>
@@ -839,10 +839,10 @@
 	<!--LanguageList-->
 	<xs:complexType name="LanguageListType">
 		<xs:sequence>
-			<xs:element name="Language" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="Language" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Code" type="sif:AUCodeSetsAustralianStandardClassificationOfLanguagesASCLType" minOccurs="0">
+						<xs:element name="Code" type="sif:AUCodeSetsAustralianStandardClassificationOfLanguagesASCLType">
 							<xs:annotation>
 								<xs:documentation>The code representing the specific language that an individual uses to communicate. </xs:documentation>
 							</xs:annotation>
@@ -939,7 +939,7 @@
 			<xs:documentation>A common metadata element designed to contain time data, both self-defined and by type.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Type" type="xs:normalizedString" minOccurs="0">
+			<xs:element name="Type" type="xs:normalizedString">
 				<xs:annotation>
 					<xs:documentation>
         This element is designed to contain the time period attached to an object.
@@ -948,20 +948,20 @@
       </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Code" type="xs:token" minOccurs="0">
+			<xs:element name="Code" type="xs:token">
 				<xs:annotation>
 					<xs:documentation>
       This element provides a place for the application to send structured data (code values, unique identifier, timestamps).
       This code value can, depending upon the use case agreement between agents, be used to qualify the data in the </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Name" type="xs:normalizedString" minOccurs="0">
+			<xs:element name="Name" type="xs:normalizedString">
 				<xs:annotation>
 					<xs:documentation>
       Contains a human-readable description of the value in </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Value" type="xs:normalizedString" minOccurs="0">
+			<xs:element name="Value" type="xs:normalizedString">
 				<xs:annotation>
 					<xs:documentation>Contains the human-readable value.</xs:documentation>
 				</xs:annotation>
@@ -971,13 +971,13 @@
 			<xs:element name="SpanGaps" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="SpanGap" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="SpanGap" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="Type" type="xs:normalizedString" minOccurs="0"/>
-									<xs:element name="Code" type="xs:token" minOccurs="0"/>
-									<xs:element name="Name" type="xs:normalizedString" minOccurs="0"/>
-									<xs:element name="Value" type="xs:normalizedString" minOccurs="0"/>
+									<xs:element name="Type" type="xs:normalizedString"/>
+									<xs:element name="Code" type="xs:token"/>
+									<xs:element name="Name" type="xs:normalizedString"/>
+									<xs:element name="Value" type="xs:normalizedString"/>
 									<xs:element name="StartDateTime" type="xs:dateTime" nillable="true" minOccurs="0"/>
 									<xs:element name="EndDateTime" type="xs:dateTime" nillable="true" minOccurs="0"/>
 								</xs:sequence>
@@ -986,7 +986,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="IsCurrent" type="xs:boolean" minOccurs="0">
+			<xs:element name="IsCurrent" type="xs:boolean">
 				<xs:annotation>
 					<xs:documentation>
       This element allows for the system to tag an object as being explicitly current.
@@ -1007,14 +1007,14 @@
 			<xs:element name="Created" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="DateTime" type="xs:dateTime" minOccurs="0"/>
+						<xs:element name="DateTime" type="xs:dateTime"/>
 						<xs:element name="Creators" nillable="true" minOccurs="0">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="Creator" minOccurs="0" maxOccurs="unbounded">
+									<xs:element name="Creator" maxOccurs="unbounded">
 										<xs:complexType>
 											<xs:sequence>
-												<xs:element name="Name" type="xs:normalizedString" minOccurs="0">
+												<xs:element name="Name" type="xs:normalizedString">
 													<xs:annotation>
 														<xs:documentation>
       Human-readable name of the data's creator. If the object contains system-generated data,
@@ -1022,7 +1022,7 @@
     </xs:documentation>
 													</xs:annotation>
 												</xs:element>
-												<xs:element name="ID" type="xs:normalizedString" minOccurs="0">
+												<xs:element name="ID" type="xs:normalizedString">
 													<xs:annotation>
 														<xs:documentation>Unique identifier of the creator.  An email address or URI could be used here.</xs:documentation>
 													</xs:annotation>
@@ -1039,15 +1039,15 @@
 			<xs:element name="ModificationHistory" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Modified" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="Modified" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="By" type="xs:normalizedString" minOccurs="0">
+									<xs:element name="By" type="xs:normalizedString">
 										<xs:annotation>
 											<xs:documentation>Identifier of the system or person that modified the data.</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="DateTime" type="xs:dateTime" minOccurs="0">
+									<xs:element name="DateTime" type="xs:dateTime">
 										<xs:annotation>
 											<xs:documentation>The date/time the modification occurred.</xs:documentation>
 										</xs:annotation>
@@ -1066,7 +1066,7 @@
 			<xs:element name="TimeElements" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element ref="sif:TimeElement" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element ref="sif:TimeElement" maxOccurs="unbounded"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -1082,7 +1082,7 @@
       </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="OtherCode" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="OtherCode" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>
         A state/province code, local code, other code or a text string that crosswalks to or serves as a translation of an associated Code element.
@@ -1120,7 +1120,7 @@
 			<xs:documentation>A list of subject areas.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element ref="sif:SubjectArea" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="sif:SubjectArea" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="SubjectAreaList" type="sif:SubjectAreaListType"/>
@@ -1130,7 +1130,7 @@
 			<xs:documentation>Subject matter.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="Code" type="xs:normalizedString" minOccurs="0">
+			<xs:element name="Code" type="xs:normalizedString">
 				<xs:annotation>
 					<xs:documentation>The subject area details</xs:documentation>
 				</xs:annotation>
@@ -1146,7 +1146,7 @@
 			<xs:element name="LearningStandardItems" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="LearningStandardItemRefId" type="sif:IdRefType" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="LearningStandardItemRefId" type="sif:IdRefType" maxOccurs="unbounded"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -1162,7 +1162,7 @@
 			<xs:element name="TimeElements" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element ref="sif:TimeElement" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element ref="sif:TimeElement" maxOccurs="unbounded"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -1201,7 +1201,7 @@
 			<xs:element name="OtherIdList" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="OtherId" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="OtherId" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>Lists an "other" identifier associated with the school.</xs:documentation>
 							</xs:annotation>
@@ -1220,7 +1220,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="SchoolName" type="xs:normalizedString" minOccurs="0">
+			<xs:element name="SchoolName" type="xs:normalizedString">
 				<xs:annotation>
 					<xs:documentation>Name of school/campus.</xs:documentation>
 				</xs:annotation>
@@ -1269,7 +1269,7 @@
 			<xs:element name="SchoolFocusList" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="SchoolFocus" type="sif:AUCodeSetsSchoolFocusCodeType" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="SchoolFocus" type="sif:AUCodeSetsSchoolFocusCodeType" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>The type of educational institution as classified by its focus.</xs:documentation>
 							</xs:annotation>
@@ -1340,7 +1340,7 @@
 								<xs:documentation>Parent School Id needs to be supplied if this Campus is not the Admin Campus.  This number should be the state-assigned identifier for this school or the locally-assigned identifier for this school.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="SchoolCampusId" type="xs:normalizedString" minOccurs="0">
+						<xs:element name="SchoolCampusId" type="xs:normalizedString">
 							<xs:annotation>
 								<xs:documentation>Specific Campus Id  - This may be the same as the School Local Id.</xs:documentation>
 							</xs:annotation>
@@ -1350,7 +1350,7 @@
 								<xs:documentation>Type of campus.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="AdminStatus" type="sif:AUCodeSetsYesOrNoCategoryType" minOccurs="0">
+						<xs:element name="AdminStatus" type="sif:AUCodeSetsYesOrNoCategoryType">
 							<xs:annotation>
 								<xs:documentation>Is this campus the Admin Campus?</xs:documentation>
 							</xs:annotation>
@@ -1358,7 +1358,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="SchoolSector" type="sif:AUCodeSetsSchoolSectorCodeType" minOccurs="0">
+			<xs:element name="SchoolSector" type="sif:AUCodeSetsSchoolSectorCodeType">
 				<xs:annotation>
 					<xs:documentation>(Government, or Non-Government).</xs:documentation>
 				</xs:annotation>
@@ -1416,15 +1416,15 @@
 			<xs:element name="YearLevelEnrollmentList" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="YearLevelEnrollment" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="YearLevelEnrollment" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="Year" type="sif:AUCodeSetsYearLevelCodeType" minOccurs="0">
+									<xs:element name="Year" type="sif:AUCodeSetsYearLevelCodeType">
 										<xs:annotation>
 											<xs:documentation>Year level for which students are counted.</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="Enrollment" type="xs:normalizedString" minOccurs="0">
+									<xs:element name="Enrollment" type="xs:normalizedString">
 										<xs:annotation>
 											<xs:documentation>Number of students enrolled in the year level.</xs:documentation>
 										</xs:annotation>
@@ -1469,7 +1469,7 @@
 			<xs:element name="SchoolGroupList" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="SchoolGroup" type="sif:LocalIdType" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="SchoolGroup" type="sif:LocalIdType" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>Repeatable element containing a local identifier to identify a loosely connected group of schools. eg. YarraValley Cluster</xs:documentation>
 							</xs:annotation>
@@ -1505,7 +1505,7 @@
         </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="SIF_RefId" minOccurs="0">
+			<xs:element name="SIF_RefId">
 				<xs:complexType>
 					<xs:annotation>
 						<xs:documentation>The SIF RefId that provides the source Object for this SystemRole Object.</xs:documentation>
@@ -1529,22 +1529,22 @@
 					</xs:simpleContent>
 				</xs:complexType>
 			</xs:element>
-			<xs:element name="SystemContextList" minOccurs="0">
+			<xs:element name="SystemContextList">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="SystemContext" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="SystemContext" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:sequence>
 									<xs:element name="RoleList" nillable="true" minOccurs="0">
 										<xs:complexType>
 											<xs:sequence>
-												<xs:element name="Role" minOccurs="0" maxOccurs="unbounded">
+												<xs:element name="Role" maxOccurs="unbounded">
 													<xs:complexType>
 														<xs:sequence>
 															<xs:element name="RoleScopeList" nillable="true" minOccurs="0">
 																<xs:complexType>
 																	<xs:sequence>
-																		<xs:element name="RoleScope" minOccurs="0" maxOccurs="unbounded">
+																		<xs:element name="RoleScope" maxOccurs="unbounded">
 																			<xs:complexType>
 																				<xs:sequence>
 																					<xs:element name="RoleScopeName" type="xs:normalizedString" nillable="true" minOccurs="0">
@@ -1649,7 +1649,7 @@
       </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="SchoolInfoRefId" type="sif:IdRefType" minOccurs="0">
+			<xs:element name="SchoolInfoRefId" type="sif:IdRefType">
 				<xs:annotation>
 					<xs:documentation>The ID (GUID) that identifies the school where the staff member is assigned.</xs:documentation>
 				</xs:annotation>
@@ -1661,7 +1661,7 @@
       </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="StaffPersonalRefId" type="sif:IdRefType" minOccurs="0">
+			<xs:element name="StaffPersonalRefId" type="sif:IdRefType">
 				<xs:annotation>
 					<xs:documentation>ID (GUID) of this staff member, as represented in the StaffPersonal object. </xs:documentation>
 				</xs:annotation>
@@ -1671,7 +1671,7 @@
 					<xs:documentation>Short assignment description</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="PrimaryAssignment" type="sif:AUCodeSetsYesOrNoCategoryType" minOccurs="0">
+			<xs:element name="PrimaryAssignment" type="sif:AUCodeSetsYesOrNoCategoryType">
 				<xs:annotation>
 					<xs:documentation>
         Is this the staff member's primary assignment?  Note: There must be one and only one instance of the object with a Yes value in this element per StaffMember per school year.
@@ -1708,10 +1708,10 @@
 			<xs:element name="StaffSubjectList" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="StaffSubject" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="StaffSubject" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="PreferenceNumber" type="xs:unsignedInt" minOccurs="0">
+									<xs:element name="PreferenceNumber" type="xs:unsignedInt">
 										<xs:annotation>
 											<xs:documentation>Priority of Subject to Teach.</xs:documentation>
 										</xs:annotation>
@@ -1735,7 +1735,7 @@
 			<xs:element name="StaffActivity" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Code" type="sif:AUCodeSetsStaffActivityType" minOccurs="0">
+						<xs:element name="Code" type="sif:AUCodeSetsStaffActivityType">
 							<xs:annotation>
 								<xs:documentation>Code representing the type of staff activity undertaken.</xs:documentation>
 							</xs:annotation>
@@ -1792,7 +1792,7 @@
       </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<!-- <xs:element ref="sif:LocalId" minOccurs="0"/> -->
+			<!-- <xs:element ref="sif:LocalId"/> -->
 			<xs:element ref="sif:LocalId" minOccurs="1"/>
 			<xs:element name="StateProvinceId" type="sif:StateProvinceIdType" nillable="true" minOccurs="0">
 				<xs:annotation>
@@ -1807,7 +1807,7 @@
 			<xs:element name="OtherIdList" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="OtherId" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="OtherId" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>Lists an "other" identifier associated with the staff member.</xs:documentation>
 							</xs:annotation>
@@ -1826,7 +1826,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element ref="sif:PersonInfo" minOccurs="0"/>
+			<xs:element ref="sif:PersonInfo"/>
 			<xs:element name="Title" type="xs:normalizedString" nillable="true" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The staff member's title.</xs:documentation>
@@ -1858,7 +1858,7 @@
 						<xs:element name="NAPLANClassList" nillable="true" minOccurs="0">
 							<xs:complexType>
 								<xs:sequence>
-									<xs:element name="ClassCode" type="xs:normalizedString" minOccurs="0" maxOccurs="unbounded">
+									<xs:element name="ClassCode" type="xs:normalizedString" maxOccurs="unbounded">
 										<xs:annotation>
 											<xs:documentation>The name of the class code the staff member administers, for the purposes of NAPLAN registration.</xs:documentation>
 										</xs:annotation>
@@ -1903,7 +1903,7 @@
 			<xs:element name="AlertMessages" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="AlertMessage" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="AlertMessage" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>This is an alert message that is associated with the student.</xs:documentation>
 							</xs:annotation>
@@ -1933,7 +1933,7 @@
 			<xs:element name="MedicalAlertMessages" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="MedicalAlertMessage" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="MedicalAlertMessage" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>Medical alert associated with the student.</xs:documentation>
 							</xs:annotation>
@@ -1961,7 +1961,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element ref="sif:LocalId" minOccurs="0"/>
+			<xs:element ref="sif:LocalId"/>
 			<xs:element name="StateProvinceId" type="sif:StateProvinceIdType" nillable="true" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The state-assigned identifier for this student.</xs:documentation>
@@ -1975,7 +1975,7 @@
 			<xs:element name="OtherIdList" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="OtherId" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="OtherId" maxOccurs="unbounded">
 							<xs:annotation>
 								<xs:documentation>Lists an "other" identifier associated with the student.</xs:documentation>
 							</xs:annotation>
@@ -1994,7 +1994,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element ref="sif:PersonInfo" minOccurs="0"/>
+			<xs:element ref="sif:PersonInfo"/>
 			<xs:element name="ProjectedGraduationYear" type="sif:ProjectedGraduationYearType" nillable="true" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Currently projected graduation year.</xs:documentation>
@@ -2109,7 +2109,7 @@
 								<xs:documentation>The name of the class code the student belongs to, for the purposes of NAPLAN registration.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="MembershipType" type="sif:AUCodeSetsSchoolEnrollmentTypeType" minOccurs="0">
+						<xs:element name="MembershipType" type="sif:AUCodeSetsSchoolEnrollmentTypeType" nillable="true" minOccurs="0">
 							<xs:annotation>
 								<xs:documentation>The type of this enrollment as it relates to the school identified in SchoolInfoRefId.</xs:documentation>
 							</xs:annotation>
@@ -2222,30 +2222,30 @@
       </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="StudentPersonalRefId" type="sif:IdRefType" minOccurs="0">
+			<xs:element name="StudentPersonalRefId" type="sif:IdRefType">
 				<xs:annotation>
 					<xs:documentation>The ID (GUID) of the student to whom this information is linked.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="SchoolInfoRefId" type="sif:IdRefType" minOccurs="0">
+			<xs:element name="SchoolInfoRefId" type="sif:IdRefType">
 				<xs:annotation>
 					<xs:documentation>The ID (GUID) of the school to which this enrollment applies.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="MembershipType" type="sif:AUCodeSetsSchoolEnrollmentTypeType" minOccurs="0">
+			<xs:element name="MembershipType" type="sif:AUCodeSetsSchoolEnrollmentTypeType">
 				<xs:annotation>
 					<xs:documentation>The type of this enrollment as it relates to the school identified in SchoolInfoRefId.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="TimeFrame" type="sif:AUCodeSetsEnrollmentTimeFrameType" minOccurs="0">
+			<xs:element name="TimeFrame" type="sif:AUCodeSetsEnrollmentTimeFrameType">
 				<xs:annotation>
 					<xs:documentation>
         The timeframe of the enrollment based on the SIF_Date in the SIF_Header of the message. For events, it is determined as of the date the event is generated. For requests and responses, it is calculated based on the date of the request.
       </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element ref="sif:SchoolYear" minOccurs="0"/>
-			<xs:element name="EntryDate" type="xs:date" minOccurs="0">
+			<xs:element ref="sif:SchoolYear"/>
+			<xs:element name="EntryDate" type="xs:date">
 				<xs:annotation>
 					<xs:documentation>The date from when this enrollment is valid.</xs:documentation>
 				</xs:annotation>
@@ -2253,7 +2253,7 @@
 			<xs:element name="EntryType" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Code" type="sif:AUCodeSetsEntryTypeType" minOccurs="0">
+						<xs:element name="Code" type="sif:AUCodeSetsEntryTypeType">
 							<xs:annotation>
 								<xs:documentation>Code indicating the type of entry for this enrollment</xs:documentation>
 							</xs:annotation>
@@ -2400,7 +2400,7 @@
 			<xs:element name="ExitStatus" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Code" type="sif:AUCodeSetsExitWithdrawalStatusType" minOccurs="0">
+						<xs:element name="Code" type="sif:AUCodeSetsExitWithdrawalStatusType">
 							<xs:annotation>
 								<xs:documentation> Code indicating the closure status for this enrollment.</xs:documentation>
 							</xs:annotation>
@@ -2412,7 +2412,7 @@
 			<xs:element name="ExitType" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Code" type="sif:AUCodeSetsExitWithdrawalTypeType" minOccurs="0">
+						<xs:element name="Code" type="sif:AUCodeSetsExitWithdrawalTypeType">
 							<xs:annotation>
 								<xs:documentation>Code indicating the type of exit for this enrollment.</xs:documentation>
 							</xs:annotation>
@@ -2446,7 +2446,7 @@
 			<xs:element name="CatchmentStatus" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="Code" type="sif:AUCodeSetsPublicSchoolCatchmentStatusType" minOccurs="0">
+						<xs:element name="Code" type="sif:AUCodeSetsPublicSchoolCatchmentStatusType">
 							<xs:annotation>
 								<xs:documentation>Code indicating the residency status for this enrollment. Code indicating Enrollment Catchment Status.</xs:documentation>
 							</xs:annotation>
@@ -2504,7 +2504,7 @@
 			<xs:element name="StudentSubjectChoiceList" nillable="true" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="StudentSubjectChoice" minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="StudentSubjectChoice" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:sequence>
 									<xs:element name="PreferenceNumber" type="xs:unsignedInt" nillable="true" minOccurs="0">
@@ -2512,7 +2512,7 @@
 											<xs:documentation>Subject Priority</xs:documentation>
 										</xs:annotation>
 									</xs:element>
-									<xs:element name="SubjectLocalId" type="sif:LocalIdType" minOccurs="0">
+									<xs:element name="SubjectLocalId" type="sif:LocalIdType">
 										<xs:annotation>
 											<xs:documentation>Local Subject Id</xs:documentation>
 										</xs:annotation>
@@ -2613,37 +2613,37 @@
 	<!-- Adding Collections Here -->
 	<xs:complexType name="StaffPersonalCollectionType">
 		<xs:sequence>
-			<xs:element name="StaffPersonal" type="sif:StaffPersonalType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="StaffPersonal" type="sif:StaffPersonalType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="StaffPersonals" type="sif:StaffPersonalCollectionType"/>
 	<xs:complexType name="StaffAssignmentCollectionType">
 		<xs:sequence>
-			<xs:element name="StaffAssignment" type="sif:StaffAssignmentType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="StaffAssignment" type="sif:StaffAssignmentType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="StaffAssignments" type="sif:StaffAssignmentCollectionType"/>
 	<xs:complexType name="StudentSchoolEnrollmentCollectionType">
 		<xs:sequence>
-			<xs:element name="StudentSchoolEnrollment" type="sif:StudentSchoolEnrollmentType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="StudentSchoolEnrollment" type="sif:StudentSchoolEnrollmentType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="StudentSchoolEnrollments" type="sif:StudentSchoolEnrollmentCollectionType"/>
 	<xs:complexType name="StudentPersonalCollectionType">
 		<xs:sequence>
-			<xs:element name="StudentPersonal" type="sif:StudentPersonalType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="StudentPersonal" type="sif:StudentPersonalType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="StudentPersonals" type="sif:StudentPersonalCollectionType"/>
 	<xs:complexType name="SchoolInfoCollectionType">
 		<xs:sequence>
-			<xs:element name="SchoolInfo" type="sif:SchoolInfoType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SchoolInfo" type="sif:SchoolInfoType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="SchoolInfos" type="sif:SchoolInfoCollectionType"/>
 	<xs:complexType name="SystemRoleCollectionType">
 		<xs:sequence>
-			<xs:element name="SystemRole" type="sif:SystemRoleType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SystemRole" type="sif:SystemRoleType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="SystemRoles" type="sif:SystemRoleCollectionType"/>

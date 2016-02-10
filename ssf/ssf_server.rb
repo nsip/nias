@@ -125,10 +125,8 @@ class SSFServer < Sinatra::Base
 		validator = Csvlint::Validator.new( StringIO.new( csv ) , {}, nil)
 		validator.validate
 		if(validator.valid? and validator.errors.empty?) then
-puts csv
 			raw_messages = CSV.parse( csv , {:headers=>true})
 			csvlines = csv.lines()
-puts raw_messages
 			raw_messages.each_with_index do |e, i| 
 				e[:__linenumber] = i+1 
 				e[:__linecontent] = csvlines[i+1].chomp

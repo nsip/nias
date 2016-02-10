@@ -9,7 +9,6 @@ xml = <<XML
 <StudentPersonal RefId="e9fc2b1f-07a5-4c07-ad9a-6ffa3d9b576d">
     <LocalId>45715</LocalId>
     <StateProvinceId>96413752</StateProvinceId>
-    <OtherIdList/>
     <PersonInfo>
         <Name Type="LGL">
             <FamilyName>Dodich</FamilyName>
