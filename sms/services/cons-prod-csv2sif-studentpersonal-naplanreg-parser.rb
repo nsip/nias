@@ -81,7 +81,6 @@ loop do
         messages = consumer.fetch
                 messages.each do |m|
             row = JSON.parse(m.value) 
-puts row
             # validate that we have received the right kind of record here, from the headers
             if(row['LocalStaffId'] and not row['LocalId'])
                 outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}", "invalid" )

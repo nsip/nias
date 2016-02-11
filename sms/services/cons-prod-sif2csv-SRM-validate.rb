@@ -67,7 +67,7 @@ def validate_student(nodes)
 	begin
 		yearlevel = Integer(yearlevel_string.to_s)
 	rescue ArgumentError
-		yearlevel_string = nil
+		yearlevel = 0
 	end
 
 	if(yearlevel_string and testlevel)
@@ -89,7 +89,7 @@ def validate_student(nodes)
 
 
 	if(yearlevel_string and birthdate)
-		if(yearlevel > 1 and yearlevel < 12)
+		if(yearlevel >= 1 and yearlevel <= 12)
 			age_in_years = (Date.today - Date.parse(birthdate.to_s)).to_i / (365.24)
 			expected_age = yearlevel + 5
 			if(age_in_years < expected_age - 1 or age_in_years > expected_age + 2)
@@ -169,7 +169,7 @@ def validate_student(nodes)
 
             visaCode = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:VisaSubClass")
 	    ret << "Error: 'VisaCode #{visaCode}' is too long" if visaCode and visaCode.to_s.length > 3
-	    ret << "Error: 'VisaCode #{visaCode}' is wrong format" if visaCode and visaCode.to_s.match(/^\d\d\d$/)
+	    ret << "Error: 'VisaCode #{visaCode}' is wrong format" unless visaCode and visaCode.to_s.match(/^\d\d\d$/)
 
 	    ffpos = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:FFPOS")
 	    ret << "Error: 'FullFeePayingStudent is mandatory" unless ffpos
