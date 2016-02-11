@@ -196,10 +196,10 @@ def validate_student(nodes)
             localCampusId = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:LocalCampusId")
 	    ret << "Error: 'LocalCampusId #{localCampusId}' is too long" if localCampusId and localCampusId.to_s.length > 9
 
-            otherSchoolId = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:xmlns:OtherEnrollmentSchoolACARAId")
+            otherSchoolId = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:OtherEnrollmentSchoolACARAId")
 	    ret << "Error: 'OtherSchoolId #{otherSchoolId}' is too long" if otherSchoolId and otherSchoolId.to_s.length > 9
 
-            reportingSchoolId = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:xmlns:ReportingSchoolId")
+            reportingSchoolId = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:ReportingSchoolId")
 	    ret << "Error: 'ReportingSchoolId #{reportingSchoolId}' is too long" if reportingSchoolId and reportingSchoolId.to_s.length > 9
 
             parent1SchoolEducation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent1SchoolEducationLevel")
