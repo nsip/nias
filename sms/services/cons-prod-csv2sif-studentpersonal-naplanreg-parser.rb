@@ -54,6 +54,7 @@ end
 @inbound = 'naplan.csv'
 #@outbound = 'naplan.sifxmlout'
 @outbound = 'sifxml.ingest'
+@errbound = 'csv.errors'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 
@@ -80,109 +81,120 @@ loop do
         messages = consumer.fetch
                 messages.each do |m|
             row = JSON.parse(m.value) 
+puts row
+            # validate that we have received the right kind of record here, from the headers
+            if(row['LocalStaffId'] and not row['LocalId'])
+                outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}", "invalid" )
+            else
+
 
 # inject the source CSV line number as a comment into the generated XML; errors found in the templated SIF/XML
 # will be reported back in the csv.errors stream
 
-            xml = <<XML
-<StudentPersonals  xmlns="http://www.sifassociation.org/au/datamodel/3.4">
-<StudentPersonal RefId="#{SecureRandom.uuid}">
-<!-- CSV line #{row['__linenumber']} -->
-<!-- CSV content #{row['__linecontent']} -->
-  <LocalId>#{row['LocalId']}</LocalId>
-  <StateProvinceId>#{row['StateProvinceId']}</StateProvinceId>
-  <OtherIdList>
-    <OtherId Type="SectorStudentId">#{row['SectorId']}</OtherId>
-    <OtherId Type="DiocesanStudentId">#{row['DiocesanId']}</OtherId>
-    <OtherId Type="OtherStudentId">#{row['OtherId']}</OtherId>
-    <OtherId Type="TAAStudentId">#{row['TAAId']}</OtherId>
-    <OtherId Type="NationalStudentId">#{row['NationalId']}</OtherId>
-    <OtherId Type="NAPPlatformStudentId">#{row['PlatformId']}</OtherId>
-    <OtherId Type="PreviousLocalSchoolStudentId">#{row['PreviousLocalId']}</OtherId>
-    <OtherId Type="PreviousSectorStudentId">#{row['PreviousSectorId']}</OtherId>
-    <OtherId Type="PreviousDiocesanStudentId">#{row['PreviousDiocesanId']}</OtherId>
-    <OtherId Type="PreviousOtherStudentId">#{row['PreviousOtherId']}</OtherId>
-    <OtherId Type="PreviousTAAStudentId">#{row['PreviousTAAId']}</OtherId>
-    <OtherId Type="PreviousStateProvinceId">#{row['PreviousStateProvinceId']}</OtherId>
-    <OtherId Type="PreviousNationalStudentId">#{row['PreviousNationalId']}</OtherId>
-    <OtherId Type="PreviousNAPPlatformStudentId">#{row['PreviousPlatformId']}</OtherId>
-  </OtherIdList>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>#{row['FamilyName']}</FamilyName>
-      <GivenName>#{row['GivenName']}</GivenName>
-      <MiddleName>#{row['MiddleName']}</MiddleName>
-      <PreferredGivenName>#{row['PreferredName']}</PreferredGivenName>
-    </Name>
-    <Demographics>
-      <IndigenousStatus>#{row['IndigenousStatus']}</IndigenousStatus>
-      <Sex>#{row['Sex']}</Sex>
-      <BirthDate>#{row['BirthDate']}</BirthDate>
-      <CountryOfBirth>#{row['CountryOfBirth']}</CountryOfBirth>
-      <LanguageList>
-        <Language>
-          <Code>#{row['StudentLOTE']}</Code>
-          <LanguageType>4</LanguageType>
-        </Language>
-      </LanguageList>
-      <VisaSubClass>#{row['VisaCode']}</VisaSubClass>
-      <LBOTE>#{row['LBOTE']}</LBOTE>
-    </Demographics>
-    <AddressList>
-      <Address Type="0765" Role="012B">
-        <Street>
-          <Line1>#{row['AddressLine1']}</Line1>
-          <Line2>#{row['AddressLine2']}</Line2>
-        </Street>
-        <City>#{row['Locality']}</City>
-        <StateProvince>#{row['StateTerritory']}</StateProvince>
-        <Country>1101</Country>
-        <PostalCode>#{row['Postcode']}</PostalCode>
-      </Address>
-    </AddressList>
-  </PersonInfo>
-  <MostRecent>
-    <SchoolLocalId>#{row['SchoolLocalId']}</SchoolLocalId>
-    <YearLevel>
-      <Code>#{row['YearLevel']}</Code>
-    </YearLevel>
-    <FTE>#{row['FTE']}</FTE>
-    <Parent1Language>#{row['Parent1LOTE']}</Parent1Language>
-    <Parent2Language>#{row['Parent2LOTE']}</Parent2Language>
-    <Parent1EmploymentType>#{row['Parent1Occupation']}</Parent1EmploymentType>
-    <Parent2EmploymentType>#{row['Parent2Occupation']}</Parent2EmploymentType>
-    <Parent1SchoolEducationLevel>#{row['Parent1SchoolEducation']}</Parent1SchoolEducationLevel>
-    <Parent2SchoolEducationLevel>#{row['Parent2SchoolEducation']}</Parent2SchoolEducationLevel>
-    <Parent1NonSchoolEducation>#{row['Parent1NonSchoolEducation']}</Parent1NonSchoolEducation>
-    <Parent2NonSchoolEducation>#{row['Parent2NonSchoolEducation']}</Parent2NonSchoolEducation>
-    <LocalCampusId>#{row['LocalCampusId']}</LocalCampusId>
-    <SchoolACARAId>#{row['ASLSchoolId']}</SchoolACARAId>
-    <TestLevel><Code>#{row['TestLevel']}</Code></TestLevel>
-    <Homegroup>#{row['Homegroup']}</Homegroup>
-    <ClassCode>#{row['ClassCode']}</ClassCode>
-    <MembershipType>#{row['MainSchoolFlag']}</MembershipType>
-    <FFPOS>#{row['FFPOS']}</FFPOS>
-    <ReportingSchoolId>#{row['ReportingSchoolId']}</ReportingSchoolId>
-    <OtherEnrollmentSchoolACARAId>#{row['OtherSchoolId']}</OtherEnrollmentSchoolACARAId>
-  </MostRecent>
-  <EducationSupport>#{row['EducationSupport']}</EducationSupport>
-  <HomeSchooledStudent>#{row['HomeSchooledStudent']}</HomeSchooledStudent>
-  <Sensitive>#{row['Sensitive']}</Sensitive>
-  <OfflineDelivery>#{row['OfflineDelivery']}</OfflineDelivery>
-</StudentPersonal>
-</StudentPersonals>
-
+                xml = <<XML
+    <StudentPersonals  xmlns="http://www.sifassociation.org/au/datamodel/3.4">
+    <StudentPersonal RefId="#{SecureRandom.uuid}">
+    <!-- CSV line #{row['__linenumber']} -->
+    <!-- CSV content #{row['__linecontent']} -->
+      <LocalId>#{row['LocalId']}</LocalId>
+      <StateProvinceId>#{row['StateProvinceId']}</StateProvinceId>
+      <OtherIdList>
+        <OtherId Type="SectorStudentId">#{row['SectorId']}</OtherId>
+        <OtherId Type="DiocesanStudentId">#{row['DiocesanId']}</OtherId>
+        <OtherId Type="OtherStudentId">#{row['OtherId']}</OtherId>
+        <OtherId Type="TAAStudentId">#{row['TAAId']}</OtherId>
+        <OtherId Type="NationalStudentId">#{row['NationalId']}</OtherId>
+        <OtherId Type="NAPPlatformStudentId">#{row['PlatformId']}</OtherId>
+        <OtherId Type="PreviousLocalSchoolStudentId">#{row['PreviousLocalId']}</OtherId>
+        <OtherId Type="PreviousSectorStudentId">#{row['PreviousSectorId']}</OtherId>
+        <OtherId Type="PreviousDiocesanStudentId">#{row['PreviousDiocesanId']}</OtherId>
+        <OtherId Type="PreviousOtherStudentId">#{row['PreviousOtherId']}</OtherId>
+        <OtherId Type="PreviousTAAStudentId">#{row['PreviousTAAId']}</OtherId>
+        <OtherId Type="PreviousStateProvinceId">#{row['PreviousStateProvinceId']}</OtherId>
+        <OtherId Type="PreviousNationalStudentId">#{row['PreviousNationalId']}</OtherId>
+        <OtherId Type="PreviousNAPPlatformStudentId">#{row['PreviousPlatformId']}</OtherId>
+      </OtherIdList>
+      <PersonInfo>
+        <Name Type="LGL">
+          <FamilyName>#{row['FamilyName']}</FamilyName>
+          <GivenName>#{row['GivenName']}</GivenName>
+          <MiddleName>#{row['MiddleName']}</MiddleName>
+          <PreferredGivenName>#{row['PreferredName']}</PreferredGivenName>
+        </Name>
+        <Demographics>
+          <IndigenousStatus>#{row['IndigenousStatus']}</IndigenousStatus>
+          <Sex>#{row['Sex']}</Sex>
+          <BirthDate>#{row['BirthDate']}</BirthDate>
+          <CountryOfBirth>#{row['CountryOfBirth']}</CountryOfBirth>
+          <LanguageList>
+            <Language>
+              <Code>#{row['StudentLOTE']}</Code>
+              <LanguageType>4</LanguageType>
+            </Language>
+          </LanguageList>
+          <VisaSubClass>#{row['VisaCode']}</VisaSubClass>
+          <LBOTE>#{row['LBOTE']}</LBOTE>
+        </Demographics>
+        <AddressList>
+          <Address Type="0765" Role="012B">
+            <Street>
+              <Line1>#{row['AddressLine1']}</Line1>
+              <Line2>#{row['AddressLine2']}</Line2>
+            </Street>
+            <City>#{row['Locality']}</City>
+            <StateProvince>#{row['StateTerritory']}</StateProvince>
+            <Country>1101</Country>
+            <PostalCode>#{row['Postcode']}</PostalCode>
+          </Address>
+        </AddressList>
+      </PersonInfo>
+      <MostRecent>
+        <SchoolLocalId>#{row['SchoolLocalId']}</SchoolLocalId>
+        <YearLevel>
+          <Code>#{row['YearLevel']}</Code>
+        </YearLevel>
+        <FTE>#{row['FTE']}</FTE>
+        <Parent1Language>#{row['Parent1LOTE']}</Parent1Language>
+        <Parent2Language>#{row['Parent2LOTE']}</Parent2Language>
+        <Parent1EmploymentType>#{row['Parent1Occupation']}</Parent1EmploymentType>
+        <Parent2EmploymentType>#{row['Parent2Occupation']}</Parent2EmploymentType>
+        <Parent1SchoolEducationLevel>#{row['Parent1SchoolEducation']}</Parent1SchoolEducationLevel>
+        <Parent2SchoolEducationLevel>#{row['Parent2SchoolEducation']}</Parent2SchoolEducationLevel>
+        <Parent1NonSchoolEducation>#{row['Parent1NonSchoolEducation']}</Parent1NonSchoolEducation>
+        <Parent2NonSchoolEducation>#{row['Parent2NonSchoolEducation']}</Parent2NonSchoolEducation>
+        <LocalCampusId>#{row['LocalCampusId']}</LocalCampusId>
+        <SchoolACARAId>#{row['ASLSchoolId']}</SchoolACARAId>
+        <TestLevel><Code>#{row['TestLevel']}</Code></TestLevel>
+        <Homegroup>#{row['Homegroup']}</Homegroup>
+        <ClassCode>#{row['ClassCode']}</ClassCode>
+        <MembershipType>#{row['MainSchoolFlag']}</MembershipType>
+        <FFPOS>#{row['FFPOS']}</FFPOS>
+        <ReportingSchoolId>#{row['ReportingSchoolId']}</ReportingSchoolId>
+        <OtherEnrollmentSchoolACARAId>#{row['OtherSchoolId']}</OtherEnrollmentSchoolACARAId>
+      </MostRecent>
+      <EducationSupport>#{row['EducationSupport']}</EducationSupport>
+      <HomeSchooledStudent>#{row['HomeSchooledStudent']}</HomeSchooledStudent>
+      <Sensitive>#{row['Sensitive']}</Sensitive>
+      <OfflineDelivery>#{row['OfflineDelivery']}</OfflineDelivery>
+    </StudentPersonal>
+    </StudentPersonals>
+    
 XML
-
-
-            nodes = Nokogiri::XML( xml ) do |config|
-                config.nonet.noblanks
+    
+    
+                nodes = Nokogiri::XML( xml ) do |config|
+                    config.nonet.noblanks
+                end
+    	    # remove empty nodes from anywhere in the document
+                #nodes.xpath('//*//child::*[not(node())]').each do |node|
+                nodes.xpath('//*//child::*[not(node()) and not(text()[normalize-space()]) ]').each do |node|
+                    node.remove
+                end
+                nodes.xpath('//*/child::*[text() and not(text()[normalize-space()])]').each do |node|
+                    node.remove
+		end
+                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout\n" + nodes.root.to_s, "indexed" )
             end
-	    # remove empty nodes from anywhere in the document
-            nodes.xpath('//*//child::*[not(node())]').each do |node|
-                node.remove
-            end
-            outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout\n" + nodes.root.to_s, "indexed" )
         end
 
         # send results to indexer to create sms data graph

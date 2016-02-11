@@ -104,12 +104,13 @@
         <script>
 
 var iterations = 0;
-var seconds = 15;
+var seconds = 2;
 var startoffset = 0;
 var timer;
 $(function() {
   $("#fileuploadform").submit(function(e){
     e.preventDefault();
+    frame(); /* set up the startoffset for the error stream */
     var formData = new FormData(this);
     formData.append('file', $("#file").prop('files')[0]);
     $("#results").empty();
@@ -124,7 +125,6 @@ $(function() {
       contentType: false,
       success: function(){
         $("#results").html("Successfully submitted</br/>")
-	frame();
  	timer = setInterval(frame, seconds*1000);
       },
       error: function(){
@@ -143,12 +143,21 @@ $(function() {
            		.done(function(data) {
 				iterations++;
 				var matches = data.match(/\{"advice":"Start consuming from ([0-9]+)"\}/);
-				startoffset = matches[1];
-				data = data.replace(/\{"advice":"Start consuming from [0-9]+"\}/, "");
-				if(!data || !data.trim() ) {
-					data = "No error...";
-				}
-       		          	$("#results").append ( data + "<br/>" );
+					startoffset = matches[1];
+					data = data.replace(/\{"advice":"Start consuming from [0-9]+"\}/, "");
+					data = data.replace(/\\n/g, "</br>\n");
+					if(!data || !data.trim() ) {
+						/* very first iteration is just setup. If we have a message, then 
+						display it, else show nothing */
+						if(startoffset == 1) {
+							data = "";
+						} else {
+							data = "No further errors reported...";
+						} 
+					}
+					if(data && data.trim() ) {
+       		          			$("#results").append ( data + "<br/>" );
+					}
 	           	});
 			}
 		}

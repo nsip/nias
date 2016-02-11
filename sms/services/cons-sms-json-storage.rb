@@ -37,7 +37,7 @@ def topic_to_id(topic, json)
 	when "naplan.csv_staff"
 		id = json["LocalStaffId"]
 	else
-		# in desperation, return concatenation of all keys then values
+		# in desperation, return concatenation of first 5 keys then first 5 values
 		id = nil
 	end
 	if(id.nil?)
@@ -46,7 +46,7 @@ def topic_to_id(topic, json)
 		elsif(json.key?('id'))
 			id = json["id"]
 		else
-			id = json.keys.join('::') + '--' + json.values.join('::')
+			id = json.keys[0..4].join('::') + '--' + json.values[0..4].join('::')
 		end
 	end
 	return id
@@ -75,7 +75,11 @@ loop do
             # write the message to storage with its own refid as the key
             # puts "\n\nkey value pair will be:\n\nKEY: #{idx[:id]}\n\nVALUE:\n\n#{nodes.to_s}"
 
-            @store["#{idx[:type]}::#{idx[:id]}"] = json
+	    begin
+            	@store["#{idx[:type]}::#{idx[:id]}"] = json
+	    rescue
+		puts "Failed to store #{json} to key #{idx[:type]}::#{idx[:id]}"
+	    end
         end
 
 

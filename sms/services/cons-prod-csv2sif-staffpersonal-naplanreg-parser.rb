@@ -16,6 +16,7 @@ require 'json-schema'
 
 @inbound = 'naplan.csv_staff'
 @outbound = 'sifxml.ingest'
+@errbound = 'csv.errors'
 #@outbound = 'naplan.sifxmlout_staff'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
@@ -53,51 +54,63 @@ loop do
             #classcodes = row['ClassCode'].split(/,/)
             #classcodes_xml = ''
             #classcodes.each { |x| classcodes_xml << "      <ClassCode>#{x}</ClassCode>\n" }
+	    # validate that we have received the right kind of record here, from the headers
+	    if(row['LocalId'] and not row['LocalStaffId']) 
+            	outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "You appear to have submitted a StudentPersonal record instead of a StaffPersonal record\n#{row['__linecontent']}", "invalid" )
+	    else
+
+
 
 # inject the source CSV line number as a comment into the generated XML; errors found in the templated SIF/XML
 # will be reported back in the csv.errors stream
 
-            xml = <<XML
-<StaffPersonals xmlns="http://www.sifassociation.org/au/datamodel/3.4">
-<StaffPersonal RefId="#{SecureRandom.uuid}">
-<!-- CSV line #{row['__linenumber']} -->
-<!-- CSV content #{row['__linecontent']} -->
-  <LocalId>#{row['LocalStaffId']}</LocalId>
-  <PersonInfo>
-    <Name Type="LGL">
-      <FamilyName>#{row['FamilyName']}</FamilyName>
-      <GivenName>#{row['GivenName']}</GivenName>
-    </Name>
-    <EmailList>
-      <Email Type="01">#{row['EmailAddress']}</Email>
-    </EmailList>
-  </PersonInfo>
-  <Title>#{row['StaffSchoolRole']}</Title>
-  <MostRecent>
-    <SchoolLocalId>#{row['LocalSchoolId']}</SchoolLocalId>
-    <SchoolACARAId>#{row['ASLSchoolId']}</SchoolACARAId>
-    <LocalCampusId>#{row['LocalCampusId']}</LocalCampusId>
-    <NAPLANClassList>
-      <ClassCode>#{row['ClassCode']}</ClassCode>
-    </NAPLANClassList>
-    <HomeGroup>#{row['HomeGroup']}</HomeGroup>
-  </MostRecent>
-  <SIF_ExtendedElements>
-    <SIF_ExtendedElement Name="AdditionalInfo">#{row['AdditionalInfo']}</SIF_ExtendedElement>
-  </SIF_ExtendedElements>
-</StaffPersonal>
-</StaffPersonals>
+                xml = <<XML
+    <StaffPersonals xmlns="http://www.sifassociation.org/au/datamodel/3.4">
+    <StaffPersonal RefId="#{SecureRandom.uuid}">
+    <!-- CSV line #{row['__linenumber']} -->
+    <!-- CSV content #{row['__linecontent']} -->
+      <LocalId>#{row['LocalStaffId']}</LocalId>
+      <PersonInfo>
+        <Name Type="LGL">
+          <FamilyName>#{row['FamilyName']}</FamilyName>
+          <GivenName>#{row['GivenName']}</GivenName>
+        </Name>
+        <EmailList>
+          <Email Type="01">#{row['EmailAddress']}</Email>
+        </EmailList>
+      </PersonInfo>
+      <Title>#{row['StaffSchoolRole']}</Title>
+      <MostRecent>
+        <SchoolLocalId>#{row['LocalSchoolId']}</SchoolLocalId>
+        <SchoolACARAId>#{row['ASLSchoolId']}</SchoolACARAId>
+        <LocalCampusId>#{row['LocalCampusId']}</LocalCampusId>
+        <NAPLANClassList>
+          <ClassCode>#{row['ClassCode']}</ClassCode>
+        </NAPLANClassList>
+        <HomeGroup>#{row['HomeGroup']}</HomeGroup>
+      </MostRecent>
+      <SIF_ExtendedElements>
+        <SIF_ExtendedElement Name="AdditionalInfo">#{row['AdditionalInfo']}</SIF_ExtendedElement>
+      </SIF_ExtendedElements>
+    </StaffPersonal>
+    </StaffPersonals>
 XML
-
-            nodes = Nokogiri::XML( xml ) do |config|
-                config.nonet.noblanks
+    
+    
+                nodes = Nokogiri::XML( xml ) do |config|
+                    config.nonet.noblanks
+                end
+                # remove empty nodes from anywhere in the document
+                #nodes.xpath('//*//child::*[not(node())]').each do |node|
+                nodes.xpath('//*//child::*[not(node()) and not(text()[normalize-space()]) ]').each do |node|
+                #nodes.xpath('*[not(*) and not(text()[normalize-space()])]').each do |node|
+                    node.remove
+                end
+                nodes.xpath('//*/child::*[text() and not(text()[normalize-space()])]').each do |node|
+                    node.remove
+                end
+                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout_staff\n" + nodes.root.to_s, "indexed" )
             end
-            # remove empty nodes from anywhere in the document
-            #nodes.xpath('//*//child::*[not(node())]').each do |node|
-            nodes.xpath('*[not(*) and not(text()[normalize-space()])]').each do |node|
-                node.remove
-            end
-            outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout_staff\n" + nodes.root.to_s, "indexed" )
         end
 
         # send results to indexer to create sms data graph
