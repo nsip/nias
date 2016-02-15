@@ -92,6 +92,14 @@ loop do
                 outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}", "invalid" )
             else
 
+                # mappings of CSV alternate values
+		row['FFPOS'] = '1' if row['FFPOS'] == 'Y'
+		row['FFPOS'] = '2' if row['FFPOS'] == 'N'
+		row['FFPOS'] = '9' if row['FFPOS'] == 'U'
+		row['FFPOS'] = '9' if row['FFPOS'] == 'X'
+		row['MainSchoolFlag'] = '01' if row['MainSchoolFlag'] == 'Y'
+		row['MainSchoolFlag'] = '02' if row['MainSchoolFlag'] == 'N'
+
 
 # inject the source CSV line number as a comment into the generated XML; errors found in the templated SIF/XML
 # will be reported back in the csv.errors stream
