@@ -121,7 +121,6 @@ class SSFServer < Sinatra::Base
 		end
 		csv_schema = Csvlint::Schema.from_csvw_metadata("http://example.com", JSON.parse(csv_schema)) unless csv_schema.nil?
 =end
-
 		validator = Csvlint::Validator.new( StringIO.new( csv ) , {}, nil)
 		validator.validate
 		if(validator.valid? and validator.errors.empty?) then

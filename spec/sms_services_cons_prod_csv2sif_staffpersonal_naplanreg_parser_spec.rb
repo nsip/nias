@@ -11,9 +11,9 @@ fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
 CSV
 
 blank_param = <<CSV
-LocalStaffId,GivenName,FamilyName,ClassCode,HomeGroup,ASLSchoolId,LocalSchoolId,LocalCampusId,EmailAddress,AdditionalInfo,StaffSchoolRole
- ,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
-fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
+GivenName,FamilyName,ClassCode,HomeGroup,ASLSchoolId,LocalSchoolId,LocalCampusId,EmailAddress,AdditionalInfo,StaffSchoolRole
+Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
+Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,Y,teacher
 CSV
 
 invalid_email = <<CSV
@@ -33,6 +33,13 @@ LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,
 fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2004-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
 fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2004-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
 CSV
+
+default_values = <<CSV
+LocalStaffId,GivenName,FamilyName,ClassCode,HomeGroup,ASLSchoolId,LocalSchoolId,LocalCampusId,EmailAddress
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com
+fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com
+CSV
+
 
 
 out = <<XML
@@ -63,6 +70,9 @@ out = <<XML
 </StaffPersonal>
 XML
 out.gsub!(/\n[ ]*/,"").chomp!
+default_xml = String.new(out)
+default_xml.gsub!('teacher', 'principal')
+default_xml.gsub!('"AdditionalInfo">Y<', '"AdditionalInfo">N<')
 
 @service_name = 'sms_services_cons_prod_csv2sif_staffpersonal_naplanreg_parser_spec'
 
@@ -80,7 +90,7 @@ describe "NAPLAN convert CSV to SIF" do
         sleep 1
     end
 
-    context "Valid CSV to naplan.csv" do
+    context "Valid CSV to naplan.csv_staff" do
 	before(:example) do
         	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout_staff.none", 0, :latest_offset)
         	puts "Next offset    = #{@xmlconsumer.next_offset}"
@@ -107,6 +117,35 @@ describe "NAPLAN convert CSV to SIF" do
             end
         end
     end
+
+    context "Missing default values in CSV to naplan.csv_staff" do
+        before(:example) do
+                @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout_staff.none", 0, :latest_offset)
+                puts "Next offset    = #{@xmlconsumer.next_offset}"
+                post_csv(default_values)
+                sleep 5
+        end
+        it "pushes templated XML with supplied default values to naplan.sifxmlout_staff.none" do
+            begin
+                a = @xmlconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expect(a[0].nil?).to be false
+                expect(a[0].value.nil?).to be false
+                received = a[0].value
+                received.gsub!(%r{<StaffPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="[^"]+">}, '<StaffPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">')
+                received.gsub!(%r{<\?xml version="1.0"\?>},'')
+                received.gsub!(%r{<!-- CSV [^>]+>},'')
+                received.gsub!(/\n[ ]*/,"")
+                expect(received).to eq default_xml
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+    end
+
 
     context "Invalid email in CSV to naplan.csv_staff" do
         before(:example) do
@@ -200,7 +239,6 @@ puts a.inspect
             end
         end
     end
-
 
     after(:all) do
         sleep 5

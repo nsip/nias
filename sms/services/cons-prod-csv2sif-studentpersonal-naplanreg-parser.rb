@@ -73,6 +73,10 @@ producers = []
 end
 @pool = producers.cycle
 
+# default values
+@default_csv = {'OfflineDelivery' => 'N', 'Sensitive' => 'Y', 'HomeSchooledStudent' => 'N', 'EducationSupport' => 'N', 'FFPOS' => 'N', 'MainSchoolFlag' => '01' }
+
+
 loop do
 
     begin
@@ -81,6 +85,8 @@ loop do
         messages = consumer.fetch
                 messages.each do |m|
             row = JSON.parse(m.value) 
+            row.merge!(@default_csv) { |key, v1, v2| v1 }
+
             # validate that we have received the right kind of record here, from the headers
             if(row['LocalStaffId'] and not row['LocalId'])
                 outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}", "invalid" )

@@ -36,6 +36,9 @@ producers = []
 end
 @pool = producers.cycle
 
+# default values
+@default_csv = {'StaffSchoolRole' => 'principal', 'AdditionalInfo' => 'N' }
+
 loop do
 
     begin
@@ -49,6 +52,8 @@ loop do
 		next unless row[key].is_a? String
                 row[key].gsub!("[ ]*\n[ ]*", " ")
             end
+	    row.merge!(@default_csv) { |key, v1, v2| v1 }
+
 
 	    #obsolete: there will only be one classcode in CSV
             #classcodes = row['ClassCode'].split(/,/)
@@ -95,6 +100,7 @@ loop do
     </StaffPersonal>
     </StaffPersonals>
 XML
+
     
     
                 nodes = Nokogiri::XML( xml ) do |config|

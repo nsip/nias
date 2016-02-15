@@ -37,7 +37,7 @@ def validate_staff(nodes)
 	ret = []
        	emailaddress = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:EmailList/xmlns:Email")
        	additionalinfo = CSVHeaders.lookup_xpath(nodes, "//xmlns:SIF_ExtendedElements/xmlns:SIF_ExtendedElement[@Name = 'AdditionalInfo']")
-	ret << "Error: Email Address #{emailaddress.to_s} is malformed" if emailaddress and not emailaddress.to_s.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-zA-Z][a-zA-Z]$/)
+	ret << "Error: Email Address #{emailaddress.to_s} is malformed" if emailaddress and not emailaddress.to_s.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-zA-Z][a-zA-Z]+$/)
 	if(additionalinfo)
 		unless additionalinfo.to_s.match(/^[ynYN]$/)
 			ret << "Error: Addition Info #{additionalinfo.to_s} is not Y or N"
