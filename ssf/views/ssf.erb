@@ -70,12 +70,14 @@
                 <div class="row">
                 <div class="seven columns" id="collection_text">
                                 <div>Normally NIAS expects you to send files to a REST endpoint for the given topic (see <a href="https://github.com/nsip/nias/wiki/Workflow">NIAS Workflow</A>). File upload can be used instead, particularly if you have very large files.
+		<p>You will need to flush data from the database if you want the upload to be tested correctly for duplicates
 
 <form action="/fileupload" method="POST" enctype="multipart/form-data" id="fileuploadform">
   <input type="file" name="file" id="file"><br/>
   <input type="radio" name="mimetype" value="application/xml">application/xml (SIF) 
   <input type="radio" name="mimetype" value="application/json">application/json 
   <input type="radio" name="mimetype" value="text/csv" checked>text/csv <br/>
+  <input type="checkbox" name="flush" >Flush all data from SMS database before uploading?<br/>
 
 		<label for="topic_menu">Topic</label>
                     <select class="u-full-width" name="topic_menu">
