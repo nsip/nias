@@ -17,8 +17,8 @@ def extract_SchoolLocalId(nodes)
     ret = nil
     schoolId = nodes.at_xpath("//xmlns:MostRecent/xmlns:SchoolACARAId")
     localId = nodes.at_xpath("//xmlns:LocalId")
-    schoolId1 = schoolId.child || nil
-    localId1 = localId.child || nil
+    schoolId1 = schoolId.child || nil if schoolId
+    localId1 = localId.child || nil if localId
     ret = "#{schoolId1}::#{localId1}" if schoolId1 and localId1
     return ret
 end
@@ -29,10 +29,10 @@ def extract_SchoolNameDOB(nodes)
     givenname = nodes.at_xpath("//xmlns:PersonInfo/xmlns:Name/xmlns:GivenName")
     familyname = nodes.at_xpath("//xmlns:PersonInfo/xmlns:Name/xmlns:FamilyName")
     dob = nodes.at_xpath("//xmlns:PersonInfo/xmlns:Demographics/xmlns:BirthDate")
-    schoolId1 = schoolId.child || nil
-    givenname1 = givenname.child || nil
-    familyname1 = familyname.child || nil
-    dob1 = dob.child || nil
+    schoolId1 = schoolId.child || nil if schoolId
+    givenname1 = givenname.child || nil if givenname
+    familyname1 = familyname.child || nil if familyname
+    dob1 = dob.child || nil if dob
     ret = "#{schoolId1}::#{givenname1}::#{familyname1}::#{dob1}" if schoolId1 and givenname1 and familyname1 and dob1
     return ret
 end
@@ -89,11 +89,11 @@ loop do
 	    school_name_dob = extract_SchoolNameDOB(nodes)
 
 	    @redis.sadd "SchoolLocalId::#{school_local_id}", refId
-	    if(Integer(@redis.scard('SchoolLocalId::#{school_local_id}')) > 1)
+	    if(Integer(@redis.scard("SchoolLocalId::#{school_local_id}")) > 1)
 		errors << "Error: There is a duplicate entry with the ACARA School Id + Local Id #{school_local_id}"
             end
 	    @redis.sadd "SchoolNameDOB::#{school_name_dob}", refId
-	    if(Integer(@redis.scard('SchoolLocalId::#{school_local_id}')) > 1)
+	    if(Integer(@redis.scard("SchoolLocalId::#{school_local_id}")) > 1)
 		errors << "Warning: There is a duplicate entry with the ACARA School Id, Given Name, Family Name and Date of Birth #{school_name_dob}"
 	    end
             errors.each do |e|

@@ -43,6 +43,8 @@ def validate_staff(nodes)
 			ret << "Error: Addition Info #{additionalinfo.to_s} is not Y or N"
 		end
 	end
+       	localid = CSVHeaders.lookup_xpath(nodes, "//xmlns:LocalId")
+	ret << "Error: 'LocalId is mandatory" unless localid
 	return ret
 end
 
