@@ -240,6 +240,11 @@ fjghh438,Treva,Seefeldt,7D,7E,k460,046129,01,tseefeldt@example.com,Y,teacher
 CSV
 
 
+inject_psi = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh439,14668,65616,75189,50668,59286,35164,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2004-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,k460,046129,01,02,k460,k460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
 out = <<XML
 <StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">
   <LocalId>fjghh371</LocalId>
@@ -345,13 +350,13 @@ describe "NAPLAN convert CSV to SIF" do
 	@redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
 	@redis.flushdb
         @http = Net::HTTP.new("localhost", "9292")
-        @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout.none", 0, :latest_offset)
-        puts "Next offset    = #{@xmlconsumer.next_offset}"
         sleep 1
     end
 
     context "Valid CSV to naplan.csv" do
         before(:example) do
+        	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout.none", 0, :latest_offset)
+        	puts "Next offset    = #{@xmlconsumer.next_offset}"
         	post_csv(csv)
         end
         it "pushes templated XML to naplan.sifxmlout.none" do
@@ -372,6 +377,8 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "CSV requiring mappings of values to naplan.csv" do
         before(:example) do
+        	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout.none", 0, :latest_offset)
+        	puts "Next offset    = #{@xmlconsumer.next_offset}"
                 post_csv(mapped_csv)
         end
         it "pushes templated XML to naplan.sifxmlout.none" do
@@ -393,6 +400,8 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Missing default values in CSV to naplan.csv" do
         before(:example) do
+        	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout.none", 0, :latest_offset)
+        	puts "Next offset    = #{@xmlconsumer.next_offset}"
                 post_csv(default_values)
         end
         it "pushes templated XML with supplied default values to naplan.sifxmlout.none" do
@@ -1074,7 +1083,6 @@ describe "NAPLAN convert CSV to SIF" do
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
-puts a.inspect
                                 errors = a.find_all{ |e| e.value["element is not expected"] }
                                 expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1143,7 +1151,6 @@ puts a.inspect
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
-a.each {|e| puts e.value }
                                 errors = a.find_all{ |e| e.value["Warning"] }
                                 expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1232,6 +1239,28 @@ a.each {|e| puts e.value }
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
                 expect(a.empty?).to be true
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+    end
+
+  context "Record without Platform Identifier in CSV to naplan.csv" do
+        before(:example) do
+        	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout.none", 0, :latest_offset)
+        	puts "Next offset    = #{@xmlconsumer.next_offset}"
+                post_csv(inject_psi)
+        end
+        it "XML including generated Platform identifier in XML to naplan.sifxmlout.none, in the right format" do
+            sleep 5
+            begin
+                a = @xmlconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expect(a[0].value).to match(/"NAPPlatformStudentId"/)
+                expect(a[0].value).to match(/NAPPlatformStudentId[^>]*>[QR]\d{11}[A-Z]</)
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset

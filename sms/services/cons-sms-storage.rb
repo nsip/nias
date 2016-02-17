@@ -18,7 +18,7 @@ require 'poseidon'
 require 'hashids'
 require 'moneta'
 
-@inbound = 'sifxml.validated'
+@inbound = 'sifxml.processed'
 
 @store = Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages', mapsize: 1_000_000_000)
 

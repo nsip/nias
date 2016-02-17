@@ -5,7 +5,7 @@ require 'nokogiri' # xml support
 
 =begin
 Consumer of validated SIF/XML messages. 
-Messages are received from the single stream sifxml.validated. The header of the received message is "topic/stream". 
+Messages are received from the single stream sifxml.processed. The header of the received message is "topic/stream". 
 Each object in the stream is filtered according to privacy filters defined in ./privacyfilters/*.xpath.
 
 The header of the received message is "topic"."stream". Each message is passed to a stram for each privacy setting simultaneously:
@@ -28,7 +28,7 @@ The privacy filters consist of lines with two elements: the XPath and the redact
 The script is currently inefficient: each xpath in each filter is applied independently of all others, using the Nokogiri xpath() method. If it proves expedient, a more efficient filter will need to be devised.
 =end
 
-@inbound = 'sifxml.validated'
+@inbound = 'sifxml.processed'
 
 @filter = {}
 @sensitivities = [:none, :low, :medium, :high, :extreme]

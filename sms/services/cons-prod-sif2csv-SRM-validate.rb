@@ -12,7 +12,7 @@ require 'hashids'
 require 'csv'
 require_relative 'cvsheaders-naplan'
 
-@inbound = 'sifxml.validated'
+@inbound = 'sifxml.processed'
 @outbound1 = 'sifxml.errors'
 @outbound2 = 'csv.errors'
 

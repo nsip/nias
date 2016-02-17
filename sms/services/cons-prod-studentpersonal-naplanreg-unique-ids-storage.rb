@@ -37,7 +37,7 @@ def extract_SchoolNameDOB(nodes)
     return ret
 end
 
-@inbound = 'sifxml.validated'
+@inbound = 'sifxml.processed'
 @outbound1 = 'sifxml.errors'
 @outbound2 = 'csv.errors'
 @servicename = 'cons-prod-studentpersonal-naplanreg-unique-ids-storage.rb'

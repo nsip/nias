@@ -1,6 +1,6 @@
 # cons-prod-sif-parser.rb
 
-# Simple consumer that reads SIF/XML messages from sifxml/validated.
+# Simple consumer that reads SIF/XML messages from sifxml/processed.
 # Assumes that sif messages have already been validated for xml
 # 
 # Parses message to find refid & type of message and to build index of
@@ -147,7 +147,7 @@ end
 
 
 
-@inbound = 'sifxml.validated'
+@inbound = 'sifxml.processed'
 @outbound = 'sms.indexer'
 
 @servicename = 'cons-prod-sif-parser'

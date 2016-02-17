@@ -110,6 +110,7 @@ def launch
 
   topics = [
         'sifxml.validated',
+        'sifxml.processed',
         'sms.indexer',
         'sifxml.ingest',
         'sifxml.bulkingest',
