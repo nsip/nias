@@ -133,7 +133,6 @@ def launch
         'naplan.csv',
         'naplan.csvstudents',
         'naplan.csv_staff',
-        'naplan.csvstaff',
         'naplan.sifxml_staff',
         'naplan.sifxml_staff.none',
         'naplan.sifxml_staff.low',

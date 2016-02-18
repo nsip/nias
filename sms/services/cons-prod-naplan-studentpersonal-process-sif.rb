@@ -73,7 +73,7 @@ loop do
             header = m.value.lines[0]
             payload = m.value.lines[1..-1].join
             topic = header.chomp.gsub(/TOPIC: /,"")
-            next unless @accepted_topics.grep(topic)
+            next unless @accepted_topics.include?(topic)
             item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
 
             nodes = Nokogiri::XML( payload ) do |config|

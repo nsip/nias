@@ -106,18 +106,19 @@
         <script>
 
 var iterations = 0;
-var seconds = 2;
+var seconds = 10;
 var startoffset = 0;
 var timer;
 $(function() {
   $("#fileuploadform").submit(function(e){
-    e.preventDefault();
-    frame(); /* set up the startoffset for the error stream */
-    var formData = new FormData(this);
-    formData.append('file', $("#file").prop('files')[0]);
     $("#results").empty();
     iterations = 0;
     startoffset = 0;
+    frame(); /* set up the startoffset for the error stream */
+    e.preventDefault();
+ 	timer = setInterval(frame, seconds*1000);
+    var formData = new FormData(this);
+    formData.append('file', $("#file").prop('files')[0]);
     $.ajax({
       type: "POST",
       url: "/fileupload",
@@ -127,10 +128,11 @@ $(function() {
       contentType: false,
       success: function(){
         $("#results").html("Successfully submitted</br/>")
- 	timer = setInterval(frame, seconds*1000);
+ //	timer = setInterval(frame, seconds*1000);
       },
       error: function(){
         $("#results").html("Form not submitted<br/>")
+iterations = 20;
       }
     });
     return false;
@@ -145,21 +147,22 @@ $(function() {
            		.done(function(data) {
 				iterations++;
 				var matches = data.match(/\{"advice":"Start consuming from ([0-9]+)"\}/);
+				var fetched_offset = startoffset;
 					startoffset = matches[1];
 					data = data.replace(/\{"advice":"Start consuming from [0-9]+"\}/, "");
 					data = data.replace(/\\n/g, "</br>\n");
 					if(!data || !data.trim() ) {
 						/* very first iteration is just setup. If we have a message, then 
 						display it, else show nothing */
-						if(startoffset == 1) {
-							data = "";
+						if(iterations == 1) {
+							data = fetched_offset + ": Waiting for errors. Fetching from " + startoffset;
 						} else {
-							data = "No further errors reported...";
+							data = fetched_offset + ": No further errors reported. Fetching from " + startoffset;
 						} 
 					}
-					if(data && data.trim() ) {
+					//if(data && data.trim() ) {
        		          			$("#results").append ( data + "<br/>" );
-					}
+					//}
 	           	});
 			}
 		}

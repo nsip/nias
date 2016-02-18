@@ -95,6 +95,7 @@ loop do
                         msg = header + "Message #{m.offset} validity error:\n" + 	
                         	xsd_errors.map{|e| e.message}.join("\n") 
                         puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"					
+                        puts "\n\nsending to: #{@outbound3}" if csvline
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg + "\n" +
                         	parent.document.to_s, "invalid" )
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound3}", 
@@ -106,6 +107,8 @@ loop do
                 msg = header + "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value	
                 # puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"
                 outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg, "invalid" )
+                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound3}", 
+			"CSV line #{csvline}: " + msg + "\n" + csvcontent, "invalid" ) if csvline
             end
         end
 
