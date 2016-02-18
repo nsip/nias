@@ -64,7 +64,6 @@ loop do
             puts "Payload size: #{payload.size}"
             #puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
 
-
             #File.open('log.txt', 'w') {|f| f.puts payload }
 
             # each ingest message is a group of objects of the same class, e.g. 
@@ -80,6 +79,7 @@ loop do
             end
             puts "Parsing took #{Time.now - start}"
 
+	    lines = []
             if(doc.errors.empty?) 
                 puts "Payload well-formed. Payload size: #{payload.size}. Validating...";
                 #			xsd_errors = @xsd.validate(parent.document)
@@ -100,23 +100,34 @@ loop do
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
                     end
                 else
-                    puts "Invalid!"
+		    lines = payload.lines
                     msg = header + "Message #{m.offset} validity error:\n" 
-                    msg << xsd_errors.map{|e| e.message + "\n...\n" + payload.lines[e.line - 3 .. e.line + 1].join("") + "...\n"}.join("\n") + "\n" 
-                    # puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"
                     puts msg
-                    outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg , "invalid" )
+	            xsd_errors.each do |e|
+			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
+                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", output , "invalid" )
+			if outbound_messages.length > 20 
+        			outbound_messages.each_slice(20) do | batch |
+            				pool.next.send_messages( batch )
+        			end
+			end
+		    end
+                    #outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg , "invalid" )
                 end
             else
                 puts "Not Well-Formed!"
-                msg = header + "Message #{m.offset} well-formedness error:\n" + 
-                doc.errors.map{|e| e.message + "\n...\n" + 
-                    payload.lines[e.line - 3 .. e.line + 1].join("") +
-                "...\n"}.join("\n") + "\n" 
-                #doc.errors.join("\n") + "\n" 	
-                # puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"
-                puts msg
-                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg, "invalid" )
+		lines = payload.lines
+                msg = header + "Message #{m.offset} well-formedness error:\n" 
+		puts msg
+                doc.errors.each do |e| 
+			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
+                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", output , "invalid" )
+			if outbound_messages.length > 20 
+        			outbound_messages.each_slice(20) do | batch |
+            				pool.next.send_messages( batch )
+        			end
+			end
+		end
             end
             payload = "" # clear payload for next iteration
             concatcount = 0
