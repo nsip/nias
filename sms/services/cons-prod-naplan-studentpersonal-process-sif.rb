@@ -3,6 +3,7 @@
 # and inserts Platform Student Identifier if one has not already been supplied
 # Only deals with topics naplan.sifxml or naplan.sifxmlout, which have been skipped by ssf/services/cons-prod-sif-process.rb
 
+# if called with arg "psi", generate and inject PSI identifier if it is not present in the source object
 
 require 'nokogiri'
 require 'json'
@@ -19,6 +20,8 @@ require_relative '../../Luhn'
 @idgen = Hashids.new( 'nsip random temp uid' )
 
 @servicename = 'cons-prod-naplan-studentpersonal-process-sif'
+
+@psi = ARGF.argv.include?('psi')
 
 # create consumer
 consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
@@ -83,7 +86,7 @@ loop do
 	    type = nodes.root.name
 	    next unless type == "StudentPersonal"
 	    psi_nodes = CSVHeaders.lookup_xpath(nodes, "//xmlns:OtherIdList/xmlns:OtherId[@Type = 'NAPPlatformStudentId']")
-	    if psi_nodes.to_s.empty?
+	    if psi_nodes.to_s.empty? and @psi
 		psi_id = new_psi()
 		psi = Nokogiri::XML::Node.new "OtherId", nodes
 		psi['Type'] = 'NAPPlatformStudentId'

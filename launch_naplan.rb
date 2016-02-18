@@ -74,22 +74,24 @@ def launch
     banner 'Starting NIAS SMS services for NAPLAN'
 
     sms_services = [
-        'cons-prod-sif-parser.rb',
-        'cons-sms-indexer.rb',
-        'cons-sms-storage.rb',
-        'cons-sms-json-storage.rb',
-        'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb',
-        'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb',
-        'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb',
-        'cons-prod-sif2csv-staffpersonal-naplanreg-parser.rb',
-        'cons-prod-sif2csv-SRM-validate.rb',
-	'cons-prod-studentpersonal-naplanreg-unique-ids-storage.rb',
-	'cons-prod-naplan-studentpersonal-process-sif.rb',
+	{:name => 'cons-prod-sif-parser.rb', :options => ''},
+	{:name => 'cons-sms-indexer.rb', :options => ''},
+	{:name => 'cons-sms-storage.rb', :options => ''},
+	{:name => 'cons-sms-json-storage.rb', :options => ''},
+	{:name => 'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb', :options => ''},
+	{:name => 'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb', :options => ''},
+	{:name => 'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb', :options => ''},
+	{:name => 'cons-prod-sif2csv-staffpersonal-naplanreg-parser.rb', :options => ''},
+	{:name => 'cons-prod-sif2csv-SRM-validate.rb', :options => ''},
+	{:name => 'cons-prod-studentpersonal-naplanreg-unique-ids-storage.rb', :options => ''},
+	# option to inject PSI into source records that are missing it
+	#{:name => 'cons-prod-naplan-studentpersonal-process-sif.rb', :options => 'psi'},
+	{:name => 'cons-prod-naplan-studentpersonal-process-sif.rb', :options => ''},
     ]
 
     sms_services.each_with_index do | service, i |
 
-        @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/sms/services/#{service}" )
+        @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/sms/services/#{service[:name]}", service[:options] )
 
     end
 
