@@ -162,6 +162,16 @@ All services available through NIAS are exposed through the NIAS UI:
 
 which has links to all the other services.
 
+## 3.1. Configuration
+
+If topics are not already in place for Kafka, initialising them can take a long time. For that reason, `launch_core.rb` includes a list of Kafka topics expected to be used. You may need to add or remove from those topics.
+
+Several microservices have command-line options, which can be configured in their launcher modules. In particular:
+
+* `cons-prod-sif-ingest-validate.rb` and `cons-prod-sif-bulk-ingest-validate.rb` take the SIF schema they validate against. In `launch_nias.rb`, that is `./ssf/services/xsd/sif3.4/SIF_Message3.4.xsd`, the Data Model XSD for SIF-AU 3.4. In `launch_naplan.rb`, that is `/ssf/services/xsd/sif3.4/NAPLANRegistrationDraft.xsd`, a customisation of the SIF-AU schema which includes only the objects needed for NAPLAN registration, with several elements made mandatory rather than optional.
+* If `cons-prod-studentpersonal-naplanreg-unique-ids-storage.rb` in `launch_naplan.rb` is run with option `psi`, a Platform Student Identifier is generated for each received student record, and added on ingest.
+* If `cons-prod-sif2csv-SRM-validate.rb` in `launch_naplan.rb` is run with a state/territory abbreviation as an option, validations specific to that jurisdiction will be performed. In particular, ASL school IDs will be constrained to those specific to that jurisdiction.
+
 
 # 4. Installation Notes
 
