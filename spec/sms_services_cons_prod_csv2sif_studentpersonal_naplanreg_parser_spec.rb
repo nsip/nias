@@ -245,6 +245,13 @@ LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PreviousLoc
 fjghh439,14668,65616,75189,50668,59286,35164,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2004-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,k460,046129,01,02,k460,k460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
 CSV
 
+# Map UGPri to UG on ingest
+ug_pri_csv = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh440,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2004-07-26,2,1101,Y,1,101,2,Y,2201,UGPri,7,0.89,7E,7D,k460,046129,01,02,k460,k460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
+
+
 out = <<XML
 <StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">
   <LocalId>fjghh371</LocalId>
@@ -360,7 +367,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(csv)
         end
         it "pushes templated XML to naplan.sifxmlout.none" do
-            sleep 5
+            sleep 3
             begin
                 a = @xmlconsumer.fetch
                 expect(a).to_not be_nil
@@ -382,7 +389,7 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(mapped_csv)
         end
         it "pushes templated XML to naplan.sifxmlout.none" do
-            sleep 5
+            sleep 3
             begin
                 a = @xmlconsumer.fetch
                 expect(a).to_not be_nil
@@ -405,7 +412,7 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(default_values)
         end
         it "pushes templated XML with supplied default values to naplan.sifxmlout.none" do
-            sleep 5
+            sleep 3
             begin
                 a = @xmlconsumer.fetch
                 expect(a).to_not be_nil
@@ -427,7 +434,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_sex)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -451,7 +458,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_ffpos)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -475,7 +482,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_birthdate)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -499,7 +506,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(inconsistent_csv_birthdate)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -523,7 +530,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_countryofbirth)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -547,7 +554,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_educationsupport)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -572,7 +579,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_lbote)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -596,7 +603,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_homeschooledstudent)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -620,7 +627,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_sensitive)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -644,7 +651,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_offlinedelivery)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -669,7 +676,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_visacode)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -694,7 +701,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_indigenousstatus)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -718,7 +725,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_studentlote)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -742,7 +749,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_parent1lote)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -766,7 +773,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_parent2lote)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -790,7 +797,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_yearlevel)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -814,7 +821,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_testlevel)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -838,7 +845,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_fte)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -862,7 +869,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_mainschoolflag)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -886,7 +893,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_parent1schooleducation)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -910,7 +917,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_parent2schooleducation)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -934,7 +941,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_parent1nonschooleducation)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -958,7 +965,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_parent2nonschooleducation)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -982,7 +989,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_parent1occupation)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1006,7 +1013,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_parent2occupation)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1030,7 +1037,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_postcode)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1054,7 +1061,7 @@ describe "NAPLAN convert CSV to SIF" do
         	post_csv(invalid_csv_stateterritory)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1078,7 +1085,7 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(blank_param)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1102,7 +1109,7 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(wrong_record)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1124,7 +1131,7 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(long_localid)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1146,7 +1153,7 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(ug_year_level)
         end
         it "pushes warning to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1168,7 +1175,7 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(mismatch_year_test_level)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1190,7 +1197,7 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(wrong_year_level)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1212,7 +1219,7 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(duplicate_localid)
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1234,7 +1241,7 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(duplicate_localnotschoolid)
         end
         it "no error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -1254,7 +1261,7 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(inject_psi)
         end
         it "XML including generated Platform identifier in XML to naplan.sifxmlout.none, in the right format" do
-            sleep 5
+            sleep 3
             begin
                 a = @xmlconsumer.fetch
                 expect(a).to_not be_nil
@@ -1269,10 +1276,32 @@ describe "NAPLAN convert CSV to SIF" do
         end
     end
 
+  context "Record with UGPri as Year Level" do
+        before(:example) do
+                @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout.none", 0, :latest_offset)
+                puts "Next offset    = #{@xmlconsumer.next_offset}"
+                post_csv(ug_pri_csv)
+        end
+        it "XML has UGPri converted to UG" do
+            sleep 3
+            begin
+                a = @xmlconsumer.fetch
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expect(a[0].value).to match(/YearLevel>\s*<Code>/)
+                expect(a[0].value).to match(/YearLevel>\s*<Code>UG<\//)
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+    end
+
 
 
     after(:all) do
-        #sleep 5
+        #sleep 3
     end
 
 end

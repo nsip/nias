@@ -55,6 +55,7 @@ loop do
                 config.nonet.noblanks
             end      		
 
+	    next if nodes.nil?
             type = nodes.root.name
             next unless type == 'StaffPersonal'
 

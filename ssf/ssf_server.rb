@@ -266,7 +266,7 @@ class SSFServer < Sinatra::Base
         strm = params['stream']
         topic_name = "#{tpc}.#{strm}"
 
-        if request.content_length.to_i > 500000000 then
+        if request.content_length.to_i > 2000000000 then
             halt 400, "SSF does not accept messages over 500 MB in size." 
         end
 
@@ -303,6 +303,7 @@ class SSFServer < Sinatra::Base
                         msgsplit.each do |msg1|
                 messages << Poseidon::MessageToSend.new( "#{topic}", msg1, "#{key}" )
             end
+puts topic
             messages << Poseidon::MessageToSend.new( "#{topic}", msgtail , "#{key}" )
 
             # write to default for audit if required

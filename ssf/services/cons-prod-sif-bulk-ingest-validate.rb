@@ -42,7 +42,6 @@ concatcount = 0
 loop do
     begin
         outbound_messages = []
-        outbound_errors = []
         messages = []
         messages = consumer.fetch
         messages.each do |m|
@@ -98,6 +97,12 @@ loop do
                         x["xmlns"] = @namespace
                         msg = header + x.to_s
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
+			if outbound_messages.length > 100 
+        			outbound_messages.each_slice(20) do | batch |
+            				pool.next.send_messages( batch )
+        			end
+        			outbound_messages = []
+			end
                     end
                 else
 		    lines = payload.lines
@@ -106,10 +111,11 @@ loop do
 	            xsd_errors.each do |e|
 			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
                     	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", output , "invalid" )
-			if outbound_messages.length > 20 
+			if outbound_messages.length > 100 
         			outbound_messages.each_slice(20) do | batch |
             				pool.next.send_messages( batch )
         			end
+        			outbound_messages = []
 			end
 		    end
                     #outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg , "invalid" )
@@ -122,10 +128,11 @@ loop do
                 doc.errors.each do |e| 
 			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
                     	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", output , "invalid" )
-			if outbound_messages.length > 20 
+			if outbound_messages.length > 100 
         			outbound_messages.each_slice(20) do | batch |
             				pool.next.send_messages( batch )
         			end
+        			outbound_messages = []
 			end
 		end
             end

@@ -96,6 +96,16 @@ loop do
 		other_ids = Nokogiri::XML::Node.new("OtherIdList", nodes) unless other_ids
 		other_ids << psi
 	    end
+	    year_level = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:YearLevel/xmlns:Code")
+	    unless year_level.to_s.empty?
+		year_level.content = case year_level.content 
+			when "UGPri" then "UG"
+			when "UGSec" then "UG"
+			when "UGJunSec" then "UG"
+			when "UGSnrSec" then "UG"
+			else year_level.content
+		end
+	    end
 
             outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", header + nodes.root.to_s, item_key )
         end
