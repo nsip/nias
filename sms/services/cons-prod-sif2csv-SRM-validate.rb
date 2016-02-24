@@ -52,19 +52,19 @@ def validate_student(nodes)
 	ret = []
         testlevel = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:TestLevel/xmlns:Code")
 	ret << "Error: '#{testlevel}' is not a valid value for TestLevel: expect 3, 5, 7, 9" if testlevel and not testlevel.to_s.match(/^[3579]$/)
-	ret << "Error: 'TestLevel is mandatory" unless testlevel
+	#ret << "Error: 'TestLevel is mandatory" unless testlevel
 
         sex = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:Sex")
-	ret << "Error: 'Sex is mandatory" unless sex
+	#ret << "Error: 'Sex is mandatory" unless sex
 
         birthdate = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:BirthDate")
-	ret << "Error: 'BirthDate is mandatory" unless birthdate
+	#ret << "Error: 'BirthDate is mandatory" unless birthdate
 
 	studentCountryOfBirth = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:CountryOfBirth")
-	ret << "Error: StudentCountryOfBirth is mandatory" unless studentCountryOfBirth
+	#ret << "Error: StudentCountryOfBirth is mandatory" unless studentCountryOfBirth
 
         yearlevel_string = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:YearLevel/xmlns:Code")
-	ret << "Error: YearLevel is mandatory" unless yearlevel_string
+	#ret << "Error: YearLevel is mandatory" unless yearlevel_string
 
 	begin
 		yearlevel = Integer(yearlevel_string.to_s)
@@ -157,11 +157,11 @@ def validate_student(nodes)
 
             familyName = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:FamilyName")
 	    ret << "Error: 'FamilyName #{familyName}' is too long" if familyName and familyName.to_s.length > 40
-	    ret << "Error: 'FamilyName is mandatory" unless familyName 
+	    #ret << "Error: 'FamilyName is mandatory" unless familyName 
 
             givenName = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:GivenName")
 	    ret << "Error: 'GivenName #{givenName}' is too long" if givenName and givenName.to_s.length > 40
-	    ret << "Error: 'GivenName is mandatory" unless givenName 
+	    #ret << "Error: 'GivenName is mandatory" unless givenName 
 
             preferredName = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:PreferredGivenName")
 	    ret << "Error: 'PreferredName #{preferredName}' is too long" if preferredName and preferredName.to_s.length > 40
@@ -174,13 +174,13 @@ def validate_student(nodes)
 	    ret << "Error: 'VisaCode #{visaCode}' is wrong format" unless visaCode and visaCode.to_s.match(/^\d\d\d$/)
 
 	    ffpos = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:FFPOS")
-	    ret << "Error: 'FullFeePayingStudent is mandatory" unless ffpos
+	    #ret << "Error: 'FullFeePayingStudent is mandatory" unless ffpos
 
 	    indigenousStatus = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:IndigenousStatus")
-	    ret << "Error: 'IndigenousStatus is mandatory" unless indigenousStatus
+	    #ret << "Error: 'IndigenousStatus is mandatory" unless indigenousStatus
 
 	    studentLOTE = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:LanguageList/xmlns:Language[xmlns:LanguageType = 4]/xmlns:Code")
-	    ret << "Error: 'StudentLOTE is mandatory" unless studentLOTE
+	    #ret << "Error: 'StudentLOTE is mandatory" unless studentLOTE
 
             homegroup = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Homegroup")
 	    ret << "Error: 'Homegroup #{homegroup}' is too long" if homegroup and homegroup.to_s.length > 10
@@ -190,7 +190,7 @@ def validate_student(nodes)
 
             aslSchoolId = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolACARAId")
 	    ret << "Error: 'ASLSchoolId #{aslSchoolId}' is too long" if aslSchoolId and aslSchoolId.to_s.length > 5
-	    ret << "Error: 'ASLSchoolId is mandatory" unless aslSchoolId
+	    #ret << "Error: 'ASLSchoolId is mandatory" unless aslSchoolId
 
             schoolLocalId = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolLocalId")
 	    ret << "Error: 'SchoolLocalId #{schoolLocalId}' is too long" if schoolLocalId and schoolLocalId.to_s.length > 9
@@ -205,28 +205,28 @@ def validate_student(nodes)
 	    ret << "Error: 'ReportingSchoolId #{reportingSchoolId}' is too long" if reportingSchoolId and reportingSchoolId.to_s.length > 9
 
             parent1SchoolEducation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent1SchoolEducationLevel")
-	    ret << "Error: 'Parent1SchoolEducation is mandatory" unless parent1SchoolEducation
+	    #ret << "Error: 'Parent1SchoolEducation is mandatory" unless parent1SchoolEducation
 
             parent2SchoolEducation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent2SchoolEducationLevel")
-	    ret << "Error: 'Parent2SchoolEducation is mandatory" unless parent2SchoolEducation
+	    #ret << "Error: 'Parent2SchoolEducation is mandatory" unless parent2SchoolEducation
 
             parent1NonSchoolEducation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent1NonSchoolEducation")
-	    ret << "Error: 'Parent1NonSchoolEducation is mandatory" unless parent1NonSchoolEducation
+	    #ret << "Error: 'Parent1NonSchoolEducation is mandatory" unless parent1NonSchoolEducation
 
             parent2NonSchoolEducation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent2NonSchoolEducation")
-	    ret << "Error: 'Parent2NonSchoolEducation is mandatory" unless parent2NonSchoolEducation
+	    #ret << "Error: 'Parent2NonSchoolEducation is mandatory" unless parent2NonSchoolEducation
 
             parent1Occupation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent1EmploymentType")
-	    ret << "Error: 'Parent1Occupation is mandatory" unless parent1Occupation
+	    #ret << "Error: 'Parent1Occupation is mandatory" unless parent1Occupation
 
             parent2Occupation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent2EmploymentType")
-	    ret << "Error: 'Parent2Occupation is mandatory" unless parent2Occupation
+	    #ret << "Error: 'Parent2Occupation is mandatory" unless parent2Occupation
 
             parent1LOTE = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent1Language")
-	    ret << "Error: 'Parent1LOTE is mandatory" unless parent1LOTE
+	    #ret << "Error: 'Parent1LOTE is mandatory" unless parent1LOTE
 
             parent2LOTE = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent2Language")
-	    ret << "Error: 'Parent2LOTE is mandatory" unless parent2LOTE
+	    #ret << "Error: 'Parent2LOTE is mandatory" unless parent2LOTE
 
             addressLine1 = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:AddressList/xmlns:Address[@Role = '012B']/xmlns:Street/xmlns:Line1")
 	    ret << "Error: 'AddressLine1 #{addressLine1}' is too long" if addressLine1 and addressLine1.to_s.length > 40

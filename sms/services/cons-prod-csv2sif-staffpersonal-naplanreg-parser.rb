@@ -39,6 +39,10 @@ end
 # default values
 @default_csv = {'StaffSchoolRole' => 'principal', 'AdditionalInfo' => 'N' }
 
+# JSON schema
+@jsonschema = JSON.parse(File.read("#{__dir__}/naplan.staff.json"))
+
+
 loop do
 
     begin
@@ -63,6 +67,20 @@ loop do
 	    if(row['LocalId'] and not row['LocalStaffId']) 
             	outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "You appear to have submitted a StudentPersonal record instead of a StaffPersonal record\n#{row['__linecontent']}", "invalid" )
 	    else
+
+                # validate against JSON Schema
+                json_errors = JSON::Validator.fully_validate(@jsonschema, row)
+                # any errors are on mandatory elements, so stop processing further
+                unless(json_errors.empty?)
+                        json_errors.each do |e|
+                                puts e
+                                outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "#{e}\n#{row['__linecontent']}", "invalid" )
+                        end
+                        outbound_messages.each_slice(20) do | batch |
+                                @pool.next.send_messages( batch )
+                        end
+                        next
+                end
 
 
 

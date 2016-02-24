@@ -1090,8 +1090,6 @@ describe "NAPLAN convert CSV to SIF" do
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
-                                errors = a.find_all{ |e| e.value["element is not expected"] }
-                                expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset

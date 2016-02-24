@@ -1,4 +1,5 @@
 <!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by Linda Marshall (DEECD) -->
+<!-- edited by Nick Nicholas NSIP to add NAPLAN-specific obligations -->
 <!--
 		SIF Implementation Specification (Australia) 3.4 (October 13, 2015) Infrastructure Version: 3.x
 	-->
@@ -114,6 +115,83 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Demographics" type="sif:DemographicsType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Demographic information about the person.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AddressList" type="sif:AddressListType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The person's address(es).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PhoneNumberList" type="sif:PhoneNumberListType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The person's phone number(s).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EmailList" type="sif:EmailListType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The person's e-mail address(es).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--PersonInfo NAPLAN-->
+	<xs:complexType name="StaffPersonInfoType">
+		<xs:annotation>
+			<xs:documentation/>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="sif:NameOfRecordType">
+				<xs:annotation>
+					<xs:documentation>The name of the person. Note: Type attribute value of LGL must be used here.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OtherNames" type="sif:OtherNamesType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Previous, alternate or other names or aliases associated with the person.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Demographics" type="sif:DemographicsType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Demographic information about the person.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AddressList" type="sif:AddressListType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The person's address(es).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PhoneNumberList" type="sif:PhoneNumberListType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The person's phone number(s).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EmailList" type="sif:EmailListType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The person's e-mail address(es).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--PersonInfo NAPLAN-->
+	<xs:complexType name="StudentPersonInfoType">
+		<xs:annotation>
+			<xs:documentation/>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="sif:NameOfRecordType">
+				<xs:annotation>
+					<xs:documentation>The name of the person. Note: Type attribute value of LGL must be used here.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OtherNames" type="sif:OtherNamesType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Previous, alternate or other names or aliases associated with the person.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- <xs:element name="Demographics" type="sif:DemographicsType" nillable="true" minOccurs="0"> -->
+			<xs:element name="Demographics" type="sif:StudentDemographicsType">
 				<xs:annotation>
 					<xs:documentation>Demographic information about the person.</xs:documentation>
 				</xs:annotation>
@@ -824,7 +902,192 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="Demographics" type="sif:DemographicsType"/>
-	<!--EnglishProficiency-->
+	<!--Demographics NAPLAN -->
+	<xs:complexType name="StudentDemographicsType">
+		<xs:annotation>
+			<xs:documentation>
+        Demographics information about the student, contact, staff member, etc. 
+      </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<!-- <xs:element name="IndigenousStatus" type="sif:AUCodeSetsIndigenousStatusType" nillable="true" minOccurs="0"> -->
+			<xs:element name="IndigenousStatus" type="sif:AUCodeSetsIndigenousStatusType">
+				<xs:annotation>
+					<xs:documentation>Whether or not the person identifies themselves as being of Aboriginal and/or Torres Strait Islander descent.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- <xs:element name="Sex" type="sif:AUCodeSetsSexCodeType" nillable="true" minOccurs="0"> -->
+			<xs:element name="Sex" type="sif:AUCodeSetsSexCodeType">
+				<xs:annotation>
+					<xs:documentation>'Sex' is the distinction 'male'/'female'/'intersex', as reported by the person</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- <xs:element name="BirthDate" type="sif:BirthDateType" nillable="true" minOccurs="0"> -->
+			<xs:element name="BirthDate" type="sif:BirthDateType">
+				<xs:annotation>
+					<xs:documentation>The person's date of birth.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BirthDateVerification" type="sif:AUCodeSetsBirthdateVerificationType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Means by which the person's birth date was validated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PlaceOfBirth" type="xs:normalizedString" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The person's place of birth - like village, town, city etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StateOfBirth" type="sif:StateProvinceType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The person's state of birth.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- <xs:element name="CountryOfBirth" type="sif:CountryType" nillable="true" minOccurs="0"> -->
+			<xs:element name="CountryOfBirth" type="sif:CountryType">
+				<xs:annotation>
+					<xs:documentation>The person's country of birth.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountriesOfCitizenship" nillable="true" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CountryOfCitizenship" type="sif:CountryType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A person's country of citizenship.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CountriesOfResidency" nillable="true" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CountryOfResidency" type="sif:CountryType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A person's country of residence.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CountryArrivalDate" type="xs:date" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date the person first arrived in the country.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AustralianCitizenshipStatus" type="sif:AUCodeSetsAustralianCitizenshipStatusType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The person's citizenship status.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EnglishProficiency" type="sif:EnglishProficiencyType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Person's proficiency in English.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- <xs:element name="LanguageList" type="sif:LanguageListType" nillable="true" minOccurs="0"> -->
+			<xs:element name="LanguageList" type="sif:LanguageListType">
+				<xs:annotation>
+					<xs:documentation>List of languages an individual uses to communicate.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DwellingArrangement" nillable="true" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Code" type="sif:AUCodeSetsDwellingArrangementType">
+							<xs:annotation>
+								<xs:documentation>Code representing the setting/environment in which the person resides</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="OtherCodeList" type="sif:OtherCodeListType" nillable="true" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Religion" nillable="true" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Code" type="sif:AUCodeSetsAustralianStandardClassificationOfReligiousGroupsASCRGType">
+							<xs:annotation>
+								<xs:documentation>Religion Code</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="OtherCodeList" type="sif:OtherCodeListType" nillable="true" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ReligiousEventList" nillable="true" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ReligiousEvent" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Type" type="xs:normalizedString">
+										<xs:annotation>
+											<xs:documentation>Religious Event - Currently Free Text</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Date" type="xs:date">
+										<xs:annotation>
+											<xs:documentation>Date of Religious Event</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ReligiousRegion" type="xs:normalizedString" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Belong to Religious Region - Currently Free Text.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PermanentResident" type="sif:AUCodeSetsPermanentResidentStatusType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Australian Residency Status (Mandatory for Student)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VisaSubClass" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Visa Sub-Class - Can be free text - not necessary to validate</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:union memberTypes="sif:AUCodeSetsVisaSubClassType xs:string"/>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VisaStatisticalCode" type="xs:normalizedString" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Visa Statistical Code - Can be free text - not necessary to validate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VisaExpiryDate" type="xs:date" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Expiry Date of Visa if one exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LBOTE" type="sif:AUCodeSetsYesOrNoCategoryType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Language Background is Other Than English. (http://www.acara.edu.au/verve/_resources/DSM_1.pdf), the LBOTE metric is under review. Currently it can be derived from Student and Parents Language Background.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ImmunisationCertificateStatus" type="sif:AUCodeSetsImmunisationCertificateStatusType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Status of Immunisation Certificate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CulturalBackground" type="sif:AUCodeSetsAustralianStandardClassificationOfCulturalAndEthnicGroupsASCCEGType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Used to indicate cultural background. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MaritalStatus" type="sif:AUCodeSetsMaritalStatusAIHWType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The person's marital status.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="EnglishProficiencyType">
 		<xs:sequence>
 			<xs:element name="Code" type="sif:AUCodeSetsEnglishProficiencyType">
@@ -1826,7 +2089,8 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element ref="sif:PersonInfo"/>
+			<!-- <xs:element ref="sif:PersonInfo"/> NAPLAN -->
+			<xs:element name="PersonInfo" type="sif:StaffPersonInfoType"/>
 			<xs:element name="Title" type="xs:normalizedString" nillable="true" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>The staff member's title.</xs:documentation>
@@ -1994,7 +2258,8 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:element ref="sif:PersonInfo"/>
+			<!-- <xs:element ref="sif:PersonInfo"/> -->
+			<xs:element name="PersonInfo" type="sif:StudentPersonInfoType"/>
 			<xs:element name="ProjectedGraduationYear" type="sif:ProjectedGraduationYearType" nillable="true" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Currently projected graduation year.</xs:documentation>
@@ -2027,7 +2292,8 @@
       </xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="YearLevel" type="sif:YearLevelType" nillable="true" minOccurs="0">
+						<!-- <xs:element name="YearLevel" type="sif:YearLevelType" nillable="true" minOccurs="0"> -->
+						<xs:element name="YearLevel" type="sif:YearLevelType">
 							<xs:annotation>
 								<xs:documentation>The current or most recent year level of the student.</xs:documentation>
 							</xs:annotation>
@@ -2044,42 +2310,50 @@
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
-						<xs:element name="Parent1Language" type="sif:AUCodeSetsAustralianStandardClassificationOfLanguagesASCLType" nillable="true" minOccurs="0">
+						<!-- <xs:element name="Parent1Language" type="sif:AUCodeSetsAustralianStandardClassificationOfLanguagesASCLType" nillable="true" minOccurs="0"> -->
+						<xs:element name="Parent1Language" type="sif:AUCodeSetsAustralianStandardClassificationOfLanguagesASCLType">
 							<xs:annotation>
 								<xs:documentation>Main language spoken by parent 1 at home, other than English.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="Parent2Language" type="sif:AUCodeSetsAustralianStandardClassificationOfLanguagesASCLType" nillable="true" minOccurs="0">
+						<!-- <xs:element name="Parent2Language" type="sif:AUCodeSetsAustralianStandardClassificationOfLanguagesASCLType" nillable="true" minOccurs="0"> -->
+						<xs:element name="Parent2Language" type="sif:AUCodeSetsAustralianStandardClassificationOfLanguagesASCLType">
 							<xs:annotation>
 								<xs:documentation>Main language spoken by parent 2 at home, other than English.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="Parent1EmploymentType" type="sif:AUCodeSetsEmploymentTypeType" nillable="true" minOccurs="0">
+						<!-- <xs:element name="Parent1EmploymentType" type="sif:AUCodeSetsEmploymentTypeType" nillable="true" minOccurs="0"> -->
+						<xs:element name="Parent1EmploymentType" type="sif:AUCodeSetsEmploymentTypeType">
 							<xs:annotation>
 								<xs:documentation>Code that defines employment type of Parent1. This is compulsory if being used for MCEECDYA reporting.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="Parent2EmploymentType" type="sif:AUCodeSetsEmploymentTypeType" nillable="true" minOccurs="0">
+						<!-- <xs:element name="Parent2EmploymentType" type="sif:AUCodeSetsEmploymentTypeType" nillable="true" minOccurs="0"> -->
+						<xs:element name="Parent2EmploymentType" type="sif:AUCodeSetsEmploymentTypeType">
 							<xs:annotation>
 								<xs:documentation>Code that defines employment type of Parent2. This is compulsory if being used for MCEECDYA reporting.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="Parent1SchoolEducationLevel" type="sif:AUCodeSetsSchoolEducationLevelTypeType" nillable="true" minOccurs="0">
+						<!-- <xs:element name="Parent1SchoolEducationLevel" type="sif:AUCodeSetsSchoolEducationLevelTypeType" nillable="true" minOccurs="0"> -->
+						<xs:element name="Parent1SchoolEducationLevel" type="sif:AUCodeSetsSchoolEducationLevelTypeType">
 							<xs:annotation>
 								<xs:documentation>The highest level of education completed by Parent1.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="Parent2SchoolEducationLevel" type="sif:AUCodeSetsSchoolEducationLevelTypeType" nillable="true" minOccurs="0">
+						<!-- type="sif:AUCodeSetsSchoolEducationLevelTypeType" nillable="true" minOccurs="0"> -->
+						<xs:element name="Parent2SchoolEducationLevel" type="sif:AUCodeSetsSchoolEducationLevelTypeType">
 							<xs:annotation>
 								<xs:documentation>The highest level of education completed by Parent2.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="Parent1NonSchoolEducation" type="sif:AUCodeSetsNonSchoolEducationType" nillable="true" minOccurs="0">
+						<!-- <xs:element name="Parent1NonSchoolEducation" type="sif:AUCodeSetsNonSchoolEducationType" nillable="true" minOccurs="0"> -->
+						<xs:element name="Parent1NonSchoolEducation" type="sif:AUCodeSetsNonSchoolEducationType">
 							<xs:annotation>
 								<xs:documentation>This reflects the level of Parent1's Non-School Education.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="Parent2NonSchoolEducation" type="sif:AUCodeSetsNonSchoolEducationType" nillable="true" minOccurs="0">
+						<!-- <xs:element name="Parent2NonSchoolEducation" type="sif:AUCodeSetsNonSchoolEducationType" nillable="true" minOccurs="0"> -->
+						<xs:element name="Parent2NonSchoolEducation" type="sif:AUCodeSetsNonSchoolEducationType">
 							<xs:annotation>
 								<xs:documentation>This reflects the level of Parent2's Non-School Education.</xs:documentation>
 							</xs:annotation>
@@ -2089,12 +2363,14 @@
 								<xs:documentation>Local identifier for a specific campus Id. This may be the same as the school local Id, but is expected to be supplied only if the school does in fact have distinct campuses.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="SchoolACARAId" type="sif:LocalIdType" nillable="true" minOccurs="0">
+						<!-- <xs:element name="SchoolACARAId" type="sif:LocalIdType" nillable="true" minOccurs="0"> -->
+						<xs:element name="SchoolACARAId" type="sif:LocalIdType">
 							<xs:annotation>
 								<xs:documentation>Identifier of the school in which the student is or was most recently enrolled in the district, as assigned in the Australian  School List.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="TestLevel" type="sif:YearLevelType" nillable="true" minOccurs="0">
+						<!-- <xs:element name="TestLevel" type="sif:YearLevelType" nillable="true" minOccurs="0"> -->
+						<xs:element name="TestLevel" type="sif:YearLevelType">
 							<xs:annotation>
 								<xs:documentation>Values: 3,5,7,9. The test level that the student is registering for.</xs:documentation>
 							</xs:annotation>
@@ -2114,7 +2390,8 @@
 								<xs:documentation>The type of this enrollment as it relates to the school identified in SchoolInfoRefId.</xs:documentation>
 							</xs:annotation>
 						</xs:element>
-						<xs:element name="FFPOS" type="sif:AUCodeSetsFFPOSStatusCodeType" nillable="true" minOccurs="0">
+						<!-- <xs:element name="FFPOS" type="sif:AUCodeSetsFFPOSStatusCodeType" nillable="true" minOccurs="0"> -->
+						<xs:element name="FFPOS" type="sif:AUCodeSetsFFPOSStatusCodeType">
 							<xs:annotation>
 								<xs:documentation>Enrolled Full-fee Paying Overseas Student (FFPOS) Status.  Enrolment Frame Element 10 NSCC Collection.</xs:documentation>
 							</xs:annotation>
@@ -14491,12 +14768,14 @@
 					<xs:documentation>A title or prefix associated with the name. If any of: Mr, Mrs, Ms, Miss, Rev, Fr, Dr, Prof, Hon, Sir, Lord, Lady - these must be as shown, otherwise free text. Note that title is not applicable to learners. </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="FamilyName" type="xs:normalizedString" nillable="true" minOccurs="0">
+			<!-- <xs:element name="FamilyName" type="xs:normalizedString" nillable="true" minOccurs="0"> NAPLAN -->
+			<xs:element name="FamilyName" type="xs:normalizedString">
 				<xs:annotation>
 					<xs:documentation>Family name. That part of the person's name which is used to describe family, clan, tribal group, or marital association. Note that this element is required when known. However, it may not be possible to know the family name in which case you should add the available information to the FullName element. </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="GivenName" type="xs:normalizedString" nillable="true" minOccurs="0">
+			<!-- <xs:element name="GivenName" type="xs:normalizedString" nillable="true" minOccurs="0"> NAPLAN -->
+			<xs:element name="GivenName" type="xs:normalizedString">
 				<xs:annotation>
 					<xs:documentation>Given name of the person. Note that this element is required if known. However, it may not be possible to know the given name in which case you should add the available information to the FullName element. </xs:documentation>
 				</xs:annotation>

@@ -9,6 +9,7 @@ require 'poseidon'
 require 'hashids'
 require 'csv'
 require 'securerandom'
+require 'json-schema'
 require_relative 'cvsheaders-naplan'
 
 def Postcode2State( postcodestr ) 
@@ -74,8 +75,11 @@ end
 @pool = producers.cycle
 
 # default values
-@default_csv = {'OfflineDelivery' => 'N', 'Sensitive' => 'Y', 'HomeSchooledStudent' => 'N', 'EducationSupport' => 'N', 'FFPOS' => 'N', 'MainSchoolFlag' => '01' }
+@default_csv = {'OfflineDelivery' => 'N', 'Sensitive' => 'Y', 'HomeSchooledStudent' => 'N', 'EducationSupport' => 'N', 'FFPOS' => 'N', 'MainSchoolFlag' => '01' , "AddressLine2" => ""}
 
+# JSON schema
+@jsonschemafile = File.read("#{__dir__}/naplan.student.json")
+@jsonschema = JSON.parse(@jsonschemafile)
 
 loop do
 
@@ -99,6 +103,22 @@ loop do
 		row['FFPOS'] = '9' if row['FFPOS'] == 'X'
 		row['MainSchoolFlag'] = '01' if row['MainSchoolFlag'] == 'Y'
 		row['MainSchoolFlag'] = '02' if row['MainSchoolFlag'] == 'N'
+
+
+		# validate against JSON Schema
+		json_errors = JSON::Validator.fully_validate(@jsonschema, row)
+		# any errors are on mandatory elements, so stop processing further
+		unless(json_errors.empty?)
+			json_errors.each do |e|
+				puts e
+                		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "#{e}\n#{row['__linecontent']}", "invalid" )
+			end
+        		outbound_messages.each_slice(20) do | batch |
+            			@pool.next.send_messages( batch )
+        		end
+			next
+		end
+
 
 
 # inject the source CSV line number as a comment into the generated XML; errors found in the templated SIF/XML

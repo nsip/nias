@@ -95,7 +95,7 @@ describe "NAPLAN convert CSV to SIF" do
         	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout_staff.none", 0, :latest_offset)
         	puts "Next offset    = #{@xmlconsumer.next_offset}"
         	post_csv(csv)
-		sleep 5
+		sleep 3
 	end
         it "pushes templated XML to naplan.sifxmlout_staff.none" do
             begin
@@ -123,7 +123,7 @@ describe "NAPLAN convert CSV to SIF" do
                 @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout_staff.none", 0, :latest_offset)
                 puts "Next offset    = #{@xmlconsumer.next_offset}"
                 post_csv(default_values)
-                sleep 5
+                sleep 3
         end
         it "pushes templated XML with supplied default values to naplan.sifxmlout_staff.none" do
             begin
@@ -152,10 +152,10 @@ describe "NAPLAN convert CSV to SIF" do
                 @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
                 puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(invalid_email)
-                sleep 5
+                sleep 3
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -175,10 +175,10 @@ describe "NAPLAN convert CSV to SIF" do
                 @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
                 puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(invalid_additionalinfo)
-                sleep 5
+                sleep 3
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -198,17 +198,14 @@ describe "NAPLAN convert CSV to SIF" do
                 @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
                 puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(blank_param)
-                sleep 5
+                sleep 3
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
-puts a.inspect
-                                errors = a.find_all{ |e| e.value["element is not expected"] }
-                                expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset
@@ -222,10 +219,10 @@ puts a.inspect
                 @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
                 puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(wrong_record)
-                sleep 5
+                sleep 3
         end
         it "pushes error to csv.errors" do
-            sleep 5
+            sleep 3
             begin
                 a = @errorconsumer.fetch
                 expect(a).to_not be_nil
@@ -241,7 +238,7 @@ puts a.inspect
     end
 
     after(:all) do
-        sleep 5
+        sleep 3
     end
 
 end

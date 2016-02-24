@@ -1,0 +1,18 @@
+{
+"title" : "NAPLAN StudentPersonal registration data schema",
+"type" : "object",
+"properties" : {	
+        "LocalStaffId": { "type" : "any" },
+        "GivenName": { "type" : "any" },
+        "FamilyName": { "type" : "any" },
+        "ClassCode": { "type" : "any" },
+        "HomeGroup": { "type" : "any" },
+        "ASLSchoolId": { "type" : "any" },
+        "LocalSchoolId": { "type" : "any" },
+        "LocalCampusId": { "type" : "any" },
+        "EmailAddress": { "type" : "any" },
+        "AdditionalInfo": { "type" : "any" },
+        "StaffSchoolRole": { "type" : "any" }
+},
+"required": ["LocalStaffId"]
+}
