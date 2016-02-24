@@ -21,6 +21,12 @@ xml = <<XML
             <Sex>2</Sex>
             <BirthDate>2004-02-10</BirthDate>
             <CountryOfBirth>1101</CountryOfBirth>
+            <LanguageList>
+                <Language>
+                    <Code>1201</Code>
+                    <LanguageType>4</LanguageType>
+                </Language>
+             </LanguageList>
         </Demographics>
         <AddressList>
             <Address Type="0123" Role="012A">
@@ -37,7 +43,7 @@ xml = <<XML
         </EmailList>
     </PersonInfo>
     <MostRecent>
-        <YearLevel><Code>6</Code></YearLevel>
+        <YearLevel><Code>7</Code></YearLevel>
         <Parent1Language>1201</Parent1Language>
         <Parent2Language>1201</Parent2Language>
         <Parent1EmploymentType>8</Parent1EmploymentType>
@@ -46,6 +52,9 @@ xml = <<XML
         <Parent2SchoolEducationLevel>0</Parent2SchoolEducationLevel>
         <Parent1NonSchoolEducation>5</Parent1NonSchoolEducation>
         <Parent2NonSchoolEducation>6</Parent2NonSchoolEducation>
+        <SchoolACARAId>11111</SchoolACARAId>
+        <TestLevel><Code>7</Code></TestLevel>
+        <FFPOS>1</FFPOS>
     </MostRecent>
 </StudentPersonal>
 </StudentPersonals>
@@ -68,6 +77,8 @@ xml_high.gsub!(%r{<PreferredGivenName>[^<]+</PreferredGivenName>}, "<PreferredGi
 xml_high.gsub!(%r{<IndigenousStatus>[^<]+</IndigenousStatus>}, "<IndigenousStatus>ZZREDACTED</IndigenousStatus>")
 xml_high.gsub!(%r{<Sex>[^<]+</Sex>}, "<Sex>ZZREDACTED</Sex>")
 xml_high.gsub!(%r{<CountryOfBirth>[^<]+</CountryOfBirth>}, "<CountryOfBirth>ZZREDACTED</CountryOfBirth>")
+xml_high.gsub!(%r{<Language>\s*<Code>1201</Code>}, "<Language><Code>ZZREDACTED</Code>")
+xml_high.gsub!(%r{<LanguageType>[^<]+</LanguageType>}, "<LanguageType>ZZREDACTED</LanguageType>")
 xml_high.gsub!(%r{<Parent1Language>[^<]+</Parent1Language>}, "<Parent1Language>ZZREDACTED</Parent1Language>")
 xml_high.gsub!(%r{<Parent2Language>[^<]+</Parent2Language>}, "<Parent2Language>ZZREDACTED</Parent2Language>")
 xml_high.gsub!(%r{<Parent1EmploymentType>[^<]+</Parent1EmploymentType>}, "<Parent1EmploymentType>ZZREDACTED</Parent1EmploymentType>")
@@ -79,7 +90,7 @@ xml_high.gsub!(%r{<Parent2NonSchoolEducation>[^<]+</Parent2NonSchoolEducation>},
 xml_high.gsub!(%r{<Email([^>]*)>[^<]+</Email>}, "<Email\\1>ZZREDACTED</Email>")
 xml_high.gsub!(%r{ RefId="[^"]+"}, ' RefId="00000000-0000-0000-0000-000000000000"')
 
-xml_extreme = xml_high.gsub(%r{<YearLevel><Code>6</Code></YearLevel>}, "<YearLevel><Code>ZZREDACTED</Code></YearLevel>")
+xml_extreme = xml_high.gsub(%r{<YearLevel><Code>7</Code></YearLevel>}, "<YearLevel><Code>ZZREDACTED</Code></YearLevel>")
 
 @service_name = 'ssf_services_cons_prod_privacyfilter_spec'
 
