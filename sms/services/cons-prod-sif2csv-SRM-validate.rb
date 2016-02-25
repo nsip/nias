@@ -34,15 +34,17 @@ end
 @naplan_topics = %w(naplan.sifxml naplan.sifxml_staff naplan.sifxmlout naplan.sifxmlout_staff)
 
 # state or territory for which validation is specific, passed as command line option
-@stateterritory = ARGF.argv[0]
+@stateterritory = ARGF.argv[0] || nil
+@stateterritory = nil if @stateterritory.empty?
 @asl_ids = Set.new
 
 # read in ASL file as csv
-CSV.foreach("#{__dir__}/asl_schools.csv", :headers => true) do |row|
-	next if(@stateterritory and not (row['State'] == @stateterritorry))
+CSV.foreach(File.path("#{__dir__}/asl_schools.csv"), :headers => true) do |row|
+	next if(!@stateterritory.nil? and not (row['State'] == @stateterritorry))
 	# if no state specified, record all ACARA IDs; if state specific, record only those for the current state
 	@asl_ids << row['ACARA ID']
 end
+#puts @asl_ids.inspect
 
 def validate_staff(nodes)
 	ret = []
@@ -102,7 +104,7 @@ def validate_student(nodes)
 			when '9'
 				ret << "Error: School Year level '#{yearlevel_string}' does not match Test Level '#{testlevel}'" unless testlevel.to_s == '9'
 			when 'UG'
-				ret << "Warning: School Year level is '#{yearlevel_string}'"
+				ret << "Warning: School Year level is Ungraded"
 			else
 				ret << "Error: School Year level '#{yearlevel_string}' is not appropriate for NAPLAN"
 		end
@@ -117,8 +119,7 @@ def validate_student(nodes)
 			end
 		end
 	end
-
-	if(birthdatestr and yearlevel_string == 'UG' and testlevel)
+	if(birthdatestr and yearlevel_string.to_s == 'UG' and testlevel)
 		begin
 			testlevelint = Integer(testlevel.to_s)
 		rescue ArgumentError
@@ -222,8 +223,8 @@ def validate_student(nodes)
             aslSchoolId = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolACARAId")
 	    ret << "Error: ASLSchoolId '#{aslSchoolId}' is too long" if aslSchoolId and aslSchoolId.to_s.length > 5
 	    #ret << "Error: 'ASLSchoolId is mandatory" unless aslSchoolId
-	    ret << "Error: ASLSchoolId '#{aslSchoolId}' is not recognised" if !@stateprovince and !@asl_ids.include?(aslSchoolId)
-	    ret << "Error: ASLSchoolId '#{aslSchoolId}' is not recognised for this state" if @stateprovince and !@asl_ids.include?(aslSchoolId)
+	    ret << "Error: ASLSchoolId '#{aslSchoolId}' is not recognised" if !@stateprovince and !@asl_ids.include?(aslSchoolId.to_s)
+	    ret << "Error: ASLSchoolId '#{aslSchoolId}' is not recognised for this state" if @stateprovince and !@asl_ids.include?(aslSchoolId.to_s)
 
             schoolLocalId = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolLocalId")
 	    ret << "Error: SchoolLocalId '#{schoolLocalId}' is too long" if schoolLocalId and schoolLocalId.to_s.length > 9
