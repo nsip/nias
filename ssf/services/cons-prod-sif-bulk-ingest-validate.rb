@@ -110,6 +110,7 @@ loop do
                     puts msg
 	            xsd_errors.each do |e|
 			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
+			puts output
                     	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", output , "invalid" )
 			if outbound_messages.length > 100 
         			outbound_messages.each_slice(20) do | batch |

@@ -20,6 +20,12 @@ xml = <<XML
             <Sex>2</Sex>
             <BirthDate>2004-02-10</BirthDate>
             <CountryOfBirth>1101</CountryOfBirth>
+            <LanguageList>
+                <Language>
+                    <Code>1201</Code>
+                    <LanguageType>4</LanguageType>
+                </Language>
+             </LanguageList>
         </Demographics>
         <AddressList>
             <Address Type="0123" Role="012A">
@@ -36,9 +42,7 @@ xml = <<XML
         </EmailList>
     </PersonInfo>
     <MostRecent>
-        <YearLevel>
-            <Code>6</Code>
-        </YearLevel>
+        <YearLevel><Code>7</Code></YearLevel>
         <Parent1Language>1201</Parent1Language>
         <Parent2Language>1201</Parent2Language>
         <Parent1EmploymentType>8</Parent1EmploymentType>
@@ -47,6 +51,9 @@ xml = <<XML
         <Parent2SchoolEducationLevel>0</Parent2SchoolEducationLevel>
         <Parent1NonSchoolEducation>5</Parent1NonSchoolEducation>
         <Parent2NonSchoolEducation>6</Parent2NonSchoolEducation>
+        <SchoolACARAId>11111</SchoolACARAId>
+        <TestLevel><Code>7</Code></TestLevel>
+        <FFPOS>1</FFPOS>
     </MostRecent>
 </StudentPersonal>
 XML
