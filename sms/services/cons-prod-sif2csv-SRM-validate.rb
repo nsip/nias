@@ -59,6 +59,14 @@ def validate_staff(nodes)
 	return ret
 end
 
+def valid_birthdate(yearlevel, birthdatestr)
+                        thisyear = Date.today.year
+                        startdate = Date.new(thisyear-yearlevel-6,1,1)
+                        enddate = Date.new(thisyear-yearlevel-5,7,31)
+                        birthdate = Date.parse(birthdatestr)
+                        return (birthdate >= startdate and birthdate <= enddate) 
+end
+
 def validate_student(nodes)
 	ret = []
         testlevel = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:TestLevel/xmlns:Code")
@@ -68,7 +76,7 @@ def validate_student(nodes)
         sex = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:Sex")
 	#ret << "Error: 'Sex is mandatory" unless sex
 
-        birthdate = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:BirthDate")
+        birthdatestr = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:BirthDate")
 	#ret << "Error: 'BirthDate is mandatory" unless birthdate
 
 	studentCountryOfBirth = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:CountryOfBirth")
@@ -101,12 +109,24 @@ def validate_student(nodes)
 	end
 
 
-	if(yearlevel_string and birthdate)
+	# numeric year level?
+	if(yearlevel_string and birthdatestr and yearlevel)
 		if(yearlevel >= 1 and yearlevel <= 12)
-			age_in_years = (Date.today - Date.parse(birthdate.to_s)).to_i / (365.24)
-			expected_age = yearlevel + 5
-			if(age_in_years < expected_age - 1 or age_in_years > expected_age + 2)
-				ret << "Warning: Date of Birth '#{birthdate} is inconsistent with Year Level #{yearlevel}" 
+			unless valid_birthdate(yearlevel, birthdatestr.to_s)
+				ret << "Warning: Date of Birth '#{birthdatestr} is inconsistent with Year Level #{yearlevel}" 
+			end
+		end
+	end
+
+	if(birthdatestr and yearlevel_string == 'UG' and testlevel)
+		begin
+			testlevelint = Integer(testlevel.to_s)
+		rescue ArgumentError
+			testlevelint = 0
+		end
+		if(testlevelint)
+			unless valid_birthdate(testlevelint, birthdatestr.to_s)
+				ret << "Warning: Date of Birth '#{birthdatestr} is inconsistent with Test Level #{testlevel}" 
 			end
 		end
 	end
