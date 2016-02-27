@@ -15,7 +15,7 @@ require 'json'
 require 'poseidon'
 require 'hashids'
 require 'redis'
-
+require_relative '../kafkaproducers'
 
 
 class OneRosterSifMerge
@@ -28,12 +28,8 @@ class OneRosterSifMerge
         @servicename = 'prod-oneroster-sif-merge-ids'
 
         # set up producer pool - busier the broker the better for speed
-        producers = []
-        (1..10).each do | i |
-            p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
-            producers << p
-        end
-        @pool = producers.cycle
+        producers = KafkaProducers.new(@servicename, 10)
+        @pool = producers.get_producers.cycle
     end
 
     def merge_ids

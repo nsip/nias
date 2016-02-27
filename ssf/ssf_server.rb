@@ -14,6 +14,8 @@ require 'nokogiri' # xml support
 require 'csvlint' # csv support
 require 'json-schema'
 require_relative '../sms/services/cvsheaders-naplan'
+require_relative '../kafkaproducers'
+
 
 =begin
 Class to handle ingesting of messages into NIAS. Deals with ingest and bulk ingest of topic/stream, and requests for topic/stream and particular privacy profiles of topic/stream. Parses JSON and CSV messages into JSON objects.
@@ -46,6 +48,7 @@ class SSFServer < Sinatra::Base
     end
 
     @validation_error = false
+    @servicename = 'ssf_server'
 
     helpers do
         # is this a valid route for a Kafka topic
@@ -148,11 +151,9 @@ class SSFServer < Sinatra::Base
             # but *no* multiple producers if doing bulk ingest: splitting the message among producers risks its being reassembled out of sequence
             producers = []
             producercount = bulk ? 1 : 10
-            (1..producercount).each do | i |
-                p = Poseidon::Producer.new(["localhost:9092"], session['producer_id'], {:compression_codec => compression_codec , :partitioner => Proc.new { |key, partition_count| 0 } })
-                producers << p
-            end
-            pool = producers.cycle
+	    producers = KafkaProducers.new(@servicename, producercount)
+            pool = producers.get_producers.cycle
+
                         # send the messages
             sending = Time.now
             puts "sending messages ( #{messages.count} )...."
@@ -303,7 +304,6 @@ class SSFServer < Sinatra::Base
                         msgsplit.each do |msg1|
                 messages << Poseidon::MessageToSend.new( "#{topic}", msg1, "#{key}" )
             end
-puts topic
             messages << Poseidon::MessageToSend.new( "#{topic}", msgtail , "#{key}" )
 
             # write to default for audit if required

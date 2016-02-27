@@ -2,6 +2,7 @@
 
 require 'poseidon'
 require 'nokogiri' # xml support
+require_relative '../../kafkaproducers'
 
 # Consumer of bulk ingest SIF/XML messages. 
 # The XSD to be used for parsing SIF/XML is passed in as the first command line parameter of the script.
@@ -32,14 +33,8 @@ consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
 @inbound, 0, :latest_offset)
 
 
-# set up producer pool - busier the broker the better for speed
-producers = []
-(1..10).each do | i |
-    p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
-    producers << p
-end
-pool = producers.cycle
-
+producers = KafkaProducers.new(@servicename, 10)
+pool = producers.get_producers.cycle
 
 
 loop do

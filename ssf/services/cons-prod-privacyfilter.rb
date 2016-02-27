@@ -2,6 +2,7 @@
 
 require 'poseidon'
 require 'nokogiri' # xml support
+require_relative '../../kafkaproducers'
 
 =begin
 Consumer of validated SIF/XML messages. 
@@ -79,12 +80,8 @@ consumer = Poseidon::PartitionConsumer.new("cons-prod-privacyfilter", "localhost
 # set up producer pool - busier the broker the better for speed
 pool = {}
 @sensitivities.each do |x|
-    producers = []
-    (1..10).each do | i |
-        p = Poseidon::Producer.new(["localhost:9092"], "cons-prod-privacyfilter", {:partitioner => Proc.new { |key, partition_count| 0 } })
-        producers << p
-    end
-    pool[x] = producers.cycle
+    producers = KafkaProducers.new(@servicename, 10)
+    pool[x] = producers.get_producers.cycle
 end
 
 # Hash of outbound messages, mapping privacy level to array of outbound messages

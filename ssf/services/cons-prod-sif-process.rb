@@ -1,6 +1,7 @@
 # cons-prod-sif-process.rb
 
 require 'poseidon'
+require_relative '../../kafkaproducers'
 
 # Process any received SIF objects in sifxml.validated, and post them to sifxml.processed
 # This script passes the objects through. Other microservices may alter the content, depending on their topic
@@ -16,13 +17,8 @@ consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
 @inbound, 0, :latest_offset)
 
 
-# set up producer pool - busier the broker the better for speed
-producers = []
-(1..10).each do | i |
-    p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
-    producers << p
-end
-pool = producers.cycle
+producers = KafkaProducers.new(@servicename, 10)
+pool = producers.get_producers.cycle
 
 # if the topic of the message is one of these, a different microservice will process the SIF/XML
 

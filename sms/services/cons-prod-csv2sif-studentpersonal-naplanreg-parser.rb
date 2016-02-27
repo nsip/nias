@@ -11,6 +11,7 @@ require 'csv'
 require 'securerandom'
 require 'json-schema'
 require_relative 'cvsheaders-naplan'
+require_relative '../../kafkaproducers'
 
 def Postcode2State( postcodestr ) 
     postcode = postcodestr.to_i
@@ -66,13 +67,8 @@ consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
 @inbound, 0, :latest_offset)
 
 
-# set up producer pool - busier the broker the better for speed
-producers = []
-(1..10).each do | i |
-    p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
-    producers << p
-end
-@pool = producers.cycle
+producers = KafkaProducers.new(@servicename, 10)
+@pool = producers.get_producers.cycle
 
 # default values
 @default_csv = {'OfflineDelivery' => 'N', 'Sensitive' => 'Y', 'HomeSchooledStudent' => 'N', 'EducationSupport' => 'N', 'FFPOS' => 'N', 'MainSchoolFlag' => '01' , "AddressLine2" => ""}

@@ -13,6 +13,7 @@ require 'csv'
 require 'securerandom'
 require_relative 'cvsheaders-naplan'
 require_relative '../../Luhn'
+require_relative '../../kafkaproducers'
 
 @inbound = 'sifxml.validated'
 @outbound = 'sifxml.processed'
@@ -28,13 +29,8 @@ consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
 @inbound, 0, :latest_offset)
 
 
-# set up producer pool - busier the broker the better for speed
-producers = []
-(1..10).each do | i |
-    p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
-    producers << p
-end
-@pool = producers.cycle
+producers = KafkaProducers.new(@servicename, 10)
+@pool = producers.get_producers.cycle
 
 @accepted_topics = %w(naplan.sifxml naplan.sifxmlout)
 

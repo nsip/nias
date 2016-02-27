@@ -22,7 +22,7 @@ require 'json'
 require 'nokogiri'
 require 'poseidon'
 require 'hashids'
-
+require_relative '../../kafkaproducers'
 
 # extract human readable label based on SIF object
 # id is GUID, nodes is Nokogiri-parsed XML
@@ -157,13 +157,8 @@ end
 # create consumer
 consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
 
-# set up producer pool - busier the broker the better for speed
-producers = []
-(1..10).each do | i |
-    p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
-    producers << p
-end
-@pool = producers.cycle
+producers = KafkaProducers.new(@servicename, 10)
+@pool = producers.get_producers.cycle
 
 loop do
 

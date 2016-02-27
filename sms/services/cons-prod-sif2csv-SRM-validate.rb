@@ -11,6 +11,7 @@ require 'poseidon_cluster' # to track offset, which seems to get lost for bulk d
 require 'hashids'
 require 'csv'
 require_relative 'cvsheaders-naplan'
+require_relative '../../kafkaproducers'
 
 @inbound = 'sifxml.processed'
 @outbound1 = 'sifxml.errors'
@@ -23,13 +24,8 @@ require_relative 'cvsheaders-naplan'
 # create consumer
 consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
 
-# set up producer pool - busier the broker the better for speed
-producers = []
-(1..10).each do | i |
-    p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
-    producers << p
-end
-@pool = producers.cycle
+producers = KafkaProducers.new(@servicename, 10)
+@pool = producers.get_producers.cycle
 
 @naplan_topics = %w(naplan.sifxml naplan.sifxml_staff naplan.sifxmlout naplan.sifxmlout_staff)
 

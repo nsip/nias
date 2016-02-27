@@ -6,6 +6,8 @@ require 'sinatra/content_for'
 require 'hashids' # temp non-colliding client & producer id generator
 require 'json'
 require 'poseidon'
+require_relative '../kafkaproducers'
+
 
 # tiny web service to assert the equivalence of a set of GUIDs on Redis
 class EquivalenceServer < Sinatra::Base
@@ -29,16 +31,12 @@ class EquivalenceServer < Sinatra::Base
 
         @idgen = Hashids.new( 'nsip random temp uid' )
     end
+    @servicename = "equiv_ids_server"
 
     producer_id = @idgen.encode(Random.new.rand(999))
     # set up producer pool - busier the broker the better for speed
-    producers = []
-    (1..10).each do | i |
-        p = Poseidon::Producer.new(["localhost:9092"], "equiv_ids_server", {:partitioner => Proc.new { |key, partition_count| 0 } })
-        producers << p
-    end
-    pool = producers.cycle
-
+    producers = KafkaProducers.new(@servicename, 10)
+    pool = producers.get_producers.cycle
 
     post "/equiv" do
         halt 400 if params['ids'].nil?

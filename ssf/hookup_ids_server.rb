@@ -6,6 +6,8 @@ require 'sinatra/content_for'
 require 'hashids' # temp non-colliding client & producer id generator
 require 'json'
 require 'poseidon'
+require_relative '../kafkaproducers'
+
 
 # tiny web service to link one GUID to a sequence of other GUIDs on Redis
 class HookupServer < Sinatra::Base
@@ -25,15 +27,11 @@ class HookupServer < Sinatra::Base
     outbound = 'sms.indexer'
 
     @idgen = Hashids.new( 'nsip random temp uid' )
+    @servicename = "hookup_ids_server"
 
     # set up producer pool - busier the broker the better for speed
-    producers = []
-    (1..10).each do | i |
-        p = Poseidon::Producer.new(["localhost:9092"], "hookup_ids_server", {:partitioner => Proc.new { |key, partition_count| 0 } })
-        producers << p
-    end
-    pool = producers.cycle
-
+    producers = KafkaProducers.new(@servicename, 10)
+    pool = producers.get_producers.cycle
 
     post "/hookup" do
         @sourceid = params['sourceid']

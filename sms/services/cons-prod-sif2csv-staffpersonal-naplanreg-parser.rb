@@ -12,6 +12,7 @@ require 'poseidon_cluster' # to track offset, which seems to get lost for bulk d
 require 'hashids'
 require 'csv'
 require_relative 'cvsheaders-naplan'
+require_relative '../../kafkaproducers'
 
 @inbound = 'naplan.sifxml_staff.none'
 @outbound = 'naplan.csvstaff_out'
@@ -26,14 +27,8 @@ consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inb
 
 #puts "#{@servicename} fetching offset #{ consumer.offset(0) } "
 
-# set up producer pool - busier the broker the better for speed
-producers = []
-(1..10).each do | i |
-    p = Poseidon::Producer.new(["localhost:9092"], @servicename, {:partitioner => Proc.new { |key, partition_count| 0 } })
-    producers << p
-end
-@pool = producers.cycle
-
+producers = KafkaProducers.new(@servicename, 10)
+@pool = producers.get_producers.cycle
 
 loop do
 

@@ -21,6 +21,7 @@
 require 'json'
 require 'poseidon'
 require 'hashids'
+require_relative '../../kafkaproducers'
 
 @inbound = 'oneroster.validated'
 @outbound = 'sms.indexer'
@@ -32,13 +33,8 @@ consumer = Poseidon::PartitionConsumer.new("cons-prod-oneroster-parser", "localh
 @inbound, 0, :latest_offset)
 
 
-# set up producer pool - busier the broker the better for speed
-producers = []
-(1..10).each do | i |
-    p = Poseidon::Producer.new(["localhost:9092"], "cons-prod-oneroster-parser", {:partitioner => Proc.new { |key, partition_count| 0 } })
-    producers << p
-end
-@pool = producers.cycle
+producers = KafkaProducers.new(@servicename, 10)
+@pool = producers.get_producers.cycle
 
 loop do
 
