@@ -3,6 +3,7 @@
 require 'poseidon'
 require 'nokogiri' # xml support
 require_relative '../../kafkaproducers'
+require_relative '../../kafkaconsumers'
 
 # Consumer of bulk ingest SIF/XML messages. 
 # The XSD to be used for parsing SIF/XML is passed in as the first command line parameter of the script.
@@ -25,22 +26,26 @@ require_relative '../../kafkaproducers'
 @namespace = 'http://www.sifassociation.org/au/datamodel/3.4'
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset )
+#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset )
+consumer = KafkaConsumers.new(@servicename, @inbound)
+Signal.trap("INT") { consumer.interrupt }
 
 
 producers = KafkaProducers.new(@servicename, 10)
-@pool = producers.get_producers.cycle
+#@pool = producers.get_producers.cycle
 
 payload = ""
 header = ""
 concatcount = 0
 
+=begin
 loop do
     begin
+=end
         outbound_messages = []
         messages = []
-        messages = consumer.fetch
-        messages.each do |m|
+        #messages = consumer.fetch
+        consumer.each do |m|
             cont = m.value.match( /===snip[^=\n]*===/ ) #this is not the last in the suite of split up messages
             m.value.gsub!(/\n===snip[^=\n]*===\n/, "")
             if(payload.empty?) then
@@ -55,8 +60,8 @@ loop do
             if (cont) then
                 next
             end
-            puts "Concatenation done at #{Time.now}"
-            puts "Payload size: #{payload.size}"
+            #puts "Concatenation done at #{Time.now}"
+            #puts "Payload size: #{payload.size}"
             #puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
 
             #File.open('log.txt', 'w') {|f| f.puts payload }
@@ -94,41 +99,43 @@ loop do
                         msg = header + x.to_s
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 			if outbound_messages.length > 100 
-        			outbound_messages.each_slice(20) do | batch |
-            				pool.next.send_messages( batch )
-        			end
+        			#outbound_messages.each_slice(20) do | batch |
+            				#pool.next.send_messages( batch )
+            				producers.send_through_queue ( outbound_messages )
+        			#end
         			outbound_messages = []
 			end
                     end
                 else
 		    lines = payload.lines
                     msg = header + "Message #{m.offset} validity error:\n" 
-                    puts msg
-	            xsd_errors.each do |e|
+                    #puts msg
+	            xsd_errors.each_with_index do |e, i|
 			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
-			puts output
-                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", output , "invalid" )
+			#puts output
+                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", output , "rcvd:#{ sprintf('%09d:%d', m.offset, i) }" )
 			if outbound_messages.length > 100 
-        			outbound_messages.each_slice(20) do | batch |
-            				pool.next.send_messages( batch )
-        			end
+        			#outbound_messages.each_slice(20) do | batch |
+            				#pool.next.send_messages( batch )
+            			producers.send_through_queue( outbound_messages )
+        			#end
         			outbound_messages = []
 			end
 		    end
-                    #outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg , "invalid" )
                 end
             else
                 puts "Not Well-Formed!"
 		lines = payload.lines
                 msg = header + "Message #{m.offset} well-formedness error:\n" 
-		puts msg
-                doc.errors.each do |e| 
+		#puts msg
+                doc.errors.each_with_index do |e, i| 
 			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
-                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", output , "invalid" )
+                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", output , "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 			if outbound_messages.length > 100 
-        			outbound_messages.each_slice(20) do | batch |
-            				pool.next.send_messages( batch )
-        			end
+        			#outbound_messages.each_slice(20) do | batch |
+            				#pool.next.send_messages( batch )
+            				producers.send_through_queue( outbound_messages )
+        			#end
         			outbound_messages = []
 			end
 		end
@@ -136,7 +143,7 @@ loop do
             payload = "" # clear payload for next iteration
             concatcount = 0
                         puts "Finished processing payload."
-        end
+        #end
 
 
         # debugging if needed
@@ -146,9 +153,13 @@ loop do
         # 	puts "\n\nContent: #{msg.value}"
         # end
 
-        outbound_messages.each_slice(20) do | batch |
-            pool.next.send_messages( batch )
-        end
+        #outbound_messages.each_slice(20) do | batch |
+            #pool.next.send_messages( batch )
+            producers.send_through_queue( outbound_messages )
+        #end
+	outbound_messages = []
+end
+=begin
         
         #	puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
     rescue Poseidon::Errors::UnknownTopicOrPartition
@@ -167,4 +178,4 @@ loop do
     #sleep 1
 end
 
-
+=end

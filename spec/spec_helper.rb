@@ -23,6 +23,7 @@ ENV['RACK_ENV'] = 'test'
 require "environment"
 require "rack/test"
 require "rspec"
+require "poseidon_cluster"
 
 RSpec.configure do |config|
     config.include Rack::Test::Methods
@@ -108,3 +109,17 @@ RSpec.configure do |config|
     # as the one that triggered the failure.
     Kernel.srand config.seed
 end
+
+# streamlined Poseidon::Group fetch
+def groupfetch(consumer)
+        ret = []
+        consumer.claimed.each do |x|
+                consumer.fetch(commit: true) do |partition, bulk|
+                        ret.concat(bulk)
+			#puts "#{partition}: #{bulk[0].value}" if bulk and bulk[0]
+                        #consumer.commit partition, bulk.last.offset+1 unless bulk.empty?
+                end
+        end
+        return ret
+end
+

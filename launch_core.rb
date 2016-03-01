@@ -113,7 +113,7 @@ def launch
         'sifxml.processed',
         'sms.indexer',
         'sifxml.ingest',
-        'sifxml.bulkingest',
+        #'sifxml.bulkingest',
         'sifxml.errors',
         'csv.errors',
         'oneroster.validated',
@@ -154,7 +154,21 @@ def launch
 
   sleep 5 # creating too early truncates topics
   topics.each do | topic |
+    puts "Creating #{topic}"
+    pid = Process.spawn( './kafka/bin/kafka-topics.sh', 
+                                                      '--zookeeper localhost:2181', 
+                                                      '--create',
+                                                      "--topic #{topic}",
+                                                      '--partitions 5',
+                                                      '--replication-factor 1')
+    Process.wait pid 
+  end
 
+  # topics that are not idempotent -- must keep messages in order
+  topics_single = [
+        'sifxml.bulkingest',
+  ]
+  topics_single.each do | topic |
     puts "Creating #{topic}"
     pid = Process.spawn( './kafka/bin/kafka-topics.sh', 
                                                       '--zookeeper localhost:2181', 
@@ -163,8 +177,8 @@ def launch
                                                       '--partitions 1',
                                                       '--replication-factor 1')
     Process.wait pid 
-  
   end
+
 
   banner 'Core topics created.'
 

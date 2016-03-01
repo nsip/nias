@@ -1,7 +1,7 @@
 
 require "net/http"
 require "spec_helper"
-require 'poseidon' 
+require 'poseidon_cluster' 
 
 
 xml = <<XML
@@ -84,16 +84,20 @@ describe "Bulk SIF Ingest/Produce" do
         end
     end
     before(:all) do
-        @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
-        @xmlvalidconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.validated", 0, :latest_offset)
+        #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
+        #@xmlvalidconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.validated", 0, :latest_offset)
+        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sifxml.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
+        @xmlvalidconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sifxml.validated", trail: true, socket_timeout_ms: 6000, max_wait_ms: 100, max_bytes: 10000000)
+        @xmlvalidconsumer.claimed.each { |x| @xmlvalidconsumer.checkout { |y| puts y.next_offset }}
+
     end
     context "Malformed XML" do
         it "pushes error to sifxml.errors" do
-            puts "Next offset    = #{@xmlconsumer.next_offset}"
             post_xml(header + xml_malformed + xmlbody + footer)
             sleep 20
             begin
-                a = @xmlconsumer.fetch
+                a = groupfetch(@xmlconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0].value).to match(/well-formedness error/)
@@ -107,11 +111,10 @@ describe "Bulk SIF Ingest/Produce" do
 
     context "Invalid XML" do
         it "pushes error to sifxml.errors" do
-            puts "Next offset    = #{@xmlconsumer.next_offset}"
             post_xml(header + xml_invalid + xmlbody + footer)
             sleep 20
             begin
-                a = @xmlconsumer.fetch
+                a = groupfetch(@xmlconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0].value).to match(/validity error/)
@@ -126,11 +129,11 @@ describe "Bulk SIF Ingest/Produce" do
 
     context "Valid XML" do
         it "pushes validated XML to sifxml.validated" do
-            puts "Next offset    = #{@xmlvalidconsumer.next_offset}"
             post_xml(header + xmlbody + footer)
             sleep 20
             begin
-                a = @xmlvalidconsumer.fetch(:max_bytes => 10000000)
+                #a = @xmlvalidconsumer.fetch(:max_bytes => 10000000)
+                a = groupfetch(@xmlvalidconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expected = "TOPIC: rspec.test\n" + xml
@@ -144,6 +147,12 @@ describe "Bulk SIF Ingest/Produce" do
                 retry
             end
         end
+    end
+
+    after(:all) do
+        @xmlconsumer.close
+        @xmlvalidconsumer.close
+        sleep 5
     end
 
 end

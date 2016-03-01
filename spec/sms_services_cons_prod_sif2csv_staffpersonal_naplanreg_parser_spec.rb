@@ -1,7 +1,7 @@
 
 require "net/http"
 require "spec_helper"
-require 'poseidon' 
+require 'poseidon_cluster' 
 
 out = <<CSV
 fjghh371,Treva,Seefeldt,7D,7E,knptb460,046129,01,tseefeldt@example.com,N,principal
@@ -54,18 +54,21 @@ describe "NAPLAN convert SIF to CSV" do
     end
 
     before(:all) do
-        @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.csvstaff_out", 0, :latest_offset)
-        puts "Next offset    = #{@xmlconsumer.next_offset}"
+        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "naplan.csvstaff_out", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.csvstaff_out", 0, :latest_offset)
+        @xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
         post_xml(xml)
-        sleep 10
+        sleep 3
     end
 
     context "Valid XML to naplan/sifxml_staff" do
         it "pushes templated CSV to naplan.csvstaff_out" do
             begin
-                a = @xmlconsumer.fetch
+                a = groupfetch(@xmlconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value.nil?).to be false
                 expect(a[0].value).to eq out
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
@@ -74,8 +77,9 @@ describe "NAPLAN convert SIF to CSV" do
             end
         end
     end
-        after(:all) do
-        sleep 10
+    after(:all) do
+        @xmlconsumer.close
+        sleep 5
     end
 
 end

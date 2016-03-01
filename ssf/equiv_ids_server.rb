@@ -36,7 +36,7 @@ class EquivalenceServer < Sinatra::Base
     producer_id = @idgen.encode(Random.new.rand(999))
     # set up producer pool - busier the broker the better for speed
     producers = KafkaProducers.new(@servicename, 10)
-    pool = producers.get_producers.cycle
+    #pool = producers.get_producers.cycle
 
     post "/equiv" do
         halt 400 if params['ids'].nil?
@@ -54,9 +54,10 @@ class EquivalenceServer < Sinatra::Base
         outbound_messages << Poseidon::MessageToSend.new( "#{settings.outbound}", idx.to_json, "indexed" )
         
         # send results to indexer to create SMS data graph
-        outbound_messages.each_slice(20) do | batch |
-            pool.next.send_messages( batch )
-        end
+        #outbound_messages.each_slice(20) do | batch |
+            #pool.next.send_messages( batch )
+            producers.send_through_queue( outbound_messages )
+        #end
 
     end
 

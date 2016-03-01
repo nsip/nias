@@ -14,6 +14,7 @@ require 'securerandom'
 require_relative 'cvsheaders-naplan'
 require_relative '../../Luhn'
 require_relative '../../kafkaproducers'
+require_relative '../../kafkaconsumers'
 
 @inbound = 'sifxml.validated'
 @outbound = 'sifxml.processed'
@@ -25,12 +26,14 @@ require_relative '../../kafkaproducers'
 @psi = ARGF.argv.include?('psi')
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
-@inbound, 0, :latest_offset)
+#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
+consumer = KafkaConsumers.new(@servicename, @inbound)
+Signal.trap("INT") { consumer.interrupt }
+
 
 
 producers = KafkaProducers.new(@servicename, 10)
-@pool = producers.get_producers.cycle
+#@pool = producers.get_producers.cycle
 
 @accepted_topics = %w(naplan.sifxml naplan.sifxmlout)
 
@@ -58,14 +61,15 @@ def new_psi
          return "R1" + psi_number + checksum_letter(psi_number)
 end
 
-
+=begin
 loop do
     begin 
+=end
         outbound_messages = []
         outbound_errors = []
         messages = []
-        messages = consumer.fetch
-        messages.each do |m|
+        #messages = consumer.fetch
+        consumer.each do |m|
             #puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
     
             # Payload from sifxml.validated contains as its first line a header line with the original topic
@@ -104,11 +108,15 @@ loop do
 	    end
 
             outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", header + nodes.root.to_s, item_key )
-        end
+        #end
         
-        outbound_messages.each_slice(20) do | batch |
-            @pool.next.send_messages( batch )
-        end
+        #outbound_messages.each_slice(20) do | batch |
+            #@pool.next.send_messages( batch )
+            producers.send_through_queue( outbound_messages )
+        #end
+	outbound_messages = []
+end
+=begin
             
         # puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
     rescue Poseidon::Errors::UnknownTopicOrPartition
@@ -126,4 +134,4 @@ loop do
             
     sleep 1     
 end         
-
+=end

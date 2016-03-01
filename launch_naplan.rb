@@ -83,11 +83,11 @@ def launch
 	{:name => 'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb', :options => ''},
 	{:name => 'cons-prod-sif2csv-staffpersonal-naplanreg-parser.rb', :options => ''},
 	# do validations specific to a state or territory
-	#{:name => 'cons-prod-sif2csv-SRM-validate.rb', :options => 'NT'},
+		#{:name => 'cons-prod-sif2csv-SRM-validate.rb', :options => 'NT'},
 	{:name => 'cons-prod-sif2csv-SRM-validate.rb', :options => ''},
 	{:name => 'cons-prod-studentpersonal-naplanreg-unique-ids-storage.rb', :options => ''},
 	# option to inject PSI into source records that are missing it
-	#{:name => 'cons-prod-naplan-studentpersonal-process-sif.rb', :options => 'psi'},
+		#{:name => 'cons-prod-naplan-studentpersonal-process-sif.rb', :options => 'psi'},
 	{:name => 'cons-prod-naplan-studentpersonal-process-sif.rb', :options => ''},
     ]
 

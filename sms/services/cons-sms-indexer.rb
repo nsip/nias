@@ -50,6 +50,7 @@ require 'nokogiri'
 require 'poseidon'
 require 'hashids'
 require 'redis'
+require_relative '../../kafkaconsumers'
 
 @inbound = 'sms.indexer'
 
@@ -60,18 +61,20 @@ require 'redis'
 @servicename = 'cons-sms-indexer'
 
 # create consumer
-@consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
-@inbound, 0, :latest_offset)
+#@consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
+@consumer = KafkaConsumers.new(@servicename, @inbound)
+Signal.trap("INT") { @consumer.interrupt }
 
 
 
-
+=begin
 loop do
 
     begin
+=end
         messages = []
-        messages = @consumer.fetch
-        messages.each do |m|
+        #messages = @consumer.fetch
+        @consumer.each do |m|
 
             idx_hash = JSON.parse( m.value )
 
@@ -133,7 +136,7 @@ loop do
 
             end
         end
-
+=begin
         # puts "cons-sms-indexer:: Resuming message consumption from: #{consumer.next_offset}"
 
     rescue Poseidon::Errors::UnknownTopicOrPartition
@@ -151,4 +154,4 @@ loop do
     sleep 1
 end
 
-
+=end

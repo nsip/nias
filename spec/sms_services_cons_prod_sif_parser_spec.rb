@@ -1,7 +1,7 @@
 
 require "net/http"
 require "spec_helper"
-require 'poseidon' 
+require 'poseidon_cluster' 
 
 
 xml = <<XML
@@ -61,18 +61,24 @@ describe "SIF Ingest/Produce" do
         end
     end
     before(:all) do
-        @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sms.indexer", 0, :latest_offset)
-        puts "Next offset    = #{@xmlconsumer.next_offset}"
-        sleep 2
-        post_xml(xml, "/rspec/test")
+        #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sms.indexer", 0, :latest_offset)
+        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sms.indexer", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
+        sleep 1
     end
 
     context "Valid XML" do
+	before(:example) do
+        	post_xml(xml, "/rspec/test")
+		sleep 1
+	end
         it "pushes interpreted XML to sms.indexer" do
             begin
-                a = @xmlconsumer.fetch
+                a = groupfetch(@xmlconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0].nil?).to be false
+                expect(a[0].value.nil?).to be false
                 expect(a[0].value).to eq out.to_s
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
@@ -80,6 +86,11 @@ describe "SIF Ingest/Produce" do
                 retry
             end
         end
+    end
+
+    after(:all) do
+        @xmlconsumer.close
+	sleep 5
     end
 
 end

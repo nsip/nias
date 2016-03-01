@@ -14,6 +14,7 @@ require 'securerandom'
 require_relative 'cvsheaders-naplan'
 require 'json-schema'
 require_relative '../../kafkaproducers'
+require_relative '../../kafkaconsumers'
 
 @inbound = 'naplan.csv_staff'
 @outbound = 'sifxml.ingest'
@@ -25,12 +26,13 @@ require_relative '../../kafkaproducers'
 @servicename = 'cons-prod-csv2sif-staffpersonal-naplanreg-parser'
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
-@inbound, 0, :latest_offset)
+#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
+consumer = KafkaConsumers.new(@servicename, @inbound)
+Signal.trap("INT") { consumer.interrupt }
 
 
 producers = KafkaProducers.new(@servicename, 10)
-@pool = producers.get_producers.cycle
+#@pool = producers.get_producers.cycle
 
 # default values
 @default_csv = {'StaffSchoolRole' => 'principal', 'AdditionalInfo' => 'N' }
@@ -38,14 +40,15 @@ producers = KafkaProducers.new(@servicename, 10)
 # JSON schema
 @jsonschema = JSON.parse(File.read("#{__dir__}/naplan.staff.json"))
 
-
+=begin
 loop do
 
     begin
+=end
         messages = []
         outbound_messages = []
-        messages = consumer.fetch
-                messages.each do |m|
+        #messages = consumer.fetch
+        consumer.each do |m|
             row = JSON.parse(m.value) 
             # Carriage return unacceptable
             row.each_key do |key|
@@ -61,20 +64,22 @@ loop do
             #classcodes.each { |x| classcodes_xml << "      <ClassCode>#{x}</ClassCode>\n" }
 	    # validate that we have received the right kind of record here, from the headers
 	    if(row['LocalId'] and not row['LocalStaffId']) 
-            	outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "You appear to have submitted a StudentPersonal record instead of a StaffPersonal record\n#{row['__linecontent']}", "invalid" )
+            	outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "You appear to have submitted a StudentPersonal record instead of a StaffPersonal record\n#{row['__linecontent']}", "rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
 	    else
 
                 # validate against JSON Schema
                 json_errors = JSON::Validator.fully_validate(@jsonschema, row)
                 # any errors are on mandatory elements, so stop processing further
                 unless(json_errors.empty?)
-                        json_errors.each do |e|
+                        json_errors.each_with_index do |e, i|
                                 puts e
-                                outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "#{e}\n#{row['__linecontent']}", "invalid" )
+                                outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "#{e}\n#{row['__linecontent']}", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
                         end
-                        outbound_messages.each_slice(20) do | batch |
-                                @pool.next.send_messages( batch )
-                        end
+                        #outbound_messages.each_slice(20) do | batch |
+                                #@pool.next.send_messages( batch )
+                                producers.send_through_queue( outbound_messages )
+                        #end
+			outbound_messages = []
                         next
                 end
 
@@ -129,15 +134,18 @@ XML
                 nodes.xpath('//*/child::*[text() and not(text()[normalize-space()])]').each do |node|
                     node.remove
                 end
-                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout_staff\n" + nodes.root.to_s, "indexed" )
+                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout_staff\n" + nodes.root.to_s, "rcvd:#{ sprintf('%09d', m.offset)}" )
             end
-        end
+        #end
 
         # send results to indexer to create sms data graph
-        outbound_messages.each_slice(20) do | batch |
-            @pool.next.send_messages( batch )
-        end
-
+        #outbound_messages.each_slice(20) do | batch |
+            #@pool.next.send_messages( batch )
+	    producers.send_through_queue(outbound_messages)
+        #end
+	outbound_messages = []
+end
+=begin
 
         # puts "cons-prod-oneroster-parser: Resuming message consumption from: #{consumer.next_offset}"
 
@@ -159,4 +167,4 @@ XML
 
 
 
-
+=end

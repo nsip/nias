@@ -13,8 +13,11 @@ require 'hashids' # temp non-colliding client & producer id generator
 require 'nokogiri' # xml support
 require 'csvlint' # csv support
 require 'json-schema'
+#require 'kafka-consumer'
+
 require_relative '../sms/services/cvsheaders-naplan'
 require_relative '../kafkaproducers'
+require_relative '../kafkaconsumers'
 
 
 =begin
@@ -152,17 +155,18 @@ class SSFServer < Sinatra::Base
             producers = []
             producercount = bulk ? 1 : 10
 	    producers = KafkaProducers.new(@servicename, producercount)
-            pool = producers.get_producers.cycle
+            #pool = producers.get_producers.cycle
 
                         # send the messages
             sending = Time.now
             puts "sending messages ( #{messages.count} )...."
             puts "started at: #{sending.to_s}"
 
-            messages.each_slice(20) do | batch |
-                pool.next.send_messages( batch )
+            #messages.each_slice(20) do | batch |
+                #pool.next.send_messages( batch )
+		producers.send_through_queue(messages)
                 #p.send_messages( batch )
-            end
+            #end
                         finish = Time.now
             puts "\nFinished: #{finish.to_s}\n\n"
             puts "\ntime taken to send: #{(finish - sending).to_s} seconds\n\n"
@@ -359,26 +363,15 @@ class SSFServer < Sinatra::Base
 
         # get batch of messages from broker
         messages = []
-        begin
-            consumer = Poseidon::PartitionConsumer.new(client_id, "localhost", 9092,
-            topic_name, 0, offset)
-            messages = consumer.fetch
-            # rescue StandardError => e
-        rescue Poseidon::Errors::OffsetOutOfRange 
-            # most common cause is records have been deleted by log cleaning since 
-            # last visit, so reset to current high water mark and let consumer
-            # figure it out
-            puts "[warning] - bad offset supplied, resetting..."
-            offset = :latest_offset
-            retry
-        end
-
+	#consumer = Kafka::Consumer.new(client_id, [topic_name], zookeeper: "localhost:2181", initial_offset: offset)
+	consumer = KafkaConsumers.new(client_id, [topic_name], offset)
+	Signal.trap("INT") { consumer.interrupt }
 
 
         # stream messages to client
         stream do | out |
             begin
-                messages.each do |msg|
+                consumer.each do |msg|
                     # puts msg.value
                     record = { 
                         :data => msg.value,

@@ -3,6 +3,7 @@
 require 'poseidon'
 require 'nokogiri' # xml support
 require_relative '../../kafkaproducers'
+require_relative '../../kafkaconsumers'
 
 =begin
 Consumer of validated SIF/XML messages. 
@@ -74,26 +75,31 @@ def apply_filter(xml_orig, xpaths)
     return xml
 end
 
+@servicename = "cons-prod-privacyfilter"
+
 # create consumer
-consumer = Poseidon::PartitionConsumer.new("cons-prod-privacyfilter", "localhost", 9092, @inbound, 0, :latest_offset)
+#consumer = Poseidon::PartitionConsumer.new("cons-prod-privacyfilter", "localhost", 9092, @inbound, 0, :latest_offset)
+consumer = KafkaConsumers.new(@servicename, @inbound)
+Signal.trap("INT") { consumer.interrupt }
 
 # set up producer pool - busier the broker the better for speed
 pool = {}
 @sensitivities.each do |x|
-    producers = KafkaProducers.new(@servicename, 10)
-    pool[x] = producers.get_producers.cycle
+    #pool[x] = KafkaProducers.new(@servicename, 10).get_producers.cycle
+    pool[x] = KafkaProducers.new(@servicename, 10)
 end
 
 # Hash of outbound messages, mapping privacy level to array of outbound messages
 outbound_messages = {}
 # Hash of filtered records, mapping privacy level to filtered record
 out = {}
-loop do
-    begin
+#loop do
+#	begin
         @sensitivities.each { |x| outbound_messages[x] = [] }
-        messages = []
-        messages = consumer.fetch
-        messages.each do |m|
+        #messages = []
+        #messages = consumer.fetch
+        #messages.each do |m|
+	consumer.each do |m|
 
             # Payload from sifxml.ingest contains as its first line a header line with the original topic
             header = m.value.lines[0]
@@ -117,43 +123,47 @@ loop do
 
                 # puts "\n\nOut\n = #{out.to_s}\n\n"
 
-                @sensitivities.each {|x|
+                @sensitivities.each do |x|
                     #puts "\n\nSending: to #{topic}.#{x}\n\n#{out[x].to_s.lines[1]}\n\nkey: #{item_key}"
                     outbound_messages[x] << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
-                }
+                end 
             end
-            if(outbound_messages[:none].length > 20)
+            #if(outbound_messages[:none].length > 20)
                 @sensitivities.each do |x|
-                    outbound_messages[x].each_slice(20) do | batch |
-                        pool[x].next.send_messages( batch )
-                    end
+                    #outbound_messages[x].each_slice(20) do | batch |
+                        #pool[x].next.send_messages( batch )
+                        pool[x].send_through_queue( outbound_messages[x] )
+                    #end
                 end
                 @sensitivities.each { |x| outbound_messages[x] = [] }
-            end
-                                end
+            #end
+	end
 
+=begin
         unless(outbound_messages.empty?)
+puts "SENDING!"
             @sensitivities.each do |x|
                 outbound_messages[x].each_slice(20) do | batch |
                     pool[x].next.send_messages( batch )
                 end
             end
         end
+=end
                 # puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
-            rescue Poseidon::Errors::UnknownTopicOrPartition
-        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-        sleep 30
-    end
+#            rescue Poseidon::Errors::UnknownTopicOrPartition
+#        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
+#        sleep 30
+#    end
         # puts "Resuming message consumption from: #{consumer.next_offset}"
 
     # trap to allow console interrupt
-    trap("INT") { 
-        puts "\ncons-prod-privacyfilter service shutting down...\n\n"
-        consumer.close
-        exit 130 
-    } 
+#    trap("INT") { 
+#        puts "\ncons-prod-privacyfilter service shutting down...\n\n"
+#        consumer.close
+#        exit 130 
+#    } 
 
-    sleep 1
-end
+#    sleep 1
+#end
 
 

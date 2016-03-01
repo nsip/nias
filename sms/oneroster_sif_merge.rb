@@ -29,7 +29,7 @@ class OneRosterSifMerge
 
         # set up producer pool - busier the broker the better for speed
         producers = KafkaProducers.new(@servicename, 10)
-        @pool = producers.get_producers.cycle
+        #@pool = producers.get_producers.cycle
     end
 
     def merge_ids
@@ -79,9 +79,10 @@ class OneRosterSifMerge
 
 
             # send results to indexer to create sms data graph
-            outbound_messages.each_slice(20) do | batch |
-                @pool.next.send_messages( batch )
-            end
+            #outbound_messages.each_slice(20) do | batch |
+                #@pool.next.send_messages( batch )
+                producers.send_through_queue( outbound_messages )
+            #end
 
         rescue Poseidon::Errors::UnknownTopicOrPartition
             puts "Topic #{@outbound} does not exist yet."

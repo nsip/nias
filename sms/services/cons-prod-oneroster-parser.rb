@@ -22,27 +22,32 @@ require 'json'
 require 'poseidon'
 require 'hashids'
 require_relative '../../kafkaproducers'
+require_relative '../../kafkaconsumers'
 
 @inbound = 'oneroster.validated'
 @outbound = 'sms.indexer'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
+@servicename =  'cons-prod-oneroster-parser'
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new("cons-prod-oneroster-parser", "localhost", 9092,
-@inbound, 0, :latest_offset)
+#consumer = Poseidon::PartitionConsumer.new("cons-prod-oneroster-parser", "localhost", 9092, @inbound, 0, :latest_offset)
+consumer = KafkaConsumers.new(@servicename, @inbound)
+Signal.trap("INT") { consumer.interrupt }
 
 
 producers = KafkaProducers.new(@servicename, 10)
-@pool = producers.get_producers.cycle
+#@pool = producers.get_producers.cycle
 
+=begin
 loop do
 
     begin
+=end
         messages = []
-        messages = consumer.fetch
+        #messages = consumer.fetch
         outbound_messages = []
-        messages.each do |m|
+        consumer.each do |m|
 
             # create 'empty' index tuple
             idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil }      	
@@ -131,14 +136,17 @@ loop do
 
             #puts "\nParser Index = #{idx.to_json}\n\n"
 
-            outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "indexed" )
-        end
+            outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "rcvd:#{ sprintf('%09d', m.offset) )
+        #end
 
         # send results to indexer to create sms data graph
-        outbound_messages.each_slice(20) do | batch |
-            @pool.next.send_messages( batch )
-        end
-
+        #outbound_messages.each_slice(20) do | batch |
+            #@pool.next.send_messages( batch )
+            producers.send_through_queue( outbound_messages )
+        #end
+	outbound_messages = []
+end
+=begin
 
         # puts "cons-prod-oneroster-parser: Resuming message consumption from: #{consumer.next_offset}"
 
@@ -160,4 +168,4 @@ end
 
 
 
-
+=end

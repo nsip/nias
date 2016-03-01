@@ -17,6 +17,7 @@ require 'nokogiri'
 require 'poseidon'
 require 'hashids'
 require 'moneta'
+require_relative '../../kafkaconsumers'
 
 @inbound = 'json.storage'
 
@@ -24,10 +25,13 @@ require 'moneta'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 
-@service_name = 'cons-sms-json-storage'
+@servicename = 'cons-sms-json-storage'
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, @inbound, 0, :latest_offset)
+#consumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, @inbound, 0, :latest_offset)
+consumer = KafkaConsumers.new(@servicename, @inbound)
+Signal.trap("INT") { consumer.interrupt }
+
 
 # given the topic name, extract likely unique id for the record 
 def topic_to_id(topic, json) 
@@ -52,14 +56,15 @@ def topic_to_id(topic, json)
 	return id
 end
 
-
+=begin
 loop do
 
     begin
+=end
         messages = []
-        messages = consumer.fetch
+        #messages = consumer.fetch
         outbound_messages = []
-        messages.each do |m|
+        consumer.each do |m|
 
             # create 'empty' index tuple, otherids and links will be unused here but keeps all parsing code consistent
             idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil}   
@@ -81,7 +86,7 @@ loop do
 		puts "Failed to store #{json} to key #{idx[:type]}::#{idx[:id]}"
 	    end
         end
-
+=begin
 
         # puts "#{@service_name}: Resuming message consumption from: #{consumer.next_offset}"
 
@@ -106,4 +111,4 @@ end
 
 
 
-
+=end

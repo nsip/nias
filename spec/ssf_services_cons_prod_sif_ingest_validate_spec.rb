@@ -1,7 +1,7 @@
 
 require "net/http"
 require "spec_helper"
-require 'poseidon' 
+require 'poseidon_cluster' 
 
 
 xml = <<XML
@@ -82,20 +82,29 @@ describe "SIF Ingest/Produce" do
         end
     end
     before(:all) do
-        @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
-        @xmlvalidconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.validated", 0, :latest_offset)
+        #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
+        #@xmlvalidconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.validated", 0, :latest_offset)
+        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sifxml.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
+        @xmlvalidconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sifxml.validated", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @xmlvalidconsumer.claimed.each { |x| @xmlvalidconsumer.checkout { |y| puts y.next_offset }}
+
     end
     context "Malformed XML" do
-        it "pushes error to sifxml.errors" do
-            puts "Next offset    = #{@xmlconsumer.next_offset}"
+	before(:example) do
             post_xml(xml_malformed)
             sleep 1
+	end
+        it "pushes error to sifxml.errors" do
             begin
-                a = @xmlconsumer.fetch
+                a = groupfetch(@xmlconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
-                expect(a[0].value).to match(/well-formedness error/)
-                expect(a[0].value).to match(/rspec\.test/)
+                expect(a[0]).to_not be_nil
+                expect(a[0].value.nil?).to be false
+		errors = a.find_all{ |e| e.value["well-formedness error"] }
+		expect(errors.empty?).to be false
+                expect(errors[0].value).to match(/rspec\.test/)
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset
@@ -109,18 +118,19 @@ describe "SIF Ingest/Produce" do
 
     context "Invalid XML" do
         before(:example) do
-            #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
-        end
-        it "pushes error to sifxml.errors" do
-            puts "Next offset    = #{@xmlconsumer.next_offset}"
             post_xml(xml_invalid)
             sleep 10
+        end
+        it "pushes error to sifxml.errors" do
             begin
-                a = @xmlconsumer.fetch
+                a = groupfetch(@xmlconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
-                expect(a[0].value).to match(/validity error/)
-                expect(a[0].value).to match(/rspec\.test/)
+                expect(a[0]).to_not be_nil
+                expect(a[0].value.nil?).to be false
+		errors = a.find_all{ |e| e.value["validity error"] }
+		expect(errors.empty?).to be false
+                expect(errors[0].value).to match(/rspec\.test/)
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset
@@ -134,16 +144,16 @@ describe "SIF Ingest/Produce" do
 
     context "Valid XML" do
         before(:example) do
-            #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
-        end
-        it "pushes validated XML to sifxml.validated" do
-            puts "Next offset    = #{@xmlvalidconsumer.next_offset}"
             post_xml(xml)
             sleep 10
+        end
+        it "pushes validated XML to sifxml.validated" do
             begin
-                a = @xmlvalidconsumer.fetch
+                a = groupfetch(@xmlvalidconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value.nil?).to be false
                 expected = "TOPIC: rspec.test\n" + xml.lines[1..-2].join
                 expected.gsub!(/ xmlns="[^"]+"/, "")
                 a[0].value.gsub!(/ xmlns="[^"]+"/, "")
@@ -160,5 +170,11 @@ describe "SIF Ingest/Produce" do
             #@xmlconsumer.close
         end
     end
+    after(:all) do
+        @xmlconsumer.close
+        @xmlvalidconsumer.close
+        sleep 5
+    end
+
 
 end

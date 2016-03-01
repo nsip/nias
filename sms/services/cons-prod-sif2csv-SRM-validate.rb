@@ -12,20 +12,24 @@ require 'hashids'
 require 'csv'
 require_relative 'cvsheaders-naplan'
 require_relative '../../kafkaproducers'
+require_relative '../../kafkaconsumers'
 
 @inbound = 'sifxml.processed'
 @outbound1 = 'sifxml.errors'
 @outbound2 = 'csv.errors'
 
-@servicename = 'cons-prod-sif2csv-staffpersonal-naplanreg-parser'
+@servicename = 'cons-prod-sif2csv-SRM-validate'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
+#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
+consumer = KafkaConsumers.new(@servicename, @inbound)
+Signal.trap("INT") { consumer.interrupt }
+
 
 producers = KafkaProducers.new(@servicename, 10)
-@pool = producers.get_producers.cycle
+#@pool = producers.get_producers.cycle
 
 @naplan_topics = %w(naplan.sifxml naplan.sifxml_staff naplan.sifxmlout naplan.sifxmlout_staff)
 
@@ -119,7 +123,7 @@ def validate_student(nodes)
 		begin
 			testlevelint = Integer(testlevel.to_s)
 		rescue ArgumentError
-			testlevelint = 0
+			#testlevelint = 0
 		end
 		if(testlevelint)
 			unless valid_birthdate(testlevelint, birthdatestr.to_s)
@@ -270,15 +274,16 @@ def validate_student(nodes)
 	return ret
 end
 
-
+=begin
 loop do
 
     begin
+=end
         messages = []
         outbound_messages = []
-        messages = consumer.fetch
+        #messages = consumer.fetch
 
-        messages.each do |m|
+        consumer.each do |m|
 
 	    header = m.value.lines[0]
             topic = header.chomp.gsub(/TOPIC: /,"")
@@ -299,18 +304,20 @@ loop do
             errors = validate_staff(nodes) if type == 'StaffPersonal'
             errors = validate_student(nodes) if type == 'StudentPersonal'
 
-	    errors.each do |e|
-            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", e + "\n" + payload, "invalid" )
-            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "CSV line #{csvline}: " + e + "\n" + csvcontent, "invalid" ) if fromcsv
+	    errors.each_with_index do |e, i|
+            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", e + "\n" + payload, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "CSV line #{csvline}: " + e + "\n" + csvcontent, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) if fromcsv
 	    end
-        end
-        # send results to error streams
-        outbound_messages.each_slice(20) do | batch |
-            #puts batch[0].value.lines[0..10].join("\n") + "\n\n" unless batch.empty?
-            @pool.next.send_messages( batch )
-        end
         #end
-
+        # send results to error streams
+        #outbound_messages.each_slice(20) do | batch |
+            #puts batch[0].value.lines[0..10].join("\n") + "\n\n" unless batch.empty?
+            #@pool.next.send_messages( batch )
+        producers.send_through_queue( outbound_messages )
+	outbound_messages = []
+        #end
+        end
+=begin
 
     rescue Poseidon::Errors::UnknownTopicOrPartition
         puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
@@ -326,4 +333,4 @@ loop do
 
     sleep 1
 end
-
+=end

@@ -10,6 +10,7 @@ require 'poseidon'
 require 'hashids'
 require 'redis'
 require_relative '../../kafkaproducers'
+require_relative '../../kafkaconsumers'
 
 # extract School+ LocalId
 # id is GUID, nodes is Nokogiri-parsed XML
@@ -46,18 +47,22 @@ end
 @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
+#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
+consumer = KafkaConsumers.new(@servicename, @inbound)
+Signal.trap("INT") { consumer.interrupt }
 
 producers = KafkaProducers.new(@servicename, 10)
-@pool = producers.get_producers.cycle
+#@pool = producers.get_producers.cycle
 
+=begin
 loop do
 
     begin
+=end
         messages = []
-        messages = consumer.fetch
+        #messages = consumer.fetch
         outbound_messages = []
-        messages.each do |m|
+        consumer.each do |m|
 
             header = m.value.lines[0]
             payload = m.value.lines[1..-1].join
@@ -87,19 +92,22 @@ loop do
 		errors << "Error: There is a duplicate entry with the ACARA School Id + Local Id #{school_local_id}"
             end
 	    @redis.sadd "SchoolNameDOB::#{school_name_dob}", refId
-	    if(Integer(@redis.scard("SchoolLocalId::#{school_local_id}")) > 1)
+	    if(Integer(@redis.scard("SchoolNameDOB::#{school_name_dob}")) > 1)
 		errors << "Warning: There is a duplicate entry with the ACARA School Id, Given Name, Family Name and Date of Birth #{school_name_dob}"
 	    end
-            errors.each do |e|
-                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", e + "\n" + payload, "invalid" )
-                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "CSV line #{csvline}: " + e + "\n" + csvcontent, "invalid" ) if fromcsv
+            errors.each_with_index do |e, i|
+                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", e + "\n" + payload, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "CSV line #{csvline}: " + e + "\n" + csvcontent, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) if fromcsv
             end
-        end
+        #end
 
-        outbound_messages.each_slice(20) do | batch |
-            @pool.next.send_messages( batch )
-        end
-
+        #outbound_messages.each_slice(20) do | batch |
+            #@pool.next.send_messages( batch )
+           producers.send_through_queue( outbound_messages )
+        #end
+	outbound_messages = []
+end
+=begin
 
         # puts "cons-prod-sif-parser: Resuming message consumption from: #{consumer.next_offset}"
 
@@ -117,4 +125,4 @@ loop do
 
     sleep 1
 end
-
+=end

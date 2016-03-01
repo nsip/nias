@@ -1,7 +1,8 @@
 
 require "net/http"
 require "spec_helper"
-require 'poseidon' 
+require 'poseidon_cluster'
+
 
 
 xml = <<XML
@@ -92,8 +93,6 @@ xml_high.gsub!(%r{ RefId="[^"]+"}, ' RefId="00000000-0000-0000-0000-000000000000
 
 xml_extreme = xml_high.gsub(%r{<YearLevel><Code>7</Code></YearLevel>}, "<YearLevel><Code>ZZREDACTED</Code></YearLevel>")
 
-@service_name = 'ssf_services_cons_prod_privacyfilter_spec'
-
 describe "SIF Privacy Filter" do
 
     def post_xml(xml) 
@@ -104,29 +103,30 @@ describe "SIF Privacy Filter" do
             http.request(request)
         end
     end
-    before(:context) do
-        @xmlconsumernone = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.none", 0, :latest_offset)
-        @xmlconsumerlow = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.low", 0, :latest_offset)
-        @xmlconsumermedium = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.medium", 0, :latest_offset)
-        @xmlconsumerhigh = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.high", 0, :latest_offset)
-        @xmlconsumerextreme = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "rspec.test.extreme", 0, :latest_offset)
-        puts "Next offset    = #{@xmlconsumernone.next_offset}"
-        puts "Next offset    = #{@xmlconsumerlow.next_offset}"
-        puts "Next offset    = #{@xmlconsumermedium.next_offset}"
-        puts "Next offset    = #{@xmlconsumerhigh.next_offset}"
-        puts "Next offset    = #{@xmlconsumerextreme.next_offset}"
+    before(:all) do
+	@service_name = 'ssf_services_cons_prod_privacyfilter_spec'
+        @xmlconsumernone = Poseidon::ConsumerGroup.new(@service_name + "_none", ["localhost:9092"], ["localhost:2181"], "rspec.test.none", trail: true)
+        @xmlconsumernone.claimed.each { |x| @xmlconsumernone.checkout { |y| puts y.next_offset }}
+        @xmlconsumerlow = Poseidon::ConsumerGroup.new(@service_name + "_low", ["localhost:9092"], ["localhost:2181"], "rspec.test.low", trail: true)
+        @xmlconsumerlow.claimed.each { |x| @xmlconsumerlow.checkout { |y| puts y.next_offset }}
+        @xmlconsumermedium = Poseidon::ConsumerGroup.new(@service_name + "_medium", ["localhost:9092"], ["localhost:2181"], "rspec.test.medium", trail: true)
+        @xmlconsumermedium.claimed.each { |x| @xmlconsumermedium.checkout { |y| puts y.next_offset }}
+        @xmlconsumerhigh = Poseidon::ConsumerGroup.new(@service_name + "_high", ["localhost:9092"], ["localhost:2181"], "rspec.test.high", trail: true)
+        @xmlconsumerhigh.claimed.each { |x| @xmlconsumerhigh.checkout { |y| puts y.next_offset }}
+        @xmlconsumerextreme = Poseidon::ConsumerGroup.new(@service_name + "_extreme", ["localhost:9092"], ["localhost:2181"], "rspec.test.extreme", trail: true)
+        @xmlconsumerextreme.claimed.each { |x| @xmlconsumerextreme.checkout { |y| puts y.next_offset }}
         post_xml(xml)
-        sleep 10
+        sleep 3
     end
 
     context "Valid XML into topic/stream" do
                 it "pushes XML as is to topic/stream/none" do
-            #puts "Next offset 1    = #{@xmlconsumernone.next_offset}"
             sleep 1
             begin
-                a = @xmlconsumernone.fetch
-                expect(a).to_not be_nil
+                a = groupfetch(@xmlconsumernone)
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value.nil?).to be false
                 expected = xml.lines[1..-2].join.gsub(/\n[ ]+/,"")
                 a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
                 expect(a[0].value.chomp).to eq expected.chomp
@@ -139,9 +139,10 @@ describe "SIF Privacy Filter" do
 
         it "pushes redacted XML to topic/stream/low" do
             begin
-                a = @xmlconsumerlow.fetch
-                expect(a).to_not be_nil
+		a = groupfetch(@xmlconsumerlow)
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value.nil?).to be false
                 expected = xml_low.lines[1..-2].join.gsub(/\n[ ]+/,"")
                 a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
                 expect(a[0].value.chomp).to eq expected.chomp
@@ -154,9 +155,10 @@ describe "SIF Privacy Filter" do
 
         it "pushes redacted XML to topic/stream/medium" do
             begin
-                a = @xmlconsumermedium.fetch
-                expect(a).to_not be_nil
+		a = groupfetch(@xmlconsumermedium)
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value.nil?).to be false
                 expected = xml_medium.lines[1..-2].join.gsub(/\n[ ]+/,"")
                 a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
                 expect(a[0].value.chomp).to eq expected.chomp
@@ -169,9 +171,10 @@ describe "SIF Privacy Filter" do
 
         it "pushes redacted XML to topic/stream/high" do
             begin
-                a = @xmlconsumerhigh.fetch
-                expect(a).to_not be_nil
+		a = groupfetch(@xmlconsumerhigh)
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value.nil?).to be false
                 expected = xml_high.lines[1..-2].join.gsub(/\n[ ]+/,"")
                 a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
                 expect(a[0].value.chomp).to eq expected.chomp
@@ -184,9 +187,10 @@ describe "SIF Privacy Filter" do
 
         it "pushes redacted XML to topic/stream/extreme" do
             begin
-                a = @xmlconsumerextreme.fetch
-                expect(a).to_not be_nil
+		a = groupfetch(@xmlconsumerextreme)
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value.nil?).to be false
                 expected = xml_extreme.lines[1..-2].join.gsub(/\n[ ]+/,"")
                 a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/<\?[^>]*>\n/, "").gsub!(/\n[ ]+/,"")
                 expect(a[0].value.chomp).to eq expected.chomp
@@ -196,12 +200,15 @@ describe "SIF Privacy Filter" do
                 retry
             end
         end
-        after (:all) do
-            sleep 10
-        end
-
-
 
     end
+        after (:all) do
+		@xmlconsumernone.close
+		@xmlconsumerlow.close
+		@xmlconsumermedium.close
+		@xmlconsumerhigh.close
+		@xmlconsumerextreme.close
+		sleep 5
+        end
 
 end

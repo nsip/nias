@@ -5,7 +5,7 @@ require "rack/test"
 require "net/http"
 require "spec_helper"
 require_relative '../ssf/filtered_client.rb'
-require 'poseidon' 
+#require 'poseidon_cluster' 
 
 
 xml = <<XML
@@ -35,8 +35,8 @@ describe "FilteredClient" do
                 request["Content-Type"] = "application/xml"
                 http.request(request)
             end
-            sleep 5
-            @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.ingest", 0, :latest_offset)
+            sleep 3
+            #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.ingest", 0, :latest_offset)
         end
         it "returns filtered XML" do
             get "/filtered/rspec/test/low"

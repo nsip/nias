@@ -3,6 +3,7 @@
 require 'poseidon'
 require 'nokogiri' # xml support
 require_relative '../../kafkaproducers'
+require_relative '../../kafkaconsumers'
 
 # Consumer of bulk ingest SIF/XML messages. 
 # The XSD to be used for parsing SIF/XML is passed in as the first command line parameter of the script.
@@ -29,22 +30,25 @@ require_relative '../../kafkaproducers'
 @namespace = 'http://www.sifassociation.org/au/datamodel/3.4'
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
-@inbound, 0, :latest_offset)
+#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
+consumer = KafkaConsumers.new(@servicename, @inbound)
+Signal.trap("INT") { consumer.interrupt }
+
 
 
 producers = KafkaProducers.new(@servicename, 10)
-pool = producers.get_producers.cycle
+#pool = producers.get_producers.cycle
 
-
+=begin
 loop do
     begin
+=end
         outbound_messages = []
         outbound_errors = []
         messages = []
-        messages = consumer.fetch
-        messages.each do |m|
-            #puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
+        #messages = consumer.fetch
+        consumer.each do |m|
+            #puts "Validate: processing message no.: #{m.offset}, #{m.key} from #{@inbound}\n\n"
 
             # Payload from sifxml.ingest contains as its first line a header line with the original topic
             header = m.value.lines[0]	
@@ -61,6 +65,7 @@ loop do
             doc = Nokogiri::XML(payload) do |config|
                 config.nonet.noblanks
             end
+            item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
             if(doc.errors.empty?) 
                 doc.remove_namespaces!
                 doc.xpath("/*/node()").each do |x|
@@ -90,22 +95,22 @@ loop do
                         msg = header + "Message #{m.offset} validity error:\n" + 	
                         	xsd_errors.map{|e| e.message}.join("\n") 
                         puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"					
-                        puts "\n\nsending to: #{@outbound3}" if csvline
+                        #puts "\n\nsending to: #{@outbound3}" if csvline
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg + "\n" +
-                        	parent.document.to_s, "invalid" )
+                        	parent.document.to_s, item_key )
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound3}", 
-				"CSV line #{csvline}: " + msg + "\n" + csvcontent, "invalid" ) if csvline
+				"CSV line #{csvline}: " + msg + "\n" + csvcontent, item_key ) if csvline
                     end
                 end
             else
                 puts "Not Well-Formed!"
                 msg = header + "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value	
                 # puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"
-                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg, "invalid" )
+                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg, item_key )
                 outbound_messages << Poseidon::MessageToSend.new( "#{@outbound3}", 
-			"CSV line #{csvline}: " + msg + "\n" + csvcontent, "invalid" ) if csvline
+			"CSV line #{csvline}: " + msg + "\n" + csvcontent, item_key ) if csvline
             end
-        end
+        #end
 
         # debugging if needed
         # outbound_messages.each do | msg |
@@ -114,9 +119,13 @@ loop do
         # 	puts "\n\nContent: #{msg.value}"
         # end
 
-        outbound_messages.each_slice(20) do | batch |
-            pool.next.send_messages( batch )
-        end
+        #outbound_messages.each_slice(20) do | batch |
+            #pool.next.send_messages( batch )
+            producers.send_through_queue( outbound_messages )
+	outbound_messages = []
+        #end
+end
+=begin
         
         # puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
     rescue Poseidon::Errors::UnknownTopicOrPartition
@@ -136,3 +145,4 @@ loop do
 end
 
 
+=end

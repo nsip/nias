@@ -12,6 +12,7 @@ require 'securerandom'
 require 'json-schema'
 require_relative 'cvsheaders-naplan'
 require_relative '../../kafkaproducers'
+require_relative '../../kafkaconsumers'
 
 def Postcode2State( postcodestr ) 
     postcode = postcodestr.to_i
@@ -63,12 +64,14 @@ end
 @servicename = 'cons-prod-csv2sif-studentpersonal-naplanreg-parser'
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092,
-@inbound, 0, :latest_offset)
+#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
+consumer = KafkaConsumers.new(@servicename, @inbound)
+Signal.trap("INT") { consumer.interrupt }
+
 
 
 producers = KafkaProducers.new(@servicename, 10)
-@pool = producers.get_producers.cycle
+#@pool = producers.get_producers.cycle
 
 # default values
 @default_csv = {'OfflineDelivery' => 'N', 'Sensitive' => 'Y', 'HomeSchooledStudent' => 'N', 'EducationSupport' => 'N', 'FFPOS' => 'N', 'MainSchoolFlag' => '01' , "AddressLine2" => ""}
@@ -77,19 +80,21 @@ producers = KafkaProducers.new(@servicename, 10)
 @jsonschemafile = File.read("#{__dir__}/naplan.student.json")
 @jsonschema = JSON.parse(@jsonschemafile)
 
+=begin
 loop do
 
     begin
+=end
         messages = []
         outbound_messages = []
-        messages = consumer.fetch
-                messages.each do |m|
+        #messages = consumer.fetch
+        consumer.each do |m|
             row = JSON.parse(m.value) 
             row.merge!(@default_csv) { |key, v1, v2| v1 }
 
             # validate that we have received the right kind of record here, from the headers
             if(row['LocalStaffId'] and not row['LocalId'])
-                outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}", "invalid" )
+                outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}", "rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
             else
 
                 # mappings of CSV alternate values
@@ -105,13 +110,15 @@ loop do
 		json_errors = JSON::Validator.fully_validate(@jsonschema, row)
 		# any errors are on mandatory elements, so stop processing further
 		unless(json_errors.empty?)
-			json_errors.each do |e|
+			json_errors.each_with_index do |e, i|
 				puts e
-                		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "#{e}\n#{row['__linecontent']}", "invalid" )
+                		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "#{e}\n#{row['__linecontent']}", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 			end
-        		outbound_messages.each_slice(20) do | batch |
-            			@pool.next.send_messages( batch )
-        		end
+        		#outbound_messages.each_slice(20) do | batch |
+            			#@pool.next.send_messages( batch )
+            			producers.send_through_queue( outbound_messages )
+        		#end
+			outbound_messages = []
 			next
 		end
 
@@ -222,15 +229,18 @@ XML
                 nodes.xpath('//*/child::*[text() and not(text()[normalize-space()])]').each do |node|
                     node.remove
 		end
-                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout\n" + nodes.root.to_s, "indexed" )
+                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout\n" + nodes.root.to_s, "rcvd:#{ sprintf('%09d', m.offset)}" )
             end
-        end
+        #end
 
         # send results to indexer to create sms data graph
-        outbound_messages.each_slice(20) do | batch |
-            @pool.next.send_messages( batch )
-        end
-
+        #outbound_messages.each_slice(20) do | batch |
+            #@pool.next.send_messages( batch )
+            producers.send_through_queue( outbound_messages )
+        #end
+	outbound_messages = []
+end
+=begin
 
         # puts "cons-prod-oneroster-parser: Resuming message consumption from: #{consumer.next_offset}"
 
@@ -252,4 +262,4 @@ XML
 
 
 
-
+=end

@@ -31,7 +31,7 @@ class HookupServer < Sinatra::Base
 
     # set up producer pool - busier the broker the better for speed
     producers = KafkaProducers.new(@servicename, 10)
-    pool = producers.get_producers.cycle
+    #pool = producers.get_producers.cycle
 
     post "/hookup" do
         @sourceid = params['sourceid']
@@ -63,9 +63,10 @@ class HookupServer < Sinatra::Base
             outbound_messages << Poseidon::MessageToSend.new( "#{outbound}", idx.to_json, "indexed" )
                     end
         # send results to indexer to create sms data graph
-        outbound_messages.each_slice(20) do | batch |
-            pool.next.send_messages( batch )
-        end
+        #outbound_messages.each_slice(20) do | batch |
+            #pool.next.send_messages( batch )
+            producers.send_through_queue( outbound_messages )
+        #end
 
     end
 

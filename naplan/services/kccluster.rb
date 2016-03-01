@@ -1,7 +1,7 @@
 # kccluster.rb
-require 'kafka-consumer'
 require 'nokogiri'
 require 'json'
+require 'kafka-consumer'
 
 zookeeper = "localhost:2181"
 name      = "kccon"

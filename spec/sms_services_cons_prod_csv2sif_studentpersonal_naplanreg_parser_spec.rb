@@ -1,7 +1,7 @@
 
 require "net/http"
 require "spec_helper"
-require 'poseidon' 
+require 'poseidon_cluster' 
 require 'redis' 
 
 csv = <<CSV
@@ -17,8 +17,8 @@ CSV
 
 duplicate_localnotschoolid = <<CSV
 LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
-fjghh373,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Dreva,Treva,E,2004-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,47089,046129,01,02,47089,47089,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
-fjghh373,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Drevor,Trevor,E,2004-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,48096,046129,01,02,48096,48096,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh373,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Dreva,Dreva,E,2004-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,47089,046129,01,02,47089,47089,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh373,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Drevor,Drevor,E,2004-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,48096,046129,01,02,48096,48096,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
 CSV
 
 # FFPOS = Y, MembershipType = N
@@ -370,21 +370,25 @@ describe "NAPLAN convert CSV to SIF" do
 	@redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
 	@redis.flushdb
         @http = Net::HTTP.new("localhost", "9292")
+        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "naplan.sifxmlout.none",  trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
+        @errorconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_err#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "csv.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @errorconsumer.claimed.each { |x| @errorconsumer.checkout { |y| puts y.next_offset }}
         sleep 1
     end
 
     context "Valid CSV to naplan.csv" do
         before(:example) do
-        	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout.none", 0, :latest_offset)
-        	puts "Next offset    = #{@xmlconsumer.next_offset}"
         	post_csv(csv)
         end
         it "pushes templated XML to naplan.sifxmlout.none" do
             sleep 3
             begin
-                a = @xmlconsumer.fetch
+                a = groupfetch(@xmlconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                 a[0].value.gsub!(%r{<StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="[^"]+">}, '<StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">').gsub!(%r{<\?xml version="1.0"\?>},'').gsub!(/<!-- CSV [^>]+>/, "").gsub!(/\n[ ]*/,"")
                 expect(a[0].value).to eq out
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -397,16 +401,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "CSV requiring mappings of values to naplan.csv" do
         before(:example) do
-        	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout.none", 0, :latest_offset)
-        	puts "Next offset    = #{@xmlconsumer.next_offset}"
                 post_csv(mapped_csv)
         end
         it "pushes templated XML to naplan.sifxmlout.none" do
             sleep 3
             begin
-                a = @xmlconsumer.fetch
+                a = groupfetch(@xmlconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                 a[0].value.gsub!(%r{<StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="[^"]+">}, '<StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">').gsub!(%r{<\?xml version="1.0"\?>},'').gsub!(/<!-- CSV [^>]+>/, "").gsub!(/\n[ ]*/,"")
                 expect(a[0].value).to eq out.gsub(/fjghh371/, "fjghh374")
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -420,16 +424,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Missing default values in CSV to naplan.csv" do
         before(:example) do
-        	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout.none", 0, :latest_offset)
-        	puts "Next offset    = #{@xmlconsumer.next_offset}"
                 post_csv(default_values)
         end
         it "pushes templated XML with supplied default values to naplan.sifxmlout.none" do
             sleep 3
             begin
-                a = @xmlconsumer.fetch
+                a = groupfetch(@xmlconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                 a[0].value.gsub!(%r{<StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="[^"]+">}, '<StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">').gsub!(%r{<\?xml version="1.0"\?>},'').gsub!(/<!-- CSV [^>]+>/, "").gsub!(/\n[ ]*/,"")
                 expect(a[0].value).to eq default_xml.gsub(/fjghh371/, "fjghh375")
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -442,16 +446,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: sex enumerable" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "ext offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_sex)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'6' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -466,16 +470,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: FFPOS enumerable" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_ffpos)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'6' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -490,16 +494,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: birthdate format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_birthdate)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'26072004' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -514,16 +518,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: birthdate inconsistent with year level" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(inconsistent_csv_birthdate)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["inconsistent"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -538,16 +542,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: country of birth format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_countryofbirth)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'110' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -562,17 +566,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: education support format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_educationsupport)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
-                a.each { |e| puts e}
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'No way!' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -587,16 +590,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: LBOTE format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_lbote)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'No way!' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -611,16 +614,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: HomeSchooledStudent format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_homeschooledstudent)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'No way!' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -635,16 +638,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: Sensitive format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_sensitive)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'No way!' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -659,16 +662,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: OfflineDelivery format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_offlinedelivery)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'No way!' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -684,16 +687,16 @@ describe "NAPLAN convert CSV to SIF" do
 =begin
     context "Invalid CSV to naplan.csv: VisaCode format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_visacode)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'1010' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -709,16 +712,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: IndigenousStatus format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_indigenousstatus)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'12' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -733,16 +736,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: StudentLOTE format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_studentlote)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'12' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -757,16 +760,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: Parent1LOTE format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_parent1lote)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'12010' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -781,16 +784,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: Parent2LOTE format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_parent2lote)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'English' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -805,16 +808,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: YearLevel format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_yearlevel)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'9a' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -829,16 +832,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: TestLevel format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_testlevel)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'8' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -853,16 +856,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: FTE format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_fte)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'1.2' is greater than the maximum value allowed"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -877,16 +880,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: MainSchoolFlag format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_mainschoolflag)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'1' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -901,16 +904,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: Parent1SchoolEducation format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_parent1schooleducation)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'01' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -925,16 +928,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: Parent2SchoolEducation format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_parent2schooleducation)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'5' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -949,16 +952,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: Parent1NonSchoolEducation format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_parent1nonschooleducation)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'05' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -973,16 +976,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: Parent2NonSchoolEducation format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_parent2nonschooleducation)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'1' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -997,16 +1000,16 @@ describe "NAPLAN convert CSV to SIF" do
     
     context "Invalid CSV to naplan.csv: Parent1Occupation format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_parent1occupation)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'machinist' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1021,16 +1024,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: Parent2Occupation format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_parent2occupation)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'7' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1045,16 +1048,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: Postcode format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_postcode)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'800' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1069,16 +1072,16 @@ describe "NAPLAN convert CSV to SIF" do
 
     context "Invalid CSV to naplan.csv: StateTerritory format" do
         before(:example) do
-        	@errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-        	puts "Next offset    = #{@errorconsumer.next_offset}"
         	post_csv(invalid_csv_stateterritory)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
 				errors = a.find_all{ |e| e.value["'Queensland' is not a valid value"] }
 				expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1093,16 +1096,16 @@ describe "NAPLAN convert CSV to SIF" do
 
    context "Blank mandatory parameter in CSV to naplan.csv" do
         before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-                puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(blank_param)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset
@@ -1115,16 +1118,16 @@ describe "NAPLAN convert CSV to SIF" do
 
    context "Staff record in CSV to naplan.csv" do
         before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-                puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(wrong_record)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                                 errors = a.find_all{ |e| e.value["You appear to have submitted a"] }
                                 expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1137,16 +1140,16 @@ describe "NAPLAN convert CSV to SIF" do
 
    context "Long LocalId in CSV to naplan.csv" do
         before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-                puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(long_localid)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                                 errors = a.find_all{ |e| e.value["is too long"] }
                                 expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1159,16 +1162,16 @@ describe "NAPLAN convert CSV to SIF" do
 
    context "UG Year Level in CSV to naplan.csv" do
         before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-                puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(ug_year_level)
         end
         it "pushes warning to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                                 errors = a.find_all{ |e| e.value["School Year level is Ungraded"] }
                                 expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1181,16 +1184,16 @@ describe "NAPLAN convert CSV to SIF" do
 
    context "UG Year Level with test level incosistent with birth date in CSV to naplan.csv" do
         before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-                puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(ug_year_test_level)
         end
         it "pushes warning to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                                 errors = a.find_all{ |e| e.value["is inconsistent with Test Level"] }
                                 expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1205,16 +1208,16 @@ describe "NAPLAN convert CSV to SIF" do
 
   context "Mismatch between Year Level and Test Level in CSV to naplan.csv" do
         before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-                puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(mismatch_year_test_level)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                                 errors = a.find_all{ |e| e.value["does not match Test Level"] }
                                 expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1227,16 +1230,16 @@ describe "NAPLAN convert CSV to SIF" do
 
   context "Bad Year Level and Test Level in CSV to naplan.csv" do
         before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-                puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(wrong_year_level)
         end
         it "pushes error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                                 errors = a.find_all{ |e| e.value["not appropriate for NAPLAN"] }
                                 expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1249,16 +1252,17 @@ describe "NAPLAN convert CSV to SIF" do
 
   context "Duplicate Local Id and School Id in CSV to naplan.csv" do
         before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-                puts "Next offset    = #{@errorconsumer.next_offset}"
+		@redis.flushdb
                 post_csv(duplicate_localid)
+            	sleep 3
         end
         it "pushes error to csv.errors" do
-            sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                                 errors = a.find_all{ |e| e.value["duplicate"] }
                                 expect(errors.empty?).to be false
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1271,16 +1275,18 @@ describe "NAPLAN convert CSV to SIF" do
 
   context "Duplicate Local Id but not School Id in CSV to naplan.csv" do
         before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-                puts "Next offset    = #{@errorconsumer.next_offset}"
+		@redis.flushdb
+		sleep 2
+		# flush out pending csv errors
+                a = groupfetch(@errorconsumer)
                 post_csv(duplicate_localnotschoolid)
+            	sleep 3
         end
         it "no error to csv.errors" do
-            sleep 3
             begin
-                a = @errorconsumer.fetch
-puts a[0].value unless a.empty?
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
+		puts a[0].value unless a.empty?
                 expect(a.empty?).to be true
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
@@ -1292,16 +1298,16 @@ puts a[0].value unless a.empty?
 
   context "Record without Platform Identifier in CSV to naplan.csv" do
         before(:example) do
-        	@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout.none", 0, :latest_offset)
-        	puts "Next offset    = #{@xmlconsumer.next_offset}"
                 post_csv(inject_psi)
         end
         it "XML including generated Platform identifier in XML to naplan.sifxmlout.none, in the right format" do
             sleep 3
             begin
-                a = @xmlconsumer.fetch
+                a = groupfetch(@xmlconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                 expect(a[0].value).to match(/"NAPPlatformStudentId"/)
                 expect(a[0].value).to match(/NAPPlatformStudentId[^>]*>[QR]\d{11}[A-Z]</)
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1314,16 +1320,16 @@ puts a[0].value unless a.empty?
 
   context "Record with UGPri as Year Level" do
         before(:example) do
-                @xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.sifxmlout.none", 0, :latest_offset)
-                puts "Next offset    = #{@xmlconsumer.next_offset}"
                 post_csv(ug_pri_csv)
         end
         it "XML has UGPri converted to UG" do
             sleep 3
             begin
-                a = @xmlconsumer.fetch
+                a = groupfetch(@xmlconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
                 expect(a[0].value).to match(/YearLevel>\s*<Code>/)
                 expect(a[0].value).to match(/YearLevel>\s*<Code>UG<\//)
             rescue Poseidon::Errors::OffsetOutOfRange
@@ -1336,17 +1342,16 @@ puts a[0].value unless a.empty?
 
  context "Invalid ASL School Id in CSV to naplan.csv" do
         before(:example) do
-                @errorconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "csv.errors", 0, :latest_offset)
-                puts "Next offset    = #{@errorconsumer.next_offset}"
                 post_csv(invalid_asl)
         end
         it "error to csv.errors" do
             sleep 3
             begin
-                a = @errorconsumer.fetch
+                a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
-puts a[0].value
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset
@@ -1357,7 +1362,9 @@ puts a[0].value
 
 
     after(:all) do
-        #sleep 3
+ 	@xmlconsumer.close
+        @errorconsumer.close
+        sleep 5
     end
 
 end

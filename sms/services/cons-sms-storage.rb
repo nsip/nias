@@ -17,6 +17,7 @@ require 'nokogiri'
 require 'poseidon'
 require 'hashids'
 require 'moneta'
+require_relative '../../kafkaconsumers'
 
 @inbound = 'sifxml.processed'
 
@@ -27,17 +28,19 @@ require 'moneta'
 @service_name = 'cons-sms-storage'
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092,
-@inbound, 0, :latest_offset)
+#consumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, @inbound, 0, :latest_offset)
+consumer = KafkaConsumers.new(@service_name, @inbound)
+Signal.trap("INT") { consumer.interrupt }
 
 
-loop do
+#loop do
 
-    begin
-        messages = []
-        messages = consumer.fetch
+#    begin
+#        messages = []
+#        messages = consumer.fetch
         outbound_messages = []
-        messages.each do |m|
+#        messages.each do |m|
+        consumer.each do |m|
 
             # create 'empty' index tuple, otherids and links will be unused here but keeps all parsing code consistent
             idx = { :type => nil, :id => @idgen.encode( rand(1...999) ), :otherids => {}, :links => [], :equivalentids => [], :label => nil}   
@@ -82,7 +85,7 @@ loop do
 
 
         # puts "#{@service_name}: Resuming message consumption from: #{consumer.next_offset}"
-
+=begin
     rescue Poseidon::Errors::UnknownTopicOrPartition
         puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
         sleep 30
@@ -104,4 +107,4 @@ end
 
 
 
-
+=end

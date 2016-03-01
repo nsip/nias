@@ -15,6 +15,7 @@ require 'json'
 require 'poseidon'
 require 'hashids'
 require 'moneta'
+require_relative '../../kafkaconsumers'
 
 @inbound = 'oneroster.validated'
 
@@ -25,17 +26,21 @@ require 'moneta'
 @service_name = 'cons-oneroster-sms-storage'
 
 # create consumer
-consumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092,
-@inbound, 0, :latest_offset)
+#consumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, @inbound, 0, :latest_offset)
+consumer = KafkaConsumers.new(@service_name, @inbound)
+Signal.trap("INT") { consumer.interrupt }
 
 
+
+=begin
 loop do
 
     begin
+=end
         messages = []
         messages = consumer.fetch
         outbound_messages = []
-        messages.each do |m|
+        consumer.each do |m|
 
             # create 'empty' index tuple, otherids and links will be unused here but keeps all parsing code consistent
             idx = { :type => nil, :id => @idgen.encode( rand(1...999) ) }
@@ -53,7 +58,7 @@ loop do
             @store["#{idx[:id]}"] = m.value
         end
 
-
+=begin
         # puts "#{@service_name}: Resuming message consumption from: #{consumer.next_offset}"
 
     rescue Poseidon::Errors::UnknownTopicOrPartition
@@ -76,5 +81,5 @@ end
 
 
 
-
+=end
 
