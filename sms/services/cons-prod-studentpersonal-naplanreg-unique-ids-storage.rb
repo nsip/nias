@@ -95,39 +95,27 @@ loop do
 	    if(Integer(@redis.scard("SchoolNameDOB::#{school_name_dob}")) > 1)
 		errors << "Uniqueness Warning:\nThere is a duplicate entry with the ACARA School Id, Given Name, Family Name and Date of Birth #{school_name_dob}"
 	    end
+	    if fromcsv 
+		outbound = "#{@outbound2}"
+	    else
+		outbound = "#{@outbound1}"
+	    end
             errors.each_with_index do |e, i|
 		if(fromcsv)
 			msg = e + "\n" + "CSV line #{csvline}: " + csvcontent
-                	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) if fromcsv
 		else
 			msg = e + "\n" + payload
-                	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 		end
+                outbound_messages << Poseidon::MessageToSend.new( outbound, msg, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) 
             end
-        #end
+=begin
+            if errors.empty?
+                outbound_messages << Poseidon::MessageToSend.new( outbound, "SUMMARY: No errors reported from the Uniqueness validator", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+            else
+                outbound_messages << Poseidon::MessageToSend.new( outbound, "SUMMARY: #{errors.size} errors reported from the Uniqueness validator", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+            end
+=end
 
-        #outbound_messages.each_slice(20) do | batch |
-            #@pool.next.send_messages( batch )
            producers.send_through_queue( outbound_messages )
-        #end
 	outbound_messages = []
 end
-=begin
-
-        # puts "cons-prod-sif-parser: Resuming message consumption from: #{consumer.next_offset}"
-
-    rescue Poseidon::Errors::UnknownTopicOrPartition
-        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-        sleep 30
-    end
-    # puts "Resuming message consumption from: #{consumer.next_offset}"
-
-    # trap to allow console interrupt
-    trap("INT") { 
-        puts "\n#{@servicename} service shutting down...\n\n"
-        exit 130 
-    } 
-
-    sleep 1
-end
-=end

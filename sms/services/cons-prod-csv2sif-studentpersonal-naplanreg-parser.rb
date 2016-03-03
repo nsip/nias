@@ -114,7 +114,6 @@ loop do
 		row['MainSchoolFlag'] = '02' if row['MainSchoolFlag'] == 'N'
 		# delete any blank/empty values
 		row = row.compact
-puts row.inspect
 
 		# validate against JSON Schema
 		json_errors = JSON::Validator.fully_validate(@jsonschema, row)

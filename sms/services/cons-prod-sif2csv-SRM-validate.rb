@@ -22,13 +22,11 @@ require_relative '../../kafkaconsumers'
 @idgen = Hashids.new( 'nsip random temp uid' )
 
 # create consumer
-#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
 consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 
 
 producers = KafkaProducers.new(@servicename, 10)
-#@pool = producers.get_producers.cycle
 
 @naplan_topics = %w(naplan.sifxml naplan.sifxml_staff naplan.sifxmlout naplan.sifxmlout_staff)
 
@@ -43,7 +41,6 @@ CSV.foreach(File.path("#{__dir__}/asl_schools.csv"), :headers => true) do |row|
 	# if no state specified, record all ACARA IDs; if state specific, record only those for the current state
 	@asl_ids << row['ACARA ID']
 end
-#puts @asl_ids.inspect
 
 def validate_staff(nodes)
 	ret = []
@@ -72,19 +69,11 @@ def validate_student(nodes)
 	ret = []
         testlevel = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:TestLevel/xmlns:Code")
 	ret << "Error: '#{testlevel}' is not a valid value for TestLevel: expect 3, 5, 7, 9" if testlevel and not testlevel.to_s.match(/^[3579]$/)
-	#ret << "Error: 'TestLevel is mandatory" unless testlevel
 
         sex = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:Sex")
-	#ret << "Error: 'Sex is mandatory" unless sex
-
         birthdatestr = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:BirthDate")
-	#ret << "Error: 'BirthDate is mandatory" unless birthdate
-
 	studentCountryOfBirth = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:CountryOfBirth")
-	#ret << "Error: StudentCountryOfBirth is mandatory" unless studentCountryOfBirth
-
         yearlevel_string = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:YearLevel/xmlns:Code")
-	#ret << "Error: YearLevel is mandatory" unless yearlevel_string
 
 	begin
 		yearlevel = Integer(yearlevel_string.to_s)
@@ -208,10 +197,8 @@ def validate_student(nodes)
 	    #ret << "Error: 'FullFeePayingStudent is mandatory" unless ffpos
 
 	    indigenousStatus = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:IndigenousStatus")
-	    #ret << "Error: 'IndigenousStatus is mandatory" unless indigenousStatus
 
 	    studentLOTE = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:LanguageList/xmlns:Language[xmlns:LanguageType = 4]/xmlns:Code")
-	    #ret << "Error: 'StudentLOTE is mandatory" unless studentLOTE
 
             homegroup = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Homegroup")
 	    ret << "Error: Homegroup '#{homegroup}' is too long" if homegroup and homegroup.to_s.length > 10
@@ -238,28 +225,13 @@ def validate_student(nodes)
 	    ret << "Error: ReportingSchoolId '#{reportingSchoolId}' is too long" if reportingSchoolId and reportingSchoolId.to_s.length > 9
 
             parent1SchoolEducation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent1SchoolEducationLevel")
-	    #ret << "Error: 'Parent1SchoolEducation is mandatory" unless parent1SchoolEducation
-
             parent2SchoolEducation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent2SchoolEducationLevel")
-	    #ret << "Error: 'Parent2SchoolEducation is mandatory" unless parent2SchoolEducation
-
             parent1NonSchoolEducation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent1NonSchoolEducation")
-	    #ret << "Error: 'Parent1NonSchoolEducation is mandatory" unless parent1NonSchoolEducation
-
             parent2NonSchoolEducation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent2NonSchoolEducation")
-	    #ret << "Error: 'Parent2NonSchoolEducation is mandatory" unless parent2NonSchoolEducation
-
             parent1Occupation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent1EmploymentType")
-	    #ret << "Error: 'Parent1Occupation is mandatory" unless parent1Occupation
-
             parent2Occupation = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent2EmploymentType")
-	    #ret << "Error: 'Parent2Occupation is mandatory" unless parent2Occupation
-
             parent1LOTE = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent1Language")
-	    #ret << "Error: 'Parent1LOTE is mandatory" unless parent1LOTE
-
             parent2LOTE = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:Parent2Language")
-	    #ret << "Error: 'Parent2LOTE is mandatory" unless parent2LOTE
 
             addressLine1 = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:AddressList/xmlns:Address[@Role = '012B']/xmlns:Street/xmlns:Line1")
 	    ret << "Error: AddressLine1 '#{addressLine1}' is too long" if addressLine1 and addressLine1.to_s.length > 40
@@ -312,29 +284,13 @@ loop do
 		msg = "SRM validation:\n#{msg}"
             	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", msg, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 	    end
-        #end
-        # send results to error streams
-        #outbound_messages.each_slice(20) do | batch |
-            #puts batch[0].value.lines[0..10].join("\n") + "\n\n" unless batch.empty?
-            #@pool.next.send_messages( batch )
+=begin
+	    if errors.empty?
+            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "SUMMARY: No errors reported from the SRM validator", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+	    else
+            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "SUMMARY: #{errors.size} errors reported from the SRM validator", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+	    end
+=end
         producers.send_through_queue( outbound_messages )
 	outbound_messages = []
-        #end
-        end
-=begin
-
-    rescue Poseidon::Errors::UnknownTopicOrPartition
-        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-        sleep 30
-    end
-    # puts "Resuming message consumption from: #{consumer.next_offset}"
-
-    # trap to allow console interrupt
-    trap("INT") { 
-        puts "\n#{@servicename} service shutting down...\n\n"
-        exit 130 
-    } 
-
-    sleep 1
 end
-=end

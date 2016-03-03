@@ -1,4 +1,5 @@
 {
+"id" : "NAPLAN Student schema for registration",
 "title" : "NAPLAN StudentPersonal registration data schema",
 "type" : "object",
 "properties" : {	

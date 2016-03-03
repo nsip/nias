@@ -1,5 +1,6 @@
 {
-"title" : "NAPLAN StudentPersonal registration data schema",
+"id" : "NAPLAN Staff schema for registration",
+"title" : "NAPLAN StaffPersonal registration data schema",
 "type" : "object",
 "properties" : {	
         "LocalStaffId": { "type" : "any" },
