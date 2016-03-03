@@ -10,7 +10,7 @@ gem 'redis'
 gem 'hiredis', '>= 0.6.0' 
 
 
-# gem 'eventmachine'
+gem 'eventmachine'
 
 # web tools
 gem 'sinatra', require: 'sinatra/base'
@@ -18,6 +18,11 @@ gem 'sinatra-contrib', github: 'sinatra/sinatra-contrib'
 
 # evented server for sinatra
 gem 'thin'
+
+# web sockets
+# sinatra-websocket uses old API of em-websocket
+gem 'em-websocket', '< 0.3.8'
+gem 'sinatra-websocket'
 
 # lightweight unique ids
 gem 'hashids'
@@ -37,7 +42,8 @@ gem 'moneta'
 gem 'lmdb'
 
 # CSV validation
-gem 'csvlint', :path => '/Users/nickn/Documents/Arbeit/csvlint.rb'
+#gem 'csvlint', :path => '/Users/nickn/Documents/Arbeit/csvlint.rb'
+gem 'csvlint'
 
 # JSON-Schema validation
 gem 'json-schema'

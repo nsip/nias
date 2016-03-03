@@ -21,7 +21,6 @@ require_relative '../../kafkaconsumers'
 @inbound = 'sifxml.ingest'
 @outbound1 = 'sifxml.validated'
 @outbound2 = 'sifxml.errors'
-@outbound3 = 'csv.errors'
 
 @servicename = 'cons-prod-sif-ingest-validate'
 
@@ -94,21 +93,24 @@ loop do
                         puts "Invalid!"
                         msg = header + "Message #{m.offset} validity error:\n" + 	
                         	xsd_errors.map{|e| e.message}.join("\n") 
+			if(csvline)
+				msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
+			else
+				msg =  msg + "\n" + parent.document.to_s
+			end
                         puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"					
                         #puts "\n\nsending to: #{@outbound3}" if csvline
-                        outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg + "\n" +
-                        	parent.document.to_s, item_key )
-                        outbound_messages << Poseidon::MessageToSend.new( "#{@outbound3}", 
-				"CSV line #{csvline}: " + msg + "\n" + csvcontent, item_key ) if csvline
+                        outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg , item_key )
                     end
                 end
             else
                 puts "Not Well-Formed!"
                 msg = header + "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value	
                 # puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"
+		if (csvline)
+			msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
+		end
                 outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg, item_key )
-                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound3}", 
-			"CSV line #{csvline}: " + msg + "\n" + csvcontent, item_key ) if csvline
             end
         #end
 

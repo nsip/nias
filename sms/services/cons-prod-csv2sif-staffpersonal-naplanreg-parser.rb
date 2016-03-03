@@ -40,6 +40,14 @@ producers = KafkaProducers.new(@servicename, 10)
 # JSON schema
 @jsonschema = JSON.parse(File.read("#{__dir__}/naplan.staff.json"))
 
+# http://stackoverflow.com/questions/3450641/removing-all-empty-elements-from-a-hash-yaml
+class Hash
+	def compact
+		delete_if { |k, v| v.nil? or (v.respond_to?('empty?') and v.strip.empty?) }
+	end
+end
+
+
 =begin
 loop do
 
@@ -56,6 +64,8 @@ loop do
                 row[key].gsub!("[ ]*\n[ ]*", " ")
             end
 	    row.merge!(@default_csv) { |key, v1, v2| v1 }
+                # delete any blank/empty values
+                row = row.compact
 
 
 	    #obsolete: there will only be one classcode in CSV

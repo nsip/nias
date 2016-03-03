@@ -73,7 +73,7 @@
 		<p>You will need to flush data from the database if you want the upload to be tested correctly for duplicates
 
 <form action="/fileupload" method="POST" enctype="multipart/form-data" id="fileuploadform">
-  <input type="file" name="file" id="file"><br/>
+  File: <input type="file" name="file" id="file"><br/>
   <input type="radio" name="mimetype" value="application/xml">application/xml (SIF) 
   <input type="radio" name="mimetype" value="application/json">application/json 
   <input type="radio" name="mimetype" value="text/csv" checked>text/csv <br/>
@@ -105,18 +105,10 @@
 
         <script>
 
-var iterations = 0;
-var seconds = 10;
-var startoffset = 0;
-var timer;
 $(function() {
   $("#fileuploadform").submit(function(e){
     $("#results").empty();
-    iterations = 0;
-    startoffset = 0;
-    frame(); /* set up the startoffset for the error stream */
     e.preventDefault();
- 	timer = setInterval(frame, seconds*1000);
     var formData = new FormData(this);
     formData.append('file', $("#file").prop('files')[0]);
     $.ajax({
@@ -128,50 +120,60 @@ $(function() {
       contentType: false,
       success: function(){
         $("#results").html("Successfully submitted</br/>")
- //	timer = setInterval(frame, seconds*1000);
       },
       error: function(){
         $("#results").html("Form not submitted<br/>")
-iterations = 20;
       }
     });
     return false;
   });
 });
 
-		function frame() { 
-                    if(iterations >= 10) {
- 		        clearInterval(timer);
-		    } else {
-	            $.ajax( "/csv/errors?offset=" + ((startoffset == 0) ? 'latest' : startoffset) )
-           		.done(function(data) {
-				iterations++;
-				var matches = data.match(/\{"advice":"Start consuming from ([0-9]+)"\}/);
-				var fetched_offset = startoffset;
-					startoffset = matches[1];
-					data = data.replace(/\{"advice":"Start consuming from [0-9]+"\}/, "");
-					data = data.replace(/\\n/g, "</br>\n");
-					if(!data || !data.trim() ) {
-						/* very first iteration is just setup. If we have a message, then 
-						display it, else show nothing */
-						if(iterations == 1) {
-							data = fetched_offset + ": Waiting for errors. Fetching from " + startoffset;
-						} else {
-							data = fetched_offset + ": No further errors reported. Fetching from " + startoffset;
-						} 
-					}
-					//if(data && data.trim() ) {
-       		          			$("#results").append ( data + "<br/>" );
-					//}
-	           	});
-			}
-		}
-	/*
-                var request = {};
-                $.get("/csv/errors", request, function(result){
-                        $("#results").append( result );
-                });
-	*/
+/* NOT USING THIS: websockets 
+ window.onload = function(){
+      (function(){
+        var show = function(el){
+          return function(msg){ el.innerHTML = msg + '<br />' + el.innerHTML; }
+        }(document.getElementById('results'));
+
+        var ws       = new WebSocket('ws://' + window.location.host + window.location.pathname);
+        ws.onopen    = function()  { $("#results").empty(); show('websocket opened'); };
+        ws.onclose   = function()  { show('websocket closed'); }
+        ws.onmessage = function(m) { show('websocket message: ' +  m.data); };
+        var sender = function(f){
+          var input     = document.getElementById('input');
+          input.onclick = function(){ input.value = "" };
+          f.onsubmit    = function(){
+            ws.send(input.value);
+            input.value = "send a message";
+            return false;
+          }
+        }(document.getElementById('form'));
+      })();
+    }
+*/
+
+function xml2html(msg){
+	return msg.replace(/\&/g, "&amp;").replace(/</g, "&lt;").replace(/>/, "&gt;");
+}
+
+var show = function(el){
+          return function(msg){ el.innerHTML = el.innerHTML + xml2html(msg) + '<br /><br />' ; }
+        }(document.getElementById('results'));
+
+if (!!window.EventSource) {
+	var source = new EventSource('csverrors');
+}
+source.addEventListener('message', function(e) {
+show(e.data);
+}, false);
+
+
+source.addEventListener('open', function(e) {
+$("#results").empty(); 
+}, false);
+
+
 	</script>
             
         </div>

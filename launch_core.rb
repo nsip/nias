@@ -113,7 +113,6 @@ def launch
         'sifxml.processed',
         'sms.indexer',
         'sifxml.ingest',
-        #'sifxml.bulkingest',
         'sifxml.errors',
         'csv.errors',
         'oneroster.validated',
@@ -150,6 +149,7 @@ def launch
         'json.test',
         'rspec.test',
         'json.storage',
+        'naplan.srm_errors',
             ]
 
   sleep 5 # creating too early truncates topics

@@ -89,15 +89,20 @@ loop do
 
 	    @redis.sadd "SchoolLocalId::#{school_local_id}", refId
 	    if(Integer(@redis.scard("SchoolLocalId::#{school_local_id}")) > 1)
-		errors << "Error: There is a duplicate entry with the ACARA School Id + Local Id #{school_local_id}"
+		errors << "Uniqueness Error:\nThere is a duplicate entry with the ACARA School Id + Local Id #{school_local_id}"
             end
 	    @redis.sadd "SchoolNameDOB::#{school_name_dob}", refId
 	    if(Integer(@redis.scard("SchoolNameDOB::#{school_name_dob}")) > 1)
-		errors << "Warning: There is a duplicate entry with the ACARA School Id, Given Name, Family Name and Date of Birth #{school_name_dob}"
+		errors << "Uniqueness Warning:\nThere is a duplicate entry with the ACARA School Id, Given Name, Family Name and Date of Birth #{school_name_dob}"
 	    end
             errors.each_with_index do |e, i|
-                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", e + "\n" + payload, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
-                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "CSV line #{csvline}: " + e + "\n" + csvcontent, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) if fromcsv
+		if(fromcsv)
+			msg = e + "\n" + "CSV line #{csvline}: " + csvcontent
+                	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) if fromcsv
+		else
+			msg = e + "\n" + payload
+                	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+		end
             end
         #end
 

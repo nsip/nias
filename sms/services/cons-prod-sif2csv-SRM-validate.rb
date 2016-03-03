@@ -15,8 +15,7 @@ require_relative '../../kafkaproducers'
 require_relative '../../kafkaconsumers'
 
 @inbound = 'sifxml.processed'
-@outbound1 = 'sifxml.errors'
-@outbound2 = 'csv.errors'
+@outbound = 'naplan.srm_errors'
 
 @servicename = 'cons-prod-sif2csv-SRM-validate'
 
@@ -305,8 +304,13 @@ loop do
             errors = validate_student(nodes) if type == 'StudentPersonal'
 
 	    errors.each_with_index do |e, i|
-            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", e + "\n" + payload, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
-            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", "CSV line #{csvline}: " + e + "\n" + csvcontent, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) if fromcsv
+		if fromcsv
+			msg = "CSV line #{csvline}: " + e + "\n" + csvcontent
+		else 
+			msg = e + "\n" + payload
+		end
+		msg = "SRM validation:\n#{msg}"
+            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", msg, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 	    end
         #end
         # send results to error streams

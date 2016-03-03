@@ -63,6 +63,14 @@ end
 
 @servicename = 'cons-prod-csv2sif-studentpersonal-naplanreg-parser'
 
+# http://stackoverflow.com/questions/3450641/removing-all-empty-elements-from-a-hash-yaml
+class Hash
+        def compact
+                delete_if { |k, v| v.nil? or (v.respond_to?('empty?') and v.strip.empty?) }
+        end
+end
+
+
 # create consumer
 #consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
 consumer = KafkaConsumers.new(@servicename, @inbound)
@@ -104,7 +112,9 @@ loop do
 		row['FFPOS'] = '9' if row['FFPOS'] == 'X'
 		row['MainSchoolFlag'] = '01' if row['MainSchoolFlag'] == 'Y'
 		row['MainSchoolFlag'] = '02' if row['MainSchoolFlag'] == 'N'
-
+		# delete any blank/empty values
+		row = row.compact
+puts row.inspect
 
 		# validate against JSON Schema
 		json_errors = JSON::Validator.fully_validate(@jsonschema, row)
@@ -114,10 +124,7 @@ loop do
 				puts e
                 		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "#{e}\n#{row['__linecontent']}", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 			end
-        		#outbound_messages.each_slice(20) do | batch |
-            			#@pool.next.send_messages( batch )
-            			producers.send_through_queue( outbound_messages )
-        		#end
+            		producers.send_through_queue( outbound_messages )
 			outbound_messages = []
 			next
 		end
