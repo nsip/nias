@@ -6,6 +6,7 @@ require 'json'
 # query interface for the redis datasets to produce visualisation queries
 require 'moneta'
 require 'nokogiri'
+require_relative '../niasconfig'
 
 # Queries specific to NIAS visualisation. These are example queries, and production systems should use their own queries.
 
@@ -15,7 +16,8 @@ class SMSVizQuery
 	@languagecodes = {}
 
 	def initialize
-                @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
+		config = NiasConfig.new
+                @redis = config.redis
                 @hashid = Hashids.new( 'nsip sms_visualise_query' )
                 @expiry_seconds = 120 #update this for production
                 @rand_space = 10000

@@ -26,7 +26,6 @@ require_relative '../../kafkaconsumers'
 @service_name = 'cons-oneroster-sms-storage'
 
 # create consumer
-#consumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, @inbound, 0, :latest_offset)
 consumer = KafkaConsumers.new(@service_name, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 
@@ -38,7 +37,7 @@ loop do
     begin
 =end
         messages = []
-        messages = consumer.fetch
+        #messages = consumer.fetch
         outbound_messages = []
         consumer.each do |m|
 

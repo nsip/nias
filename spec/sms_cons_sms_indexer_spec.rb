@@ -7,7 +7,7 @@ require "spec_helper"
 require 'moneta' 
 require 'securerandom'
 require 'redis'
-
+require_relative '../niasconfig'
 
 describe "SMS Indexer" do
 
@@ -39,6 +39,7 @@ XML
 
     @service_name = 'sms_cons_sms_indexer_spec'
 
+    $config = NiasConfig.new
 
     def remove_redis(key, localid, guid2, linkid, type) 
         @redis.hdel 'labels', key
@@ -50,7 +51,7 @@ XML
     end
 
     def post_xml(xml, path)
-        Net::HTTP.start("localhost", "9292") do |http|
+        Net::HTTP.start("#{$config.get_host}", "#{$config.get_sinatra_port}") do |http|
             request = Net::HTTP::Post.new(path)
             request.body = xml unless xml.nil?
             request["Content-Type"] = "application/xml" unless xml.nil?
@@ -61,7 +62,7 @@ XML
 
     before(:all) do
         @store = Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
-        @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
+        @redis = $config.redis
     end
 
     context "Post SchoolInfo record with RefID #{guid}" do
@@ -101,10 +102,6 @@ XML
             post_xml(header + xml + footer, "/rspec/test")
             post "/equiv", {:ids => "#{guid},#{guid2}"}
             #post_xml(nil, "/equiv?ids=#{guid},#{guid2}")
-            #Net::HTTP.start("localhost", "9292") do |http|
-            #	request = Net::HTTP::Post.new("/equiv?ids=#{guid},#{guid2}")
-            #	http.request(request)
-            #end
             sleep 2
         end
 

@@ -1,9 +1,12 @@
+require_relative './niasconfig'
 require 'kafka-consumer'
 
 class KafkaConsumers
 
+
 	def initialize(id, topics, offset = :latest_offset)
-		@consumer =  Kafka::Consumer.new(id, topics, zookeeper: "localhost:2181", initial_offset: offset)
+		config = NiasConfig.new
+		@consumer =  Kafka::Consumer.new(id, topics, zookeeper: "#{config.get_host}:2181", initial_offset: offset)
 	end
 
 	def interrupt

@@ -16,15 +16,17 @@ require 'poseidon'
 require 'hashids'
 require 'redis'
 require_relative '../kafkaproducers'
+require_relative '../niasconfig'
 
 
 class OneRosterSifMerge
 
 
     def initialize
+	config = NiasConfig.new
         @outbound = 'sms.indexer'
         @idgen = Hashids.new( 'nsip random temp uid' )
-        @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
+        @redis = config.redis
         @servicename = 'prod-oneroster-sif-merge-ids'
 
         # set up producer pool - busier the broker the better for speed

@@ -29,7 +29,6 @@ require_relative '../../kafkaconsumers'
 @namespace = 'http://www.sifassociation.org/au/datamodel/3.4'
 
 # create consumer
-#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
 consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 

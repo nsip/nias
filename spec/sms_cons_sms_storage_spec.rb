@@ -7,7 +7,7 @@ require "spec_helper"
 require 'moneta' 
 require 'securerandom'
 require 'redis'
-
+require_relative '../niasconfig'
 
 describe "SMS Storage" do
 
@@ -49,8 +49,9 @@ XML
     context "Post SchoolInfo record with RefID #{guid}" do
         before(:context) do
             @store = Moneta.new( :LMDB, dir: '/tmp/nias/moneta', db: 'nias-messages')
-            @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
-            Net::HTTP.start("localhost", "9292") do |http|
+	    config = NiasConfig.new
+            @redis = config.redis
+            Net::HTTP.start("#{config.get_host}", "#{config.get_sinatra_port}") do |http|
                 request = Net::HTTP::Post.new("/rspec/test")
                 request.body = header + xml + footer
                 request["Content-Type"] = "application/xml"

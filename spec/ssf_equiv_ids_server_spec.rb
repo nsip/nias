@@ -7,7 +7,7 @@ require './ssf/equiv_ids_server'
 require './ssf/ssf_server'
 require 'poseidon_cluster' 
 require 'json' 
-
+require_relative '../niasconfig'
 
 @service_name = 'spec-ssf-equiv-ids-server'
 
@@ -16,7 +16,8 @@ require 'json'
     describe "POST /equiv" do
 
         before(:all) do
-        	@consumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sms.indexer", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+		config = NiasConfig.new
+        	@consumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "sms.indexer", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         	@consumer.claimed.each { |x| @consumer.checkout { |y| puts y.next_offset }}
 	end
 

@@ -2,7 +2,7 @@
 require "net/http"
 require "spec_helper"
 require 'poseidon_cluster' 
-
+require_relative '../niasconfig'
 
 xml = <<XML
 <TeachingGroups xmlns="http://www.sifassociation.org/au/datamodel/3.4">
@@ -49,11 +49,12 @@ out = "{\"type\":\"TeachingGroup\",\"id\":\"f94278d5-b1b4-4936-ae95-f6d78d0887e2
 
 @service_name = 'sms_services_cons_prod_sif_parser_spec'
 
+$config = NiasConfig.new
 
 describe "SIF Ingest/Produce" do
 
     def post_xml(xml, path) 
-        Net::HTTP.start("localhost", "9292") do |http|
+        Net::HTTP.start("#{$config.get_host}", "#{$config.get_sinatra_port}") do |http|
             request = Net::HTTP::Post.new(path)
             request.body = xml
             request["Content-Type"] = "application/xml"
@@ -61,8 +62,7 @@ describe "SIF Ingest/Produce" do
         end
     end
     before(:all) do
-        #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sms.indexer", 0, :latest_offset)
-        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sms.indexer", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "sms.indexer", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
         sleep 1
     end

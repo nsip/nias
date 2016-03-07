@@ -1,14 +1,16 @@
+require_relative './niasconfig'
 require 'poseidon'
 require 'thread'
 
 class KafkaProducers
 
 	def initialize(id, size)
+		config = NiasConfig.new
         	producers = []
         	bulk_partitioner = Proc.new { |key, partition_count|  Zlib::crc32(key) % partition_count }
         	(1..size).each do | i |
-            		p = Poseidon::Producer.new(["localhost:9092"], id, {:partitioner => bulk_partitioner})
-            		#p = Poseidon::Producer.new(["localhost:9092"], id)
+            		p = Poseidon::Producer.new(["#{config.kafka}"], id, {:partitioner => bulk_partitioner})
+            		#p = Poseidon::Producer.new(["#{config.kafka}"], id)
             		producers << p
         	end
 		@id = id

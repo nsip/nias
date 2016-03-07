@@ -2,7 +2,7 @@
 require "net/http"
 require "spec_helper"
 require 'poseidon_cluster' 
-
+require_relative '../niasconfig'
 
 xml = <<XML
 <StudentPersonal RefId="e9fc2b1f-07a5-4c07-ad9a-6ffa3d9b576d">
@@ -72,11 +72,12 @@ recordcount = 30000
 
 xmlbody = xml * recordcount
 
+$config = NiasConfig.new
 
 describe "Bulk SIF Ingest/Produce" do
 
     def post_xml(xml) 
-        Net::HTTP.start("localhost", "9292") do |http|
+        Net::HTTP.start("#{$config.get_host}", "#{$config.get_sinatra_port}") do |http|
             request = Net::HTTP::Post.new("/rspec/test/bulk")
             request.body = xml
             request["Content-Type"] = "application/xml"
@@ -84,11 +85,9 @@ describe "Bulk SIF Ingest/Produce" do
         end
     end
     before(:all) do
-        #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
-        #@xmlvalidconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.validated", 0, :latest_offset)
-        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sifxml.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "sifxml.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
-        @xmlvalidconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sifxml.validated", trail: true, socket_timeout_ms: 6000, max_wait_ms: 100, max_bytes: 10000000)
+        @xmlvalidconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "sifxml.validated", trail: true, socket_timeout_ms: 6000, max_wait_ms: 100, max_bytes: 10000000)
         @xmlvalidconsumer.claimed.each { |x| @xmlvalidconsumer.checkout { |y| puts y.next_offset }}
 
     end

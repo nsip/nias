@@ -2,7 +2,7 @@
 require "net/http"
 require "spec_helper"
 require 'poseidon_cluster' 
-
+require_relative '../niasconfig'
 
 xml = <<XML
 <StudentPersonals xmlns="http://www.sifassociation.org/au/datamodel/3.4">
@@ -70,11 +70,12 @@ xml_invalid = xml.gsub(%r{GivenName}, "FirstName")
 
 @service_name = 'ssf_services_cons_prod_sif_ingest_validate_spec'
 
+$config = NiasConfig.new
 
 describe "SIF Ingest/Produce" do
 
     def post_xml(xml) 
-        Net::HTTP.start("localhost", "9292") do |http|
+        Net::HTTP.start("#{$config.get_host}", "#{$config.get_sinatra_port}") do |http|
             request = Net::HTTP::Post.new("/rspec/test")
             request.body = xml
             request["Content-Type"] = "application/xml"
@@ -82,11 +83,9 @@ describe "SIF Ingest/Produce" do
         end
     end
     before(:all) do
-        #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.errors", 0, :latest_offset)
-        #@xmlvalidconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.validated", 0, :latest_offset)
-        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sifxml.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "sifxml.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
-        @xmlvalidconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sifxml.validated", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @xmlvalidconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "sifxml.validated", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @xmlvalidconsumer.claimed.each { |x| @xmlvalidconsumer.checkout { |y| puts y.next_offset }}
 
     end

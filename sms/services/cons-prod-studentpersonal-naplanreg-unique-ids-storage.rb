@@ -11,6 +11,7 @@ require 'hashids'
 require 'redis'
 require_relative '../../kafkaproducers'
 require_relative '../../kafkaconsumers'
+require_relative '../../niasconfig'
 
 # extract School+ LocalId
 # id is GUID, nodes is Nokogiri-parsed XML
@@ -44,10 +45,10 @@ end
 @servicename = 'cons-prod-studentpersonal-naplanreg-unique-ids-storage.rb'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
-@redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
+config = NiasConfig.new
+@redis = config.redis
 
 # create consumer
-#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
 consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 

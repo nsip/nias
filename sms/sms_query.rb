@@ -5,13 +5,14 @@
 
 require 'redis'
 require 'hashids'
+require_relative '../niasconfig'
 
 
 class SMSQuery
 
     def initialize
-
-        @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
+	config = NiasConfig.new
+        @redis = config.redis
         @idgen = Hashids.new( 'nsip sms queries' )
 
     end

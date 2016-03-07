@@ -78,7 +78,6 @@ end
 @servicename = "cons-prod-privacyfilter"
 
 # create consumer
-#consumer = Poseidon::PartitionConsumer.new("cons-prod-privacyfilter", "localhost", 9092, @inbound, 0, :latest_offset)
 consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 

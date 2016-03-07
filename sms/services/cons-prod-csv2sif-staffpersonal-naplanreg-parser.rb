@@ -26,7 +26,6 @@ require_relative '../../kafkaconsumers'
 @servicename = 'cons-prod-csv2sif-staffpersonal-naplanreg-parser'
 
 # create consumer
-#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
 consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 

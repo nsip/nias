@@ -3,6 +3,7 @@ require "net/http"
 require "spec_helper"
 require 'poseidon_cluster' 
 require 'redis' 
+require_relative '../niasconfig'
 
 csv = <<CSV
 LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
@@ -367,13 +368,18 @@ describe "NAPLAN convert CSV to SIF" do
 
     before(:all) do
 	puts "FLUSHING REDIS"
-	@redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
+	config = NiasConfig.new
+	@redis = config.redis
 	@redis.flushdb
-        @http = Net::HTTP.new("localhost", "9292")
-        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "naplan.sifxmlout.none",  trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @http = Net::HTTP.new("#{config.get_host}", "#{config.get_sinatra_port}")
+        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "naplan.sifxmlout.none",  trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
-        @errorconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_err#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "csv.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @errorconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_err#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "csv.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @errorconsumer.claimed.each { |x| @errorconsumer.checkout { |y| puts y.next_offset }}
+        @siferrorconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_err#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "sifxml.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @siferrorconsumer.claimed.each { |x| @siferrorconsumer.checkout { |y| puts y.next_offset }}
+        @srmerrorconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_err#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "naplan.srm_errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @srmerrorconsumer.claimed.each { |x| @srmerrorconsumer.checkout { |y| puts y.next_offset }}
         sleep 1
     end
 
@@ -448,10 +454,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_sex)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -472,10 +478,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_ffpos)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -496,10 +502,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_birthdate)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -520,10 +526,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(inconsistent_csv_birthdate)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to naplan.srm_errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@srmerrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -544,10 +550,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_countryofbirth)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -568,10 +574,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_educationsupport)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -592,10 +598,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_lbote)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -616,10 +622,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_homeschooledstudent)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -640,10 +646,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_sensitive)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -664,10 +670,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_offlinedelivery)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -714,10 +720,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_indigenousstatus)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -738,10 +744,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_studentlote)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -762,10 +768,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_parent1lote)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -786,10 +792,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_parent2lote)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -810,10 +816,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_yearlevel)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -834,10 +840,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_testlevel)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to naplan.srm_errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@srmerrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -858,10 +864,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_fte)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -882,10 +888,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_mainschoolflag)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -906,10 +912,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_parent1schooleducation)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -930,10 +936,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_parent2schooleducation)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -954,10 +960,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_parent1nonschooleducation)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -978,10 +984,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_parent2nonschooleducation)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1002,10 +1008,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_parent1occupation)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1026,10 +1032,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_parent2occupation)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to sifxml.errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@siferrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1050,10 +1056,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_postcode)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to naplan.srm_errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@srmerrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1074,10 +1080,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
         	post_csv(invalid_csv_stateterritory)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to naplan.srm_errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@srmerrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1142,10 +1148,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
                 post_csv(long_localid)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to naplan.srm_errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@srmerrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1164,10 +1170,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
                 post_csv(ug_year_level)
         end
-        it "pushes warning to csv.errors" do
+        it "pushes warning to naplan.srm_errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@srmerrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1186,10 +1192,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
                 post_csv(ug_year_test_level)
         end
-        it "pushes warning to csv.errors" do
+        it "pushes warning to naplan.srm_errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@srmerrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1204,16 +1210,14 @@ describe "NAPLAN convert CSV to SIF" do
         end
     end
 
-
-
   context "Mismatch between Year Level and Test Level in CSV to naplan.csv" do
         before(:example) do
                 post_csv(mismatch_year_test_level)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to naplan.srm_errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@srmerrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1232,10 +1236,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
                 post_csv(wrong_year_level)
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to naplan.srm_errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@srmerrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1344,10 +1348,10 @@ describe "NAPLAN convert CSV to SIF" do
         before(:example) do
                 post_csv(invalid_asl)
         end
-        it "error to csv.errors" do
+        it "error to naplan.srm_errors" do
             sleep 3
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@srmerrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1364,6 +1368,8 @@ describe "NAPLAN convert CSV to SIF" do
     after(:all) do
  	@xmlconsumer.close
         @errorconsumer.close
+        @siferrorconsumer.close
+        @srmerrorconsumer.close
         sleep 5
     end
 

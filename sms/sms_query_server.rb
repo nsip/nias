@@ -68,6 +68,7 @@ require 'redis'
 
 require_relative 'sms_query'
 require_relative 'oneroster_sif_merge'
+require_relative '../niasconfig'
 
 
 class SMSQueryServer < Sinatra::Base
@@ -207,7 +208,8 @@ class SMSQueryServer < Sinatra::Base
     get "/sms/flush" do
         begin
             puts "Flushing REDIS!"
-	    @redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
+	    config = NiasConfig.new
+	    @redis = config.redis
             @redis.flushdb
         rescue
             return 500, 'Error executing SMS Flush.'

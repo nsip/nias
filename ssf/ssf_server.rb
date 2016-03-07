@@ -23,7 +23,7 @@ require_relative '../sms/services/cvsheaders-naplan'
 require_relative '../kafkaproducers'
 require_relative '../kafkaconsumers'
 require_relative './ssf_server_helpers'
-
+require_relative '../niasconfig'
 
 =begin
 Class to handle ingesting of messages into NIAS. Deals with ingest and bulk ingest of topic/stream, and requests for topic/stream and particular privacy profiles of topic/stream. Parses JSON and CSV messages into JSON objects.
@@ -266,7 +266,6 @@ class SSFServer < Sinatra::Base
 
         # get batch of messages from broker
         messages = []
-	#consumer = Kafka::Consumer.new(client_id, [topic_name], zookeeper: "localhost:2181", initial_offset: offset)
 	consumer = KafkaConsumers.new(client_id, [topic_name], offset)
 	Signal.trap("INT") { consumer.interrupt }
 

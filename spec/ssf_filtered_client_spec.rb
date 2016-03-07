@@ -5,7 +5,7 @@ require "rack/test"
 require "net/http"
 require "spec_helper"
 require_relative '../ssf/filtered_client.rb'
-#require 'poseidon_cluster' 
+require_relative '../niasconfig'
 
 
 xml = <<XML
@@ -24,19 +24,20 @@ XML
 
 @service_name = 'spec-ssf-filtered-client'
 
+$config = NiasConfig.new
+
 
 describe "FilteredClient" do
 
     describe "GET /filtered/rspec/test/low" do
         before(:example) do
-            Net::HTTP.start("localhost", "9292") do |http|
+            Net::HTTP.start("#{$config.get_host}", "#{$config.get_sinatra_port}") do |http|
                 request = Net::HTTP::Post.new("/rspec/test")
                 request.body = xml
                 request["Content-Type"] = "application/xml"
                 http.request(request)
             end
             sleep 3
-            #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.ingest", 0, :latest_offset)
         end
         it "returns filtered XML" do
             get "/filtered/rspec/test/low"

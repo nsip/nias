@@ -28,7 +28,6 @@ require_relative '../../kafkaconsumers'
 @servicename = 'cons-sms-json-storage'
 
 # create consumer
-#consumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, @inbound, 0, :latest_offset)
 consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 

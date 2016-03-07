@@ -3,7 +3,7 @@
 require "spec_helper"
 require_relative '../ssf/ssf_server.rb'
 require 'poseidon_cluster' 
-
+require_relative '../niasconfig'
 
 xml = <<XML
 <Invoice RefId="82c725ac-1ea4-4395-a9be-c35e5657d1cc">
@@ -63,6 +63,8 @@ csv2_out = '{"label":"test2","value":"hello2","__linenumber":1,"__linecontent":"
 
 @service_name = 'spec-ssf-ssf-server'
 
+config = NiasConfig.new
+
 describe "SSFServer" do
 
     describe "GET ssf" do
@@ -91,12 +93,11 @@ describe "SSFServer" do
 
     describe "POST rspec/test" do
         before(:all) do
-            #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "sifxml.ingest", 0, :latest_offset)
-            @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sifxml.ingest", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+            @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "sifxml.ingest", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
             @xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
-            @genericconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "rspec.test", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+            @genericconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "rspec.test", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
             @genericconsumer.claimed.each { |x| @genericconsumer.checkout { |y| puts y.next_offset }}
-            @csvconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "csv.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+            @csvconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "csv.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
             @csvconsumer.claimed.each { |x| @csvconsumer.checkout { |y| puts y.next_offset }}
         end
         context "SIF/XML non-sif small" do
@@ -231,11 +232,11 @@ describe "SSFServer" do
 
 describe "POST rspec/test/bulk" do
 	before(:all) do
-            @xmlbulkconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "sifxml.bulkingest", trail: true, socket_timeout_ms: 6000, max_wait_ms: 100, max_bytes: 10000000)
+            @xmlbulkconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "sifxml.bulkingest", trail: true, socket_timeout_ms: 6000, max_wait_ms: 100, max_bytes: 10000000)
             @xmlbulkconsumer.claimed.each { |x| @xmlbulkconsumer.checkout { |y| puts y.next_offset }}
-            @genericconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "rspec.test", trail: true, socket_timeout_ms:6000, max_wait_ms:100, max_bytes: 10000000)
+            @genericconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "rspec.test", trail: true, socket_timeout_ms:6000, max_wait_ms:100, max_bytes: 10000000)
             @genericconsumer.claimed.each { |x| @genericconsumer.checkout { |y| puts y.next_offset }}
-            @csvconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "csv.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+            @csvconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "csv.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
             @csvconsumer.claimed.each { |x| @csvconsumer.checkout { |y| puts y.next_offset }}
             @inputxml = xmlheader + xml * 5000 + xmlfooter
 	end

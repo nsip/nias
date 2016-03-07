@@ -2,7 +2,7 @@
 require "net/http"
 require "spec_helper"
 require 'poseidon_cluster'
-
+require_relative "../niasconfig"
 
 
 xml = <<XML
@@ -93,10 +93,12 @@ xml_high.gsub!(%r{ RefId="[^"]+"}, ' RefId="00000000-0000-0000-0000-000000000000
 
 xml_extreme = xml_high.gsub(%r{<YearLevel><Code>7</Code></YearLevel>}, "<YearLevel><Code>ZZREDACTED</Code></YearLevel>")
 
+$config = NiasConfig.new
+
 describe "SIF Privacy Filter" do
 
     def post_xml(xml) 
-        Net::HTTP.start("localhost", "9292") do |http|
+        Net::HTTP.start("#{$config.get_host}", "#{$config.get_sinatra_port}") do |http|
             request = Net::HTTP::Post.new("/rspec/test")
             request.body = xml
             request["Content-Type"] = "application/xml"
@@ -105,15 +107,15 @@ describe "SIF Privacy Filter" do
     end
     before(:all) do
 	@service_name = 'ssf_services_cons_prod_privacyfilter_spec'
-        @xmlconsumernone = Poseidon::ConsumerGroup.new(@service_name + "_none", ["localhost:9092"], ["localhost:2181"], "rspec.test.none", trail: true)
+        @xmlconsumernone = Poseidon::ConsumerGroup.new(@service_name + "_none", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.none", trail: true)
         @xmlconsumernone.claimed.each { |x| @xmlconsumernone.checkout { |y| puts y.next_offset }}
-        @xmlconsumerlow = Poseidon::ConsumerGroup.new(@service_name + "_low", ["localhost:9092"], ["localhost:2181"], "rspec.test.low", trail: true)
+        @xmlconsumerlow = Poseidon::ConsumerGroup.new(@service_name + "_low", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.low", trail: true)
         @xmlconsumerlow.claimed.each { |x| @xmlconsumerlow.checkout { |y| puts y.next_offset }}
-        @xmlconsumermedium = Poseidon::ConsumerGroup.new(@service_name + "_medium", ["localhost:9092"], ["localhost:2181"], "rspec.test.medium", trail: true)
+        @xmlconsumermedium = Poseidon::ConsumerGroup.new(@service_name + "_medium", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.medium", trail: true)
         @xmlconsumermedium.claimed.each { |x| @xmlconsumermedium.checkout { |y| puts y.next_offset }}
-        @xmlconsumerhigh = Poseidon::ConsumerGroup.new(@service_name + "_high", ["localhost:9092"], ["localhost:2181"], "rspec.test.high", trail: true)
+        @xmlconsumerhigh = Poseidon::ConsumerGroup.new(@service_name + "_high", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.high", trail: true)
         @xmlconsumerhigh.claimed.each { |x| @xmlconsumerhigh.checkout { |y| puts y.next_offset }}
-        @xmlconsumerextreme = Poseidon::ConsumerGroup.new(@service_name + "_extreme", ["localhost:9092"], ["localhost:2181"], "rspec.test.extreme", trail: true)
+        @xmlconsumerextreme = Poseidon::ConsumerGroup.new(@service_name + "_extreme", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.extreme", trail: true)
         @xmlconsumerextreme.claimed.each { |x| @xmlconsumerextreme.checkout { |y| puts y.next_offset }}
         post_xml(xml)
         sleep 3

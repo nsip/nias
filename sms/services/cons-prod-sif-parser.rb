@@ -156,7 +156,6 @@ end
 @idgen = Hashids.new( 'nsip random temp uid' )
 
 # create consumer
-#consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
 consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 

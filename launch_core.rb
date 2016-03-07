@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'fileutils'
+require_relative './niasconfig'
 
 =begin
 Launcher of NIAS infrastructure. Must be run before ./launcher_nias.rb
@@ -50,15 +51,17 @@ end
 
 
 @pids = {}
-@pid_file = 'core.pid'
+@PID_FILE = 'core.pid'
 
 def launch
 
+  config = NiasConfig.new()
+puts config.get_host
   # just in case an old one gets left behind, delete on startup
   #File.delete( @pid_file ) if File.exist?( @pid_file )
   # if an old pid file exists, abort, should be running -K instead
-  if ( File.exist?( @pid_file) ) then
-    puts "The file #{@pid_file} exists: run ./launch_core.rb -K to terminate any existing processes"
+  if ( File.exist?( @PID_FILE) ) then
+    puts "The file #{@PID_FILE} exists: run ./launch_core.rb -K to terminate any existing processes"
     exit
   end
   
@@ -83,7 +86,7 @@ def launch
   # @pids['ssf'] = Process.spawn( 'ruby', './ssf/ssf_server.rb', '-e', 'production', '-p', '4567' )
   @pids['web'] = Process.spawn( 'rackup' )
 
-  banner 'Web services running on localhost:9292/'  
+  banner "Web services running on #{config.get_host}:#{config.get_sinatra_port}/"  
 
 
   banner 'Kafka logs will be created under /tmp/nias/kafka'
@@ -91,14 +94,14 @@ def launch
   banner 'Redis backups will be created under /tmp/nias/redis'
   banner 'SIF Key Value store will be created under /tmp/nias/moneta'
 
-  File.open(@pid_file, 'w') {|f| 
+  File.open(@PID_FILE, 'w') {|f| 
     f.puts "#{@pids['kafka']}"
     f.puts "#{@pids['zk']}"
     f.puts "#{@pids['sms-redis']}"
     f.puts "#{@pids['web']}"
   }
 
-  banner "pid file written to #{@pid_file}"
+  banner "pid file written to #{@PID_FILE}"
 
   banner 'Creating known topics'
 
@@ -156,7 +159,7 @@ def launch
   topics.each do | topic |
     puts "Creating #{topic}"
     pid = Process.spawn( './kafka/bin/kafka-topics.sh', 
-                                                      '--zookeeper localhost:2181', 
+                                                      "--zookeeper #{config.zookeeper}", 
                                                       '--create',
                                                       "--topic #{topic}",
                                                       '--partitions 5',
@@ -171,7 +174,7 @@ def launch
   topics_single.each do | topic |
     puts "Creating #{topic}"
     pid = Process.spawn( './kafka/bin/kafka-topics.sh', 
-                                                      '--zookeeper localhost:2181', 
+                                                      "--zookeeper #{config.zookeeper}", 
                                                       '--create',
                                                       "--topic #{topic}",
                                                       '--partitions 1',
@@ -190,7 +193,7 @@ end
 def shut_down
     banner "\n Core Services shutting down...\n\n"
 
-    File.readlines( @pid_file ).each do |line|
+    File.readlines( @PID_FILE ).each do |line|
         begin
             Process.kill :INT, line.chomp.to_i
             sleep 2
@@ -200,7 +203,7 @@ def shut_down
         end
     end
 
-    File.delete( @pid_file ) if File.exist?( @pid_file )
+    File.delete( @PID_FILE ) if File.exist?( @PID_FILE )
 
     banner "All core services shut down"
 

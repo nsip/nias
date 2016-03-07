@@ -51,17 +51,18 @@ require 'poseidon'
 require 'hashids'
 require 'redis'
 require_relative '../../kafkaconsumers'
+require_relative '../../niasconfig'
 
 @inbound = 'sms.indexer'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 
-@redis = Redis.new(:url => 'redis://localhost:6381', :driver => :hiredis)
+config = NiasConfig.new
+@redis = config.redis
 
 @servicename = 'cons-sms-indexer'
 
 # create consumer
-#@consumer = Poseidon::PartitionConsumer.new(@servicename, "localhost", 9092, @inbound, 0, :latest_offset)
 @consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { @consumer.interrupt }
 

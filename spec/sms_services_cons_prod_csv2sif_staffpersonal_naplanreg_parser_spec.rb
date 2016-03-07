@@ -3,6 +3,7 @@
 require "net/http"
 require "spec_helper"
 require 'poseidon_cluster' 
+require_relative '../niasconfig'
 
 csv = <<CSV
 LocalStaffId,GivenName,FamilyName,ClassCode,HomeGroup,ASLSchoolId,LocalSchoolId,LocalCampusId,EmailAddress,AdditionalInfo,StaffSchoolRole
@@ -79,12 +80,17 @@ describe "NAPLAN convert CSV to SIF" do
     end
 
     before(:all) do
+	config = NiasConfig.new
 	@service_name = 'sms_services_cons_prod_csv2sif_staffpersonal_naplanreg_parser_spec'
-        @http = Net::HTTP.new("localhost", "9292")
-	@xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "naplan.sifxmlout_staff.none", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+        @http = Net::HTTP.new("#{config.get_host}", "#{config.get_sinatra_port}") 
+	@xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "naplan.sifxmlout_staff.none", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
 	@xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
-	@errorconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_err#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "csv.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+	@errorconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_err#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "csv.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
 	@errorconsumer.claimed.each { |x| @errorconsumer.checkout { |y| puts y.next_offset }}
+	@siferrorconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_err#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "sifxml.errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+	@siferrorconsumer.claimed.each { |x| @siferrorconsumer.checkout { |y| puts y.next_offset }}
+	@srmerrorconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_err#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "naplan.srm_errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+	@srmerrorconsumer.claimed.each { |x| @srmerrorconsumer.checkout { |y| puts y.next_offset }}
         sleep 1
     end
 
@@ -140,15 +146,14 @@ describe "NAPLAN convert CSV to SIF" do
         end
     end
 
-
     context "Invalid email in CSV to naplan.csv_staff" do
         before(:example) do
                 post_csv(invalid_email)
                 sleep 3
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to naplan.srm_errors" do
             begin
-		a = groupfetch(@errorconsumer)	
+		a = groupfetch(@srmerrorconsumer)	
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
                 expect(a[0].value.nil?).to be false
@@ -167,9 +172,9 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(invalid_additionalinfo)
                 sleep 3
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to naplan.srm_errors" do
             begin
-		a = groupfetch(@errorconsumer)	
+		a = groupfetch(@srmerrorconsumer)	
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
                 expect(a[0].value.nil?).to be false
@@ -226,6 +231,8 @@ describe "NAPLAN convert CSV to SIF" do
     after(:all) do
 	@xmlconsumer.close
 	@errorconsumer.close
+	@srmerrorconsumer.close
+	@siferrorconsumer.close
 	sleep 5
     end
 

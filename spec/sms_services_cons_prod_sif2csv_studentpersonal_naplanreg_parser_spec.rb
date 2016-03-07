@@ -2,6 +2,7 @@
 require "net/http"
 require "spec_helper"
 require 'poseidon_cluster' 
+require_relative '../niasconfig'
 
 out = <<CSV
 fjghh371,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2009-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,knptb460,046129,01,02,knptb460,knptb460,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,"",Pepper Pike,9999,QLD
@@ -103,7 +104,7 @@ XML
 describe "NAPLAN convert SIF to CSV" do
 
     def post_xml(xml) 
-        Net::HTTP.start("localhost", "9292") do |http|
+        Net::HTTP.start("#{$config.get_host}", "#{$config.get_sinatra_port}") do |http|
             request = Net::HTTP::Post.new("/naplan/sifxml")
             request.body = xml
             request["Content-Type"] = "application/xml"
@@ -111,8 +112,8 @@ describe "NAPLAN convert SIF to CSV" do
         end
     end
     before(:all) do
-        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["localhost:9092"], ["localhost:2181"], "naplan.csvstudents", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
-        #@xmlconsumer = Poseidon::PartitionConsumer.new(@service_name, "localhost", 9092, "naplan.csvstudents", 0, :latest_offset)
+	$config = NiasConfig.new
+        @xmlconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_xml#{rand(1000)}", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "naplan.csvstudents", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @xmlconsumer.claimed.each { |x| @xmlconsumer.checkout { |y| puts y.next_offset }}
         post_xml(xml)
         sleep 3

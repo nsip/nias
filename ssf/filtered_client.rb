@@ -10,6 +10,8 @@ require 'hashids' # temp non-colliding client & producer id generator
 require 'nokogiri' # xml support
 require 'cgi'
 
+require_relative '../niasconfig'
+
 class FilteredClient < Sinatra::Base
 
     # Client to SSF: given request for /filtered/:topic/:stream/:profile,
@@ -85,7 +87,8 @@ class FilteredClient < Sinatra::Base
         # get batch of messages from broker
         messages = []
         begin
-            consumer = Poseidon::PartitionConsumer.new(client_id, "localhost", 9092,
+	    config = NiasConfig.new
+            consumer = Poseidon::PartitionConsumer.new(client_id, "#{config.kafka_host}", "#{config.kafka_port}",
             topic_name, 0, offset)
             messages = consumer.fetch
             # rescue StandardError => e

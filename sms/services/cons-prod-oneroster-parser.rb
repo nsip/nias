@@ -31,7 +31,6 @@ require_relative '../../kafkaconsumers'
 @servicename =  'cons-prod-oneroster-parser'
 
 # create consumer
-#consumer = Poseidon::PartitionConsumer.new("cons-prod-oneroster-parser", "localhost", 9092, @inbound, 0, :latest_offset)
 consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 
@@ -136,7 +135,7 @@ loop do
 
             #puts "\nParser Index = #{idx.to_json}\n\n"
 
-            outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "rcvd:#{ sprintf('%09d', m.offset) )
+            outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "rcvd:#{ sprintf('%09d', m.offset)}" )
         #end
 
         # send results to indexer to create sms data graph
