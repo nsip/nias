@@ -90,7 +90,18 @@
 
   <input  class="button-primary" type="submit" id="filesubmit">
 </form>
-</div></div>
+</div>
+</div>
+
+
+<div class="five columns">
+<h6 class="docs-header">Report</h6>
+<div id="console">
+<br/>
+</div>
+</div>
+
+</div>
 
 	<div class="row">
             <div class="twelve columns">
@@ -105,10 +116,14 @@
 
         <script>
 
+var errortypes = {};
+
 $(function() {
   $("#fileuploadform").submit(function(e){
     $("#results").empty();
+    $("#console").empty();
     e.preventDefault();
+    errortypes = {};
     var formData = new FormData(this);
     formData.append('file', $("#file").prop('files')[0]);
     $.ajax({
@@ -165,12 +180,25 @@ if (!!window.EventSource) {
 	var source = new EventSource('csverrors');
 }
 source.addEventListener('message', function(e) {
-show(e.data);
+var msg = e.data;
+/* strip the header count in the error message */
+var myRegexp = /^([0-9]+):([0-9]+) ([^\n]+)\n/g;
+var match = myRegexp.exec(msg);
+
+if(!errortypes[match[3]]) {
+errortypes[match[3]] = match[2];
+document.getElementById('console').innerHTML += match[2] + " errors of type: " + match[3] + "<br/>";
+}
+
+msg = msg.replace(/^[^\n+]+\n/,"");
+show(msg);
 }, false);
 
 
 source.addEventListener('open', function(e) {
 $("#results").empty(); 
+$("#console").empty(); 
+errortypes = {};
 }, false);
 
 
