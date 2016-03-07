@@ -138,31 +138,5 @@ out = {}
             #end
 	end
 
-=begin
-        unless(outbound_messages.empty?)
-puts "SENDING!"
-            @sensitivities.each do |x|
-                outbound_messages[x].each_slice(20) do | batch |
-                    pool[x].next.send_messages( batch )
-                end
-            end
-        end
-=end
-                # puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
-#            rescue Poseidon::Errors::UnknownTopicOrPartition
-#        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-#        sleep 30
-#    end
-        # puts "Resuming message consumption from: #{consumer.next_offset}"
-
-    # trap to allow console interrupt
-#    trap("INT") { 
-#        puts "\ncons-prod-privacyfilter service shutting down...\n\n"
-#        consumer.close
-#        exit 130 
-#    } 
-
-#    sleep 1
-#end
 
 

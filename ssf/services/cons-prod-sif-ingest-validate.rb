@@ -4,6 +4,7 @@ require 'poseidon'
 require 'nokogiri' # xml support
 require_relative '../../kafkaproducers'
 require_relative '../../kafkaconsumers'
+require_relative '../../niaserror'
 
 # Consumer of bulk ingest SIF/XML messages. 
 # The XSD to be used for parsing SIF/XML is passed in as the first command line parameter of the script.
@@ -35,16 +36,10 @@ Signal.trap("INT") { consumer.interrupt }
 
 
 producers = KafkaProducers.new(@servicename, 10)
-#pool = producers.get_producers.cycle
 
-=begin
-loop do
-    begin
-=end
         outbound_messages = []
         outbound_errors = []
         messages = []
-        #messages = consumer.fetch
         consumer.each do |m|
             #puts "Validate: processing message no.: #{m.offset}, #{m.key} from #{@inbound}\n\n"
 
@@ -89,27 +84,34 @@ loop do
                         #puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
                     else
-                        puts "Invalid!"
-                        msg = header + "Message #{m.offset} validity error:\n" + 	
-                        	xsd_errors.map{|e| e.message}.join("\n") 
-			if(csvline)
-				msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
-			else
-				msg =  msg + "\n" + parent.document.to_s
-			end
-                        puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"					
-                        #puts "\n\nsending to: #{@outbound3}" if csvline
-                        outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg , item_key )
+                        	puts "Invalid!"
+	                    	lines = payload.lines
+       		            	msg = header + "Message #{m.offset} validity error:\n"
+				if(csvline)
+					msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
+				else
+					msg =  msg + "\n" + parent.document.to_s
+				end
+                        	xsd_errors.each_with_index do |e, i|
+                        		output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
+                        		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", NiasError.new(i, xsd_errors.length, "XSD Validation Error", output).to_s,
+                                		"rcvd:#{ sprintf('%09d:%d', m.offset, i) }" )
+				end
                     end
                 end
             else
                 puts "Not Well-Formed!"
-                msg = header + "Message #{m.offset} well-formedness error:\n" + doc.errors.join("\n") + "\n" + m.value	
-                # puts "\n\nsending to: #{@outbound2}\n\nmessage:\n\n#{msg}\n\nkey: 'invalid'\n\n"
-		if (csvline)
-			msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
-		end
-                outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", msg, item_key )
+	        lines = payload.lines
+
+                msg = header + "Message #{m.offset} well-formedness error:\n"
+                doc.errors.each_with_index do |e, i|
+			if (csvline)
+				msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
+			end
+                        output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
+                        outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", NiasError.new(i, doc.errors.length, "XML Well-Formedness Error", output).to_s,
+                                "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+                end
             end
         #end
 
@@ -120,30 +122,7 @@ loop do
         # 	puts "\n\nContent: #{msg.value}"
         # end
 
-        #outbound_messages.each_slice(20) do | batch |
-            #pool.next.send_messages( batch )
-            producers.send_through_queue( outbound_messages )
+        producers.send_through_queue( outbound_messages )
 	outbound_messages = []
-        #end
-end
-=begin
-        
-        # puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
-    rescue Poseidon::Errors::UnknownTopicOrPartition
-        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-        sleep 30
-    end
-        # puts "Resuming message consumption from: #{consumer.next_offset}"
-
-    # trap to allow console interrupt
-    trap("INT") { 
-        puts "\n#{@servicename} service shutting down...\n\n"
-        consumer.close
-        exit 130 
-    } 
-
-    sleep 1
 end
 
-
-=end

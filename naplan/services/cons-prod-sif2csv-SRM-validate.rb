@@ -13,6 +13,7 @@ require 'csv'
 require_relative 'cvsheaders-naplan'
 require_relative '../../kafkaproducers'
 require_relative '../../kafkaconsumers'
+require_relative '../../niaserror'
 
 @inbound = 'sifxml.processed'
 @outbound = 'naplan.srm_errors'
@@ -177,11 +178,9 @@ def validate_student(nodes)
 
             familyName = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:FamilyName")
 	    ret << "Error: FamilyName '#{familyName}' is too long" if familyName and familyName.to_s.length > 40
-	    #ret << "Error: 'FamilyName is mandatory" unless familyName 
 
             givenName = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:GivenName")
 	    ret << "Error: GivenName '#{givenName}' is too long" if givenName and givenName.to_s.length > 40
-	    #ret << "Error: 'GivenName is mandatory" unless givenName 
 
             preferredName = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Name/xmlns:PreferredGivenName")
 	    ret << "Error: PreferredName '#{preferredName}' is too long" if preferredName and preferredName.to_s.length > 40
@@ -194,7 +193,6 @@ def validate_student(nodes)
 	    ret << "Error: VisaCode '#{visaCode}' is wrong format" unless visaCode and visaCode.to_s.match(/^\d\d\d$/)
 
 	    ffpos = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:FFPOS")
-	    #ret << "Error: 'FullFeePayingStudent is mandatory" unless ffpos
 
 	    indigenousStatus = CSVHeaders.lookup_xpath(nodes, "//xmlns:PersonInfo/xmlns:Demographics/xmlns:IndigenousStatus")
 
@@ -208,7 +206,6 @@ def validate_student(nodes)
 
             aslSchoolId = CSVHeaders.lookup_xpath(nodes, "//xmlns:MostRecent/xmlns:SchoolACARAId")
 	    ret << "Error: ASLSchoolId '#{aslSchoolId}' is too long" if aslSchoolId and aslSchoolId.to_s.length > 5
-	    #ret << "Error: 'ASLSchoolId is mandatory" unless aslSchoolId
 	    ret << "Error: ASLSchoolId '#{aslSchoolId}' is not recognised" if !@stateprovince and !@asl_ids.include?(aslSchoolId.to_s)
 	    ret << "Error: ASLSchoolId '#{aslSchoolId}' is not recognised for this state" if @stateprovince and !@asl_ids.include?(aslSchoolId.to_s)
 
@@ -245,11 +242,6 @@ def validate_student(nodes)
 	return ret
 end
 
-=begin
-loop do
-
-    begin
-=end
         messages = []
         outbound_messages = []
         #messages = consumer.fetch
@@ -282,15 +274,8 @@ loop do
 			msg = e + "\n" + payload
 		end
 		msg = "SRM validation:\n#{msg}"
-            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", msg, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", NiasError.new(i, errors.length, "SRM Validation", msg).to_s, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 	    end
-=begin
-	    if errors.empty?
-            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "SUMMARY: No errors reported from the SRM validator", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
-	    else
-            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "SUMMARY: #{errors.size} errors reported from the SRM validator", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
-	    end
-=end
         producers.send_through_queue( outbound_messages )
 	outbound_messages = []
 end

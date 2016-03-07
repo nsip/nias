@@ -19,18 +19,12 @@ Signal.trap("INT") { consumer.interrupt }
 
 
 producers = KafkaProducers.new(@servicename, 10)
-#pool = producers.get_producers.cycle
 
 # if the topic of the message is one of these, a different microservice will process the SIF/XML
 
 @skip_topics = %w(naplan.sifxml naplan.sifxmlout)
 
-=begin
-loop do
-    begin
-=end
         outbound_messages = []
-        outbound_errors = []
         messages = []
         #messages = consumer.fetch
         consumer.each do |m|
@@ -43,34 +37,6 @@ loop do
             next if @skip_topics.include?(topic)
             item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
             outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", m.value, item_key ) 
-            #pool.next.send_messages(outbound_messages)
 	    producers.send_through_queue(outbound_messages)
             outbound_messages = []
-=begin
-        #end
-
-        outbound_messages.each_slice(20) do | batch |
-            pool.next.send_messages( batch )
-        end
-=end
 end
-=begin
-        
-        # puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
-    rescue Poseidon::Errors::UnknownTopicOrPartition
-        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-        sleep 30
-    end
-        # puts "Resuming message consumption from: #{consumer.next_offset}"
-
-    # trap to allow console interrupt
-    trap("INT") { 
-        puts "\n#{@servicename} service shutting down...\n\n"
-        consumer.close
-        exit 130 
-    } 
-
-    sleep 1
-end
-
-=end

@@ -20,6 +20,7 @@ require 'sinatra-websocket' # for server-side push of errors
 #require_relative '../naplan/services/cvsheaders-naplan'
 require_relative '../kafkaproducers'
 require_relative '../kafkaconsumers'
+require_relative '../niaserror'
 
 
 =begin
@@ -95,7 +96,11 @@ Helper methods for ssf_server.rb
 			end
 		else
 			@validation_error = true
-			raw_messages = validator.errors.map {|e| "Row: #{e.row} Col: #{e.column}, Category #{e.category}: Type #{e.type}, Content #{e.content}, Constraints: #{e.constraints}" }
+			raw_messages = []
+			validator.errors.each_with_index do |e, i|
+				raw_messages << NiasError.new(i, validator.errors.length, "CSV Lint Validator", 
+					"Row: #{e.row} Col: #{e.column}, Category #{e.category}: Type #{e.type}, Content #{e.content.chomp}, Constraints: #{e.constraints}" ).to_s
+			end
 			raw_messages.each {|e| puts e}
 		end
             else

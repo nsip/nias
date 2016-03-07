@@ -4,6 +4,7 @@ require 'poseidon'
 require 'nokogiri' # xml support
 require_relative '../../kafkaproducers'
 require_relative '../../kafkaconsumers'
+require_relative '../../niaserror'
 
 # Consumer of bulk ingest SIF/XML messages. 
 # The XSD to be used for parsing SIF/XML is passed in as the first command line parameter of the script.
@@ -31,19 +32,13 @@ Signal.trap("INT") { consumer.interrupt }
 
 
 producers = KafkaProducers.new(@servicename, 10)
-#@pool = producers.get_producers.cycle
 
 payload = ""
 header = ""
 concatcount = 0
 
-=begin
-loop do
-    begin
-=end
         outbound_messages = []
         messages = []
-        #messages = consumer.fetch
         consumer.each do |m|
             cont = m.value.match( /===snip[^=\n]*===/ ) #this is not the last in the suite of split up messages
             m.value.gsub!(/\n===snip[^=\n]*===\n/, "")
@@ -98,10 +93,7 @@ loop do
                         msg = header + x.to_s
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 			if outbound_messages.length > 100 
-        			#outbound_messages.each_slice(20) do | batch |
-            				#pool.next.send_messages( batch )
-            				producers.send_through_queue ( outbound_messages )
-        			#end
+            			producers.send_through_queue ( outbound_messages )
         			outbound_messages = []
 			end
                     end
@@ -112,12 +104,10 @@ loop do
 	            xsd_errors.each_with_index do |e, i|
 			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
 			#puts output
-                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", output , "rcvd:#{ sprintf('%09d:%d', m.offset, i) }" )
+                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", NiasError.new(i, xsd_errors.length, "XSD Validation Error", output).to_s, 
+				"rcvd:#{ sprintf('%09d:%d', m.offset, i) }" )
 			if outbound_messages.length > 100 
-        			#outbound_messages.each_slice(20) do | batch |
-            				#pool.next.send_messages( batch )
             			producers.send_through_queue( outbound_messages )
-        			#end
         			outbound_messages = []
 			end
 		    end
@@ -129,12 +119,10 @@ loop do
 		#puts msg
                 doc.errors.each_with_index do |e, i| 
 			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
-                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", output , "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", NiasError.new(i, doc.errors.length, "XML Well-Formedness Error", output).to_s, 
+				"rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 			if outbound_messages.length > 100 
-        			#outbound_messages.each_slice(20) do | batch |
-            				#pool.next.send_messages( batch )
-            				producers.send_through_queue( outbound_messages )
-        			#end
+            			producers.send_through_queue( outbound_messages )
         			outbound_messages = []
 			end
 		end
@@ -142,8 +130,6 @@ loop do
             payload = "" # clear payload for next iteration
             concatcount = 0
                         puts "Finished processing payload."
-        #end
-
 
         # debugging if needed
         # outbound_messages.each do | msg |
@@ -152,29 +138,7 @@ loop do
         # 	puts "\n\nContent: #{msg.value}"
         # end
 
-        #outbound_messages.each_slice(20) do | batch |
-            #pool.next.send_messages( batch )
-            producers.send_through_queue( outbound_messages )
-        #end
+        producers.send_through_queue( outbound_messages )
 	outbound_messages = []
 end
-=begin
-        
-        #	puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
-    rescue Poseidon::Errors::UnknownTopicOrPartition
-        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-        sleep 30
-    end
-        # puts "Resuming message consumption from: #{consumer.next_offset}"
 
-    # trap to allow console interrupt
-    trap("INT") { 
-        puts "\n#{@servicename} service shutting down...\n\n"
-        consumer.close
-        exit 130 
-    } 
-
-    #sleep 1
-end
-
-=end

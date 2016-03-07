@@ -12,6 +12,7 @@ require 'redis'
 require_relative '../../kafkaproducers'
 require_relative '../../kafkaconsumers'
 require_relative '../../niasconfig'
+require_relative '../../niaserror'
 
 # extract School+ LocalId
 # id is GUID, nodes is Nokogiri-parsed XML
@@ -40,8 +41,7 @@ def extract_SchoolNameDOB(nodes)
 end
 
 @inbound = 'sifxml.processed'
-@outbound1 = 'sifxml.errors'
-@outbound2 = 'csv.errors'
+@outbound = 'naplan.srm_errors'
 @servicename = 'cons-prod-studentpersonal-naplanreg-unique-ids-storage.rb'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
@@ -95,20 +95,15 @@ producers = KafkaProducers.new(@servicename, 10)
 	    if(Integer(results[1]) > 1)
 		errors << "Uniqueness Warning:\nThere is a duplicate entry with the ACARA School Id, Given Name, Family Name and Date of Birth #{school_name_dob}"
 	    end
-	    if fromcsv 
-		outbound = "#{@outbound2}"
-	    else
-		outbound = "#{@outbound1}"
-	    end
             errors.each_with_index do |e, i|
 		if(fromcsv)
 			msg = e + "\n" + "CSV line #{csvline}: " + csvcontent
 		else
 			msg = e + "\n" + payload
 		end
-                outbound_messages << Poseidon::MessageToSend.new( outbound, msg, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) 
+                outbound_messages << Poseidon::MessageToSend.new( @outbound, NiasError.new(i, errors.length, "SRM Uniqueness Check", msg).to_s, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) 
             end
 
-           producers.send_through_queue( outbound_messages )
+        producers.send_through_queue( outbound_messages )
 	outbound_messages = []
 end

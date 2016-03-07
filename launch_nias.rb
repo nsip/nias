@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'fileutils'
+require_relative './niasconfig'
 
 =begin
 Launcher of NIAS microservices. Must be run after ./launcher_core.rb
@@ -62,6 +63,8 @@ def launch
   # otherwise topics may fail to create - will be created dynamically when called, but with  
   # startup overhead that is better dealt with here.
   sleep 5
+
+  config = NiasConfig.new
 
 
   topics = [

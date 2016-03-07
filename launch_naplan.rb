@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'fileutils'
+require_relative './niasconfig'
 
 =begin
 Launcher of NIAS microservices specific to NAPLAN. Replaces generic launch_nias.rb. Must be run after ./launcher_core.rb
@@ -60,6 +61,7 @@ def launch
   # startup overhead that is better dealt with here.
   sleep 5
 
+  config = NiasConfig.new
 
   topics = [
         'sifxml.validated',

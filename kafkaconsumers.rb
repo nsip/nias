@@ -6,7 +6,7 @@ class KafkaConsumers
 
 	def initialize(id, topics, offset = :latest_offset)
 		config = NiasConfig.new
-		@consumer =  Kafka::Consumer.new(id, topics, zookeeper: "#{config.get_host}:2181", initial_offset: offset)
+		@consumer =  Kafka::Consumer.new(id, topics, zookeeper: "#{config.zookeeper}", initial_offset: offset)
 	end
 
 	def interrupt

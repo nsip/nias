@@ -265,6 +265,11 @@ LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,
 fjghh442,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2012-07-26,2,1101,Y,1,101,2,Y,2201,UG,7,0.89,7E,7D,48096,046129,01,02,48096,48096,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
 CSV
 
+duplicate_name_school_dob = <<CSV
+LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+fjghh443,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2004-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,48096,046129,01,02,48096,48096,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+fjghh444,14668,65616,75189,50668,59286,35164,47618,66065,4716,50001,65241,55578,44128,37734,73143,Seefeldt,Treva,Treva,E,2004-07-26,2,1101,Y,1,101,2,Y,2201,7,7,0.89,7E,7D,48096,046129,01,02,48096,48096,U,Y,Y,3,8,2,1201,2,7,4,1201,30769 PineTree Rd.,,Pepper Pike,9999,QLD
+CSV
 
 out = <<XML
 <StudentPersonal xmlns="http://www.sifassociation.org/au/datamodel/3.4" RefId="A5413EDF-886B-4DD5-A765-237BEDEC9833">
@@ -1260,9 +1265,9 @@ describe "NAPLAN convert CSV to SIF" do
                 post_csv(duplicate_localid)
             	sleep 3
         end
-        it "pushes error to csv.errors" do
+        it "pushes error to naplan.srm_errors" do
             begin
-                a = groupfetch(@errorconsumer)
+                a = groupfetch(@srmerrorconsumer)
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0]).to_not be_nil
@@ -1299,6 +1304,29 @@ describe "NAPLAN convert CSV to SIF" do
             end
         end
     end
+
+  context "Duplicate name, school, date of birth in CSV to naplan.csv" do
+        before(:example) do
+		@redis.flushdb
+                post_csv(duplicate_name_school_dob)
+            	sleep 3
+        end
+        it "pushes error to naplan.srm_errors" do
+            begin
+                a = groupfetch(@srmerrorconsumer)
+                expect(a).to_not be_nil
+                expect(a.empty?).to be false
+                expect(a[0]).to_not be_nil
+                expect(a[0].value).to_not be_nil
+                                errors = a.find_all{ |e| e.value["duplicate"] }
+                                expect(errors.empty?).to be false
+            rescue Poseidon::Errors::OffsetOutOfRange
+                puts "[warning] - bad offset supplied, resetting..."
+                offset = :latest_offset
+                retry
+            end
+        end
+  end
 
   context "Record without Platform Identifier in CSV to naplan.csv" do
         before(:example) do

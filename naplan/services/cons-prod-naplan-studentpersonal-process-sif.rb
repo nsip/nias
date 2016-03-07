@@ -65,7 +65,6 @@ loop do
     begin 
 =end
         outbound_messages = []
-        outbound_errors = []
         messages = []
         #messages = consumer.fetch
         consumer.each do |m|
@@ -115,22 +114,3 @@ loop do
         #end
 	outbound_messages = []
 end
-=begin
-            
-        # puts "cons-prod-ingest:: Resuming message consumption from: #{consumer.next_offset}"
-    rescue Poseidon::Errors::UnknownTopicOrPartition
-        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-        sleep 30
-    end     
-        # puts "Resuming message consumption from: #{consumer.next_offset}"
-            
-    # trap to allow console interrupt
-    trap("INT") { 
-        puts "\n#{@servicename} service shutting down...\n\n"
-        consumer.close
-        exit 130 
-    }       
-            
-    sleep 1     
-end         
-=end

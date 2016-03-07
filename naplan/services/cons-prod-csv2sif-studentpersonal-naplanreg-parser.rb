@@ -13,6 +13,7 @@ require 'json-schema'
 require_relative 'cvsheaders-naplan'
 require_relative '../../kafkaproducers'
 require_relative '../../kafkaconsumers'
+require_relative '../../niaserror'
 
 def Postcode2State( postcodestr ) 
     postcode = postcodestr.to_i
@@ -101,7 +102,10 @@ loop do
 
             # validate that we have received the right kind of record here, from the headers
             if(row['LocalStaffId'] and not row['LocalId'])
-                outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}", "rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
+                outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
+			NiasError.new(0,1, "CSV Document Type Error",
+				"You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}").to_s, 
+			"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
             else
 
                 # mappings of CSV alternate values
@@ -120,7 +124,9 @@ loop do
 		unless(json_errors.empty?)
 			json_errors.each_with_index do |e, i|
 				puts e
-                		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", "#{e}\n#{row['__linecontent']}", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+                		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", NiasError.new(i, json_errors.length, "JSON Validation Error",
+						"#{e}\n#{row['__linecontent']}").to_s,
+					"rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 			end
             		producers.send_through_queue( outbound_messages )
 			outbound_messages = []
@@ -236,35 +242,8 @@ XML
 		end
                 outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout\n" + nodes.root.to_s, "rcvd:#{ sprintf('%09d', m.offset)}" )
             end
-        #end
 
         # send results to indexer to create sms data graph
-        #outbound_messages.each_slice(20) do | batch |
-            #@pool.next.send_messages( batch )
-            producers.send_through_queue( outbound_messages )
-        #end
+        producers.send_through_queue( outbound_messages )
 	outbound_messages = []
 end
-=begin
-
-        # puts "cons-prod-oneroster-parser: Resuming message consumption from: #{consumer.next_offset}"
-
-    rescue Poseidon::Errors::UnknownTopicOrPartition
-        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-        sleep 30
-    end
-        # puts "Resuming message consumption from: #{consumer.next_offset}"
-
-    # trap to allow console interrupt
-    trap("INT") { 
-        puts "\n#{@servicename} service shutting down...\n\n"
-        exit 130 
-    } 
-
-    sleep 1
-    end
-
-
-
-
-=end
