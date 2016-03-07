@@ -215,4 +215,11 @@ There is a Gemfile in the root nias directory:
 ## 4.1. Testing
 See also the [NIAS Test Data](https://github.com/nsip/nias_testdata) repository for much larger test data.
 
+# 5. Future functionality
+
+NIAS is under ongoing development to meet the needs of NSIP stakeholders. Support for NAPLAN registration data validation and upload has been identified as a national priority.
+
+The following may be implemented as needed in future releases:
+
+* Support for validation of very large XML files, using a streaming parser rather than current parser (Nokogiri). Currently XML validation becomes time-consuming for very large XML files (i.e. over 100 MB).
 
