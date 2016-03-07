@@ -172,6 +172,7 @@ Several microservices have command-line options, which can be configured in thei
 * If `cons-prod-studentpersonal-naplanreg-unique-ids-storage.rb` in `launch_naplan.rb` is run with option `psi`, a Platform Student Identifier is generated for each received student record, and added on ingest.
 * If `cons-prod-sif2csv-SRM-validate.rb` in `launch_naplan.rb` is run with a state/territory abbreviation as an option, validations specific to that jurisdiction will be performed. In particular, ASL school IDs will be constrained to those specific to that jurisdiction.
 
+The hosts and ports for the various services used by NIAS are defined in `./niasconfig.rb`. The version included in this distribution gives default port values for localhost.
 
 # 4. Installation Notes
 
