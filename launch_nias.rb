@@ -80,13 +80,6 @@ def launch
 	{:name => 'cons-sms-json-storage.rb', :options => ''},
 	{:name => 'cons-oneroster-sms-storage.rb', :options => ''}, 
 	{:name => 'cons-prod-oneroster-parser.rb', :options => ''},
-	{:name => 'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb', :options => ''},
-	{:name => 'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb', :options => ''},
-	{:name => 'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb', :options => ''},
-	{:name => 'cons-prod-sif2csv-staffpersonal-naplanreg-parser.rb', :options => ''},
-	{:name => 'cons-prod-sif2csv-SRM-validate.rb', :options => ''},
-	{:name => 'cons-prod-studentpersonal-naplanreg-unique-ids-storage.rb', :options => ''},
-	{:name => 'cons-prod-naplan-studentpersonal-process-sif.rb', :options => ''},
     ]
 
     sms_services.each_with_index do | service, i |

@@ -71,13 +71,24 @@ def launch
     end
     
 
-    banner 'Starting NIAS SMS services for NAPLAN'
+    banner 'Starting NIAS SMS services'
 
     sms_services = [
 	{:name => 'cons-prod-sif-parser.rb', :options => ''},
 	{:name => 'cons-sms-indexer.rb', :options => ''},
 	{:name => 'cons-sms-storage.rb', :options => ''},
 	{:name => 'cons-sms-json-storage.rb', :options => ''},
+    ]
+
+    sms_services.each_with_index do | service, i |
+
+        @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/sms/services/#{service[:name]}", service[:options] )
+
+    end
+
+    banner 'Starting NIAS SMS services for NAPLAN'
+
+    sms_services = [
 	{:name => 'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb', :options => ''},
 	{:name => 'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb', :options => ''},
 	{:name => 'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb', :options => ''},
@@ -92,9 +103,7 @@ def launch
     ]
 
     sms_services.each_with_index do | service, i |
-
-        @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/sms/services/#{service[:name]}", service[:options] )
-
+        @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/naplan/services/#{service[:name]}", service[:options] )
     end
 
     # write pids to file for shutdown
