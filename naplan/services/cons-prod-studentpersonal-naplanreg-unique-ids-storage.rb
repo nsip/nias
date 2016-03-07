@@ -53,15 +53,8 @@ consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 
 producers = KafkaProducers.new(@servicename, 10)
-#@pool = producers.get_producers.cycle
 
-=begin
-loop do
-
-    begin
-=end
         messages = []
-        #messages = consumer.fetch
         outbound_messages = []
         consumer.each do |m|
 
@@ -109,13 +102,6 @@ loop do
 		end
                 outbound_messages << Poseidon::MessageToSend.new( outbound, msg, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) 
             end
-=begin
-            if errors.empty?
-                outbound_messages << Poseidon::MessageToSend.new( outbound, "SUMMARY: No errors reported from the Uniqueness validator", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
-            else
-                outbound_messages << Poseidon::MessageToSend.new( outbound, "SUMMARY: #{errors.size} errors reported from the Uniqueness validator", "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
-            end
-=end
 
            producers.send_through_queue( outbound_messages )
 	outbound_messages = []
