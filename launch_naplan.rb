@@ -53,6 +53,87 @@ def launch
         exit
     end
 
+  banner 'Creating known topics'
+
+    # slight wait to ensure kafka is initialised
+  # otherwise topics may fail to create - will be created dynamically when called, but with  
+  # startup overhead that is better dealt with here.
+  sleep 5
+
+
+  topics = [
+        'sifxml.validated',
+        'sifxml.processed',
+        'sms.indexer',
+        'sifxml.ingest',
+        'sifxml.errors',
+        'csv.errors',
+        'naplan.sifxml',
+        'naplan.sifxml.none',
+        'naplan.sifxml.low',
+        'naplan.sifxml.medium',
+        'naplan.sifxml.high',
+        'naplan.sifxml.extreme',
+        'naplan.sifxmlout',
+        'naplan.sifxmlout.none',
+        'naplan.sifxmlout.low',
+        'naplan.sifxmlout.medium',
+        'naplan.sifxmlout.high',
+        'naplan.sifxmlout.extreme',
+        'naplan.csv',
+        'naplan.csvstudents',
+        'naplan.csv_staff',
+        'naplan.sifxml_staff',
+        'naplan.sifxml_staff.none',
+        'naplan.sifxml_staff.low',
+        'naplan.sifxml_staff.medium',
+        'naplan.sifxml_staff.high',
+        'naplan.sifxml_staff.extreme',
+        'naplan.sifxmlout_staff',
+        'naplan.sifxmlout_staff.none',
+        'naplan.sifxmlout_staff.low',
+        'naplan.sifxmlout_staff.medium',
+        'naplan.sifxmlout_staff.high',
+        'naplan.sifxmlout_staff.extreme',
+        'naplan.csvstaff_out',
+        'test.test1',
+        'json.test',
+        'rspec.test',
+        'json.storage',
+        'naplan.srm_errors',
+            ]
+
+  sleep 5 # creating too early truncates topics
+  topics.each do | topic |
+    puts "Creating #{topic}"
+    pid = Process.spawn( './kafka/bin/kafka-topics.sh',
+                                                      "--zookeeper #{config.zookeeper}",
+                                                      '--create',
+                                                      "--topic #{topic}",
+                                                      '--partitions 5',
+                                                      '--replication-factor 1')
+    Process.wait pid
+  end
+
+  # topics that are not idempotent -- must keep messages in order
+  topics_single = [
+        'sifxml.bulkingest',
+  ]
+  topics_single.each do | topic |
+    puts "Creating #{topic}"
+    pid = Process.spawn( './kafka/bin/kafka-topics.sh',
+                                                      "--zookeeper #{config.zookeeper}",
+                                                      '--create',
+                                                      "--topic #{topic}",
+                                                      '--partitions 1',
+                                                      '--replication-factor 1')
+    Process.wait pid
+  end
+
+
+  banner 'Core topics created.'
+
+
 
     banner 'Starting NIAS SSF services for NAPLAN'
 

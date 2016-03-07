@@ -16,9 +16,12 @@ Launch presupposes the file does not exist, and creates it.
 Shutdown presupposes the file does exist, and deletes it, after shutting down each process it references.
 
 Functionality:
-1. Starts SSF microservices
 
-2. Starts SMS microservices
+1. Creates all the Kafka topics that are known in advance to be required. There is latency in auto-creating Kafka topics, which can lead to messages being dropped.
+
+2. Starts SSF microservices
+
+1. Starts SMS microservices
 =end
 
 puts "\n\nStarting in: #{__dir__}\n\n"
@@ -52,6 +55,60 @@ def launch
         puts "The file #{@pid_file} exists: run ./launch_nias.rb -K to terminate any existing processes"
         exit
     end
+
+  banner 'Creating known topics'
+
+    # slight wait to ensure kafka is initialised
+  # otherwise topics may fail to create - will be created dynamically when called, but with  
+  # startup overhead that is better dealt with here.
+  sleep 5
+
+
+  topics = [
+        'sifxml.validated',
+        'sifxml.processed',
+        'sms.indexer',
+        'sifxml.ingest',
+        'sifxml.errors',
+        'csv.errors',
+        'oneroster.validated',
+        'nsip.test',
+        'test.test1',
+        'json.test',
+        'rspec.test',
+        'json.storage',
+            ]
+
+  sleep 5 # creating too early truncates topics
+  topics.each do | topic |
+    puts "Creating #{topic}"
+    pid = Process.spawn( './kafka/bin/kafka-topics.sh',
+                                                      "--zookeeper #{config.zookeeper}",
+                                                      '--create',
+                                                      "--topic #{topic}",
+                                                      '--partitions 5',
+                                                      '--replication-factor 1')
+    Process.wait pid
+  end
+
+  # topics that are not idempotent -- must keep messages in order
+  topics_single = [
+        'sifxml.bulkingest',
+  ]
+  topics_single.each do | topic |
+    puts "Creating #{topic}"
+    pid = Process.spawn( './kafka/bin/kafka-topics.sh',
+                                                      "--zookeeper #{config.zookeeper}",
+                                                      '--create',
+                                                      "--topic #{topic}",
+                                                      '--partitions 1',
+                                                      '--replication-factor 1')
+    Process.wait pid
+  end
+
+
+  banner 'Core topics created.'
+
 
 
     banner 'Starting NIAS SSF services'
