@@ -16,9 +16,8 @@ require 'json-schema'
 require 'thin'
 require 'em-websocket' # for server-side push of errors
 require 'sinatra-websocket' # for server-side push of errors
-#require 'kafka-consumer'
 
-require_relative '../sms/services/cvsheaders-naplan'
+#require_relative '../naplan/services/cvsheaders-naplan'
 require_relative '../kafkaproducers'
 require_relative '../kafkaconsumers'
 

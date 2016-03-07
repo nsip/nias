@@ -81,12 +81,18 @@ producers = KafkaProducers.new(@servicename, 10)
 	    school_local_id = extract_SchoolLocalId(nodes)
 	    school_name_dob = extract_SchoolNameDOB(nodes)
 
-	    @redis.sadd "SchoolLocalId::#{school_local_id}", refId
-	    if(Integer(@redis.scard("SchoolLocalId::#{school_local_id}")) > 1)
+	    results = @redis.multi do |multi|
+	    	multi.sadd "SchoolLocalId::#{school_local_id}", refId
+	    	multi.scard("SchoolLocalId::#{school_local_id}")
+	    end
+	    if(Integer(results[1]) > 1)
 		errors << "Uniqueness Error:\nThere is a duplicate entry with the ACARA School Id + Local Id #{school_local_id}"
             end
-	    @redis.sadd "SchoolNameDOB::#{school_name_dob}", refId
-	    if(Integer(@redis.scard("SchoolNameDOB::#{school_name_dob}")) > 1)
+	    results = @redis.multi do |multi|
+	    	multi.sadd "SchoolNameDOB::#{school_name_dob}", refId
+	    	multi.scard("SchoolNameDOB::#{school_name_dob}")
+	    end
+	    if(Integer(results[1]) > 1)
 		errors << "Uniqueness Warning:\nThere is a duplicate entry with the ACARA School Id, Given Name, Family Name and Date of Birth #{school_name_dob}"
 	    end
 	    if fromcsv 

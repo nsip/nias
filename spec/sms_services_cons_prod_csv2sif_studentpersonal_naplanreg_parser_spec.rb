@@ -1279,8 +1279,8 @@ describe "NAPLAN convert CSV to SIF" do
 
   context "Duplicate Local Id but not School Id in CSV to naplan.csv" do
         before(:example) do
-		@redis.flushdb
 		sleep 2
+		@redis.flushdb
 		# flush out pending csv errors
                 a = groupfetch(@errorconsumer)
                 post_csv(duplicate_localnotschoolid)

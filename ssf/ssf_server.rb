@@ -19,7 +19,6 @@ require 'thin'
 #require 'kafka-consumer'
 require 'poseidon_cluster'
 
-require_relative '../sms/services/cvsheaders-naplan'
 require_relative '../kafkaproducers'
 require_relative '../kafkaconsumers'
 require_relative './ssf_server_helpers'
