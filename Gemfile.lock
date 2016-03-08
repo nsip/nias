@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/nsip/kafka-consumer.git
+  revision: f8861d855892d3e5b092de32d7a13eafd7e85c9c
+  specs:
+    kafka-consumer (0.1.2)
+      kazoo-ruby (~> 0.4.0)
+      poseidon (~> 0.0.5)
+
+GIT
   remote: git://github.com/sinatra/sinatra-contrib.git
   revision: 66892d3789ba23f157b17d67570479e97d7eaa95
   specs:
@@ -48,9 +56,6 @@ GEM
     json (1.8.3)
     json-schema (2.5.0)
       addressable (~> 2.3)
-    kafka-consumer (0.1.2)
-      kazoo-ruby (~> 0.4.0)
-      poseidon (~> 0.0.5)
     kazoo-ruby (0.4.0)
       thor (~> 0.19.1)
       zookeeper (~> 1.4)
@@ -122,7 +127,7 @@ DEPENDENCIES
   hashids
   hiredis (>= 0.6.0)
   json-schema
-  kafka-consumer
+  kafka-consumer!
   lmdb
   moneta
   nokogiri

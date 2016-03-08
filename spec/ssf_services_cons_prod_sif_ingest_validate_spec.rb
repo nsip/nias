@@ -103,7 +103,6 @@ describe "SIF Ingest/Produce" do
                 expect(a[0].value.nil?).to be false
 		errors = a.find_all{ |e| e.value["well-formedness error"] }
 		expect(errors.empty?).to be false
-                expect(errors[0].value).to match(/rspec\.test/)
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset
@@ -129,7 +128,6 @@ describe "SIF Ingest/Produce" do
                 expect(a[0].value.nil?).to be false
 		errors = a.find_all{ |e| e.value["validity error"] }
 		expect(errors.empty?).to be false
-                expect(errors[0].value).to match(/rspec\.test/)
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset
@@ -158,6 +156,7 @@ describe "SIF Ingest/Produce" do
                 a[0].value.gsub!(/ xmlns="[^"]+"/, "")
 		expected.gsub!(/\n\s+/, "\n")
 		a[0].value.gsub!(/\n\s+/, "\n")
+		a[0].value.gsub!(/TOPIC: rspec.test [0-9]+:[0-9]+:\S+\n/, "TOPIC: rspec.test\n")
                 expect(a[0].value.chomp).to eq expected.chomp
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."

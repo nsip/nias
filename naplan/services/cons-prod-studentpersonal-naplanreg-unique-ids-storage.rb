@@ -56,8 +56,10 @@ producers = KafkaProducers.new(@servicename, 10)
 
         messages = []
         outbound_messages = []
+	recordid = 0
         consumer.each do |m|
 
+	    recordid = recordid + 1
             header = m.value.lines[0]
             payload = m.value.lines[1..-1].join
 	    errors = []
@@ -101,7 +103,7 @@ producers = KafkaProducers.new(@servicename, 10)
 		else
 			msg = e + "\n" + payload
 		end
-                outbound_messages << Poseidon::MessageToSend.new( @outbound, NiasError.new(i, errors.length, "SRM Uniqueness Check", msg).to_s, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) 
+                outbound_messages << Poseidon::MessageToSend.new( @outbound, NiasError.new(i, errors.length, recordid, "SRM Uniqueness Check", msg).to_s, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" ) 
             end
 
         producers.send_through_queue( outbound_messages )

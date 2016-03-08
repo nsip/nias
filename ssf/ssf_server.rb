@@ -23,6 +23,7 @@ require_relative '../kafkaproducers'
 require_relative '../kafkaconsumers'
 require_relative './ssf_server_helpers'
 require_relative '../niasconfig'
+require_relative '../niaserror'
 
 =begin
 Class to handle ingesting of messages into NIAS. Deals with ingest and bulk ingest of topic/stream, and requests for topic/stream and particular privacy profiles of topic/stream. Parses JSON and CSV messages into JSON objects.
@@ -117,6 +118,7 @@ class SSFServer < Sinatra::Base
 
         messages = []
 	fetched_messages = fetch_raw_messages(topic_name, request.media_type, request.body.read )
+	@validation_error = fetched_messages["validation_error"]
 	
         case request.media_type
 	    when 'application/xml' then
@@ -134,7 +136,7 @@ class SSFServer < Sinatra::Base
         	key = "#{strm}"
 	end
 
-        fetched_messages.each do | msg |
+        fetched_messages["messages"].each do | msg |
             case request.media_type
             when 'application/json' then msg = msg.to_json
             when 'application/xml' then 
@@ -157,6 +159,9 @@ class SSFServer < Sinatra::Base
                         # write to default for audit if required
             # messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )
                     end
+	    if(request.media_type == 'text/csv' and !@validation_error) 
+		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Lint Validator", "").to_s, "#{key}" )
+	    end
 
         post_messages(messages, :none, false)		
         return 202
@@ -186,10 +191,15 @@ class SSFServer < Sinatra::Base
 
         messages = []
 
-        fetch_raw_messages(topic_name, request.media_type, request.body.read).each do | msg |
+        fetched_messages = fetch_raw_messages(topic_name, request.media_type, request.body.read)
+	@validation_error = fetched_messages["validation_error"]
+	fetched_messages["messages"].each do | msg |
 
             topic = "#{topic_name}"
             key = "#{strm}"
+		if(@validation_error) then
+                	topic = "#{settings.csverrors}" 
+		end
 
             case request.media_type
             when 'application/json' then msg = msg.to_json
@@ -197,7 +207,12 @@ class SSFServer < Sinatra::Base
                 msg =  "TOPIC: #{topic_name}\n" + msg.to_s
                 topic = "#{settings.xmlbulktopic}"
                 key = "#{topic_name}"
-            when 'text/csv' then msg = msg.to_hash.to_json
+            when 'text/csv' then 
+		if(@validation_error) then
+			msg = msg.to_s
+		else
+			msg = msg.to_hash.to_json
+		end
             end
 
             #puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
@@ -215,6 +230,9 @@ class SSFServer < Sinatra::Base
             # write to default for audit if required
             # messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )			
         end
+	    if(request.media_type == 'text/csv' and !@validation_error) 
+		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Lint Validator", "").to_s, "valid" )
+	    end
 
         post_messages(messages, :none, true)		
         return 202
@@ -305,7 +323,22 @@ class SSFServer < Sinatra::Base
         # get batch of messages from broker
         messages = []
 	consumer = KafkaConsumers.new(client_id, ["csv.errors", "naplan.srm_errors", "sifxml.errors"], :latest_offset)
-	Signal.trap("INT") { consumer.interrupt }
+	Signal.trap("INT") { 
+		puts "Consumer stopping on INT"
+		consumer.stop if consumer 
+	}
+	Signal.trap("EXIT") { 
+		puts "Consumer stopping on EXIT"
+		consumer.stop if consumer 
+	}
+	Signal.trap("HUP") { 
+		puts "Consumer stopping on HUP"
+		consumer.stop if consumer 
+	}
+	Signal.trap("QUIT") { 
+		puts "Consumer stopping on QUIT"
+		consumer.stop if consumer 
+	}
         stream do | out |
             begin
                 consumer.each do |msg|
@@ -361,7 +394,9 @@ puts "??"
         # end
 
         messages = []
-        fetch_raw_messages(topic_name, mimetype, body).each do | msg |
+	fetched_messages = fetch_raw_messages(topic_name, request.media_type, request.body.read )
+	@validation_error = fetched_messages["validation_error"]
+        fetched_messages["messages"].each do | msg |
 
             topic = "#{topic_name}"
             key = "#{strm}"
@@ -372,7 +407,13 @@ puts "??"
                 msg =  "TOPIC: #{topic_name}\n" + msg.to_s
                 topic = "#{settings.xmlbulktopic}"
                 key = "#{topic_name}"
-            when 'text/csv' then msg = msg.to_hash.to_json
+            when 'text/csv' then 
+                if(@validation_error) then
+                        msg = msg.to_s
+                        topic = "#{settings.csverrors}"
+                else
+			msg = msg.to_hash.to_json
+		end
             end
 
             #puts "\n\ntopic is: #{topic} : key is #{key}\n\n#{msg}\n\n"
@@ -386,6 +427,9 @@ puts "??"
                 messages << Poseidon::MessageToSend.new( "#{topic}", msg1, "#{key}" )
             end
             messages << Poseidon::MessageToSend.new( "#{topic}", msgtail , "#{key}" )
+	    if(!@validation_error) 
+		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Lint Validator", "").to_s, "#{key}" )
+	    end
 
             # write to default for audit if required
             # messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )			

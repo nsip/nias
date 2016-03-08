@@ -116,7 +116,10 @@
 
         <script>
 
+/* counts of error per record type */
 var errortypes = {};
+/* for errors counted per record, whether the record has already been seen for the given error type */
+var errorrecords = {};
 
 $(function() {
   $("#fileuploadform").submit(function(e){
@@ -124,6 +127,7 @@ $(function() {
     $("#console").empty();
     e.preventDefault();
     errortypes = {};
+    errorrecords = {};
     var formData = new FormData(this);
     formData.append('file', $("#file").prop('files')[0]);
     $.ajax({
@@ -180,18 +184,35 @@ if (!!window.EventSource) {
 	var source = new EventSource('csverrors');
 }
 source.addEventListener('message', function(e) {
-var msg = e.data;
-/* strip the header count in the error message */
-var myRegexp = /^([0-9]+):([0-9]+) ([^\n]+)\n/g;
-var match = myRegexp.exec(msg);
+	var msg = e.data;
+	/* strip the header count in the error message: extract counts and type */
+	var myRegexp = /^([0-9]+):([0-9]+):([0-9]+) ([^\n]+)\n/g;
+	var match = myRegexp.exec(msg);
+	var output;
 
-if(!errortypes[match[3]]) {
-errortypes[match[3]] = match[2];
-document.getElementById('console').innerHTML += match[2] + " errors of type: " + match[3] + "<br/>";
-}
+	if(!match[3] === "0") {
+		/* errors are for the whole uploaded document */
+		if(!errortypes[match[4]]) {
+			errortypes[match[4]] = match[2];
+			output = "<div id='" + match[4] + "'>" + match[2] + " errors of type: " + match[4] + "</div>";
+			document.getElementById('console').innerHTML += output;
+		}
+	} else {
+		/* errors are for the currently processed record */
+		if(!errortypes[match[4]]) {
+			 document.getElementById('console').innerHTML += "<div id='" + match[4] + "'></div>";
+			 errortypes[match[4]] = 0;
+		}
+		if(!errorrecords[match[4] + '::' + match[3]]) {
+			errortypes[match[4]] += parseInt(match[2]);
+			output = errortypes[match[4]] + " errors of type: " + match[4] ;
+			document.getElementById(match[4]).innerHTML = output;
+			errorrecords[match[4] + '::' + match[3]] = 1;
+		}
+	}
 
-msg = msg.replace(/^[^\n+]+\n/,"");
-show(msg);
+	msg = msg.replace(/^[^\n+]+\n/,"");
+	show(msg);
 }, false);
 
 
@@ -199,6 +220,7 @@ source.addEventListener('open', function(e) {
 $("#results").empty(); 
 $("#console").empty(); 
 errortypes = {};
+errorrecords = {};
 }, false);
 
 

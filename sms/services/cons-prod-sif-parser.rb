@@ -161,15 +161,8 @@ Signal.trap("INT") { consumer.interrupt }
 
 
 producers = KafkaProducers.new(@servicename, 10)
-#@pool = producers.get_producers.cycle
 
-=begin
-loop do
-
-    begin
-=end
         messages = []
-        #messages = consumer.fetch
         outbound_messages = []
         consumer.each do |m|
 
@@ -178,6 +171,8 @@ loop do
 
             header = m.value.lines[0]
             payload = m.value.lines[1..-1].join
+
+puts payload
 
             # read xml message
             nodes = Nokogiri::XML( payload ) do |config|
@@ -262,35 +257,12 @@ loop do
 
             idx[:label] = extract_label(idx[:id], nodes)
 
-            #puts "\nParser Index = #{idx.to_json}\n\n"
+            puts "\nParser Index = #{idx.to_json}\n\n"
 
             outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "rcvd:#{ sprintf('%09d', m.offset)}" )
-        #end
 
         # send results to indexer to create sms data graph
-        #outbound_messages.each_slice(20) do | batch |
-            #@pool.next.send_messages( batch )
-            producers.send_through_queue( outbound_messages )
-        #end
+        producers.send_through_queue( outbound_messages )
 	outbound_messages = []
 end
-=begin
 
-
-        # puts "cons-prod-sif-parser: Resuming message consumption from: #{consumer.next_offset}"
-
-    rescue Poseidon::Errors::UnknownTopicOrPartition
-        puts "Topic #{@inbound} does not exist yet, will retry in 30 seconds"
-        sleep 30
-    end
-    # puts "Resuming message consumption from: #{consumer.next_offset}"
-
-    # trap to allow console interrupt
-    trap("INT") { 
-        puts "\n#{@servicename} service shutting down...\n\n"
-        exit 130 
-    } 
-
-    sleep 1
-end
-=end

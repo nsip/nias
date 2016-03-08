@@ -48,7 +48,7 @@ gem 'csvlint'
 # JSON-Schema validation
 gem 'json-schema'
 
-gem 'kafka-consumer'
+gem 'kafka-consumer', github: 'nsip/kafka-consumer'
 
 # process matrix parameters in URLs
 # gem 'rack-matrix_params'

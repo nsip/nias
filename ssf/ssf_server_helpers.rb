@@ -57,7 +57,7 @@ Helper methods for ssf_server.rb
             if session['producer_id'] == nil 
                 session['producer_id'] = settings.hashid.encode(Random.new.rand(999))
             end
-	    	@validation_error = false
+	    @validation_error = false
             puts "\nProducer ID  is #{session['producer_id']}\n\n"
                         # extract messages
             puts "\nData sent is #{mimetype}\n\n"
@@ -98,7 +98,7 @@ Helper methods for ssf_server.rb
 			@validation_error = true
 			raw_messages = []
 			validator.errors.each_with_index do |e, i|
-				raw_messages << NiasError.new(i, validator.errors.length, "CSV Lint Validator", 
+				raw_messages << NiasError.new(i, validator.errors.length, 0, "CSV Lint Validator", 
 					"Row: #{e.row} Col: #{e.column}, Category #{e.category}: Type #{e.type}, Content #{e.content.chomp}, Constraints: #{e.constraints}" ).to_s
 			end
 			raw_messages.each {|e| puts e}
@@ -106,7 +106,7 @@ Helper methods for ssf_server.rb
             else
                 halt 415, "Sorry content type #{mimetype} is not supported, must be one of: application/json - application/xml - text/csv"
             end
-	    return raw_messages
+	    return {"validation_error" => @validation_error, "messages" => raw_messages}
         end
 
         # post messages to the appropriate stream. bulk identifies whether these are intended 

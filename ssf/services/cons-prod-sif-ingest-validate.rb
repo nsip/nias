@@ -1,6 +1,7 @@
 # cons-prod-sif-ingest.rb
 
 require 'poseidon'
+require 'hashids'
 require 'nokogiri' # xml support
 require_relative '../../kafkaproducers'
 require_relative '../../kafkaconsumers'
@@ -28,11 +29,15 @@ require_relative '../../niaserror'
 #@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif3.4/SIF_Message3.4.xsd"))
 @xsd = Nokogiri::XML::Schema(File.open(ARGF.argv[0]))
 @namespace = 'http://www.sifassociation.org/au/datamodel/3.4'
+@hashid = Hashids.new( 'nias file upload' ) # hash ID for current message
 
 # create consumer
 consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 
+def header(node_ordinal, node_count, destination_topic, doc_id)
+        return "TOPIC: #{destination_topic} #{node_ordinal}:#{node_count}:#{doc_id}\n"
+end
 
 
 producers = KafkaProducers.new(@servicename, 10)
@@ -44,7 +49,7 @@ producers = KafkaProducers.new(@servicename, 10)
             #puts "Validate: processing message no.: #{m.offset}, #{m.key} from #{@inbound}\n\n"
 
             # Payload from sifxml.ingest contains as its first line a header line with the original topic
-            header = m.value.lines[0]	
+            destination_topic = m.value.lines[0][/TOPIC: (\S+)/, 1]
             payload = m.value.lines[1..-1].join
 	    csvline = payload[/<!-- CSV line (\d+) /, 1]
 	    csvcontent = payload[/<!-- CSV content (.+) -->/, 1]
@@ -55,13 +60,20 @@ producers = KafkaProducers.new(@servicename, 10)
             # If message is well-formed, break it up into its constituent objects, and parse each separately
             # This allows us to bypass the SIF constraint that all objects must be of the same type
 
+            doc_id = @hashid.encode(rand(10000000))
+
             doc = Nokogiri::XML(payload) do |config|
                 config.nonet.noblanks
             end
             item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
             if(doc.errors.empty?) 
-                doc.remove_namespaces!
-                doc.xpath("/*/node()").each do |x|
+                #doc.remove_namespaces!
+		doc.root.add_namespace nil, @namespace
+                xsd_errors = @xsd.validate(doc.document)
+		if(xsd_errors.empty?)
+	  	nodes = doc.xpath("/*/node()")
+		nodes.each_with_index do |x, i|
+=begin
                     #root = x.xpath("local-name(/)")
                     root = x.name()
                     parent = Nokogiri::XML::Node.new root+"s", Nokogiri::XML::Document.new()
@@ -79,40 +91,49 @@ producers = KafkaProducers.new(@servicename, 10)
                     doc3 = Nokogiri::XML(doc2.parent().canonicalize(nil, nil, 1))
                     xsd_errors = @xsd.validate(doc3.document)
                     if(xsd_errors.empty?) 
+=end
+			x["xmlns"] = @namespace
                         item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
-                        msg = header + x.to_s
+                        msg = header(i, nodes.length, destination_topic, doc_id) + x.to_s
                         #puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
+		end
+                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}",
+                                NiasError.new(0, 0, 0, "XSD Validation Error", "").to_s,
+                                "rcvd:#{ sprintf('%09d:%d', m.offset, 0) }" )
+                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
+                                NiasError.new(0, 0, 0, "XML Well-Formedness Error", "").to_s,
+                                "rcvd:#{ sprintf('%09d:%d', m.offset, 1) }" )
                     else
                         	puts "Invalid!"
 	                    	lines = payload.lines
-       		            	msg = header + "Message #{m.offset} validity error:\n"
+       		            	msg = "Message #{m.offset} validity error:\n"
 				if(csvline)
 					msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
-				else
-					msg =  msg + "\n" + parent.document.to_s
 				end
                         	xsd_errors.each_with_index do |e, i|
                         		output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
-                        		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", NiasError.new(i, xsd_errors.length, "XSD Validation Error", output).to_s,
+                        		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
+						NiasError.new(i, xsd_errors.length, 0, "XSD Validation Error", output).to_s,
                                 		"rcvd:#{ sprintf('%09d:%d', m.offset, i) }" )
 				end
-                    end
                 end
             else
                 puts "Not Well-Formed!"
 	        lines = payload.lines
 
-                msg = header + "Message #{m.offset} well-formedness error:\n"
+                msg = "Message #{m.offset} well-formedness error:\n"
                 doc.errors.each_with_index do |e, i|
 			if (csvline)
 				msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
 			end
                         output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
-                        outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", NiasError.new(i, doc.errors.length, "XML Well-Formedness Error", output).to_s,
+                        outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
+				NiasError.new(i, doc.errors.length, 0, "XML Well-Formedness Error", output).to_s,
                                 "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
                 end
             end
+
         #end
 
         # debugging if needed

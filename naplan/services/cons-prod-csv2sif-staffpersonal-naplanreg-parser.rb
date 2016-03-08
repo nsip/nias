@@ -20,7 +20,6 @@ require_relative '../../niaserror'
 @inbound = 'naplan.csv_staff'
 @outbound = 'sifxml.ingest'
 @errbound = 'csv.errors'
-#@outbound = 'naplan.sifxmlout_staff'
 
 @idgen = Hashids.new( 'nsip random temp uid' )
 
@@ -32,7 +31,6 @@ Signal.trap("INT") { consumer.interrupt }
 
 
 producers = KafkaProducers.new(@servicename, 10)
-#@pool = producers.get_producers.cycle
 
 # default values
 @default_csv = {'StaffSchoolRole' => 'principal', 'AdditionalInfo' => 'N' }
@@ -70,7 +68,7 @@ end
 	    # validate that we have received the right kind of record here, from the headers
 	    if(row['LocalId'] and not row['LocalStaffId']) 
             	outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
-			NiasError.new(0,1, "CSV Document Type Error", 
+			NiasError.new(0,1, 0, "CSV Document Type Error", 
 				"You appear to have submitted a StudentPersonal record instead of a StaffPersonal record\n#{row['__linecontent']}").to_s, 
 			"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
 	    else
@@ -78,11 +76,17 @@ end
                 # validate against JSON Schema
                 json_errors = JSON::Validator.fully_validate(@jsonschema, row)
                 # any errors are on mandatory elements, so stop processing further
-                unless(json_errors.empty?)
+                if(json_errors.empty?)
+                        outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
+					NiasError.new(0, 0, 0, "JSON Validation Error", "").to_s,
+					"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
+                        producers.send_through_queue( outbound_messages )
+			outbound_messages = []
+		else
                         json_errors.each_with_index do |e, i|
                                 puts e
                                 outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
-					NiasError.new(i, json_errors.length, "JSON Validation Error", "#{e}\n#{row['__linecontent']}").to_s, 
+					NiasError.new(i, json_errors.length, 0, "JSON Validation Error", "#{e}\n#{row['__linecontent']}").to_s, 
 					"rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
                         end
                         producers.send_through_queue( outbound_messages )

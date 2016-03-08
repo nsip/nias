@@ -117,7 +117,6 @@ describe "Bulk SIF Ingest/Produce" do
                 expect(a).to_not be_nil
                 expect(a.empty?).to be false
                 expect(a[0].value).to match(/validity error/)
-                expect(a[0].value).to match(/rspec\.test/)
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset
@@ -138,6 +137,7 @@ describe "Bulk SIF Ingest/Produce" do
                 expected = "TOPIC: rspec.test\n" + xml
                 expected.gsub!(/ xmlns="[^"]+"/, "")
                 expected.gsub!(/\n[ ]*/, "")
+		a[0].value.gsub!(/TOPIC: rspec.test [0-9]+:[0-9]+:\S+\n/, "TOPIC: rspec.test\n")
                 a[0].value.gsub!(/ xmlns="[^"]+"/, "").gsub!(/\n[ ]*/, "")
                 expect(a[0].value.chomp).to eq expected.chomp
             rescue Poseidon::Errors::OffsetOutOfRange

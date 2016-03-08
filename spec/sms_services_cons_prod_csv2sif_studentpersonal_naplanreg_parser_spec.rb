@@ -1296,7 +1296,8 @@ describe "NAPLAN convert CSV to SIF" do
                 a = groupfetch(@errorconsumer)
                 expect(a).to_not be_nil
 		puts a[0].value unless a.empty?
-                expect(a.empty?).to be true
+                # there will be just the 0:0:0 no errors message
+		expect(a[0].value).to match(/0:0:0/)
             rescue Poseidon::Errors::OffsetOutOfRange
                 puts "[warning] - bad offset supplied, resetting..."
                 offset = :latest_offset

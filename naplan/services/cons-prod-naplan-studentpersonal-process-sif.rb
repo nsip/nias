@@ -73,7 +73,7 @@ loop do
             # Payload from sifxml.validated contains as its first line a header line with the original topic
             header = m.value.lines[0]
             payload = m.value.lines[1..-1].join
-            topic = header.chomp.gsub(/TOPIC: /,"")
+            topic = header[/TOPIC: (\S+)/, 1]
             next unless @accepted_topics.include?(topic)
             item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
 

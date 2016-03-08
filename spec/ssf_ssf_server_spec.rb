@@ -259,6 +259,7 @@ describe "POST rspec/test/bulk" do
                         payload << m.value
                     end
                     payload = payload.gsub(/\n===snip [0-9]*===\n/, "")
+                    payload = payload.gsub(/TOPIC: rspec.test [0-9]+:[0-9]+:\S+\n/, "TOPIC: rspec.test\n")
                     expect(payload).to eq "TOPIC: rspec.test\n#{@inputxml}"
                     expect(a[0].key).to eq "rspec.test"
                 rescue Poseidon::Errors::OffsetOutOfRange

@@ -70,7 +70,7 @@ describe "SIF Ingest/Produce" do
     context "Valid XML" do
 	before(:example) do
         	post_xml(xml, "/rspec/test")
-		sleep 1
+		sleep 3
 	end
         it "pushes interpreted XML to sms.indexer" do
             begin

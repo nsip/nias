@@ -1,6 +1,7 @@
 # cons-prod-sif-bulk-ingest.rb
 
 require 'poseidon'
+require 'hashids'
 require 'nokogiri' # xml support
 require_relative '../../kafkaproducers'
 require_relative '../../kafkaconsumers'
@@ -25,16 +26,22 @@ require_relative '../../niaserror'
 #@xsd = Nokogiri::XML::Schema(File.open("#{__dir__}/xsd/sif3.4/SIF_Message3.4.xsd"))
 @xsd = Nokogiri::XML::Schema(File.open(ARGF.argv[0]))
 @namespace = 'http://www.sifassociation.org/au/datamodel/3.4'
+@hashid = Hashids.new( 'nias file upload' ) # hash ID for current file
 
 # create consumer
 consumer = KafkaConsumers.new(@servicename, @inbound)
 Signal.trap("INT") { consumer.interrupt }
 
 
+def header(node_ordinal, node_count, destination_topic, doc_id)
+	return "TOPIC: #{destination_topic} #{node_ordinal}:#{node_count}:#{doc_id}\n"
+end
+
+
 producers = KafkaProducers.new(@servicename, 10)
 
 payload = ""
-header = ""
+destination_topic = ""
 concatcount = 0
 
         outbound_messages = []
@@ -44,7 +51,7 @@ concatcount = 0
             m.value.gsub!(/\n===snip[^=\n]*===\n/, "")
             if(payload.empty?) then
                 # Payload from sifxml.bulkingest contains as its first line a header line with the original topic
-                header = m.value.lines[0]	
+                destination_topic = m.value.lines[0][/TOPIC: (\S+)/, 1]
                 payload = m.value.lines[1..-1].join
                 start = Time.now
             else
@@ -68,6 +75,7 @@ concatcount = 0
             # This allows us to bypass the SIF constraint that all objects must be of the same type
 
             start = Time.now
+	    doc_id = @hashid.encode(rand(10000000))
             doc = Nokogiri::XML(payload) do |config|
                 config.nonet.noblanks
             end
@@ -84,27 +92,35 @@ concatcount = 0
                 puts "XSD validation took #{Time.now - start}"
                 if(xsd_errors.empty?) 
                     puts "Validated! "
-                    doc.xpath("/*/node()").each_with_index do |x, i|
+		    nodes = doc.xpath("/*/node()")
+                    nodes.each_with_index do |x, i|
                         if (i%10000 == 0 and i > 0) then 
                             puts "#{i} records queued..." 
                         end
                         item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
                         x["xmlns"] = @namespace
-                        msg = header + x.to_s
+                        msg = header(i, nodes.length, destination_topic, doc_id) + x.to_s
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 			if outbound_messages.length > 100 
             			producers.send_through_queue ( outbound_messages )
         			outbound_messages = []
 			end
                     end
+                    outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
+				NiasError.new(0, 0, 0, "XSD Validation Error", "").to_s, 
+				"rcvd:#{ sprintf('%09d:%d', m.offset, 0) }" )
+                    outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
+				NiasError.new(0, 0, 0, "XML Well-Formedness Error", "").to_s, 
+				"rcvd:#{ sprintf('%09d:%d', m.offset, 1) }" )
                 else
 		    lines = payload.lines
-                    msg = header + "Message #{m.offset} validity error:\n" 
+                    msg = "Message #{m.offset} validity error:\n" 
                     #puts msg
 	            xsd_errors.each_with_index do |e, i|
 			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
 			#puts output
-                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", NiasError.new(i, xsd_errors.length, "XSD Validation Error", output).to_s, 
+                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
+				NiasError.new(i, xsd_errors.length, 0, "XSD Validation Error", output).to_s, 
 				"rcvd:#{ sprintf('%09d:%d', m.offset, i) }" )
 			if outbound_messages.length > 100 
             			producers.send_through_queue( outbound_messages )
@@ -115,11 +131,12 @@ concatcount = 0
             else
                 puts "Not Well-Formed!"
 		lines = payload.lines
-                msg = header + "Message #{m.offset} well-formedness error:\n" 
+                msg = "Message #{m.offset} well-formedness error:\n" 
 		#puts msg
                 doc.errors.each_with_index do |e, i| 
 			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
-                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", NiasError.new(i, doc.errors.length, "XML Well-Formedness Error", output).to_s, 
+                    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
+				NiasError.new(i, doc.errors.length, 0, "XML Well-Formedness Error", output).to_s, 
 				"rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 			if outbound_messages.length > 100 
             			producers.send_through_queue( outbound_messages )

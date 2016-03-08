@@ -73,7 +73,7 @@ loop do
 
             # read json message
             json = JSON.parse(payload)
-            idx[:type] = header.chomp.gsub(/TOPIC: /,"")
+            idx[:type] = header[/TOPIC: (\S+)/, 1]
             idx[:id] = topic_to_id(idx[:type], json)
 
             # write the message to storage with its own refid as the key

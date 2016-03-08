@@ -246,10 +246,12 @@ end
         outbound_messages = []
         #messages = consumer.fetch
 
-        consumer.each do |m|
+	recordid = 0
 
+        consumer.each do |m|
+	    recordid = recordid + 1
 	    header = m.value.lines[0]
-            topic = header.chomp.gsub(/TOPIC: /,"")
+            topic = header[/TOPIC: (\S+)/, 1]
             payload = m.value.lines[1..-1].join
             # we are only interested in XML in NAPLAN topics
             next unless @naplan_topics.grep(topic) 
@@ -274,7 +276,9 @@ end
 			msg = e + "\n" + payload
 		end
 		msg = "SRM validation:\n#{msg}"
-            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", NiasError.new(i, errors.length, "SRM Validation", msg).to_s, "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+            	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", 
+			NiasError.new(i, errors.length, recordid, "SRM Validation", msg).to_s, 
+			"rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 	    end
         producers.send_through_queue( outbound_messages )
 	outbound_messages = []

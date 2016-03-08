@@ -103,7 +103,7 @@ loop do
             # validate that we have received the right kind of record here, from the headers
             if(row['LocalStaffId'] and not row['LocalId'])
                 outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
-			NiasError.new(0,1, "CSV Document Type Error",
+			NiasError.new(0,1, 0, "CSV Document Type Error",
 				"You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}").to_s, 
 			"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
             else
@@ -121,10 +121,15 @@ loop do
 		# validate against JSON Schema
 		json_errors = JSON::Validator.fully_validate(@jsonschema, row)
 		# any errors are on mandatory elements, so stop processing further
-		unless(json_errors.empty?)
+		if(json_errors.empty?)
+                	outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", NiasError.new(0, 0, 0, "JSON Validation Error", "").to_s,
+				"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
+            		producers.send_through_queue( outbound_messages )
+			outbound_messages = []
+		else
 			json_errors.each_with_index do |e, i|
 				puts e
-                		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", NiasError.new(i, json_errors.length, "JSON Validation Error",
+                		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", NiasError.new(i, json_errors.length, 0, "JSON Validation Error",
 						"#{e}\n#{row['__linecontent']}").to_s,
 					"rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 			end
