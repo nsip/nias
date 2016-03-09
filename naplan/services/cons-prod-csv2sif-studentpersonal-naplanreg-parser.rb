@@ -79,7 +79,6 @@ Signal.trap("INT") { consumer.interrupt }
 
 
 producers = KafkaProducers.new(@servicename, 10)
-#@pool = producers.get_producers.cycle
 
 # default values
 @default_csv = {'OfflineDelivery' => 'N', 'Sensitive' => 'Y', 'HomeSchooledStudent' => 'N', 'EducationSupport' => 'N', 'FFPOS' => 'N', 'MainSchoolFlag' => '01' , "AddressLine2" => ""}
@@ -88,14 +87,8 @@ producers = KafkaProducers.new(@servicename, 10)
 @jsonschemafile = File.read("#{__dir__}/naplan.student.json")
 @jsonschema = JSON.parse(@jsonschemafile)
 
-=begin
-loop do
-
-    begin
-=end
         messages = []
         outbound_messages = []
-        #messages = consumer.fetch
         consumer.each do |m|
             row = JSON.parse(m.value) 
             row.merge!(@default_csv) { |key, v1, v2| v1 }
@@ -148,6 +141,8 @@ loop do
     <StudentPersonal RefId="#{SecureRandom.uuid}">
     <!-- CSV line #{row['__linenumber']} -->
     <!-- CSV content #{row['__linecontent']} -->
+    <!-- CSV docid #{row['__docid']} -->
+    <!-- CSV linetotal #{row['__linetotal']} -->
       <LocalId>#{row['LocalId']}</LocalId>
       <StateProvinceId>#{row['StateProvinceId']}</StateProvinceId>
       <OtherIdList>

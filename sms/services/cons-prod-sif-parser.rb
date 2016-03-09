@@ -172,7 +172,6 @@ producers = KafkaProducers.new(@servicename, 10)
             header = m.value.lines[0]
             payload = m.value.lines[1..-1].join
 
-puts payload
 
             # read xml message
             nodes = Nokogiri::XML( payload ) do |config|
@@ -257,7 +256,7 @@ puts payload
 
             idx[:label] = extract_label(idx[:id], nodes)
 
-            puts "\nParser Index = #{idx.to_json}\n\n"
+            #puts "\nParser Index = #{idx.to_json}\n\n"
 
             outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", idx.to_json, "rcvd:#{ sprintf('%09d', m.offset)}" )
 

@@ -58,8 +58,8 @@ test,hello
 CSV
 
 
-csv_out = '{"label":"test","value":"hello","__linenumber":1,"__linecontent":"test,hello"}'
-csv2_out = '{"label":"test2","value":"hello2","__linenumber":1,"__linecontent":"test2,hello2"}'
+csv_out = '{"label":"test","value":"hello"}'
+csv2_out = '{"label":"test2","value":"hello2"}'
 
 @service_name = 'spec-ssf-ssf-server'
 
@@ -157,7 +157,12 @@ describe "SSFServer" do
                     expect(a.empty?).to be false
                     expect(a[0].nil?).to be false
                     expect(a[0].value.nil?).to be false
-                    expect(a[0].value).to eq csv_out
+            expected = a[0].value
+            expected.gsub!(/,"__[^"]+":([^",}]+|"[^"]+")/,"")
+            expected.gsub!(/,"__[^"]+":([^",}]+|"[^"]+")\}$/,"}")
+            #expected.gsub!(/,\}$/, "}")
+
+                    expect(expected).to eq csv_out
                     expect(a[0].key).to eq "test"
                 rescue Poseidon::Errors::OffsetOutOfRange
                     puts "[warning] - bad offset supplied, resetting..."
@@ -329,7 +334,8 @@ describe "POST rspec/test/bulk" do
                     expect(a[0].nil?).to be false
                     expect(a[0].value.nil?).to be false
 		    received = a[0].value
-		    received.gsub!(/"__linenumber":[0-9]+,/,'"__linenumber":1,')
+            received.gsub!(/,"__[^"]+":([^",}]+|"[^"]+")/,"")
+            received.gsub!(/,"__[^"]+":([^",}]+|"[^"]+")\}$/,"}")
                     expect(received).to eq csv_out
                     expect(a[0].key).to eq "test"
                 rescue Poseidon::Errors::OffsetOutOfRange
@@ -354,6 +360,9 @@ describe "POST rspec/test/bulk" do
                     expect(a.empty?).to be false
                     expect(a[0].nil?).to be false
                     expect(a[0].value.nil?).to be false
+	    received = a[0].value
+            received.gsub!(/,"__[^"]+":([^",}]+|"[^"]+")/,"")
+            received.gsub!(/,"__[^"]+":([^",}]+|"[^"]+")\}$/,"}")
                     expect(a[0].value).to eq csv2_out
                     expect(a[0].key).to eq "test"
                 rescue Poseidon::Errors::OffsetOutOfRange

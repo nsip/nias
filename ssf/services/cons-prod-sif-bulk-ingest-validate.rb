@@ -75,7 +75,8 @@ concatcount = 0
             # This allows us to bypass the SIF constraint that all objects must be of the same type
 
             start = Time.now
-	    doc_id = @hashid.encode(rand(10000000))
+	    doc_id = payload[/<!-- CSV docid (\S+)/, 1]
+	    doc_id = @hashid.encode(rand(10000000)) unless doc_id
             doc = Nokogiri::XML(payload) do |config|
                 config.nonet.noblanks
             end
@@ -93,13 +94,15 @@ concatcount = 0
                 if(xsd_errors.empty?) 
                     puts "Validated! "
 		    nodes = doc.xpath("/*/node()")
+	    	    recordcount = payload[/<!-- CSV linetotal (\S+)/, 1]
+	    	    recordcount = nodes.length unless recordcount
                     nodes.each_with_index do |x, i|
                         if (i%10000 == 0 and i > 0) then 
                             puts "#{i} records queued..." 
                         end
                         item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
                         x["xmlns"] = @namespace
-                        msg = header(i, nodes.length, destination_topic, doc_id) + x.to_s
+                        msg = header(i, recordcount, destination_topic, doc_id) + x.to_s
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 			if outbound_messages.length > 100 
             			producers.send_through_queue ( outbound_messages )

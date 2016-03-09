@@ -63,6 +63,9 @@ def valid_birthdate(yearlevel, birthdatestr)
                         startdate = Date.new(thisyear-yearlevel-6,1,1)
                         enddate = Date.new(thisyear-yearlevel-5,7,31)
                         birthdate = Date.parse(birthdatestr)
+if not (birthdate >= startdate and birthdate <= enddate)
+puts "#{birthdate} not between #{startdate} and #{enddate}"
+end
                         return (birthdate >= startdate and birthdate <= enddate) 
 end
 

@@ -190,7 +190,9 @@ source.addEventListener('message', function(e) {
 	var match = myRegexp.exec(msg);
 	var output;
 
-	if(!match[3] === "0") {
+	if(match[4] == "Report") {
+		/* This is a report, not an error */
+	} else if(!match[3] === "0") {
 		/* errors are for the whole uploaded document */
 		if(!errortypes[match[4]]) {
 			errortypes[match[4]] = match[2];

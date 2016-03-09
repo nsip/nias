@@ -104,6 +104,8 @@ end
     <StaffPersonal RefId="#{SecureRandom.uuid}">
     <!-- CSV line #{row['__linenumber']} -->
     <!-- CSV content #{row['__linecontent']} -->
+    <!-- CSV docid #{row['__docid']} -->
+    <!-- CSV linetotal #{row['__linetotal']} -->
       <LocalId>#{row['LocalStaffId']}</LocalId>
       <PersonInfo>
         <Name Type="LGL">

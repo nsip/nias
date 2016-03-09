@@ -18,7 +18,7 @@ id,something,somethingelse
 #{guid},test,hello
 CSV
 
-    json = %Q!{"id"=>"#{guid}", "something"=>"test", "somethingelse"=>"hello", "__linenumber"=>1, "__linecontent"=>"#{guid},test,hello"}!
+    json = %Q!{"id"=>"#{guid}", "something"=>"test", "somethingelse"=>"hello"}!
 
     @service_name = 'sms_cons_sms_json_storage_spec'
 
@@ -42,7 +42,11 @@ CSV
         it "stores XML to Moneta with key rspec.test::#{guid}" do
             result = @store["rspec.test::#{guid}"]
             expect(result).to_not be_nil
-            expect(result.to_s).to eq json
+	    expected = result.to_s
+	    expected.gsub!(/ "__[^"]+"=>([^",]|"[^"]+"),/,"")
+	    expected.gsub!(/ "__[^"]+"=>([^",]|"[^"]+")\}/,"}")
+	    expected.gsub!(/,\}$/, "}")
+            expect(expected).to eq json
         end
 
         after(:context) do

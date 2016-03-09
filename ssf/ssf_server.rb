@@ -156,12 +156,12 @@ class SSFServer < Sinatra::Base
                 messages << Poseidon::MessageToSend.new( "#{settings.jsonstorage}", "TOPIC: #{topic_name}\n" + msg, "#{key}" )
             end
 
-                        # write to default for audit if required
+            # write to default for audit if required
             # messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )
-                    end
-	    if(request.media_type == 'text/csv' and !@validation_error) 
+         end
+	 if(request.media_type == 'text/csv' and !@validation_error) 
 		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Lint Validator", "").to_s, "#{key}" )
-	    end
+	 end
 
         post_messages(messages, :none, false)		
         return 202
@@ -322,26 +322,26 @@ class SSFServer < Sinatra::Base
 
         # get batch of messages from broker
         messages = []
-	consumer = KafkaConsumers.new(client_id, ["csv.errors", "naplan.srm_errors", "sifxml.errors"], :latest_offset)
+	@csverror_consumer = KafkaConsumers.new(client_id, ["csv.errors", "naplan.srm_errors", "sifxml.errors"], :latest_offset)
 	Signal.trap("INT") { 
 		puts "Consumer stopping on INT"
-		consumer.stop if consumer 
+		@csverror_consumer.stop if @csverror_consumer 
 	}
 	Signal.trap("EXIT") { 
 		puts "Consumer stopping on EXIT"
-		consumer.stop if consumer 
+		@csverror_consumer.stop if @csverror_consumer 
 	}
 	Signal.trap("HUP") { 
 		puts "Consumer stopping on HUP"
-		consumer.stop if consumer 
+		@csverror_consumer.stop if @csverror_consumer 
 	}
 	Signal.trap("QUIT") { 
 		puts "Consumer stopping on QUIT"
-		consumer.stop if consumer 
+		@csverror_consumer.stop if @csverror_consumer 
 	}
         stream do | out |
             begin
-                consumer.each do |msg|
+                @csverror_consumer.each do |msg|
 			out << "data: #{msg.value.gsub(/\n/, "\ndata: ")}\n\n"
 		end
 	    rescue StandardError => e

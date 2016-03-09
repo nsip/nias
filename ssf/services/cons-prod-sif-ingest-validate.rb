@@ -60,7 +60,8 @@ producers = KafkaProducers.new(@servicename, 10)
             # If message is well-formed, break it up into its constituent objects, and parse each separately
             # This allows us to bypass the SIF constraint that all objects must be of the same type
 
-            doc_id = @hashid.encode(rand(10000000))
+	    doc_id = payload[/<!-- CSV docid (\S+)/, 1]
+            doc_id = @hashid.encode(rand(10000000)) unless doc_id
 
             doc = Nokogiri::XML(payload) do |config|
                 config.nonet.noblanks
@@ -72,6 +73,9 @@ producers = KafkaProducers.new(@servicename, 10)
                 xsd_errors = @xsd.validate(doc.document)
 		if(xsd_errors.empty?)
 	  	nodes = doc.xpath("/*/node()")
+                recordcount = payload[/<!-- CSV linetotal (\S+)/, 1]
+                recordcount = nodes.length unless recordcount
+
 		nodes.each_with_index do |x, i|
 =begin
                     #root = x.xpath("local-name(/)")
@@ -94,7 +98,9 @@ producers = KafkaProducers.new(@servicename, 10)
 =end
 			x["xmlns"] = @namespace
                         item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
-                        msg = header(i, nodes.length, destination_topic, doc_id) + x.to_s
+			record_ordinal = csvline
+			record_ordinal = i unless record_ordinal
+                        msg = header(record_ordinal, recordcount, destination_topic, doc_id) + x.to_s
                         #puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 		end
@@ -113,6 +119,7 @@ producers = KafkaProducers.new(@servicename, 10)
 				end
                         	xsd_errors.each_with_index do |e, i|
                         		output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
+					puts output
                         		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
 						NiasError.new(i, xsd_errors.length, 0, "XSD Validation Error", output).to_s,
                                 		"rcvd:#{ sprintf('%09d:%d', m.offset, i) }" )

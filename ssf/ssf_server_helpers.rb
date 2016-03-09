@@ -51,11 +51,13 @@ Helper methods for ssf_server.rb
 	end
 
 	@validation_error = false
-        # fetch messages from the body of the HTTP request, and parse the messages if they are in CSV or JSON
+        # fetch messages from the body of the HTTP request, and parse the messages if they are in CSV or JSON.
+	# Also inject a doc-id for the CSV records, to identify them as all belonging to the same payload.
         def fetch_raw_messages(topic_name, mimetype, body)
             # set producer ID for the session
+	    sessionid = Hashids.new( "gregor samza" ).encode(Random.new.rand(100000))
             if session['producer_id'] == nil 
-                session['producer_id'] = settings.hashid.encode(Random.new.rand(999))
+                session['producer_id'] = sessionid
             end
 	    @validation_error = false
             puts "\nProducer ID  is #{session['producer_id']}\n\n"
@@ -93,6 +95,8 @@ Helper methods for ssf_server.rb
 			raw_messages.each_with_index do |e, i| 
 				e[:__linenumber] = i+1 
 				e[:__linecontent] = csvlines[i+1].chomp
+				e[:__docid] = sessionid
+				e[:__linetotal] = raw_messages.length
 			end
 		else
 			@validation_error = true
@@ -117,18 +121,13 @@ Helper methods for ssf_server.rb
             producers = []
             producercount = bulk ? 1 : 10
 	    producers = KafkaProducers.new(@servicename, producercount)
-            #pool = producers.get_producers.cycle
 
                         # send the messages
             sending = Time.now
             puts "sending messages ( #{messages.count} )...."
             puts "started at: #{sending.to_s}"
 
-            #messages.each_slice(20) do | batch |
-                #pool.next.send_messages( batch )
 		producers.send_through_queue(messages)
-                #p.send_messages( batch )
-            #end
                         finish = Time.now
             puts "\nFinished: #{finish.to_s}\n\n"
             puts "\ntime taken to send: #{(finish - sending).to_s} seconds\n\n"

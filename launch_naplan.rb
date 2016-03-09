@@ -171,7 +171,7 @@ def launch
 
     banner 'Starting NIAS SMS services for NAPLAN'
 
-    sms_services = [
+    naplan_services = [
 	{:name => 'cons-prod-sif2scv-studentpersonal-naplanreg-parser.rb', :options => ''},
 	{:name => 'cons-prod-csv2sif-studentpersonal-naplanreg-parser.rb', :options => ''},
 	{:name => 'cons-prod-csv2sif-staffpersonal-naplanreg-parser.rb', :options => ''},
@@ -183,9 +183,10 @@ def launch
 	# option to inject PSI into source records that are missing it
 		#{:name => 'cons-prod-naplan-studentpersonal-process-sif.rb', :options => 'psi'},
 	{:name => 'cons-prod-naplan-studentpersonal-process-sif.rb', :options => ''},
+	{:name => 'cons-prod-file-report.rb', :options => ''},
     ]
 
-    sms_services.each_with_index do | service, i |
+    naplan_services.each_with_index do | service, i |
         @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/naplan/services/#{service[:name]}", service[:options] )
     end
 
