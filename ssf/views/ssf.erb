@@ -96,9 +96,8 @@
 
 <div class="five columns">
 <h6 class="docs-header">Report</h6>
-<div id="console">
-<br/>
-</div>
+<div id="console"></div>
+<div id="summary"></div>
 </div>
 
 </div>
@@ -125,6 +124,7 @@ $(function() {
   $("#fileuploadform").submit(function(e){
     $("#results").empty();
     $("#console").empty();
+    $("#summary").empty();
     e.preventDefault();
     errortypes = {};
     errorrecords = {};
@@ -173,18 +173,25 @@ $(function() {
 */
 
 function xml2html(msg){
-	return msg.replace(/\&/g, "&amp;").replace(/</g, "&lt;").replace(/>/, "&gt;");
+	return msg.replace(/\&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br/>");
 }
 
 var show = function(el){
           return function(msg){ el.innerHTML = el.innerHTML + xml2html(msg) + '<br /><br />' ; }
         }(document.getElementById('results'));
 
+var show_summary = function(el){
+          return function(msg){ el.innerHTML = el.innerHTML + xml2html(msg) + '<br /><br />' ; }
+        }(document.getElementById('summary'));
+
 if (!!window.EventSource) {
 	var source = new EventSource('csverrors');
 }
 source.addEventListener('message', function(e) {
 	var msg = e.data;
+	if(msg == null){
+		return;
+	}
 	/* strip the header count in the error message: extract counts and type */
 	var myRegexp = /^([0-9]+):([0-9]+):([0-9]+) ([^\n]+)\n/g;
 	var match = myRegexp.exec(msg);
@@ -192,7 +199,7 @@ source.addEventListener('message', function(e) {
 
 	if(match[4] == "Report") {
 		/* This is a report, not an error */
-	} else if(!match[3] === "0") {
+	} else if((match[3] === "0") ) {
 		/* errors are for the whole uploaded document */
 		if(!errortypes[match[4]]) {
 			errortypes[match[4]] = match[2];
@@ -205,7 +212,7 @@ source.addEventListener('message', function(e) {
 			 document.getElementById('console').innerHTML += "<div id='" + match[4] + "'></div>";
 			 errortypes[match[4]] = 0;
 		}
-		if(!errorrecords[match[4] + '::' + match[3]]) {
+		if(!((match[4] + '::' + match[3]) in errorrecords)) {
 			errortypes[match[4]] += parseInt(match[2]);
 			output = errortypes[match[4]] + " errors of type: " + match[4] ;
 			document.getElementById(match[4]).innerHTML = output;
@@ -214,15 +221,23 @@ source.addEventListener('message', function(e) {
 	}
 
 	msg = msg.replace(/^[^\n+]+\n/,"");
-	show(msg);
+	if(match[4] == "Report") {
+		show_summary("\n"+msg);
+	} else {
+		if(!(match[2] === "0")) {
+			show(match[4]+"\n"+msg);
+		}
+	}
 }, false);
 
 
 source.addEventListener('open', function(e) {
+/*
 $("#results").empty(); 
 $("#console").empty(); 
 errortypes = {};
 errorrecords = {};
+*/
 }, false);
 
 

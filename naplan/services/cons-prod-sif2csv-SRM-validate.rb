@@ -258,7 +258,7 @@ end
             payload = m.value.lines[1..-1].join
             # we are only interested in XML in NAPLAN topics
             next unless @naplan_topics.grep(topic) 
-            fromcsv = payload["<!-- CSV line"]
+            fromcsv = payload["<!-- CSV "]
 	    csvline = payload[/<!-- CSV line (\d+) /, 1]
             csvcontent = payload[/<!-- CSV content (.+) -->/, 1]
 
@@ -278,7 +278,6 @@ end
 		else 
 			msg = e + "\n" + payload
 		end
-		msg = "SRM validation:\n#{msg}"
             	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", 
 			NiasError.new(i, errors.length, recordid, "SRM Validation", msg).to_s, 
 			"rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )

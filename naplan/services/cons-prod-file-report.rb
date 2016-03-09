@@ -89,6 +89,7 @@ Year 7: #{ payloads[doc_id][:yr7].size }
 Year 9: #{ payloads[doc_id][:yr9].size }
 
 MSG
+puts msg
         	    	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", 
 				NiasError.new(0, 0, 0, "Report", msg).to_s, 
 				"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )

@@ -13,7 +13,9 @@ class NiasError
 
 	# header : (error ordinal):(error totals for the class):(recordnumber, for error reporting per record, else 0) (errorclass)
 	def to_s
-		return "#{@ordinal}:#{@total_errors}:#{@record_id} #{@errorclass}\n#{@message}"
+		ret = "#{@ordinal}:#{@total_errors}:#{@record_id} #{@errorclass}\n"
+		ret = ret + "#{@message}\n" unless @message.nil?
+		return ret
 	end
 
 

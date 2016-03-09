@@ -18,6 +18,7 @@ require 'thin'
 #require 'sinatra-websocket' # for server-side push of errors
 #require 'kafka-consumer'
 require 'poseidon_cluster'
+require 'redis'
 
 require_relative '../kafkaproducers'
 require_relative '../kafkaconsumers'
@@ -160,7 +161,7 @@ class SSFServer < Sinatra::Base
             # messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )
          end
 	 if(request.media_type == 'text/csv' and !@validation_error) 
-		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Lint Validator", "").to_s, "#{key}" )
+		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Well-Formedness Validator", nil).to_s, "#{key}" )
 	 end
 
         post_messages(messages, :none, false)		
@@ -231,7 +232,7 @@ class SSFServer < Sinatra::Base
             # messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )			
         end
 	    if(request.media_type == 'text/csv' and !@validation_error) 
-		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Lint Validator", "").to_s, "valid" )
+		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Well-Formedness Validator", nil).to_s, "valid" )
 	    end
 
         post_messages(messages, :none, true)		
@@ -322,7 +323,6 @@ class SSFServer < Sinatra::Base
 
         # get batch of messages from broker
         messages = []
-	@csverror_consumer = KafkaConsumers.new(client_id, ["csv.errors", "naplan.srm_errors", "sifxml.errors"], :latest_offset)
 	Signal.trap("INT") { 
 		puts "Consumer stopping on INT"
 		@csverror_consumer.stop if @csverror_consumer 
@@ -339,6 +339,7 @@ class SSFServer < Sinatra::Base
 		puts "Consumer stopping on QUIT"
 		@csverror_consumer.stop if @csverror_consumer 
 	}
+	@csverror_consumer = KafkaConsumers.new(client_id, ["csv.errors", "naplan.srm_errors", "sifxml.errors"], :latest_offset)
         stream do | out |
             begin
                 @csverror_consumer.each do |msg|
@@ -361,6 +362,18 @@ puts "??"
 	stream = params[:stream]
 	payload = params[:file]
 	payloadname = payload.nil? ? nil : payload[:filename] || nil
+	flush = params[:flush] || nil
+
+        if(flush)
+                begin
+                puts "Flushing REDIS!"
+                config = NiasConfig.new
+                @redis = config.redis
+                @redis.flushdb
+                rescue
+                        return 500, 'Error executing SMS Flush.'
+                end
+        end
 
 	validation = validate_fileupload(mimetype, topic_menu, topic, stream, payloadname)
 	unless validation == "OK"
@@ -394,7 +407,7 @@ puts "??"
         # end
 
         messages = []
-	fetched_messages = fetch_raw_messages(topic_name, request.media_type, request.body.read )
+	fetched_messages = fetch_raw_messages(topic_name, mimetype, body )
 	@validation_error = fetched_messages["validation_error"]
         fetched_messages["messages"].each do | msg |
 
@@ -428,7 +441,7 @@ puts "??"
             end
             messages << Poseidon::MessageToSend.new( "#{topic}", msgtail , "#{key}" )
 	    if(!@validation_error) 
-		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Lint Validator", "").to_s, "#{key}" )
+		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Well-Formedness Validator", nil).to_s, "#{key}" )
 	    end
 
             # write to default for audit if required

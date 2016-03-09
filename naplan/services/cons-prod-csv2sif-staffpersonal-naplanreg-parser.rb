@@ -48,8 +48,11 @@ end
 
         messages = []
         outbound_messages = []
-        #messages = consumer.fetch
+
+	recordid = 0
+
         consumer.each do |m|
+	    recordid = recordid + 1
             row = JSON.parse(m.value) 
             # Carriage return unacceptable
             row.each_key do |key|
@@ -76,19 +79,11 @@ end
                 # validate against JSON Schema
                 json_errors = JSON::Validator.fully_validate(@jsonschema, row)
                 # any errors are on mandatory elements, so stop processing further
-                if(json_errors.empty?)
-                        outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
-					NiasError.new(0, 0, 0, "JSON Validation Error", "").to_s,
-					"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
-                        producers.send_through_queue( outbound_messages )
-			outbound_messages = []
-		else
                         json_errors.each_with_index do |e, i|
                                 puts e
                                 outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
-					NiasError.new(i, json_errors.length, 0, "JSON Validation Error", "#{e}\n#{row['__linecontent']}").to_s, 
+					NiasError.new(i, json_errors.length, recordid, "Mandatory Element Check", "#{e}\n#{row['__linecontent']}").to_s, 
 					"rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
-                        end
                         producers.send_through_queue( outbound_messages )
 			outbound_messages = []
                         next

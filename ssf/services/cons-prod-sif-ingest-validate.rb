@@ -105,10 +105,10 @@ producers = KafkaProducers.new(@servicename, 10)
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
 		end
                     	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}",
-                                NiasError.new(0, 0, 0, "XSD Validation Error", "").to_s,
+                                NiasError.new(0, 0, 0, "XSD Validation Error", nil).to_s,
                                 "rcvd:#{ sprintf('%09d:%d', m.offset, 0) }" )
                     	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
-                                NiasError.new(0, 0, 0, "XML Well-Formedness Error", "").to_s,
+                                NiasError.new(0, 0, 0, "XML Well-Formedness Error", nil).to_s,
                                 "rcvd:#{ sprintf('%09d:%d', m.offset, 1) }" )
                     else
                         	puts "Invalid!"

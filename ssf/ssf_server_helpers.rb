@@ -67,6 +67,7 @@ Helper methods for ssf_server.rb
             #request.body.rewind
             # read messages based on content type
             raw_messages = []
+puts mimetype
             case mimetype
             when 'application/json' then raw_messages = JSON.parse( body ) # request.body.read )
             when 'application/xml' then 
@@ -102,8 +103,10 @@ Helper methods for ssf_server.rb
 			@validation_error = true
 			raw_messages = []
 			validator.errors.each_with_index do |e, i|
-				raw_messages << NiasError.new(i, validator.errors.length, 0, "CSV Lint Validator", 
-					"Row: #{e.row} Col: #{e.column}, Category #{e.category}: Type #{e.type}, Content #{e.content.chomp}, Constraints: #{e.constraints}" ).to_s
+				content = e.content
+				content.chomp! unless content.nil?
+				raw_messages << NiasError.new(i, validator.errors.length, 0, "CSV Well-Formedness Validator", 
+					"Row: #{e.row} Col: #{e.column}, Category: #{e.category}: Type: #{e.type}, Content: #{content}, Constraints: #{e.constraints}" ).to_s
 			end
 			raw_messages.each {|e| puts e}
 		end
