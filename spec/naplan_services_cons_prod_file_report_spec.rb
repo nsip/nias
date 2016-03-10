@@ -218,6 +218,7 @@ Year 5: 60
 Year 7: 52
 Year 9: 51
 
+
 REPORT
 
 
@@ -244,7 +245,7 @@ describe "NAPLAN report on student file contents" do
     context "Valid CSV to naplan.csv" do
 	before(:example) do
         	post_csv(csv)
-		sleep 3
+		sleep 5
 	end
         it "pushes report to naplan.srm_errors" do
             begin
@@ -266,7 +267,7 @@ describe "NAPLAN report on student file contents" do
 
     after(:all) do
 	@errorconsumer.close
-	sleep 5
+	sleep 3
     end
 
 end

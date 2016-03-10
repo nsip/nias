@@ -84,7 +84,6 @@ Signal.trap("INT") { consumer.interrupt }
 # set up producer pool - busier the broker the better for speed
 pool = {}
 @sensitivities.each do |x|
-    #pool[x] = KafkaProducers.new(@servicename, 10).get_producers.cycle
     pool[x] = KafkaProducers.new(@servicename, 10)
 end
 
@@ -92,12 +91,8 @@ end
 outbound_messages = {}
 # Hash of filtered records, mapping privacy level to filtered record
 out = {}
-#loop do
-#	begin
         @sensitivities.each { |x| outbound_messages[x] = [] }
-        #messages = []
-        #messages = consumer.fetch
-        #messages.each do |m|
+
 	consumer.each do |m|
 
             # Payload from sifxml.ingest contains as its first line a header line with the original topic
@@ -112,7 +107,7 @@ out = {}
             end
 
             #puts "\n\nInput:\n\n#{input.to_xml}\n\n"
-                        if(input.errors.empty?) 
+            if(input.errors.empty?) 
                 item_key = "prv_filter:#{ sprintf('%09d', m.offset) }"
                                 out[:none] = input
                 out[:low] = apply_filter(input, @filter[:low])
@@ -127,15 +122,10 @@ out = {}
                     outbound_messages[x] << Poseidon::MessageToSend.new( "#{topic}.#{x}", out[x].to_s, item_key ) 
                 end 
             end
-            #if(outbound_messages[:none].length > 20)
                 @sensitivities.each do |x|
-                    #outbound_messages[x].each_slice(20) do | batch |
-                        #pool[x].next.send_messages( batch )
                         pool[x].send_through_queue( outbound_messages[x] )
-                    #end
                 end
                 @sensitivities.each { |x| outbound_messages[x] = [] }
-            #end
 	end
 
 

@@ -107,15 +107,15 @@ describe "SIF Privacy Filter" do
     end
     before(:all) do
 	@service_name = 'ssf_services_cons_prod_privacyfilter_spec'
-        @xmlconsumernone = Poseidon::ConsumerGroup.new(@service_name + "_none", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.none", trail: true)
+        @xmlconsumernone = Poseidon::ConsumerGroup.new("#{@service_name}_none#{rand(1000)}", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.none", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @xmlconsumernone.claimed.each { |x| @xmlconsumernone.checkout { |y| puts y.next_offset }}
-        @xmlconsumerlow = Poseidon::ConsumerGroup.new(@service_name + "_low", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.low", trail: true)
+        @xmlconsumerlow = Poseidon::ConsumerGroup.new("#{@service_name}_low#{rand(1000)}", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.low", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @xmlconsumerlow.claimed.each { |x| @xmlconsumerlow.checkout { |y| puts y.next_offset }}
-        @xmlconsumermedium = Poseidon::ConsumerGroup.new(@service_name + "_medium", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.medium", trail: true)
+        @xmlconsumermedium = Poseidon::ConsumerGroup.new("#{@service_name}_medium#{rand(1000)}", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.medium", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @xmlconsumermedium.claimed.each { |x| @xmlconsumermedium.checkout { |y| puts y.next_offset }}
-        @xmlconsumerhigh = Poseidon::ConsumerGroup.new(@service_name + "_high", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.high", trail: true)
+        @xmlconsumerhigh = Poseidon::ConsumerGroup.new("#{@service_name}_high#{rand(1000)}", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.high", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @xmlconsumerhigh.claimed.each { |x| @xmlconsumerhigh.checkout { |y| puts y.next_offset }}
-        @xmlconsumerextreme = Poseidon::ConsumerGroup.new(@service_name + "_extreme", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.extreme", trail: true)
+        @xmlconsumerextreme = Poseidon::ConsumerGroup.new("#{@service_name}_extreme#{rand(1000)}", ["#{$config.kafka}"], ["#{$config.zookeeper}"], "rspec.test.extreme", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
         @xmlconsumerextreme.claimed.each { |x| @xmlconsumerextreme.checkout { |y| puts y.next_offset }}
         post_xml(xml)
         sleep 3

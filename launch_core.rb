@@ -82,12 +82,14 @@ puts config.get_host
   banner 'Starting SMS Redis'
   @pids['sms-redis'] = Process.spawn( 'redis-server', './sms/sms-redis.conf' )
 
+=begin
+  # moving this to launch_nias.rb and launch_naplan.rb : the web services depend on kafka queues which have not been initiated yet 
   banner 'Starting Web Services'
   # @pids['ssf'] = Process.spawn( 'ruby', './ssf/ssf_server.rb', '-e', 'production', '-p', '4567' )
   @pids['web'] = Process.spawn( 'rackup' )
 
   banner "Web services running on #{config.get_host}:#{config.get_sinatra_port}/"  
-
+=end
 
   banner 'Kafka logs will be created under /tmp/nias/kafka'
   banner 'Zookeeper logs will be created under /tmp/nias/zookeeper'
@@ -98,7 +100,7 @@ puts config.get_host
     f.puts "#{@pids['kafka']}"
     f.puts "#{@pids['zk']}"
     f.puts "#{@pids['sms-redis']}"
-    f.puts "#{@pids['web']}"
+    #f.puts "#{@pids['web']}"
   }
 
   banner "pid file written to #{@PID_FILE}"

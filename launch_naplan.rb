@@ -59,9 +59,12 @@ def launch
     # slight wait to ensure kafka is initialised
   # otherwise topics may fail to create - will be created dynamically when called, but with  
   # startup overhead that is better dealt with here.
-  sleep 5
+  #sleep 5
 
   config = NiasConfig.new
+
+  # see if any of the topics have already been created
+  topic_describe = ` ./kafka/bin/kafka-topics.sh  --describe  --zookeeper #{config.zookeeper} `
 
   topics = [
         'sifxml.validated',
@@ -107,6 +110,7 @@ def launch
 
   sleep 5 # creating too early truncates topics
   topics.each do | topic |
+    unless topic_describe[/Topic:#{topic}/]
     puts "Creating #{topic}"
     pid = Process.spawn( './kafka/bin/kafka-topics.sh',
                                                       "--zookeeper #{config.zookeeper}",
@@ -115,6 +119,7 @@ def launch
                                                       '--partitions 5',
                                                       '--replication-factor 1')
     Process.wait pid
+    end
   end
 
   # topics that are not idempotent -- must keep messages in order
@@ -122,6 +127,7 @@ def launch
         'sifxml.bulkingest',
   ]
   topics_single.each do | topic |
+    unless topic_describe[/Topic:#{topic}/]
     puts "Creating #{topic}"
     pid = Process.spawn( './kafka/bin/kafka-topics.sh',
                                                       "--zookeeper #{config.zookeeper}",
@@ -130,6 +136,7 @@ def launch
                                                       '--partitions 1',
                                                       '--replication-factor 1')
     Process.wait pid
+    end
   end
 
 
@@ -189,6 +196,13 @@ def launch
     naplan_services.each_with_index do | service, i |
         @pids["#{service}:#{i}"] = Process.spawn( 'ruby', "#{__dir__}/naplan/services/#{service[:name]}", service[:options] )
     end
+
+  # Web services depend on Kafka queues
+  banner 'Starting Web Services'
+  @pids['web'] = Process.spawn( 'rackup' )
+
+  banner "Web services running on #{config.get_host}:#{config.get_sinatra_port}/"  
+
 
     # write pids to file for shutdown
     File.open(@pid_file, 'w') {|f|

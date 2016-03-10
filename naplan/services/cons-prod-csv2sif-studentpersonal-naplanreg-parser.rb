@@ -101,6 +101,9 @@ producers = KafkaProducers.new(@servicename, 10)
 			NiasError.new(0,1, 0, "CSV Document Type Error",
 				"You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}").to_s, 
 			"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
+            	producers.send_through_queue( outbound_messages )
+		outbound_messages = []
+		next
             else
 
                 # mappings of CSV alternate values
@@ -113,9 +116,12 @@ producers = KafkaProducers.new(@servicename, 10)
 		# delete any blank/empty values
 		row = row.compact
 
+
+
 		# validate against JSON Schema
 		json_errors = JSON::Validator.fully_validate(@jsonschema, row)
 		# any errors are on mandatory elements, so stop processing further
+		if(!json_errors.empty?)
 			json_errors.each_with_index do |e, i|
 				puts e
                 		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", NiasError.new(i, json_errors.length, recordid, "Mandatory Element Check",
@@ -125,6 +131,7 @@ producers = KafkaProducers.new(@servicename, 10)
             		producers.send_through_queue( outbound_messages )
 			outbound_messages = []
 			next
+		end
 
 
 
@@ -223,7 +230,6 @@ producers = KafkaProducers.new(@servicename, 10)
     
 XML
     
-    
                 nodes = Nokogiri::XML( xml ) do |config|
                     config.nonet.noblanks
                 end
@@ -236,9 +242,9 @@ XML
                     node.remove
 		end
                 outbound_messages << Poseidon::MessageToSend.new( "#{@outbound}", "TOPIC: naplan.sifxmlout\n" + nodes.root.to_s, "rcvd:#{ sprintf('%09d', m.offset)}" )
-            end
-
         # send results to indexer to create sms data graph
         producers.send_through_queue( outbound_messages )
 	outbound_messages = []
+            end
+
 end
