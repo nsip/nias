@@ -112,11 +112,11 @@ producers = KafkaProducers.new(@servicename, 10)
                                 NiasError.new(0, 0, 0, "XML Well-Formedness Error", nil).to_s,
                                 "rcvd:#{ sprintf('%09d:%d', m.offset, 1) }" )
                     else
-                        	puts "Invalid!"
+                        	#puts "Invalid!"
 	                    	lines = payload.lines
        		            	msg = "Message #{m.offset} validity error:\n"
 				if(csvline)
-					msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
+					msg = "CSV line #{csvline}: " + msg + csvcontent + "\n"
 				end
                         	xsd_errors.each_with_index do |e, j|
                         		output = "#{msg}Line #{e.line}: #{e.message} \n"
@@ -128,7 +128,7 @@ producers = KafkaProducers.new(@servicename, 10)
 				end
                 end
             else
-                puts "Not Well-Formed!"
+                #puts "Not Well-Formed!"
 	        lines = payload.lines
 
                 msg = "Message #{m.offset} well-formedness error:\n"
@@ -137,6 +137,7 @@ producers = KafkaProducers.new(@servicename, 10)
 				msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
 			end
                         output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
+			puts output if !csvline
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
 				NiasError.new(j, doc.errors.length, payload_id, "XML Well-Formedness Error", output).to_s,
                                 "rcvd:#{ sprintf('%09d:%d', m.offset, j)}" )
