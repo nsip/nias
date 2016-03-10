@@ -77,6 +77,8 @@ concatcount = 0
             start = Time.now
 	    doc_id = payload[/<!-- CSV docid (\S+)/, 1]
 	    doc_id = @hashid.encode(rand(10000000)) unless doc_id
+	    payload_id = payload[/<!-- CSV docid (\S+)/, 1]
+	    payload_id = 0 unless payload_id
             doc = Nokogiri::XML(payload) do |config|
                 config.nonet.noblanks
             end
@@ -123,7 +125,7 @@ concatcount = 0
 			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
 			#puts output
                     	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
-				NiasError.new(i, xsd_errors.length, 0, "XSD Validation Error", output).to_s, 
+				NiasError.new(i, xsd_errors.length, payload_id, "XSD Validation Error", output).to_s, 
 				"rcvd:#{ sprintf('%09d:%d', m.offset, i) }" )
 			if outbound_messages.length > 100 
             			producers.send_through_queue( outbound_messages )
@@ -139,7 +141,7 @@ concatcount = 0
                 doc.errors.each_with_index do |e, i| 
 			output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
                     	outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
-				NiasError.new(i, doc.errors.length, 0, "XML Well-Formedness Error", output).to_s, 
+				NiasError.new(i, doc.errors.length, payload_id, "XML Well-Formedness Error", output).to_s, 
 				"rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 			if outbound_messages.length > 100 
             			producers.send_through_queue( outbound_messages )

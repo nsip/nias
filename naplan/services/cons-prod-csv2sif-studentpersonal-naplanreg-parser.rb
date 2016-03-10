@@ -95,15 +95,23 @@ producers = KafkaProducers.new(@servicename, 10)
             row = JSON.parse(m.value) 
             row.merge!(@default_csv) { |key, v1, v2| v1 }
 
+        doctype_error_per_docid = {}
+
+
             # validate that we have received the right kind of record here, from the headers
             if(row['LocalStaffId'] and not row['LocalId'])
-                outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
-			NiasError.new(0,1, 0, "CSV Document Type Error",
-				"You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}").to_s, 
-			"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
-            	producers.send_through_queue( outbound_messages )
-		outbound_messages = []
-		next
+                # only send this error out once per docid
+                unless doctype_error_per_docid[row["__docid"]]
+puts row["__docid"]
+                	outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
+				NiasError.new(0,1, row["__docid"], "CSV Document Type Error",
+					"You appear to have submitted a StaffPersonal record instead of a StudentPersonal record\n#{row['__linecontent']}").to_s, 
+				"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
+            		producers.send_through_queue( outbound_messages )
+			outbound_messages = []
+			doctype_error_per_docid[row["__docid"]] = true
+			next
+		end
             else
 
                 # mappings of CSV alternate values
@@ -124,7 +132,7 @@ producers = KafkaProducers.new(@servicename, 10)
 		if(!json_errors.empty?)
 			json_errors.each_with_index do |e, i|
 				puts e
-                		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", NiasError.new(i, json_errors.length, recordid, "Mandatory Element Check",
+                		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", NiasError.new(i, json_errors.length, row["__docid"], "Mandatory Element Check",
 						"#{e}\n#{row['__linecontent']}").to_s,
 					"rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 			end
@@ -146,7 +154,7 @@ producers = KafkaProducers.new(@servicename, 10)
     <!-- CSV docid #{row['__docid']} -->
     <!-- CSV linetotal #{row['__linetotal']} -->
       <LocalId>#{row['LocalId']}</LocalId>
-      <StateProvinceId>#{row['StateProvinceId']}</StateProvinceId>
+      <StateProvinceId>#{row['JurisdictionId']}</StateProvinceId>
       <OtherIdList>
         <OtherId Type="SectorStudentId">#{row['SectorId']}</OtherId>
         <OtherId Type="DiocesanStudentId">#{row['DiocesanId']}</OtherId>
@@ -159,7 +167,7 @@ producers = KafkaProducers.new(@servicename, 10)
         <OtherId Type="PreviousDiocesanStudentId">#{row['PreviousDiocesanId']}</OtherId>
         <OtherId Type="PreviousOtherStudentId">#{row['PreviousOtherId']}</OtherId>
         <OtherId Type="PreviousTAAStudentId">#{row['PreviousTAAId']}</OtherId>
-        <OtherId Type="PreviousStateProvinceId">#{row['PreviousStateProvinceId']}</OtherId>
+        <OtherId Type="PreviousStateProvinceId">#{row['PreviousJurisdictionId']}</OtherId>
         <OtherId Type="PreviousNationalStudentId">#{row['PreviousNationalId']}</OtherId>
         <OtherId Type="PreviousNAPPlatformStudentId">#{row['PreviousPlatformId']}</OtherId>
       </OtherIdList>
@@ -214,7 +222,7 @@ producers = KafkaProducers.new(@servicename, 10)
         <LocalCampusId>#{row['LocalCampusId']}</LocalCampusId>
         <SchoolACARAId>#{row['ASLSchoolId']}</SchoolACARAId>
         <TestLevel><Code>#{row['TestLevel']}</Code></TestLevel>
-        <Homegroup>#{row['Homegroup']}</Homegroup>
+        <Homegroup>#{row['HomeGroup']}</Homegroup>
         <ClassCode>#{row['ClassCode']}</ClassCode>
         <MembershipType>#{row['MainSchoolFlag']}</MembershipType>
         <FFPOS>#{row['FFPOS']}</FFPOS>

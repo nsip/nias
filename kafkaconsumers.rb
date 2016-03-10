@@ -13,6 +13,10 @@ class KafkaConsumers
 		return @consumer.interrupt
 	end
 
+	def stop
+		return @consumer.stop
+	end
+
 	def each(&block)
 		return @consumer.each(&block)
 	end

@@ -7,7 +7,7 @@ require 'redis'
 require_relative '../niasconfig'
 
 csv = <<CSV
-LocalId,SectorId,DiocesanId,OtherId,TAAId,StateProvinceId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousStateProvinceId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,Homegroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
+LocalId,SectorId,DiocesanId,OtherId,TAAId,JurisdictionId,NationalId,PlatformId,PreviousLocalId,PreviousSectorId,PreviousDiocesanId,PreviousOtherId,PreviousTAAId,PreviousJurisdictionId,PreviousNationalId,PreviousPlatformId,FamilyName,GivenName,PreferredName,MiddleName,BirthDate,Sex,CountryOfBirth,EducationSupport,FFPOS,VisaCode,IndigenousStatus,LBOTE,StudentLOTE,YearLevel,TestLevel,FTE,HomeGroup,ClassCode,ASLSchoolId,SchoolLocalId,LocalCampusId,MainSchoolFlag,OtherSchoolId,ReportingSchoolId,HomeSchooledStudent,Sensitive,OfflineDelivery,Parent1SchoolEducation,Parent1NonSchoolEducation,Parent1Occupation,Parent1LOTE,Parent2SchoolEducation,Parent2NonSchoolEducation,Parent2Occupation,Parent2LOTE,AddressLine1,AddressLine2,Locality,Postcode,StateTerritory
 mxcst695,98013,72507,73336,50082,42558,4558,80732,20190,47559,28808,50601,59468,33349,95522,63874,Winningham,Sandy,Sandy,,2005-10-14,1,1101,Y,2,101,2,Y,1201,5,5,0.16,5E,5F,49360,22782,01,01,qxvpa796,49360,Y,N,X,4,8,3,1201,2,7,3,2201,115 Lexington Ave,,HAMERSLEY,6022,SA
 vmtrc134,77282,84826,72041,41986,80587,44427,14226,81596,16599,32139,78202,75148,55460,45570,97957,Diaz,Katherine,Katherine,S,2005-05-25,2,1101,Y,1,101,4,N,1201,5,5,0.21,5C,5B,49360,22782,01,01,jbrbs389,49360,N,N,Y,3,7,4,5203,2,8,3,2201,820 Marquette Avenue,,COMMODINE,6311,SA
 qiili008,97717,83547,37048,77365,65705,27697,75054,14805,18430,76464,43054,34836,63693,98896,76241,Mikel,Christopher,Christopher,Evan,2007-02-28,1,1101,Y,2,101,1,N,1201,3,3,0.96,3C,3B,49360,22782,01,01,kdiqh202,49360,N,Y,Y,1,6,1,1201,1,6,2,1201,334B Massachusetts Ave.,,ATTADALE,6156,SA
@@ -237,7 +237,7 @@ describe "NAPLAN report on student file contents" do
         @redis.flushdb
 	@service_name = 'naplan_services_cons_prod_file_report_spec'
         @http = Net::HTTP.new("#{config.get_host}", "#{config.get_sinatra_port}") 
-	@errorconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_err#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "naplan.srm_errors", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
+	@errorconsumer = Poseidon::ConsumerGroup.new("#{@service_name}_err#{rand(1000)}", ["#{config.kafka}"], ["#{config.zookeeper}"], "naplan.filereport", trail: true, socket_timeout_ms:6000, max_wait_ms:100)
 	@errorconsumer.claimed.each { |x| @errorconsumer.checkout { |y| puts y.next_offset }}
         sleep 1
     end
@@ -247,7 +247,7 @@ describe "NAPLAN report on student file contents" do
         	post_csv(csv)
 		sleep 5
 	end
-        it "pushes report to naplan.srm_errors" do
+        it "pushes report to naplan.filereport" do
             begin
 		a = groupfetch(@errorconsumer)	
                 expect(a).to_not be_nil

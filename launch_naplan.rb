@@ -101,6 +101,7 @@ def launch
         'naplan.sifxmlout_staff.high',
         'naplan.sifxmlout_staff.extreme',
         'naplan.csvstaff_out',
+        'naplan.filereport',
         'test.test1',
         'json.test',
         'rspec.test',

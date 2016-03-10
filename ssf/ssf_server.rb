@@ -327,10 +327,12 @@ class SSFServer < Sinatra::Base
 		puts "Consumer stopping on INT"
 		@csverror_consumer.stop if @csverror_consumer 
 	}
+=begin 
 	Signal.trap("EXIT") { 
 		puts "Consumer stopping on EXIT"
 		@csverror_consumer.stop if @csverror_consumer 
 	}
+=end
 	Signal.trap("HUP") { 
 		puts "Consumer stopping on HUP"
 		@csverror_consumer.stop if @csverror_consumer 
@@ -339,7 +341,7 @@ class SSFServer < Sinatra::Base
 		puts "Consumer stopping on QUIT"
 		@csverror_consumer.stop if @csverror_consumer 
 	}
-	@csverror_consumer = KafkaConsumers.new(client_id, ["csv.errors", "naplan.srm_errors", "sifxml.errors"], :latest_offset)
+	@csverror_consumer = KafkaConsumers.new(client_id, ["csv.errors", "naplan.srm_errors", "sifxml.errors", "naplan.filereport"], :latest_offset) unless @csverror_consumer
         stream do | out |
             begin
                 @csverror_consumer.each do |msg|
@@ -440,13 +442,13 @@ puts "??"
                 messages << Poseidon::MessageToSend.new( "#{topic}", msg1, "#{key}" )
             end
             messages << Poseidon::MessageToSend.new( "#{topic}", msgtail , "#{key}" )
-	    if(!@validation_error) 
-		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Well-Formedness Validator", nil).to_s, "#{key}" )
-	    end
 
             # write to default for audit if required
             # messages << Poseidon::MessageToSend.new( "#{topic}.default", msg, "#{strm}" )			
         end
+	    if(!@validation_error) 
+		messages << Poseidon::MessageToSend.new( "#{settings.csverrors}", NiasError.new(0, 0, 0, "CSV Well-Formedness Validator", nil).to_s, "#{topic_name}" )
+	    end
 
         post_messages(messages, :none, true)		
         return 202, "File read successfully"

@@ -50,6 +50,7 @@ end
         outbound_messages = []
 
 	recordid = 0
+	doctype_error_per_docid = {}
 
         consumer.each do |m|
 	    recordid = recordid + 1
@@ -70,13 +71,17 @@ end
             #classcodes.each { |x| classcodes_xml << "      <ClassCode>#{x}</ClassCode>\n" }
 	    # validate that we have received the right kind of record here, from the headers
 	    if(row['LocalId'] and not row['LocalStaffId']) 
-            	outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
-			NiasError.new(0,1, 0, "CSV Document Type Error", 
-				"You appear to have submitted a StudentPersonal record instead of a StaffPersonal record\n#{row['__linecontent']}").to_s, 
-			"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
-                producers.send_through_queue( outbound_messages )
-		outbound_messages = []
-                next
+		# only send this error out once per docid
+		unless doctype_error_per_docid[row["__docid"]]
+            		outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
+				NiasError.new(0,1, row["__docid"], "CSV Document Type Error", 
+					"You appear to have submitted a StudentPersonal record instead of a StaffPersonal record\n#{row['__linecontent']}").to_s, 
+				"rcvd:#{ sprintf('%09d:%d', m.offset, 0)}" )
+                	producers.send_through_queue( outbound_messages )
+			outbound_messages = []
+			doctype_error_per_docid[row["__docid"]] = true
+                	next
+		end
 	    else
 
                 # validate against JSON Schema
@@ -86,7 +91,7 @@ end
                         json_errors.each_with_index do |e, i|
                                 puts e
                                 outbound_messages << Poseidon::MessageToSend.new( "#{@errbound}", 
-					NiasError.new(i, json_errors.length, recordid, "Mandatory Element Check", "#{e}\n#{row['__linecontent']}").to_s, 
+					NiasError.new(i, json_errors.length, row["__docid"], "Mandatory Element Check", "#{e}\n#{row['__linecontent']}").to_s, 
 					"rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
 			end
                         producers.send_through_queue( outbound_messages )

@@ -43,7 +43,6 @@ end
 producers = KafkaProducers.new(@servicename, 10)
 
         outbound_messages = []
-        outbound_errors = []
         messages = []
         consumer.each do |m|
             #puts "Validate: processing message no.: #{m.offset}, #{m.key} from #{@inbound}\n\n"
@@ -62,6 +61,8 @@ producers = KafkaProducers.new(@servicename, 10)
 
 	    doc_id = payload[/<!-- CSV docid (\S+)/, 1]
             doc_id = @hashid.encode(rand(10000000)) unless doc_id
+	    payload_id = csvline
+	    payload_id = 0 unless payload_id
 
             doc = Nokogiri::XML(payload) do |config|
                 config.nonet.noblanks
@@ -77,6 +78,8 @@ producers = KafkaProducers.new(@servicename, 10)
                 recordcount = nodes.length unless recordcount
 
 		nodes.each_with_index do |x, i|
+			record_ordinal = csvline
+			record_ordinal = i unless record_ordinal
 =begin
                     #root = x.xpath("local-name(/)")
                     root = x.name()
@@ -98,8 +101,6 @@ producers = KafkaProducers.new(@servicename, 10)
 =end
 			x["xmlns"] = @namespace
                         item_key = "rcvd:#{ sprintf('%09d', m.offset) }"
-			record_ordinal = csvline
-			record_ordinal = i unless record_ordinal
                         msg = header(record_ordinal, recordcount, destination_topic, doc_id) + x.to_s
                         #puts "\n\nsending to: #{@outbound1}\n\nmessage:\n\n#{msg}\n\nkey:#{item_key}\n\n"
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound1}", msg, item_key ) 
@@ -117,12 +118,13 @@ producers = KafkaProducers.new(@servicename, 10)
 				if(csvline)
 					msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
 				end
-                        	xsd_errors.each_with_index do |e, i|
-                        		output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
-					puts output
+                        	xsd_errors.each_with_index do |e, j|
+                        		output = "#{msg}Line #{e.line}: #{e.message} \n"
+                        		output = output + "...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"  if !csvline
+					puts output if !csvline
                         		outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
-						NiasError.new(i, xsd_errors.length, 0, "XSD Validation Error", output).to_s,
-                                		"rcvd:#{ sprintf('%09d:%d', m.offset, i) }" )
+						NiasError.new(j, xsd_errors.length, payload_id, "XSD Validation Error", output).to_s,
+                                		"rcvd:#{ sprintf('%09d:%d', m.offset, j) }" )
 				end
                 end
             else
@@ -130,14 +132,14 @@ producers = KafkaProducers.new(@servicename, 10)
 	        lines = payload.lines
 
                 msg = "Message #{m.offset} well-formedness error:\n"
-                doc.errors.each_with_index do |e, i|
+                doc.errors.each_with_index do |e, j|
 			if (csvline)
 				msg = "CSV line #{csvline}: " + msg + "\n" + csvcontent
 			end
                         output = "#{msg}Line #{e.line}: #{e.message} \n...\n#{lines[e.line - 3 .. e.line + 1].join("")}...\n"
                         outbound_messages << Poseidon::MessageToSend.new( "#{@outbound2}", 
-				NiasError.new(i, doc.errors.length, 0, "XML Well-Formedness Error", output).to_s,
-                                "rcvd:#{ sprintf('%09d:%d', m.offset, i)}" )
+				NiasError.new(j, doc.errors.length, payload_id, "XML Well-Formedness Error", output).to_s,
+                                "rcvd:#{ sprintf('%09d:%d', m.offset, j)}" )
                 end
             end
 

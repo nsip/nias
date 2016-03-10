@@ -1,6 +1,6 @@
 # cons-prod-file-report.rb
 
-# Report on contents of a single payload (as marked by doc ID in message header) to naplan.srm_errors
+# Report on contents of a single payload (as marked by doc ID in message header) to naplan.filereport
 # We assume that the payloads  are loaded in sequence, and do not overlap.
 
 require 'json'
@@ -15,7 +15,7 @@ require_relative '../../kafkaconsumers'
 require_relative '../../niaserror'
 
 @inbound = 'sifxml.processed'
-@outbound = 'naplan.srm_errors'
+@outbound = 'naplan.filereport'
 
 @servicename = 'cons-prod-file-report'
 
