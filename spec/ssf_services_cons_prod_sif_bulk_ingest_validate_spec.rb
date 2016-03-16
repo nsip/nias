@@ -53,6 +53,7 @@ xml = <<XML
         <Parent2NonSchoolEducation>6</Parent2NonSchoolEducation>
         <SchoolACARAId>11111</SchoolACARAId>
         <TestLevel><Code>7</Code></TestLevel>
+        <MembershipType>01</MembershipType>
         <FFPOS>1</FFPOS>
     </MostRecent>
 </StudentPersonal>

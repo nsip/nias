@@ -58,6 +58,7 @@ xml = <<XML
         <TestLevel>
 		<Code>7</Code>
 	</TestLevel>
+        <MembershipType>01</MembershipType>
         <FFPOS>1</FFPOS>
     </MostRecent>
 </StudentPersonal>

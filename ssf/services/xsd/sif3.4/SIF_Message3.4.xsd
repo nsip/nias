@@ -2,7 +2,7 @@
 		SIF Implementation Specification (Australia) 3.4 (October 27, 2015) Infrastructure Version: 3.x
 	-->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sif="http://www.sifassociation.org/au/datamodel/3.4" targetNamespace="http://www.sifassociation.org/au/datamodel/3.4" elementFormDefault="qualified">
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="imports/xml/xml.xsd" />
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd" />
 
   <!--Infrastructure Common Elements-->
 
