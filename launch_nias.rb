@@ -156,7 +156,7 @@ def launch
 
   # Web services depend on Kafka queues
   banner 'Starting Web Services'
-  @pids['web'] = Process.spawn( 'rackup' )
+  @pids['web'] = Process.spawn( "rackup --host #{config.get_host}" )
 
   banner "Web services running on #{config.get_host}:#{config.get_sinatra_port}/"
 
