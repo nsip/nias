@@ -61,9 +61,9 @@ concatcount = 0
             if (cont) then
                 next
             end
-            #puts "Concatenation done at #{Time.now}"
-            #puts "Payload size: #{payload.size}"
-            #puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
+            puts "Concatenation done at #{Time.now}"
+            puts "Payload size: #{payload.size}"
+            puts "Validate: processing message no.: #{m.offset}, #{m.key}\n\n"
 
             #File.open('log.txt', 'w') {|f| f.puts payload }
 
