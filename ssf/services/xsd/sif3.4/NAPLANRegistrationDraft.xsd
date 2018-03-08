@@ -8256,6 +8256,16 @@
 	</xs:simpleType>
 	<xs:simpleType name="AUCodeSetsAustralianStandardClassificationOfLanguagesASCLType">
 		<xs:restriction base="xs:token">
+			<xs:enumeration value="1101">
+				<xs:annotation>
+					<xs:documentation>Gaelic (Scotland)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1102">
+				<xs:annotation>
+					<xs:documentation>Irish</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 			<xs:enumeration value="1103">
 				<xs:annotation>
 					<xs:documentation>Welsh</xs:documentation>
@@ -8818,7 +8828,7 @@
 			</xs:enumeration>
 			<xs:enumeration value="6503">
 				<xs:annotation>
-					<xs:documentation>IIokano</xs:documentation>
+					<xs:documentation>Ilokano</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="6504">
@@ -10404,351 +10414,6 @@
 			<xs:enumeration value="9799">
 				<xs:annotation>
 					<xs:documentation>Sign Languages, nec</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="0000">
-				<xs:annotation>
-					<xs:documentation>Inadequately Described</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="0001">
-				<xs:annotation>
-					<xs:documentation>Non Verbal, so described</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="0002">
-				<xs:annotation>
-					<xs:documentation>Not Stated</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="0003">
-				<xs:annotation>
-					<xs:documentation>Swiss, so described</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="0004">
-				<xs:annotation>
-					<xs:documentation>Cypriot, so described</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="0005">
-				<xs:annotation>
-					<xs:documentation>Creole, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="0006">
-				<xs:annotation>
-					<xs:documentation>French Creole, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="0007">
-				<xs:annotation>
-					<xs:documentation>Spanish Creole, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="0008">
-				<xs:annotation>
-					<xs:documentation>Portuguese Creole, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="0009">
-				<xs:annotation>
-					<xs:documentation>Pidgin, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="1000">
-				<xs:annotation>
-					<xs:documentation>Northern European Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="1100">
-				<xs:annotation>
-					<xs:documentation>Celtic, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="1300">
-				<xs:annotation>
-					<xs:documentation>German and Related Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="1400">
-				<xs:annotation>
-					<xs:documentation>Dutch and Related Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="1500">
-				<xs:annotation>
-					<xs:documentation>Scandinavian, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="1600">
-				<xs:annotation>
-					<xs:documentation>Finnish and Related Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="2000">
-				<xs:annotation>
-					<xs:documentation>Southern European Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="2300">
-				<xs:annotation>
-					<xs:documentation>Iberian Romance, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="2900">
-				<xs:annotation>
-					<xs:documentation>Other Southern European Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="3000">
-				<xs:annotation>
-					<xs:documentation>Eastern European Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="3100">
-				<xs:annotation>
-					<xs:documentation>Baltic, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="3400">
-				<xs:annotation>
-					<xs:documentation>East Slavic, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="3500">
-				<xs:annotation>
-					<xs:documentation>South Slavic, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="3600">
-				<xs:annotation>
-					<xs:documentation>West Slavic, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="3900">
-				<xs:annotation>
-					<xs:documentation>Other Eastern European Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="4000">
-				<xs:annotation>
-					<xs:documentation>Southwest and Central Asian Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="4100">
-				<xs:annotation>
-					<xs:documentation>Iranic, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="4200">
-				<xs:annotation>
-					<xs:documentation>Middle Eastern Semitic Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="4300">
-				<xs:annotation>
-					<xs:documentation>Turkic, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="4900">
-				<xs:annotation>
-					<xs:documentation>Other Southwest and Central Asian Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="5000">
-				<xs:annotation>
-					<xs:documentation>Southern Asian Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="5100">
-				<xs:annotation>
-					<xs:documentation>Dravidian, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="5200">
-				<xs:annotation>
-					<xs:documentation>Indo-Aryan, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="6000">
-				<xs:annotation>
-					<xs:documentation>Southeast Asian Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="6100">
-				<xs:annotation>
-					<xs:documentation>Burmese and Related Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="6200">
-				<xs:annotation>
-					<xs:documentation>Hmong-Mien, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="6300">
-				<xs:annotation>
-					<xs:documentation>Mon-Khmer, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="6400">
-				<xs:annotation>
-					<xs:documentation>Tai, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="6500">
-				<xs:annotation>
-					<xs:documentation>Southeast Asian Austronesian Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="7000">
-				<xs:annotation>
-					<xs:documentation>Eastern Asian Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="7100">
-				<xs:annotation>
-					<xs:documentation>Chinese, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="7900">
-				<xs:annotation>
-					<xs:documentation>Other Eastern Asian Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8000">
-				<xs:annotation>
-					<xs:documentation>Australian Indigenous Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8100">
-				<xs:annotation>
-					<xs:documentation>Arnhem Land and Daly River Region Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8170">
-				<xs:annotation>
-					<xs:documentation>Kuwinjkuan, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8180">
-				<xs:annotation>
-					<xs:documentation>Burarran, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8200">
-				<xs:annotation>
-					<xs:documentation>Yolngu Matha, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8210">
-				<xs:annotation>
-					<xs:documentation>Dhangu, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8220">
-				<xs:annotation>
-					<xs:documentation>Dhay'yi, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8230">
-				<xs:annotation>
-					<xs:documentation>Dhuwal, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8240">
-				<xs:annotation>
-					<xs:documentation>Dhuwala, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8250">
-				<xs:annotation>
-					<xs:documentation>Djinang, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8260">
-				<xs:annotation>
-					<xs:documentation>Djinba, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8270">
-				<xs:annotation>
-					<xs:documentation>Yakuy, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8300">
-				<xs:annotation>
-					<xs:documentation>Cape York Peninsula Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8400">
-				<xs:annotation>
-					<xs:documentation>Torres Strait Island Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8500">
-				<xs:annotation>
-					<xs:documentation>Northern Desert Fringe Area Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8600">
-				<xs:annotation>
-					<xs:documentation>Arandic, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8610">
-				<xs:annotation>
-					<xs:documentation>Anmatyerr, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8620">
-				<xs:annotation>
-					<xs:documentation>Arrernte, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8700">
-				<xs:annotation>
-					<xs:documentation>Western Desert Language, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8800">
-				<xs:annotation>
-					<xs:documentation>Kimberley Area Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="8900">
-				<xs:annotation>
-					<xs:documentation>Other Australian  Indigenous Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="9000">
-				<xs:annotation>
-					<xs:documentation>Other Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="9200">
-				<xs:annotation>
-					<xs:documentation>African Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="9300">
-				<xs:annotation>
-					<xs:documentation>Pacific Austronesian Languages, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="9400">
-				<xs:annotation>
-					<xs:documentation>Oceanic Pidgins and Creoles, nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="9500">
-				<xs:annotation>
-					<xs:documentation>Papua New Guinea Languages,  nfd</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="9700">
-				<xs:annotation>
-					<xs:documentation>Sign Languages, nfd</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="ZZREDACTED">
@@ -13463,6 +13128,12 @@
 	</xs:simpleType>
 	<xs:simpleType name="AUCodeSetsYearLevelCodeType">
 		<xs:restriction base="xs:token">
+		    <!-- Note: Foundation proposed for SIF-AU 3.4, not in SIF-AU 1.4 -->
+			<xs:enumeration value="F">
+				<xs:annotation>
+					<xs:documentation>Foundation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 			<xs:enumeration value="1">
 				<xs:annotation>
 					<xs:documentation>Year 1</xs:documentation>

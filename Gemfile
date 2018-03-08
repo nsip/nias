@@ -14,7 +14,9 @@ gem 'eventmachine'
 
 # web tools
 gem 'sinatra', require: 'sinatra/base'
-gem 'sinatra-contrib', github: 'sinatra/sinatra-contrib'
+github 'sinatra/sinatra' do
+  gem 'sinatra-contrib'
+end
 
 # evented server for sinatra
 gem 'thin'
