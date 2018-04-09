@@ -2,7 +2,7 @@
 NSIP Integration As A Service - NIAS
 ====================================
 
-**Important Note - This project has been superseded by [NIAS2](https://github.com/nsip/nias2).**
+**Important Note - This project has been superseded by [NIAS2](https://github.com/nsip/nias2) and [NIAS3](https://github.com/nsip/nias3).**
 
 # 1. Overview
 
