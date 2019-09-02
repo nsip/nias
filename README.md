@@ -2,6 +2,10 @@
 NSIP Integration As A Service - NIAS
 ====================================
 
+****DEPRECATED (RETIRED)****
+*This repository is now retired, achived and no longer maintained - note particularly that security updates are NO LONGER being performed.* 
+
+
 **Important Note - This project has been superseded by [NIAS2](https://github.com/nsip/nias2) and [NIAS3](https://github.com/nsip/nias3).**
 
 # 1. Overview
